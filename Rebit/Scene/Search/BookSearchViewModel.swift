@@ -38,22 +38,6 @@ final class BookSearchViewModel: BaseViewModel, ObservableObject {
             }
             .store(in: &cancellables)
         
-        let publisher = Just("jm")
-        
-        publisher
-            .sink(receiveCompletion: { result in
-                switch result {
-                case .finished:
-                    print(result)
-                case .failure(let failure):
-                    print(failure)
-                }
-            }, receiveValue: { value in
-                print(value)
-            })
-            .store(in: &cancellables)
-        
-        
     }
  
     

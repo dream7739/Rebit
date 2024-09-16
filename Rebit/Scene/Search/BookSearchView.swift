@@ -65,7 +65,7 @@ struct SearchRowView: View {
                 Spacer()
                 HStack {
                     Spacer()
-                    WriteButtonView()
+                    WriteButtonView(book: book)
                 }
             }
         }
@@ -82,10 +82,12 @@ struct SearchRowView: View {
 }
 
 struct WriteButtonView: View {
+    var book: Book
+    
     var body: some View {
-        Button(action: {
-            
-        }, label: {
+        NavigationLink {
+            NavigationLazyView(BookDetailView(book: book))
+        } label: {
             Text("기록하기")
                 .font(.callout.bold())
                 .frame(width: 90, height: 35)
@@ -94,7 +96,7 @@ struct WriteButtonView: View {
                 .clipShape(
                     .rect(topLeadingRadius: 0, bottomLeadingRadius: 20, bottomTrailingRadius: 15, topTrailingRadius: 15)
                 )
-        })
+        }
     }
 }
 
