@@ -12,19 +12,14 @@ struct BookSearchView: View {
     @ObservedObject private var viewModel = BookSearchViewModel()
     
     var body: some View {
-        NavigationView {
+        VStack {
+            SearchBarView(text: $viewModel.searchText)
+                .padding(.horizontal, 10)
+                .onSubmit {
+                    viewModel.input.callSearch.send(())
+                }
             verticalScrollView()
-                .navigationTitle("Search")
         }
-        .searchable(
-            text: $viewModel.searchText,
-            placement: .navigationBarDrawer(displayMode: .always),
-            prompt: "책 제목을 검색해보세요"
-        )
-        .onSubmit(of: .search) {
-            viewModel.input.callSearch.send(())
-        }
-        
     }
     
     func verticalScrollView() -> some View {
@@ -74,7 +69,6 @@ struct SearchRowView: View {
         .background(
             RoundedRectangle(cornerRadius: 10)
                 .fill(.white)
-                .shadow(color: .gray.opacity(0.3), radius: 5)
         )
         .padding(.horizontal, 10)
         .padding(.vertical, 5)

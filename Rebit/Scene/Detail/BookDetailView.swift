@@ -13,16 +13,20 @@ struct BookDetailView: View {
     
     var body: some View {
         GeometryReader { proxy in
-            ScrollView {
-                VStack(spacing: 0) {
-                    detailCoverImage()
-                    DetailContentView(book)
+            ZStack {
+                Color.theme
+                    .opacity(0.3)
+                
+                ScrollView {
+                    VStack(spacing: 30) {
+                        detailCoverImage()
+                        DetailContentView(book)
+                    }
+                    .frame(minHeight: proxy.size.height)
                 }
-                .frame(minHeight: proxy.size.height)
             }
         }
         .ignoresSafeArea()
-        .background(backgroundColorView())
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 NavigationLink(destination: {
@@ -38,16 +42,10 @@ struct BookDetailView: View {
     
     func detailCoverImage() -> some View {
         CoverImageView(url: book.image)
+            .frame(width: 150, height: 200)
             .clipShape(RoundedRectangle(cornerRadius: 8))
-            .frame(width: 180, height: 250)
             .offset(x: 0, y: 100)
             .zIndex(1.0)
-    }
-    
-    func backgroundColorView() -> some View {
-        CoverImageView(url: book.image)
-            .frame(width: .infinity, height: .infinity)
-            .blur(radius: 60)
     }
 }
 
@@ -60,39 +58,78 @@ struct DetailContentView: View {
     }
     
     var body: some View {
-        VStack(alignment: .center) {
+        VStack(alignment: .leading) {
+            headerView()
+            Divider()
+            storylineView()
+            publishInfoView()
+            Spacer()
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(.top, 90)
+        .padding(.horizontal, 15)
+        .padding(.bottom, 20)
+        .background(
+            UnevenRoundedRectangle(cornerRadii: .init(topLeading: 30, topTrailing: 30))
+                .fill(.white)
+        )
+    }
+    
+    func headerView() -> some View {
+        VStack {
             Text(book.title)
-                .font(.title3.bold())
+                .font(.callout.bold())
             Text(book.author)
                 .foregroundStyle(.gray)
-                .font(.callout.bold())
-            Divider()
+                .font(.subheadline.bold())
+        }
+        .frame(maxWidth: .infinity)
+    }
+    
+    func storylineView() -> some View {
+        VStack(alignment: .leading) {
+            Text("줄거리")
+                .font(.footnote)
+                .padding(.top, 5)
             HStack(alignment: .top) {
                 Text(book.description)
-                    .lineLimit(isOpened ? .max : 10)
+                    .font(.footnote)
+                    .foregroundStyle(.gray)
+                    .lineLimit(isOpened ? .max : 5)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Button(action: {
                     isOpened.toggle()
                 }, label: {
                     Image(systemName: "chevron.down")
+                        .imageScale(.small)
                         .foregroundStyle(.gray)
                         .rotationEffect(
                             Angle(degrees: isOpened ? 180 : 0)
                         )
                 })
-                
             }
-            .padding(.vertical, 10)
-            .padding(.horizontal, 5)
-            Spacer()
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding(.top, 120)
-        .padding(.horizontal, 15)
-        .background(
-            Rectangle()
-                .fill(.thinMaterial)
-        )
+        .frame(maxWidth: .infinity, alignment: .leading)
+        
+    }
+    
+    func publishInfoView() -> some View {
+        VStack(alignment: .leading) {
+            Text("출판사")
+                .font(.footnote)
+                .padding(.top, 5)
+            Text(book.publisher)
+                .font(.footnote)
+                .foregroundStyle(.gray)
+            Text("출판일")
+                .font(.footnote)
+                .padding(.top, 5)
+            Text(book.pubdate)
+                .font(.footnote)
+                .foregroundStyle(.gray)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        
     }
 }
 
@@ -102,6 +139,8 @@ struct DetailContentView: View {
         title: "주술회전 26 (남쪽으로)",
         image: "https://shopping-phinf.pstatic.net/main_4850944/48509446622.20240618091426.jpg",
         author: "아쿠타미 게게",
+        publisher: "한국문화사",
+        pubdate: "20240202",
         isbn: "123456789999",
         description: "고죠 VS. 스쿠나!!!\n차원이 다른 “최강”의 전투, 그 결말은?!\n\n급이 다른 규모로 펼쳐지는 고죠 VS. 스쿠나의 최강 결전…! 영역의 동시 전개와 타서 끊어진 술식의 회복을 반복하던 전투는, 마허라가 소환되고 고죠의 영역 전개가 불가능해지면서 균형이 무너진 것처럼 보이는데--?!\n\n약식판권 : JUJUTSU KAISEN ⓒ2018 by Gege Akutami / SHUEISHA Inc."
     ))

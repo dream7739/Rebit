@@ -53,6 +53,7 @@ extension BookSearchViewModel {
         bookRequest.query = text
         
         APIManager.fetchBooks(request: bookRequest)
+            .receive(on: DispatchQueue.main)
             .sink { result in
                 switch result {
                 case .finished:
@@ -72,6 +73,7 @@ extension BookSearchViewModel {
         bookRequest.start += 1
         
         APIManager.fetchBooks(request: bookRequest)
+            .receive(on: DispatchQueue.main)
             .sink { result in
                 switch result {
                 case .finished:

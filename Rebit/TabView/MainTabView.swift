@@ -11,10 +11,9 @@ struct MainTabView: View {
     @State private var selectedTab = 0
     
     var body: some View {
-        ZStack(alignment: .bottom,
-               content: {
-            TabView(selection: $selectedTab) {
-                Group {
+        NavigationView {
+            ZStack(alignment: .bottom){
+                TabView(selection: $selectedTab) {
                     FavoriteBookView()
                         .tag(0)
                     BookShelfView()
@@ -25,9 +24,7 @@ struct MainTabView: View {
                         .tag(3)
                 }
                 .toolbar(.hidden, for: .tabBar)
-            }
-            
-            ZStack {
+                
                 HStack {
                     ForEach(TabItems.allCases, id: \.self) { item in
                         Button(action: {
@@ -38,15 +35,16 @@ struct MainTabView: View {
                     }
                 }
                 .padding(6)
+                .frame(height: 70)
+                .background(
+                    RoundedRectangle(cornerRadius: 35)
+                        .fill(.white)
+                        .shadow(color: .gray.opacity(0.2), radius: 2)
+                )
+                .padding(.horizontal, 10)
             }
-            .frame(height: 70)
-            .background(
-                RoundedRectangle(cornerRadius: 35)
-                    .fill(.white)
-                    .shadow(color: .gray.opacity(0.2), radius: 2)
-            )
-            .padding(.horizontal, 10)
-        })
+            .navigationTitle(TabItems(rawValue: selectedTab)!.title)
+        }
     }
 }
 
@@ -98,7 +96,8 @@ extension MainTabView {
             }
             Spacer()
         }
-        .frame(width: isActive ? .infinity: 60, height: 60)
+        .frame(height: 60)
+        .frame(maxWidth: isActive ? .infinity: 60)
         .background(isActive ? .theme.opacity(0.4) : .clear)
         .clipShape(RoundedRectangle(cornerRadius: 30))
     }

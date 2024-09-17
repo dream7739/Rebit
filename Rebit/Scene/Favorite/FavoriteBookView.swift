@@ -23,10 +23,7 @@ var latestmovie = [Movie(id: 0, title: "The Avengers", imageName: "1"),
 
 struct FavoriteBookView: View {
     var body: some View {
-        NavigationView {
-            BookCarouselView()
-                .navigationTitle("Favorites")
-        }
+        BookCarouselView()
     }
 }
 
