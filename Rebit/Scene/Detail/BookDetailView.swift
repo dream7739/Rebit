@@ -9,6 +9,7 @@ import SwiftUI
 
 struct BookDetailView: View {
     @ObservedObject private var viewModel = BookDetailViewModel()
+    @State private var isFullPresented = false
     var book: Book
     
     var body: some View {
@@ -29,15 +30,17 @@ struct BookDetailView: View {
         .ignoresSafeArea()
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                NavigationLink(destination: {
-                    NavigationLazyView(BookWriteView())
+                Button(action: {
+                    isFullPresented = true
                 }, label: {
                     Text("저장")
-                        .foregroundStyle(.black)
+                    .foregroundStyle(.black)
                 })
-                
             }
         }
+        .fullScreenCover(isPresented: $isFullPresented, content: {
+            NavigationLazyView(BookWriteView(isFullPresented: $isFullPresented))
+        })
     }
     
     func detailCoverImage() -> some View {

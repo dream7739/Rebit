@@ -8,14 +8,23 @@
 import SwiftUI
 
 struct BookWriteView: View {
+    @Binding var isFullPresented: Bool
     @State private var summaryText: String = ""
+    @State private var startDate: Date = Date()
+    @State private var endDate: Date = Date()
+    @State private var rating: Double = 5
+    @State private var reviewText: String = ""
+    @State private var selectedStatus: Int = 0
     
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
             titleView()
             readingStatusView()
-            summaryView()
+            ratingView()
             dateView()
+            summaryView()
+            reviewView()
+            writeButton()
             Spacer()
         }
         .navigationBarTitleDisplayMode(.inline)
@@ -23,18 +32,51 @@ struct BookWriteView: View {
     }
     
     func titleView() -> some View {
-        Text("이 책은 어떤 책인가요?")
-            .font(.system(size: 20).bold())
+        HStack {
+            Text("이 책은 어떤 책인가요?")
+                .font(.system(size: 20).bold())
+            Spacer()
+            Button(action: {
+                isFullPresented = false
+            }, label: {
+                Image(systemName: "xmark")
+                    .foregroundStyle(.black)
+            })
+            .frame(alignment: .trailing)
+        }
+        .frame(maxWidth: .infinity)
     }
+    
     func readingStatusView() -> some View {
         VStack(alignment: .leading) {
             Text("독서 상태를 알려주세요")
                 .font(.subheadline)
             HStack {
-                StatusCardView(.expected)
-                StatusCardView(.current)
-                StatusCardView(.completed)
+                ForEach(ReadingStatus.allCases, id: \.self) { item in
+                    StatusCardView(selectedIndex: $selectedStatus, index: item.rawValue)
+                }
+             
             }
+        }
+    }
+    
+    func ratingView() -> some View {
+        VStack(alignment: .leading) {
+            Text("평점을 매겨주세요")
+                .font(.subheadline)
+            CustomCosmosView(rating: $rating)
+            
+        }
+    }
+    
+    func dateView() -> some View {
+        VStack(alignment: .leading) {
+            Text("독서한 기간을 알려주세요")
+                .font(.subheadline)
+            DatePicker("시작일", selection: $startDate, displayedComponents: .date)
+                .font(.subheadline)
+            DatePicker("종료일", selection: $endDate, displayedComponents: .date)
+                .font(.subheadline)
         }
     }
     
@@ -64,47 +106,75 @@ struct BookWriteView: View {
         .frame(maxWidth: .infinity)
     }
     
-    func dateView() -> some View {
-        VStack {
-            Text("독서한 기간을 알려주세요")
+    func reviewView() -> some View {
+        VStack(alignment: .leading) {
+            Text("전체적인 감상평을 남겨보세요")
                 .font(.subheadline)
+            
+            TextEditor(text: $reviewText)
+                .font(.footnote)
+                .textInputAutocapitalization(.none)
+                .autocorrectionDisabled()
+                .tint(.black)
+                .background(.gray.opacity(0.1))
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+                .scrollContentBackground(.hidden)
         }
+    }
+
+    func writeButton() -> some View {
+        Button(action: {}, label: {
+            Text("작성하기")
+                .asThemeBasicButtonModifier()
+        })
     }
 }
 
 
+enum ReadingStatus: Int, CaseIterable {
+    case expected = 0
+    case current
+    case completed
+    
+    var title: String {
+        switch self {
+        case .expected:
+            return "독서예정"
+        case .current:
+            return "독서중"
+        case .completed:
+            return "독서완료"
+        }
+    }
+}
+
 struct StatusCardView: View {
-    enum ReadingStatus: String {
-        case expected = "독서예정"
-        case current = "독서중"
-        case completed = "독서완료"
-    }
-    
-    var status: ReadingStatus
-    
-    init(_ status: ReadingStatus) {
-        self.status = status
-    }
-    
+
+    @Binding var selectedIndex: Int
+    var index: Int
+
     var body: some View {
-        RoundedRectangle(cornerRadius: 10)
-            .fill(.white)
-            .shadow(color: .gray.opacity(0.3), radius: 3)
-            .frame(height: 100)
-            .overlay {
-                VStack {
-                    Image(.character)
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                    Text(status.rawValue)
-                        .font(.caption)
+        Button(action: {
+            selectedIndex = index
+        }, label: {
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(selectedIndex == index ? .theme.opacity(0.5) : .gray.opacity(0.5), lineWidth: 1.5)
+                .frame(height: 100)
+                .overlay {
+                    VStack {
+                        Image(.character)
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                        Text(ReadingStatus.allCases[index].title)
+                            .font(.caption)
+                    }
                 }
-            }
-        
+        })
+        .buttonStyle(PlainButtonStyle())
     }
 }
 
 
 #Preview {
-    BookWriteView()
+    BookWriteView(isFullPresented: .constant(false))
 }

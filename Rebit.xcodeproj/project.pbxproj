@@ -11,6 +11,9 @@
 		8851A7232C97F25C002D2952 /* BookDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8851A7222C97F25C002D2952 /* BookDetailViewModel.swift */; };
 		8863628F2C99407700B5A8E8 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8863628E2C99407700B5A8E8 /* SearchBarView.swift */; };
 		886362922C99409600B5A8E8 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886362912C99409600B5A8E8 /* UIApplication+.swift */; };
+		886362952C9992DE00B5A8E8 /* Cosmos in Frameworks */ = {isa = PBXBuildFile; productRef = 886362942C9992DE00B5A8E8 /* Cosmos */; };
+		886362972C9993F600B5A8E8 /* CustomCosmosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886362962C9993F600B5A8E8 /* CustomCosmosView.swift */; };
+		88D19D222C9ACFC200CE4FE6 /* GreenRoundBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D19D212C9ACFC200CE4FE6 /* GreenRoundBackground.swift */; };
 		88F141EB2C95454D002117CD /* RebitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F141EA2C95454D002117CD /* RebitApp.swift */; };
 		88F141ED2C95454D002117CD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F141EC2C95454D002117CD /* ContentView.swift */; };
 		88F141EF2C95454E002117CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88F141EE2C95454E002117CD /* Assets.xcassets */; };
@@ -38,6 +41,8 @@
 		8851A7222C97F25C002D2952 /* BookDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewModel.swift; sourceTree = "<group>"; };
 		8863628E2C99407700B5A8E8 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		886362912C99409600B5A8E8 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
+		886362962C9993F600B5A8E8 /* CustomCosmosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCosmosView.swift; sourceTree = "<group>"; };
+		88D19D212C9ACFC200CE4FE6 /* GreenRoundBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenRoundBackground.swift; sourceTree = "<group>"; };
 		88F141E72C95454D002117CD /* Rebit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rebit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88F141EA2C95454D002117CD /* RebitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RebitApp.swift; sourceTree = "<group>"; };
 		88F141EC2C95454D002117CD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -65,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				886362952C9992DE00B5A8E8 /* Cosmos in Frameworks */,
 				88FC19242C96B11A004C844E /* RealmSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -88,6 +94,14 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		88D19D202C9ACFA300CE4FE6 /* Modifier */ = {
+			isa = PBXGroup;
+			children = (
+				88D19D212C9ACFC200CE4FE6 /* GreenRoundBackground.swift */,
+			);
+			path = Modifier;
+			sourceTree = "<group>";
+		};
 		88F141DE2C95454D002117CD = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +122,7 @@
 		88F141E92C95454D002117CD /* Rebit */ = {
 			isa = PBXGroup;
 			children = (
+				88D19D202C9ACFA300CE4FE6 /* Modifier */,
 				886362902C99408F00B5A8E8 /* Extension */,
 				8851A71F2C97F13B002D2952 /* Wrapper */,
 				88F142102C955F46002117CD /* TabView */,
@@ -185,6 +200,7 @@
 			children = (
 				88F1420E2C9548B4002117CD /* CoverImageView.swift */,
 				8863628E2C99407700B5A8E8 /* SearchBarView.swift */,
+				886362962C9993F600B5A8E8 /* CustomCosmosView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -256,6 +272,7 @@
 			name = Rebit;
 			packageProductDependencies = (
 				88FC19232C96B11A004C844E /* RealmSwift */,
+				886362942C9992DE00B5A8E8 /* Cosmos */,
 			);
 			productName = Rebit;
 			productReference = 88F141E72C95454D002117CD /* Rebit.app */;
@@ -287,6 +304,7 @@
 			mainGroup = 88F141DE2C95454D002117CD;
 			packageReferences = (
 				88FC19222C96B11A004C844E /* XCRemoteSwiftPackageReference "realm-swift" */,
+				886362932C9992DE00B5A8E8 /* XCRemoteSwiftPackageReference "Cosmos" */,
 			);
 			productRefGroup = 88F141E82C95454D002117CD /* Products */;
 			projectDirPath = "";
@@ -325,6 +343,8 @@
 				88F142152C9560D0002117CD /* FavoriteBookView.swift in Sources */,
 				88F141ED2C95454D002117CD /* ContentView.swift in Sources */,
 				8851A7232C97F25C002D2952 /* BookDetailViewModel.swift in Sources */,
+				886362972C9993F600B5A8E8 /* CustomCosmosView.swift in Sources */,
+				88D19D222C9ACFC200CE4FE6 /* GreenRoundBackground.swift in Sources */,
 				88F142122C955F60002117CD /* MainTabView.swift in Sources */,
 				88FC19272C96B3C9004C844E /* BookDetailView.swift in Sources */,
 				88F141FD2C954765002117CD /* APIKey.swift in Sources */,
@@ -550,6 +570,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		886362932C9992DE00B5A8E8 /* XCRemoteSwiftPackageReference "Cosmos" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/Cosmos.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 25.0.1;
+			};
+		};
 		88FC19222C96B11A004C844E /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -561,6 +589,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		886362942C9992DE00B5A8E8 /* Cosmos */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 886362932C9992DE00B5A8E8 /* XCRemoteSwiftPackageReference "Cosmos" */;
+			productName = Cosmos;
+		};
 		88FC19232C96B11A004C844E /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 88FC19222C96B11A004C844E /* XCRemoteSwiftPackageReference "realm-swift" */;

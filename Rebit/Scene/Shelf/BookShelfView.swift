@@ -9,9 +9,13 @@ import SwiftUI
 
 struct BookShelfView: View {
     var body: some View {
-        Text("SHELF")
+        VStack {
+            Text("SHELF")
+            
+        }
     }
 }
+
 
 #Preview {
     BookShelfView()
