@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct BookDetailView: View {
-    @ObservedObject private var viewModel = BookDetailViewModel()
     @State private var isFullPresented = false
     var book: Book
     
@@ -39,7 +38,7 @@ struct BookDetailView: View {
             }
         }
         .fullScreenCover(isPresented: $isFullPresented, content: {
-            NavigationLazyView(BookWriteView(isFullPresented: $isFullPresented))
+            NavigationLazyView(BookWriteView(book: book, isFullPresented: $isFullPresented))
         })
     }
     
@@ -127,7 +126,13 @@ struct DetailContentView: View {
             Text("출판일")
                 .font(.footnote)
                 .padding(.top, 5)
-            Text(book.pubdate)
+            Text(book.dateDescription)
+                .font(.footnote)
+                .foregroundStyle(.gray)
+            Text("ISBN")
+                .font(.footnote)
+                .padding(.top, 5)
+            Text(book.isbn)
                 .font(.footnote)
                 .foregroundStyle(.gray)
         }

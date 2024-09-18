@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-protocol BaseViewModel: AnyObject {
+protocol BaseViewModel: AnyObject, ObservableObject {
     associatedtype Input
     associatedtype Output
     

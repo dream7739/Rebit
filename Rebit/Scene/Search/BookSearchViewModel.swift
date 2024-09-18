@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 
-final class BookSearchViewModel: BaseViewModel, ObservableObject {
+final class BookSearchViewModel: BaseViewModel {
     @Published var searchText = ""
     
     var bookRequest = BookRequest(query: "")

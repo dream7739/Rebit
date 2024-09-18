@@ -6,15 +6,12 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct BookWriteView: View {
+    var book: Book?
     @Binding var isFullPresented: Bool
-    @State private var summaryText: String = ""
-    @State private var startDate: Date = Date()
-    @State private var endDate: Date = Date()
-    @State private var rating: Double = 5
-    @State private var reviewText: String = ""
-    @State private var selectedStatus: Int = 0
+    @ObservedObject private var viewModel = BookWriteViewModel()
     
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
@@ -29,6 +26,10 @@ struct BookWriteView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .padding()
+        .onAppear {
+            viewModel.book = book
+            print(Realm.Configuration.defaultConfiguration.fileURL)
+        }
     }
     
     func titleView() -> some View {
@@ -53,7 +54,7 @@ struct BookWriteView: View {
                 .font(.subheadline)
             HStack {
                 ForEach(ReadingStatus.allCases, id: \.self) { item in
-                    StatusCardView(selectedIndex: $selectedStatus, index: item.rawValue)
+                    StatusCardView(selectedIndex: $viewModel.output.selectedStatus, index: item.rawValue)
                 }
              
             }
@@ -64,8 +65,7 @@ struct BookWriteView: View {
         VStack(alignment: .leading) {
             Text("평점을 매겨주세요")
                 .font(.subheadline)
-            CustomCosmosView(rating: $rating)
-            
+            CustomCosmosView(rating: $viewModel.output.rating)
         }
     }
     
@@ -73,9 +73,9 @@ struct BookWriteView: View {
         VStack(alignment: .leading) {
             Text("독서한 기간을 알려주세요")
                 .font(.subheadline)
-            DatePicker("시작일", selection: $startDate, displayedComponents: .date)
+            DatePicker("시작일", selection: $viewModel.output.startDate, displayedComponents: .date)
                 .font(.subheadline)
-            DatePicker("종료일", selection: $endDate, displayedComponents: .date)
+            DatePicker("종료일", selection: $viewModel.output.endDate, displayedComponents: .date)
                 .font(.subheadline)
         }
     }
@@ -91,7 +91,7 @@ struct BookWriteView: View {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(.gray.opacity(0.1))
                     
-                    TextField("", text: $summaryText)
+                    TextField("", text: $viewModel.output.summaryText)
                         .font(.footnote)
                         .tint(.black)
                         .padding(.horizontal, 8)
@@ -111,7 +111,7 @@ struct BookWriteView: View {
             Text("전체적인 감상평을 남겨보세요")
                 .font(.subheadline)
             
-            TextEditor(text: $reviewText)
+            TextEditor(text: $viewModel.output.reviewText)
                 .font(.footnote)
                 .textInputAutocapitalization(.none)
                 .autocorrectionDisabled()
@@ -123,33 +123,16 @@ struct BookWriteView: View {
     }
 
     func writeButton() -> some View {
-        Button(action: {}, label: {
+        Button(action: {
+            viewModel.input.saveReview.send(())
+        }, label: {
             Text("작성하기")
                 .asThemeBasicButtonModifier()
         })
     }
 }
 
-
-enum ReadingStatus: Int, CaseIterable {
-    case expected = 0
-    case current
-    case completed
-    
-    var title: String {
-        switch self {
-        case .expected:
-            return "독서예정"
-        case .current:
-            return "독서중"
-        case .completed:
-            return "독서완료"
-        }
-    }
-}
-
 struct StatusCardView: View {
-
     @Binding var selectedIndex: Int
     var index: Int
 

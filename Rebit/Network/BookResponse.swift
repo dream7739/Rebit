@@ -22,4 +22,14 @@ struct Book: Decodable, Hashable {
     let pubdate: String
     let isbn: String
     let description: String
+    
+    var dateDescription: String {
+        if pubdate.isEmpty {
+            return "정보없음"
+        } else {
+            let date = DateFormatterManager.emptyDateFormatter.date(from: pubdate) ?? Date()
+            let dateString = DateFormatterManager.basicFormatter.string(from: date)
+            return dateString
+        }
+    }
 }
