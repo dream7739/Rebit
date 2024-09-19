@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		881040B62C9C247700FCBD5A /* ImageFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881040B52C9C247700FCBD5A /* ImageFileManager.swift */; };
+		881040B82C9C332500FCBD5A /* BookShelfViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881040B72C9C332500FCBD5A /* BookShelfViewModel.swift */; };
 		8851A7212C97F149002D2952 /* NavigationLazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8851A7202C97F149002D2952 /* NavigationLazyView.swift */; };
 		8863628F2C99407700B5A8E8 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8863628E2C99407700B5A8E8 /* SearchBarView.swift */; };
 		886362922C99409600B5A8E8 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886362912C99409600B5A8E8 /* UIApplication+.swift */; };
@@ -40,6 +42,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		881040B52C9C247700FCBD5A /* ImageFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileManager.swift; sourceTree = "<group>"; };
+		881040B72C9C332500FCBD5A /* BookShelfViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShelfViewModel.swift; sourceTree = "<group>"; };
 		8851A7202C97F149002D2952 /* NavigationLazyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLazyView.swift; sourceTree = "<group>"; };
 		8863628E2C99407700B5A8E8 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		886362912C99409600B5A8E8 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
@@ -112,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				88D19D282C9ADA8400CE4FE6 /* DateFormatterManager.swift */,
+				881040B52C9C247700FCBD5A /* ImageFileManager.swift */,
 			);
 			path = Utill;
 			sourceTree = "<group>";
@@ -250,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				88F1421A2C956239002117CD /* BookShelfView.swift */,
+				881040B72C9C332500FCBD5A /* BookShelfViewModel.swift */,
 			);
 			path = Shelf;
 			sourceTree = "<group>";
@@ -359,6 +365,7 @@
 				88F142092C9547F6002117CD /* BookSearchViewModel.swift in Sources */,
 				88F1420F2C9548B4002117CD /* CoverImageView.swift in Sources */,
 				88F141FF2C954789002117CD /* NetworkManager.swift in Sources */,
+				881040B82C9C332500FCBD5A /* BookShelfViewModel.swift in Sources */,
 				88D19D262C9AD3C500CE4FE6 /* BookReview.swift in Sources */,
 				88F142152C9560D0002117CD /* FavoriteBookView.swift in Sources */,
 				88F141ED2C95454D002117CD /* ContentView.swift in Sources */,
@@ -371,6 +378,7 @@
 				88F1420C2C954817002117CD /* BaseViewModel.swift in Sources */,
 				88F142182C956122002117CD /* BookChartView.swift in Sources */,
 				88D19D2B2C9B06FD00CE4FE6 /* RealmRepository.swift in Sources */,
+				881040B62C9C247700FCBD5A /* ImageFileManager.swift in Sources */,
 				88F142012C95479B002117CD /* BookRequest.swift in Sources */,
 				88F141EB2C95454D002117CD /* RebitApp.swift in Sources */,
 				88FC19212C96B004004C844E /* BookWriteView.swift in Sources */,

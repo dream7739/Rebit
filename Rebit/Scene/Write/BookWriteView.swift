@@ -30,6 +30,9 @@ struct BookWriteView: View {
             viewModel.book = book
             print(Realm.Configuration.defaultConfiguration.fileURL)
         }
+        .onReceive(viewModel.output.dismissRequest) { _ in
+            isFullPresented = false
+        }
     }
     
     func titleView() -> some View {

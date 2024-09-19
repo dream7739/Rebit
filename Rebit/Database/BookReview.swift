@@ -16,6 +16,7 @@ final class BookInfo: Object, ObjectKeyIdentifiable {
     @Persisted var isbn: String
     @Persisted var pubdate: String
     @Persisted var publisher: String
+    
     @Persisted var saveDate: Date
     @Persisted var reviewList = List<BookReview>()
     
