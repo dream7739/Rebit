@@ -10,21 +10,46 @@ import RealmSwift
 
 struct BookShelfView: View {
     @StateObject private var viewModel = BookShelfViewModel()
-    @ObservedResults(BookInfo.self, sortDescriptor: SortDescriptor(keyPath: "saveDate", ascending: false))
-    var bookList
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("지금 어떤 책을 읽고 있나요?")
-                .bold()
-            CurrentBookView()
-            
-            Text("나만의 책장을 구경해볼까요")
-                .bold()
-            shelfGridView()
+        VStack(alignment: .leading, spacing: 20) {
+            nowReadingSection()
+            mybookShelfSection()
             Spacer()
         }
         .padding()
+    }
+    
+    func nowReadingSection() -> some View {
+        VStack(alignment: .leading) {
+            Text("지금 어떤 책을 읽고 있나요?")
+                .bold()
+            
+            asHorizontalPageContent {
+                ForEach(viewModel.currentBookList, id: \.id) { item in
+                    CurrentReadingView(currentBookInfo: item)
+                }
+            }
+         
+        }
+    }
+    
+    func mybookShelfSection() -> some View {
+        VStack(alignment: .leading) {
+            HStack {
+                Text("나만의 책장")
+                    .bold()
+                Spacer()
+                Button(action: {
+                    //전체보기
+                }, label: {
+                    Text("더보기")
+                        .font(.footnote)
+                        .foregroundStyle(.gray)
+                })
+            }
+            shelfGridView()
+        }
     }
     
     func shelfGridView() -> some View {
@@ -35,58 +60,57 @@ struct BookShelfView: View {
         ]
         
         return LazyVGrid(columns: columns, spacing: 20, content: {
-            ForEach(0..<6) { item in
-                ShelfBookView(viewModel: viewModel, bookList: bookList[item])
+            if viewModel.bookList.count >= 6 {
+                ForEach(0..<6) { item in
+                    ShelfBookView(bookList: viewModel.bookList[item])
+                }
+            } else {
+                ForEach(viewModel.bookList, id: \.id) { item in
+                    ShelfBookView(bookList: item)
+                }
             }
         })
     }
 }
 
-struct CurrentBookView: View {
-    var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 10)
-                .fill(.background)
-                .frame(height: 160)
-                .shadow(color: .gray.opacity(0.3), radius: 5)
-            
-            HStack(alignment: .top) {
-                CoverImageView(url: "https://shopping-phinf.pstatic.net/main_5003270/50032709645.20240828201557.jpg")
-                    .scaledToFit()
-                    .frame(width: 100, height: 130)
-                VStack(alignment: .leading) {
-                    Text("주술회전 27(트리플특장판) (바보 서바이버!!)")
-                    Text("아쿠타미 게게")
-                }
-                Spacer()
-            }
-            .padding()
-        }
-    }
-}
-
-struct ShelfBookView: View {
-    @ObservedObject var viewModel: BookShelfViewModel
-    @ObservedRealmObject var bookList: BookInfo
+struct CurrentReadingView: View {
+    @ObservedRealmObject var currentBookInfo: BookInfo
     
     var body: some View {
-        VStack {
-            Image(uiImage: viewModel.retriveImage("\(bookList.id)"))
+        HStack(alignment: .top) {
+            Image(uiImage: ImageFileManager.shared.loadImageToDocument(filename: "\(currentBookInfo.id)") ?? UIImage())
                 .resizable()
+                .frame(width: 100, height: 130)
                 .clipShape(RoundedRectangle(cornerRadius: 5))
-            Text(bookList.title)
-                .lineLimit(1)
-                .font(.caption)
-                .background(RoundedRectangle(cornerRadius: 3)
-                    .fill(.thickMaterial)
-                    .frame(width: 110, height: 35)
-                    .shadow(color: .gray.opacity(0.3), radius: 10, x: 5, y: 5)
-                )
-                .offset(x: 0, y: -10)
+                .offset(x: -5, y: 0)
+                .shadow(color: .gray.opacity(0.3), radius: 10, x: 3, y: 3)
+            VStack(alignment: .leading) {
+                Text(currentBookInfo.title)
+                    .lineLimit(2)
+                    .font(.subheadline)
+                Text(currentBookInfo.author)
+                    .font(.caption)
+                    .foregroundStyle(.gray)
+                Spacer()
+                Button(action: {}, label: {
+                    Capsule()
+                        .fill(.theme.opacity(0.6))
+                        .frame(width: 70, height: 30)
+                        .overlay(alignment: .center) {
+                            Text("기록하기")
+                                .font(.caption.bold())
+                                .foregroundStyle(.white)
+                        }
+                })
+            }
+            Spacer()
         }
-        .frame(width: 100, height: 150)
+        .padding()
     }
+    
 }
+
+
 
 #Preview {
     BookShelfView()

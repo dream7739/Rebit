@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import Combine
+import RealmSwift
 
 final class BookShelfViewModel: BaseViewModel {
     struct Input {
@@ -20,7 +21,19 @@ final class BookShelfViewModel: BaseViewModel {
     @Published var output = Output()
     var cancellables = Set<AnyCancellable>()
     
-    private let repository = RealmRepository()
+    @ObservedResults(
+        BookInfo.self,
+        sortDescriptor: SortDescriptor(keyPath: "saveDate", ascending: false)
+    )
+    var bookList
+    
+    @ObservedResults(
+        BookInfo.self,
+        where: ({ $0.reviewList.status == "독서중" }),
+        sortDescriptor: SortDescriptor(keyPath: "saveDate", ascending: false)
+    )
+    var currentBookList
+    
     private let fileManager = ImageFileManager.shared
     
     init() {
@@ -29,15 +42,5 @@ final class BookShelfViewModel: BaseViewModel {
     
     func transform() {
       
-    }
-}
-
-extension BookShelfViewModel {
-    func retriveImage(_ id: String) -> UIImage {
-        if let image = fileManager.loadImageToDocument(filename: "\(id)") {
-            return image
-        } else {
-            return UIImage()
-        }
     }
 }
