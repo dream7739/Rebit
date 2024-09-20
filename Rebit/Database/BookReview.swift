@@ -38,6 +38,11 @@ final class BookInfo: Object, ObjectKeyIdentifiable {
         self.pubdate = pubdate
         self.publisher = publisher
     }
+    
+    var reviewCountDescription: String {
+        return reviewList.count.formatted() + "개"
+    }
+    
 }
 
 final class BookReview: Object, ObjectKeyIdentifiable {
@@ -75,6 +80,37 @@ final class BookReview: Object, ObjectKeyIdentifiable {
         self.endDate = endDate
         self.saveDate = Date()
     }
+    
+    var ratingDescription: String {
+        return rating.formatted() + "점"
+    }
+    
+    var readingDateDescription: String {
+        let start = DateFormatterManager.basicFormatter.string(from: startDate ?? Date())
+        let end = DateFormatterManager.basicFormatter.string(from: endDate ?? Date())
+        let description = start + " - " + end + "(\(periodDescription))"
+        return description
+    }
+    
+    var saveDateDescription: String {
+        let date = DateFormatterManager.basicFormatter.string(from: saveDate)
+        return date
+    }
+    
+    var periodDescription: String {
+        if let period = DateFormatterManager.dateCompare(startDate ?? Date(), endDate ?? Date()) {
+            if period == 0 {
+                return "하루"
+            } else if period > 0 {
+                return period.formatted() + "일"
+            } else {
+                return "-"
+            }
+        } else {
+            return "-"
+        }
+    }
+    
 }
 
 final class ReadingGoal: Object, ObjectKeyIdentifiable {

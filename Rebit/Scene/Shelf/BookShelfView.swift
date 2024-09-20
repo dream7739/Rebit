@@ -28,7 +28,7 @@ struct BookShelfView: View {
             Text("지금 어떤 책을 읽고 있나요?")
                 .bold()
             
-            asHorizontalPageContent {
+            asHorizontalPageContent(height: 150) {
                 ForEach(viewModel.currentBookList, id: \.id) { item in
                     CurrentReadingView(currentBookInfo: item)
                 }
@@ -66,11 +66,19 @@ struct BookShelfView: View {
         return LazyVGrid(columns: columns, spacing: 20, content: {
             if viewModel.bookList.count >= 6 {
                 ForEach(0..<6) { item in
-                    ShelfBookView(bookList: viewModel.bookList[item])
+                    NavigationLinkWrapper {
+                        BookReviewView(bookInfo: viewModel.bookList[item])
+                    } inner: {
+                        ShelfBookView(bookList: viewModel.bookList[item])
+                    }
                 }
             } else {
                 ForEach(viewModel.bookList, id: \.id) { item in
-                    ShelfBookView(bookList: item)
+                    NavigationLinkWrapper {
+                        BookReviewView(bookInfo: item)
+                    } inner: {
+                        ShelfBookView(bookList: item)
+                    }
                 }
             }
         })

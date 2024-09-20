@@ -23,4 +23,8 @@ enum DateFormatterManager {
         return dateFormatter
     }()
     
+    static func dateCompare(_ start: Date, _ end: Date) -> Int? {
+        return Calendar.current.dateComponents([.day], from: start, to: end).day
+    }
+    
 }

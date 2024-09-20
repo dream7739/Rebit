@@ -22,9 +22,11 @@ struct HorizontalPageWrapper: ViewModifier {
 }
 
 struct HorizontalPageContentWrapper<Inner: View>: ViewModifier {
+    let height: CGFloat
     let inner: Inner
     
-    init(@ViewBuilder inner: () -> Inner) {
+    init(height: CGFloat, @ViewBuilder inner: () -> Inner) {
+        self.height = height
         self.inner = inner()
     }
     
@@ -34,7 +36,7 @@ struct HorizontalPageContentWrapper<Inner: View>: ViewModifier {
                 LazyHStack {
                     inner
                         .containerRelativeFrame(.horizontal)
-                        .frame(height: 150)
+                        .frame(height: height)
                 }
                 .scrollTargetLayout()
             }
@@ -44,7 +46,7 @@ struct HorizontalPageContentWrapper<Inner: View>: ViewModifier {
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack {
                         inner
-                            .frame(width: proxy.size.width, height: 150)
+                            .frame(width: proxy.size.width, height: height)
                     }
                 }
             }
@@ -61,8 +63,9 @@ extension View {
     }
     
     func asHorizontalPageContent(
+        height: CGFloat, 
         @ViewBuilder inner: () -> some View
     ) -> some View {
-        modifier(HorizontalPageContentWrapper(inner: inner))
+        modifier(HorizontalPageContentWrapper(height: height, inner: inner))
     }
 }
