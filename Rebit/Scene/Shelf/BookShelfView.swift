@@ -9,7 +9,7 @@ import SwiftUI
 import RealmSwift
 
 struct BookShelfView: View {
-    @StateObject private var viewModel = BookShelfViewModel()
+    @ObservedObject private var viewModel = BookShelfViewModel()
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -18,6 +18,9 @@ struct BookShelfView: View {
             Spacer()
         }
         .padding()
+        .onAppear(perform: {
+            print(Realm.Configuration.defaultConfiguration.fileURL)
+        })
     }
     
     func nowReadingSection() -> some View {
@@ -40,13 +43,14 @@ struct BookShelfView: View {
                 Text("나만의 책장")
                     .bold()
                 Spacer()
-                Button(action: {
-                    //전체보기
+                NavigationLink(destination: {
+                     EntireShelfView()
                 }, label: {
                     Text("더보기")
                         .font(.footnote)
                         .foregroundStyle(.gray)
                 })
+                .buttonStyle(PlainButtonStyle())
             }
             shelfGridView()
         }
