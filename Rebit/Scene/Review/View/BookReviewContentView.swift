@@ -1,44 +1,21 @@
 //
-//  BookReviewView.swift
+//  BookReviewContentView.swift
 //  Rebit
 //
-//  Created by 홍정민 on 9/20/24.
+//  Created by 홍정민 on 9/22/24.
 //
 
 import SwiftUI
 import RealmSwift
 
-struct BookReviewView: View {
-    @ObservedRealmObject var bookInfo: BookInfo
-    @State var image: UIImage?
-    
-    var body: some View {
-        ZStack {
-            Rectangle()
-                .fill(
-                    .theme.opacity(0.3)
-                )
-                .ignoresSafeArea()
-            
-            GeometryReader { proxy in
-                asHorizontalPageContent(height: proxy.size.height) {
-                    ForEach(bookInfo.reviewList, id: \.id) { review in
-                        ReviewContentView(bookInfo: bookInfo, reviewInfo: review, image: image)
-                    }
-                }
-            }
-        }
-        .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            image = ImageFileManager.shared.loadImageToDocument(filename: "\(bookInfo.id)")
-        }
-    }
-}
+struct BookReviewContentView: View {
+    @StateObject private var viewModel: BookReviewContentViewModel
+    var image: UIImage
 
-struct ReviewContentView: View {
-    @ObservedRealmObject var bookInfo: BookInfo
-    @ObservedRealmObject var reviewInfo: BookReview
-    var image: UIImage?
+    init(reviewInfo: BookReview, image: UIImage) {
+        self._viewModel = StateObject(wrappedValue: BookReviewContentViewModel(reviewInfo: reviewInfo))
+        self.image = image
+    }
     
     var body: some View {
         VStack {
@@ -57,17 +34,20 @@ struct ReviewContentView: View {
         )
         .padding(.trailing, 20)
         .padding(.vertical)
+        .onAppear {
+            viewModel.input.viewOnAppear.send(())
+        }
     }
     
     func headerView() -> some View {
         VStack {
-            Image(uiImage: image ?? UIImage())
+            Image(uiImage: image)
                 .resizable()
                 .frame(width: 150, height: 230)
                 .padding(.top, 10)
-            Text(bookInfo.title)
+            Text(viewModel.output.title)
                 .font(.callout.bold())
-            Text(bookInfo.author)
+            Text(viewModel.output.author)
                 .font(.subheadline)
         }
         .frame(maxWidth: .infinity, alignment: .center)
@@ -79,9 +59,9 @@ struct ReviewContentView: View {
     func optionMenuView() -> some View {
         HStack(alignment: .center, spacing: 4) {
             Button(action: {
-                $reviewInfo.isLike.wrappedValue.toggle()
+                viewModel.input.isLikeClicked.send(())
             }, label: {
-                if $reviewInfo.isLike.wrappedValue {
+                if viewModel.output.isLike {
                     Image(systemName: "heart.fill")
                         .foregroundStyle(.red)
                         .imageScale(.large)
@@ -106,9 +86,9 @@ struct ReviewContentView: View {
     
     func infoSectionView() -> some View {
         HStack {
-            infoBoxView("독서기간", reviewInfo.periodDescription)
-            infoBoxView("평점", reviewInfo.ratingDescription)
-            infoBoxView("리뷰수", bookInfo.reviewCountDescription)
+            infoBoxView("독서기간", viewModel.output.period)
+            infoBoxView("평점", viewModel.output.rating)
+            infoBoxView("리뷰수", viewModel.output.reviewCnt)
         }
         .frame(maxWidth: .infinity)
         .frame(height: 50)
@@ -130,10 +110,10 @@ struct ReviewContentView: View {
     
     func contentSectionView() -> some View {
         VStack(alignment: .leading, spacing: 6) {
-            contentView("한줄평", reviewInfo.title)
-            contentView("감상평", reviewInfo.content)
-            contentView("독서기간", reviewInfo.readingDateDescription)
-            contentView("저장일", reviewInfo.saveDateDescription)
+            contentView("한줄평", viewModel.output.reviewTitle)
+            contentView("감상평", viewModel.output.reviewContent)
+            contentView("독서기간", viewModel.output.period)
+            contentView("저장일", viewModel.output.saveDate)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 10)
