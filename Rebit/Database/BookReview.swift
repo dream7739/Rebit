@@ -82,7 +82,7 @@ final class BookReview: Object, ObjectKeyIdentifiable {
     }
     
     var ratingDescription: String {
-        return rating.formatted() + "점"
+        return rating.formatted()
     }
     
     var readingDateDescription: String {

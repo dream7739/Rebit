@@ -27,6 +27,7 @@ final class BookReviewContentViewModel: BaseViewModel {
         var rating = ""
         var saveDate = ""
         var isLike = false
+        
     }
     
     var input = Input()
@@ -34,6 +35,7 @@ final class BookReviewContentViewModel: BaseViewModel {
     var cancellables = Set<AnyCancellable>()
     
     @ObservedRealmObject var reviewInfo: BookReview
+
     private let fileManager = ImageFileManager.shared
     
     init(reviewInfo: BookReview) {
@@ -71,5 +73,7 @@ final class BookReviewContentViewModel: BaseViewModel {
                 self.output.isLike = reviewInfo.isLike
             }
             .store(in: &cancellables)
+        
+        
     }
 }

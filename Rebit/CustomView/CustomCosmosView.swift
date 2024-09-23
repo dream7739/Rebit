@@ -24,7 +24,7 @@ struct CustomCosmosView: UIViewRepresentable {
        
          // Change Cosmos view settings here
          uiView.settings.starSize = 20
-         uiView.settings.filledImage = UIImage(named: "rating.fill")
+         uiView.settings.filledImage = UIImage(named: "ratingFill")
          uiView.settings.emptyImage = UIImage(named: "rating")
          uiView.settings.fillMode = .full
          uiView.didFinishTouchingCosmos = { rating in

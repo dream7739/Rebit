@@ -10,6 +10,7 @@ import SwiftUI
 struct BookDetailView: View {
     @State private var isFullPresented = false
     var book: Book
+    var coverImage: UIImage?
     
     var body: some View {
         GeometryReader { proxy in
@@ -19,35 +20,57 @@ struct BookDetailView: View {
                 
                 ScrollView {
                     VStack(spacing: 30) {
-                        detailCoverImage()
+                        if let coverImage {
+                            existCoverImage(coverImage)
+                        } else {
+                            asyncCoverImage()
+                        }
                         DetailContentView(book)
                     }
                     .frame(minHeight: proxy.size.height)
                 }
+                .overlay(alignment: .bottomTrailing) {
+                    writeButton()
+                }
             }
         }
         .ignoresSafeArea()
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button(action: {
-                    isFullPresented = true
-                }, label: {
-                    Text("저장")
-                    .foregroundStyle(.black)
-                })
-            }
-        }
         .fullScreenCover(isPresented: $isFullPresented, content: {
             NavigationLazyView(BookWriteView(book: book, isFullPresented: $isFullPresented))
         })
     }
     
-    func detailCoverImage() -> some View {
+    func asyncCoverImage() -> some View {
         CoverImageView(url: book.image)
             .frame(width: 150, height: 200)
             .clipShape(RoundedRectangle(cornerRadius: 8))
             .offset(x: 0, y: 100)
             .zIndex(1.0)
+    }
+    
+    func existCoverImage(_ image: UIImage) -> some View {
+        Image(uiImage: image)
+            .resizable()
+            .frame(width: 150, height: 200)
+            .clipShape(RoundedRectangle(cornerRadius: 8))
+            .offset(x: 0, y: 100)
+            .zIndex(1.0)
+    }
+    
+    func writeButton() -> some View {
+        Button(action: {
+            isFullPresented = true
+        }, label: {
+            Image(systemName: "pencil")
+                .resizable()
+                .foregroundStyle(.white)
+                .frame(width: 20, height: 20)
+                .padding()
+                .background(.theme)
+                .clipShape(Circle())
+        })
+        .padding(.bottom, 30)
+        .padding(.trailing, 20)
     }
 }
 

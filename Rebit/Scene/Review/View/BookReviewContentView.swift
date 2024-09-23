@@ -11,9 +11,11 @@ import RealmSwift
 struct BookReviewContentView: View {
     @StateObject private var viewModel: BookReviewContentViewModel
     var image: UIImage
-
+    
     init(reviewInfo: BookReview, image: UIImage) {
-        self._viewModel = StateObject(wrappedValue: BookReviewContentViewModel(reviewInfo: reviewInfo))
+        self._viewModel = StateObject(
+            wrappedValue: BookReviewContentViewModel(reviewInfo: reviewInfo)
+        )
         self.image = image
     }
     
@@ -74,7 +76,23 @@ struct BookReviewContentView: View {
             Menu {
                 Button("수정", action: {})
                 Button("삭제", action: {})
-                Button("상세정보", action: {})
+                NavigationLinkWrapper {
+                    if let book = viewModel.reviewInfo.book.first {
+                        BookDetailView(
+                            book: Book(
+                                title: book.title,
+                                image: "",
+                                author: book.author,
+                                publisher: book.publisher,
+                                pubdate: book.pubdate,
+                                isbn: book.isbn,
+                                description: book.content),
+                            coverImage: image
+                        )
+                    }
+                } inner: {
+                    Button("상세정보", action: {})
+                }
             } label: {
                 Image(.dotList)
                     .frame(width: 30, height: 30)
