@@ -21,7 +21,7 @@ struct BookReviewView: View {
         ZStack {
             Rectangle()
                 .fill(
-                    .theme.opacity(0.3)
+                    .theme.opacity(0.4)
                 )
                 .ignoresSafeArea()
             

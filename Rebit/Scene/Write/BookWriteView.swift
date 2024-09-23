@@ -9,29 +9,51 @@ import SwiftUI
 import RealmSwift
 
 struct BookWriteView: View {
-    var book: Book?
+    private enum Field: Hashable {
+        case title
+        case content
+        case initial
+    }
+    
     @Binding var isFullPresented: Bool
-    @ObservedObject private var viewModel = BookWriteViewModel()
+    @StateObject private var viewModel: BookWriteViewModel
+    @FocusState private var focusedField: Field?
+    
+    init(book: Book, isFullPresented: Binding<Bool>) {
+        _viewModel = StateObject(wrappedValue: BookWriteViewModel(book: book))
+        self._isFullPresented = isFullPresented
+    }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 15) {
-            titleView()
-            readingStatusView()
-            ratingView()
-            dateView()
-            summaryView()
-            reviewView()
-            writeButton()
-            Spacer()
+        ScrollView {
+            VStack(alignment: .leading, spacing: 15) {
+                titleView()
+                readingStatusView()
+                ratingView()
+                dateView()
+                summaryView()
+                reviewView()
+                writeButton()
+                Spacer()
+            }
+            .padding()
+
         }
         .navigationBarTitleDisplayMode(.inline)
-        .padding()
-        .onAppear {
-            viewModel.book = book
-            print(Realm.Configuration.defaultConfiguration.fileURL)
-        }
         .onReceive(viewModel.output.dismissRequest) { _ in
             isFullPresented = false
+        }
+        .onTapGesture {
+            print("안녕")
+            UIApplication.shared.endEditing()
+        }
+        .onSubmit {
+            switch focusedField {
+            case .title:
+                focusedField = .content
+            default:
+                print("default")
+            }
         }
     }
     
@@ -48,7 +70,7 @@ struct BookWriteView: View {
             })
             .frame(alignment: .trailing)
         }
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
     
     func readingStatusView() -> some View {
@@ -59,9 +81,10 @@ struct BookWriteView: View {
                 ForEach(ReadingStatus.allCases, id: \.self) { item in
                     StatusCardView(selectedIndex: $viewModel.output.selectedStatus, index: item.rawValue)
                 }
-             
+                
             }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
     
     func ratingView() -> some View {
@@ -69,7 +92,10 @@ struct BookWriteView: View {
             Text("평점을 매겨주세요")
                 .font(.subheadline)
             CustomCosmosView(rating: $viewModel.output.rating)
+                .onTapGesture(count: 999999) { }
+
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
     
     func dateView() -> some View {
@@ -78,35 +104,31 @@ struct BookWriteView: View {
                 .font(.subheadline)
             DatePicker("시작일", selection: $viewModel.output.startDate, displayedComponents: .date)
                 .font(.subheadline)
+                .onTapGesture(count: 999999) { }
             DatePicker("종료일", selection: $viewModel.output.endDate, displayedComponents: .date)
                 .font(.subheadline)
+                .onTapGesture(count: 999999) { }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
     
     func summaryView() -> some View {
         VStack(alignment: .leading) {
             Text("나만의 한줄평을 입력해보세요")
                 .font(.subheadline)
-            HStack(alignment: .top) {
-                Image(systemName: "quote.opening")
-                    .font(.system(size: 10))
-                ZStack {
+            
+            TextField("이 책을 한줄로 정의해보세요", text: $viewModel.output.summaryText)
+                .font(.footnote)
+                .tint(.black)
+                .padding(10)
+                .focused($focusedField, equals: .title)
+                .background(
                     RoundedRectangle(cornerRadius: 10)
                         .fill(.gray.opacity(0.1))
-                    
-                    TextField("", text: $viewModel.output.summaryText)
-                        .font(.footnote)
-                        .tint(.black)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 2)
-                }
+                )
                 .frame(height: 35)
-                
-                Image(systemName: "quote.closing")
-                    .font(.system(size: 10))
-            }
         }
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
     
     func reviewView() -> some View {
@@ -119,12 +141,26 @@ struct BookWriteView: View {
                 .textInputAutocapitalization(.none)
                 .autocorrectionDisabled()
                 .tint(.black)
+                .padding(.vertical, 5)
+                .padding(.horizontal, 10)
                 .background(.gray.opacity(0.1))
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 .scrollContentBackground(.hidden)
+                .frame(height: 200)
+                .focused($focusedField, equals: .content)
+                .overlay(alignment: .topLeading) {
+                    Text("책을 읽은 후의 감상을 적어보세요")
+                        .font(.footnote)
+                        .foregroundStyle(.gray.opacity(0.6))
+                        .padding(.vertical, 15)
+                        .padding(.horizontal, 13)
+                        .opacity(viewModel.output.reviewText.isEmpty ? 1.0 : 0)
+                }
+            
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
-
+    
     func writeButton() -> some View {
         Button(action: {
             viewModel.input.saveReview.send(())
@@ -138,23 +174,22 @@ struct BookWriteView: View {
 struct StatusCardView: View {
     @Binding var selectedIndex: Int
     var index: Int
-
+    
     var body: some View {
         Button(action: {
             selectedIndex = index
         }, label: {
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(selectedIndex == index ? .theme.opacity(0.5) : .gray.opacity(0.5), lineWidth: 1.5)
-                .frame(height: 100)
-                .overlay {
-                    VStack {
-                        Image(.character)
-                            .resizable()
-                            .frame(width: 50, height: 50)
-                        Text(ReadingStatus.allCases[index].title)
-                            .font(.caption)
-                    }
-                }
+            Text(ReadingStatus.allCases[index].title)
+                .font(.caption)
+                .padding(.vertical, 8)
+                .padding(.horizontal, 13)
+                .background(selectedIndex == index ? .theme : .white)
+                .foregroundStyle(selectedIndex == index ? .white : .black)
+                .clipShape(Capsule())
+                .overlay(
+                    Capsule()
+                        .stroke(selectedIndex == index ? .clear: .gray.opacity(0.4), lineWidth: 1)
+                )
         })
         .buttonStyle(PlainButtonStyle())
     }
@@ -162,5 +197,8 @@ struct StatusCardView: View {
 
 
 #Preview {
-    BookWriteView(isFullPresented: .constant(false))
+    BookWriteView(
+        book: Book(title: "", image: "", author: "", publisher: "", pubdate: "", isbn: "", description: ""),
+        isFullPresented: .constant(true)
+    )
 }

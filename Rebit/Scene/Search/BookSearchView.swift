@@ -85,7 +85,7 @@ struct WriteButtonView: View {
             Text("기록하기")
                 .font(.callout.bold())
                 .frame(width: 90, height: 35)
-                .background(.theme.opacity(0.7))
+                .background(.theme)
                 .foregroundStyle(.white)
                 .clipShape(
                     .rect(topLeadingRadius: 0, bottomLeadingRadius: 20, bottomTrailingRadius: 15, topTrailingRadius: 15)

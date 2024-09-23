@@ -12,8 +12,7 @@ import RealmSwift
 typealias ReadingStatus = BookWriteViewModel.ReadingStatus
 
 final class BookWriteViewModel: BaseViewModel {
-    var book: Book?
-
+  
     struct Input {
         var saveReview = PassthroughSubject<Void, Never>()
     }
@@ -32,10 +31,12 @@ final class BookWriteViewModel: BaseViewModel {
     @Published var output = Output()
     var cancellables = Set<AnyCancellable>()
     
+    var book: Book
     private let repository = RealmRepository()
     private let fileManager = ImageFileManager.shared
     
-    init() {
+    init(book: Book) {
+        self.book = book
         transform()
     }
     
@@ -99,7 +100,7 @@ final class BookWriteViewModel: BaseViewModel {
             }
             .sink { [weak self] (bookInfo, review) in
                 self?.repository.addBookReview(bookInfo, review)
-                guard let image = self?.book?.image else { return }
+                guard let image = self?.book.image else { return }
                 self?.fileManager.saveImageToDocument(path: image, filename: "\(bookInfo.id)")
                 self?.output.dismissRequest.send(())
             }

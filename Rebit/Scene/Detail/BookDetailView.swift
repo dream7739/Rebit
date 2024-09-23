@@ -166,13 +166,15 @@ struct DetailContentView: View {
 
 
 #Preview {
-    BookDetailView(book: Book(
-        title: "주술회전 26 (남쪽으로)",
-        image: "https://shopping-phinf.pstatic.net/main_4850944/48509446622.20240618091426.jpg",
-        author: "아쿠타미 게게",
-        publisher: "한국문화사",
-        pubdate: "20240202",
-        isbn: "123456789999",
-        description: "고죠 VS. 스쿠나!!!\n차원이 다른 “최강”의 전투, 그 결말은?!\n\n급이 다른 규모로 펼쳐지는 고죠 VS. 스쿠나의 최강 결전…! 영역의 동시 전개와 타서 끊어진 술식의 회복을 반복하던 전투는, 마허라가 소환되고 고죠의 영역 전개가 불가능해지면서 균형이 무너진 것처럼 보이는데--?!\n\n약식판권 : JUJUTSU KAISEN ⓒ2018 by Gege Akutami / SHUEISHA Inc."
-    ))
+    BookDetailView(book: bookDump)
 }
+
+var bookDump = Book(
+    title: "주술회전 26 (남쪽으로)",
+    image: "https://shopping-phinf.pstatic.net/main_4850944/48509446622.20240618091426.jpg",
+    author: "아쿠타미 게게",
+    publisher: "한국문화사",
+    pubdate: "20240202",
+    isbn: "123456789999",
+    description: "고죠 VS. 스쿠나!!!\n차원이 다른 “최강”의 전투, 그 결말은?!\n\n급이 다른 규모로 펼쳐지는 고죠 VS. 스쿠나의 최강 결전…! 영역의 동시 전개와 타서 끊어진 술식의 회복을 반복하던 전투는, 마허라가 소환되고 고죠의 영역 전개가 불가능해지면서 균형이 무너진 것처럼 보이는데--?!\n\n약식판권 : JUJUTSU KAISEN ⓒ2018 by Gege Akutami / SHUEISHA Inc."
+)

@@ -106,7 +106,7 @@ struct CurrentReadingView: View {
                 Spacer()
                 Button(action: {}, label: {
                     Capsule()
-                        .fill(.theme.opacity(0.6))
+                        .fill(.theme)
                         .frame(width: 70, height: 30)
                         .overlay(alignment: .center) {
                             Text("기록하기")

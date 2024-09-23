@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct MainTabView: View {
     @State private var selectedTab = 0
     
@@ -20,7 +21,7 @@ struct MainTabView: View {
                         .tag(1)
                     BookSearchView()
                         .tag(2)
-                    BookChartView()
+                    BookWriteView(book: bookDump, isFullPresented: .constant(true))
                         .tag(3)
                 }
                 .toolbar(.hidden, for: .tabBar)
@@ -34,7 +35,6 @@ struct MainTabView: View {
                         })
                     }
                 }
-                .padding(6)
                 .frame(height: 70)
                 .background(
                     RoundedRectangle(cornerRadius: 35)
@@ -42,8 +42,10 @@ struct MainTabView: View {
                         .shadow(color: .gray.opacity(0.2), radius: 2)
                 )
                 .padding(.horizontal, 10)
+                .padding(.bottom, 20)
             }
             .navigationTitle(TabItems(rawValue: selectedTab)!.title)
+            .ignoresSafeArea()
         }
     }
 }
