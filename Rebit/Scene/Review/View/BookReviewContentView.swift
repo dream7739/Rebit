@@ -10,12 +10,14 @@ import RealmSwift
 
 struct BookReviewContentView: View {
     @StateObject private var viewModel: BookReviewContentViewModel
+    @Binding var isFullPresented: Bool
     var image: UIImage
     
-    init(reviewInfo: BookReview, image: UIImage) {
+    init(reviewInfo: BookReview, isFullPresented: Binding<Bool>, image: UIImage) {
         self._viewModel = StateObject(
             wrappedValue: BookReviewContentViewModel(reviewInfo: reviewInfo)
         )
+        self._isFullPresented = isFullPresented
         self.image = image
     }
     
@@ -74,8 +76,12 @@ struct BookReviewContentView: View {
                 }
             })
             Menu {
-                Button("수정", action: {})
+                Button("수정", action: {
+                    isFullPresented = true
+                })
+
                 Button("삭제", action: {})
+                
                 NavigationLinkWrapper {
                     if let book = viewModel.reviewInfo.book.first {
                         BookDetailView(

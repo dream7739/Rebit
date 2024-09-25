@@ -49,7 +49,7 @@ final class BookReview: Object, ObjectKeyIdentifiable {
     @Persisted var title: String
     @Persisted var content: String
     @Persisted var rating: Double
-    @Persisted var status: String
+    @Persisted var status: Int
     @Persisted var isLike: Bool
     @Persisted var startDate: Date?
     @Persisted(indexed: true) var endDate: Date?
@@ -63,7 +63,7 @@ final class BookReview: Object, ObjectKeyIdentifiable {
         title: String,
         content: String,
         rating: Double,
-        status: String,
+        status: Int,
         isLike: Bool = false,
         startDate: Date?,
         endDate: Date?

@@ -27,7 +27,6 @@ final class BookReviewContentViewModel: BaseViewModel {
         var rating = ""
         var saveDate = ""
         var isLike = false
-        
     }
     
     var input = Input()

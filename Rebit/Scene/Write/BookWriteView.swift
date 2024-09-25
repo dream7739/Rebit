@@ -15,13 +15,20 @@ struct BookWriteView: View {
         case initial
     }
     
-    @State var isShow: Bool = false
-    @Binding var isFullPresented: Bool
     @StateObject private var viewModel: BookWriteViewModel
+    @State var isShow: Bool = false
     @FocusState private var focusedField: Field?
-    
-    init(book: Book, isFullPresented: Binding<Bool>) {
+    @Binding var isFullPresented: Bool
+
+    //책 상세화면에서 진입했을 경우
+    init(book: Book?, isFullPresented: Binding<Bool>) {
         _viewModel = StateObject(wrappedValue: BookWriteViewModel(book: book))
+        self._isFullPresented = isFullPresented
+    }
+    
+    //책 리뷰화면에서 진입했을 경우
+    init(bookReview: BookReview?, isFullPresented: Binding<Bool>) {
+        _viewModel = StateObject(wrappedValue: BookWriteViewModel(bookReview: bookReview))
         self._isFullPresented = isFullPresented
     }
     
@@ -45,6 +52,9 @@ struct BookWriteView: View {
             }
         }
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            viewModel.input.viewOnAppear.send(())
+        }
         .onReceive(viewModel.output.dismissRequest) { _ in
             isShow = true
         }
@@ -97,8 +107,6 @@ struct BookWriteView: View {
             Spacer()
         }
     }
-    
-    
 }
 
 extension BookWriteView {

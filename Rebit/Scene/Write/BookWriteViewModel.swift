@@ -14,7 +14,8 @@ typealias ReadingStatus = BookWriteViewModel.ReadingStatus
 final class BookWriteViewModel: BaseViewModel {
   
     struct Input {
-        var saveReview = PassthroughSubject<Void, Never>()
+        let viewOnAppear = PassthroughSubject<Void, Never>()
+        let saveReview = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
@@ -31,21 +32,40 @@ final class BookWriteViewModel: BaseViewModel {
     @Published var output = Output()
     var cancellables = Set<AnyCancellable>()
     
-    var book: Book
+    var book: Book?
+    var bookReview: BookReview?
+    
     private let repository = RealmRepository()
     private let fileManager = ImageFileManager.shared
     
-    init(book: Book) {
+    init(book: Book? = nil, bookReview: BookReview? = nil) {
         self.book = book
+        self.bookReview = bookReview
         transform()
     }
     
+    /* 저장
+    1) 책 정보가 존재 > 리뷰만 저장
+    2) 책 정보가 존재하지 않음 > 책 저장 > 리뷰 저장
+    */
     func transform() {
-        //1) 책 정보가 존재 > 리뷰만 저장
-        //2) 책 정보가 존재하지 않음 > 책 저장 > 리뷰 저장
-        
         let saveBook = PassthroughSubject<Void, Never>()
         let saveReview = PassthroughSubject<Void, Never>()
+        
+        input.viewOnAppear
+            .compactMap { [weak self] in
+                self?.bookReview
+            }
+            .sink { [weak self] value in
+                guard let self = self else { return }
+                self.output.summaryText = value.title
+                self.output.startDate = value.startDate ?? Date()
+                self.output.endDate = value.endDate ?? Date()
+                self.output.rating = value.rating
+                self.output.reviewText = value.content
+                self.output.selectedStatus = value.status
+            }
+            .store(in: &cancellables)
         
         input.saveReview
             .compactMap { [weak self] in
@@ -94,7 +114,7 @@ final class BookWriteViewModel: BaseViewModel {
                     title: self?.output.summaryText ?? "",
                     content: self?.output.reviewText ?? "" ,
                     rating: self?.output.rating ?? 0,
-                    status: status.title,
+                    status: self?.output.selectedStatus ?? 0,
                     startDate: self?.output.startDate,
                     endDate: self?.output.endDate
                 )
@@ -102,7 +122,7 @@ final class BookWriteViewModel: BaseViewModel {
             }
             .sink { [weak self] (bookInfo, review) in
                 self?.repository.addBookReview(bookInfo, review)
-                guard let image = self?.book.image else { return }
+                guard let image = self?.book?.image else { return }
                 self?.fileManager.saveImageToDocument(path: image, filename: "\(bookInfo.id)")
                 self?.output.dismissRequest.send(())
             }
