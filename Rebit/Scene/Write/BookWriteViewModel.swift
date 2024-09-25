@@ -88,11 +88,13 @@ final class BookWriteViewModel: BaseViewModel {
                 self?.repository.getBookObject(title: $0.title, isbn: $0.isbn)
             }
             .map { [weak self] bookInfo in
-               let review = BookReview(
+                let status = ReadingStatus(rawValue: self?.output.selectedStatus ?? 0)!
+                
+                let review = BookReview(
                     title: self?.output.summaryText ?? "",
                     content: self?.output.reviewText ?? "" ,
                     rating: self?.output.rating ?? 0,
-                    status: ReadingStatus(rawValue: self?.output.selectedStatus ?? 0)!.title,
+                    status: status.title,
                     startDate: self?.output.startDate,
                     endDate: self?.output.endDate
                 )
@@ -123,6 +125,26 @@ extension BookWriteViewModel {
                 return "독서중"
             case .completed:
                 return "독서완료"
+            }
+        }
+        
+        var endDateTitle: String {
+            switch self {
+            case .expected:
+                return ""
+            case .current:
+                return "목표종료일"
+            case .completed:
+                return "종료일"
+            }
+        }
+        
+        var summaryTitle: String {
+            switch self {
+            case .expected:
+                return "이 책에 대한 기대평을 입력해보세요"
+            case .current, .completed:
+                return "나만의 한줄평을 입력해보세요"
             }
         }
     }

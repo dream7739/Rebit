@@ -21,7 +21,7 @@ struct MainTabView: View {
                         .tag(1)
                     BookSearchView()
                         .tag(2)
-                    BookWriteView(book: bookDump, isFullPresented: .constant(true))
+                    BookChartView()
                         .tag(3)
                 }
                 .toolbar(.hidden, for: .tabBar)

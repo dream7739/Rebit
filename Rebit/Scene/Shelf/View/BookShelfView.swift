@@ -25,15 +25,15 @@ struct BookShelfView: View {
     
     func nowReadingSection() -> some View {
         VStack(alignment: .leading) {
-            Text("지금 어떤 책을 읽고 있나요?")
+            Text("책을 읽고 기록해보세요")
                 .bold()
             
             asHorizontalPageContent(height: 150) {
                 ForEach(viewModel.currentBookList, id: \.id) { item in
-                    CurrentReadingView(currentBookInfo: item)
+                    ExpectedReadingView(reviewInfo: item)
                 }
             }
-         
+            
         }
     }
     
@@ -44,7 +44,7 @@ struct BookShelfView: View {
                     .bold()
                 Spacer()
                 NavigationLink(destination: {
-                     EntireShelfView()
+                    EntireShelfView()
                 }, label: {
                     Text("더보기")
                         .font(.footnote)
@@ -85,39 +85,45 @@ struct BookShelfView: View {
     }
 }
 
-struct CurrentReadingView: View {
-    @ObservedRealmObject var currentBookInfo: BookInfo
+struct ExpectedReadingView: View {
+    @ObservedRealmObject var reviewInfo: BookReview
     
     var body: some View {
-        HStack(alignment: .top) {
-            Image(uiImage: ImageFileManager.shared.loadImageToDocument(filename: "\(currentBookInfo.id)") ?? UIImage())
-                .resizable()
-                .frame(width: 100, height: 130)
-                .clipShape(RoundedRectangle(cornerRadius: 5))
-                .offset(x: -5, y: 0)
-                .shadow(color: .gray.opacity(0.3), radius: 10, x: 3, y: 3)
-            VStack(alignment: .leading) {
-                Text(currentBookInfo.title)
-                    .lineLimit(2)
-                    .font(.subheadline)
-                Text(currentBookInfo.author)
-                    .font(.caption)
-                    .foregroundStyle(.gray)
+        if let bookInfo = reviewInfo.book.first {
+            HStack(alignment: .top) {
+                Image(uiImage: ImageFileManager.shared.loadImageToDocument(filename: "\(bookInfo.id)") ?? UIImage())
+                    .resizable()
+                    .frame(width: 100, height: 140)
+                    .clipShape(RoundedRectangle(cornerRadius: 5))
+                    .offset(x: -5, y: 0)
+                    .shadow(color: .gray.opacity(0.3), radius: 10, x: 3, y: 3)
+                VStack(alignment: .leading) {
+                    Text(bookInfo.title)
+                        .lineLimit(1)
+                        .font(.subheadline)
+                    Text(bookInfo.author)
+                        .font(.caption)
+                        .foregroundStyle(.gray)
+                    Text("\(reviewInfo.title)")
+                        .font(.caption)
+                        .foregroundStyle(.gray)
+                        .lineLimit(2)
+                    Spacer()
+                    Button(action: {}, label: {
+                        Capsule()
+                            .fill(.theme)
+                            .frame(width: 70, height: 30)
+                            .overlay(alignment: .center) {
+                                Text("기록하기")
+                                    .font(.caption.bold())
+                                    .foregroundStyle(.white)
+                            }
+                    })
+                }
                 Spacer()
-                Button(action: {}, label: {
-                    Capsule()
-                        .fill(.theme)
-                        .frame(width: 70, height: 30)
-                        .overlay(alignment: .center) {
-                            Text("기록하기")
-                                .font(.caption.bold())
-                                .foregroundStyle(.white)
-                        }
-                })
             }
-            Spacer()
+            .padding()
         }
-        .padding()
     }
     
 }

@@ -23,13 +23,14 @@ final class BookShelfViewModel: BaseViewModel {
     
     @ObservedResults(
         BookInfo.self,
+        where: ({ $0.reviewList.status != "독서예정" }),
         sortDescriptor: SortDescriptor(keyPath: "saveDate", ascending: false)
     )
     var bookList
     
     @ObservedResults(
-        BookInfo.self,
-        where: ({ $0.reviewList.status == "독서중" }),
+        BookReview.self,
+        where: ({ $0.status == "독서예정" }),
         sortDescriptor: SortDescriptor(keyPath: "saveDate", ascending: false)
     )
     var currentBookList

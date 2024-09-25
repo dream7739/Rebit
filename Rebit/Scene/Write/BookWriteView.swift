@@ -15,6 +15,7 @@ struct BookWriteView: View {
         case initial
     }
     
+    @State var isShow: Bool = false
     @Binding var isFullPresented: Bool
     @StateObject private var viewModel: BookWriteViewModel
     @FocusState private var focusedField: Field?
@@ -27,24 +28,27 @@ struct BookWriteView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 15) {
-                titleView()
-                readingStatusView()
-                ratingView()
-                dateView()
-                summaryView()
-                reviewView()
-                writeButton()
-                Spacer()
+                switch ReadingStatus(rawValue: viewModel.output.selectedStatus)! {
+                case .expected:
+                    expectedView()
+                case .current:
+                    currentView()
+                case .completed:
+                    completeView()
+                }
             }
             .padding()
-
+        }
+        .overlay(alignment: .bottom) {
+            ToastView(isShow: $isShow, message: "저장되었습니다") {
+                isFullPresented = false
+            }
         }
         .navigationBarTitleDisplayMode(.inline)
         .onReceive(viewModel.output.dismissRequest) { _ in
-            isFullPresented = false
+            isShow = true
         }
         .onTapGesture {
-            print("안녕")
             UIApplication.shared.endEditing()
         }
         .onSubmit {
@@ -57,6 +61,47 @@ struct BookWriteView: View {
         }
     }
     
+    func expectedView() -> some View {
+        VStack(alignment: .leading, spacing: 15) {
+            titleView()
+            readingStatusView()
+            dateView()
+            summaryView()
+            writeButton()
+            Spacer()
+        }
+    }
+    
+    func currentView() -> some View {
+        VStack(alignment: .leading, spacing: 15) {
+            titleView()
+            readingStatusView()
+            ratingView()
+            dateView()
+            summaryView()
+            reviewView()
+            writeButton()
+            Spacer()
+        }
+    }
+    
+    func completeView() -> some View {
+        VStack(alignment: .leading, spacing: 15) {
+            titleView()
+            readingStatusView()
+            ratingView()
+            dateView()
+            summaryView()
+            reviewView()
+            writeButton()
+            Spacer()
+        }
+    }
+    
+    
+}
+
+extension BookWriteView {
     func titleView() -> some View {
         HStack {
             Text("이 책은 어떤 책인가요?")
@@ -79,7 +124,10 @@ struct BookWriteView: View {
                 .font(.subheadline)
             HStack {
                 ForEach(ReadingStatus.allCases, id: \.self) { item in
-                    StatusCardView(selectedIndex: $viewModel.output.selectedStatus, index: item.rawValue)
+                    StatusCardView(
+                        selectedIndex: $viewModel.output.selectedStatus,
+                        index: item.rawValue
+                    )
                 }
                 
             }
@@ -93,28 +141,36 @@ struct BookWriteView: View {
                 .font(.subheadline)
             CustomCosmosView(rating: $viewModel.output.rating)
                 .onTapGesture(count: 999999) { }
-
+            
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
     
+    //독서예정일 경우 -> startDate만 존재
+    //독서중, 독서완료일 경우 -> startDate, endDate가 존재
     func dateView() -> some View {
         VStack(alignment: .leading) {
+            let status = ReadingStatus(rawValue: viewModel.output.selectedStatus)!
+            
             Text("독서한 기간을 알려주세요")
                 .font(.subheadline)
             DatePicker("시작일", selection: $viewModel.output.startDate, displayedComponents: .date)
                 .font(.subheadline)
                 .onTapGesture(count: 999999) { }
-            DatePicker("종료일", selection: $viewModel.output.endDate, displayedComponents: .date)
-                .font(.subheadline)
-                .onTapGesture(count: 999999) { }
+            if status != .expected {
+                DatePicker(status.endDateTitle, selection: $viewModel.output.endDate, displayedComponents: .date)
+                    .font(.subheadline)
+                    .onTapGesture(count: 999999) { }
+            }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
     
     func summaryView() -> some View {
         VStack(alignment: .leading) {
-            Text("나만의 한줄평을 입력해보세요")
+            let status = ReadingStatus(rawValue: viewModel.output.selectedStatus)!
+
+            Text(status.summaryTitle)
                 .font(.subheadline)
             
             TextField("이 책을 한줄로 정의해보세요", text: $viewModel.output.summaryText)
@@ -127,6 +183,7 @@ struct BookWriteView: View {
                         .fill(.gray.opacity(0.1))
                 )
                 .frame(height: 35)
+            
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -198,7 +255,15 @@ struct StatusCardView: View {
 
 #Preview {
     BookWriteView(
-        book: Book(title: "", image: "", author: "", publisher: "", pubdate: "", isbn: "", description: ""),
+        book: Book(
+            title: "",
+            image: "",
+            author: "",
+            publisher: "",
+            pubdate: "",
+            isbn: "",
+            description: ""
+        ),
         isFullPresented: .constant(true)
     )
 }
