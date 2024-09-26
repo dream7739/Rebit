@@ -12,20 +12,20 @@ final class RealmRepository {
     
     private let realm = try! Realm()
     
-    func addBookInfo(_ item: BookInfo) {
+    func addBookInfo(_ book: BookInfo) {
         do{
             try realm.write {
-                realm.add(item)
+                realm.add(book)
             }
         }catch{
             print("Add Realm Item Failed")
         }
     }
     
-    func addBookReview( _ book: BookInfo, _ item: BookReview) {
+    func addBookReview( _ book: BookInfo, _ review: BookReview) {
         do {
             try realm.write {
-                book.reviewList.append(item)
+                book.reviewList.append(review)
             }
         } catch {
             print("Add Realm Item Failed")
@@ -37,8 +37,31 @@ final class RealmRepository {
         return list
     }
     
+    func fetchAllReview() -> Results<BookReview> {
+        let list = realm.objects(BookReview.self)
+        return list
+    }
+    
+    func fetchReview(_ id: ObjectId) -> BookReview {
+        let review = realm.object(ofType: BookReview.self, forPrimaryKey: id) ?? BookReview()
+        return review
+    }
+    
+    func modifyBookReview(_ oldReview: BookReview, _ newReview: BookModifyModel) {
+        do {
+            try realm.write {
+                oldReview.thaw()?.title = newReview.title
+                oldReview.thaw()?.startDate = newReview.startDate
+                oldReview.thaw()?.endDate = newReview.endDate
+                oldReview.thaw()?.rating = newReview.rating
+                oldReview.thaw()?.content = newReview.content
+                oldReview.thaw()?.status = newReview.status
+            }
+        } catch {
+            print("Modify Realm Item Failed")
+        }
+    }
 }
-
 
 extension RealmRepository {
     func isBookExist(title: String, isbn: String) -> Bool {

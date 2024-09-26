@@ -9,14 +9,9 @@ import SwiftUI
 import RealmSwift
 
 struct BookWriteView: View {
-    private enum Field: Hashable {
-        case title
-        case content
-        case initial
-    }
-    
     @StateObject private var viewModel: BookWriteViewModel
-    @State var isShow: Bool = false
+    @State private var isShow: Bool = false
+    @State private var viewType: ViewType
     @FocusState private var focusedField: Field?
     @Binding var isFullPresented: Bool
 
@@ -24,12 +19,14 @@ struct BookWriteView: View {
     init(book: Book?, isFullPresented: Binding<Bool>) {
         _viewModel = StateObject(wrappedValue: BookWriteViewModel(book: book))
         self._isFullPresented = isFullPresented
+        self.viewType = .add
     }
     
     //책 리뷰화면에서 진입했을 경우
     init(bookReview: BookReview?, isFullPresented: Binding<Bool>) {
         _viewModel = StateObject(wrappedValue: BookWriteViewModel(bookReview: bookReview))
         self._isFullPresented = isFullPresented
+        self.viewType = .edit
     }
     
     var body: some View {
@@ -47,7 +44,7 @@ struct BookWriteView: View {
             .padding()
         }
         .overlay(alignment: .bottom) {
-            ToastView(isShow: $isShow, message: "저장되었습니다") {
+            ToastView(isShow: $isShow, message: viewType.toastMessage) {
                 isFullPresented = false
             }
         }
@@ -105,6 +102,28 @@ struct BookWriteView: View {
             reviewView()
             writeButton()
             Spacer()
+        }
+    }
+}
+
+extension BookWriteView {
+    private enum Field: Hashable {
+        case title
+        case content
+        case initial
+    }
+    
+    private enum ViewType {
+        case add
+        case edit
+        
+        var toastMessage: String {
+            switch self {
+            case .add:
+                return "저장되었습니다"
+            case .edit:
+                return "수정되었습니다"
+            }
         }
     }
 }
@@ -228,7 +247,12 @@ extension BookWriteView {
     
     func writeButton() -> some View {
         Button(action: {
-            viewModel.input.saveReview.send(())
+            switch viewType {
+            case .add:
+                viewModel.input.saveReview.send(())
+            case .edit:
+                viewModel.input.modifyReview.send(())
+            }
         }, label: {
             Text("작성하기")
                 .asThemeBasicButtonModifier()

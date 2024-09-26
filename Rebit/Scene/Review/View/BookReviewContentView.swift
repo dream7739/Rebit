@@ -10,14 +10,13 @@ import RealmSwift
 
 struct BookReviewContentView: View {
     @StateObject private var viewModel: BookReviewContentViewModel
-    @Binding var isFullPresented: Bool
+    @State var isFullPresented: Bool = false
     var image: UIImage
     
-    init(reviewInfo: BookReview, isFullPresented: Binding<Bool>, image: UIImage) {
+    init(reviewInfo: BookReview, image: UIImage) {
         self._viewModel = StateObject(
             wrappedValue: BookReviewContentViewModel(reviewInfo: reviewInfo)
         )
-        self._isFullPresented = isFullPresented
         self.image = image
     }
     
@@ -38,6 +37,11 @@ struct BookReviewContentView: View {
         )
         .padding(.trailing, 20)
         .padding(.vertical)
+        .fullScreenCover(isPresented: $isFullPresented, onDismiss: {
+            viewModel.input.modifyOccured.send(())
+        }) {
+            BookWriteView(bookReview: viewModel.reviewInfo, isFullPresented: $isFullPresented)
+        }
         .onAppear {
             viewModel.input.viewOnAppear.send(())
         }
@@ -49,9 +53,9 @@ struct BookReviewContentView: View {
                 .resizable()
                 .frame(width: 150, height: 230)
                 .padding(.top, 10)
-            Text(viewModel.output.title)
+            Text(viewModel.output.bookInfo.title)
                 .font(.callout.bold())
-            Text(viewModel.output.author)
+            Text(viewModel.output.bookInfo.author)
                 .font(.subheadline)
         }
         .frame(maxWidth: .infinity, alignment: .center)
@@ -65,7 +69,7 @@ struct BookReviewContentView: View {
             Button(action: {
                 viewModel.input.isLikeClicked.send(())
             }, label: {
-                if viewModel.output.isLike {
+                if viewModel.output.reviewInfo.isLike {
                     Image(systemName: "heart.fill")
                         .foregroundStyle(.red)
                         .imageScale(.large)
@@ -110,9 +114,9 @@ struct BookReviewContentView: View {
     
     func infoSectionView() -> some View {
         HStack {
-            infoBoxView("독서기간", viewModel.output.period)
-            infoBoxView("평점", viewModel.output.rating)
-            infoBoxView("리뷰수", viewModel.output.reviewCnt)
+            infoBoxView("독서기간", viewModel.output.reviewInfo.periodDescription)
+            infoBoxView("평점", viewModel.output.reviewInfo.ratingDescription)
+            infoBoxView("리뷰수", viewModel.output.bookInfo.reviewCountDescription)
         }
         .frame(maxWidth: .infinity)
         .frame(height: 50)
@@ -134,10 +138,10 @@ struct BookReviewContentView: View {
     
     func contentSectionView() -> some View {
         VStack(alignment: .leading, spacing: 6) {
-            contentView("한줄평", viewModel.output.reviewTitle)
-            contentView("감상평", viewModel.output.reviewContent)
-            contentView("독서기간", viewModel.output.period)
-            contentView("저장일", viewModel.output.saveDate)
+            contentView("한줄평", viewModel.output.reviewInfo.title)
+            contentView("감상평", viewModel.output.reviewInfo.content)
+            contentView("독서기간", viewModel.output.reviewInfo.periodDescription)
+            contentView("저장일", viewModel.output.reviewInfo.saveDateDescription)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 10)

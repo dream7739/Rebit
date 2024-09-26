@@ -16,6 +16,7 @@ final class BookReviewViewModel: BaseViewModel {
     
     struct Output {
         var bookCoverImage = UIImage()
+        var bookInfo = BookInfo()
     }
     
     var input = Input()
@@ -23,6 +24,7 @@ final class BookReviewViewModel: BaseViewModel {
     var cancellables = Set<AnyCancellable>()
     
     @ObservedRealmObject var bookInfo: BookInfo
+
     private let fileManager = ImageFileManager.shared
     
     init(bookInfo: BookInfo) {
@@ -35,8 +37,10 @@ final class BookReviewViewModel: BaseViewModel {
             .sink { [weak self] _ in
                 guard let self = self else { return }
                 self.output.bookCoverImage = self.fileManager.loadImageToDocument(filename: "\(self.bookInfo.id)") ?? UIImage()
+                self.output.bookInfo = self.bookInfo
+                print(self.output.bookInfo)
             }
             .store(in: &cancellables)
-        
+       
     }
 }

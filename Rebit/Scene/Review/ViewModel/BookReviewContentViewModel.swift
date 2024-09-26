@@ -12,21 +12,13 @@ import RealmSwift
 final class BookReviewContentViewModel: BaseViewModel {
     struct Input {
         let viewOnAppear = PassthroughSubject<Void, Never>()
+        let modifyOccured = PassthroughSubject<Void, Never>()
         let isLikeClicked = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
-        //책 정보
-        var title = ""
-        var author = ""
-        var reviewCnt = ""
-        //리뷰정보
-        var reviewTitle = ""
-        var reviewContent = ""
-        var period = ""
-        var rating = ""
-        var saveDate = ""
-        var isLike = false
+        var bookInfo = BookInfo()
+        var reviewInfo = BookReview()
     }
     
     var input = Input()
@@ -36,6 +28,7 @@ final class BookReviewContentViewModel: BaseViewModel {
     @ObservedRealmObject var reviewInfo: BookReview
 
     private let fileManager = ImageFileManager.shared
+    private let repository = RealmRepository()
     
     init(reviewInfo: BookReview) {
         self.reviewInfo = reviewInfo
@@ -49,27 +42,30 @@ final class BookReviewContentViewModel: BaseViewModel {
                 
                 //책 관련 정보
                 if let book = self.reviewInfo.book.first {
-                    self.output.title = book.title
-                    self.output.author = book.author
-                    self.output.reviewCnt = book.reviewCountDescription
+                    self.output.bookInfo = book
                 }
                 
                 //리뷰 관련 정보
-                self.output.reviewTitle = reviewInfo.title
-                self.output.reviewContent = reviewInfo.content
-                self.output.period = reviewInfo.periodDescription
-                self.output.rating = reviewInfo.ratingDescription
-                self.output.saveDate = reviewInfo.saveDateDescription
-                self.output.isLike = reviewInfo.isLike
+                self.output.reviewInfo = reviewInfo
                 
+            }
+            .store(in: &cancellables)
+        
+        input.modifyOccured
+            .sink { [weak self] _ in
+                guard let self = self else { return }
+                self.reviewInfo = repository.fetchReview(self.reviewInfo.id)
+                self.output.reviewInfo = self.reviewInfo
             }
             .store(in: &cancellables)
         
         input.isLikeClicked
             .sink { [weak self] in
                 guard let self = self else { return }
+                //ObservedRealmObject <- Frozen Object
+                //변경시 realm트랜잭션 안에서 thaw 사용
                 $reviewInfo.isLike.wrappedValue.toggle()
-                self.output.isLike = reviewInfo.isLike
+                output.reviewInfo = repository.fetchReview(self.reviewInfo.id)
             }
             .store(in: &cancellables)
         

@@ -16,6 +16,7 @@ final class BookWriteViewModel: BaseViewModel {
     struct Input {
         let viewOnAppear = PassthroughSubject<Void, Never>()
         let saveReview = PassthroughSubject<Void, Never>()
+        let modifyReview = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
@@ -44,14 +45,18 @@ final class BookWriteViewModel: BaseViewModel {
         transform()
     }
     
-    /* 저장
-    1) 책 정보가 존재 > 리뷰만 저장
-    2) 책 정보가 존재하지 않음 > 책 저장 > 리뷰 저장
+    /* 신규 저장
+    * 1) 책 정보가 존재 > 리뷰만 저장
+    * 2) 책 정보가 존재하지 않음 > 책 저장 > 리뷰 저장
+    *
+    * 리뷰 수정
+    * 1) Realm 오브젝트에 접근해서 수정
     */
     func transform() {
         let saveBook = PassthroughSubject<Void, Never>()
         let saveReview = PassthroughSubject<Void, Never>()
         
+        //첫 진입 시
         input.viewOnAppear
             .compactMap { [weak self] in
                 self?.bookReview
@@ -67,6 +72,7 @@ final class BookWriteViewModel: BaseViewModel {
             }
             .store(in: &cancellables)
         
+        //리뷰 신규 저장
         input.saveReview
             .compactMap { [weak self] in
                 self?.book
@@ -108,8 +114,6 @@ final class BookWriteViewModel: BaseViewModel {
                 self?.repository.getBookObject(title: $0.title, isbn: $0.isbn)
             }
             .map { [weak self] bookInfo in
-                let status = ReadingStatus(rawValue: self?.output.selectedStatus ?? 0)!
-                
                 let review = BookReview(
                     title: self?.output.summaryText ?? "",
                     content: self?.output.reviewText ?? "" ,
@@ -125,6 +129,29 @@ final class BookWriteViewModel: BaseViewModel {
                 guard let image = self?.book?.image else { return }
                 self?.fileManager.saveImageToDocument(path: image, filename: "\(bookInfo.id)")
                 self?.output.dismissRequest.send(())
+            }
+            .store(in: &cancellables)
+        
+        //리뷰 수정
+        input.modifyReview
+            .compactMap { [weak self] in
+                self?.bookReview
+            }
+            .map { oldReview in
+                let newReview = BookModifyModel(
+                    title: self.output.summaryText,
+                    startDate: self.output.startDate,
+                    endDate: self.output.endDate,
+                    rating: self.output.rating,
+                    content: self.output.reviewText,
+                    status: self.output.selectedStatus
+                )
+                return (oldReview, newReview)
+            }
+            .sink { [weak self] (oldReview: BookReview, newReview: BookModifyModel) in
+                guard let self = self else { return }
+                repository.modifyBookReview(oldReview, newReview)
+                self.output.dismissRequest.send(())
             }
             .store(in: &cancellables)
     }

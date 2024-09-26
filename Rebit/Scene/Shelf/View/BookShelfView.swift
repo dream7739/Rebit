@@ -33,7 +33,6 @@ struct BookShelfView: View {
                     ExpectedReadingView(reviewInfo: item)
                 }
             }
-            
         }
     }
     
