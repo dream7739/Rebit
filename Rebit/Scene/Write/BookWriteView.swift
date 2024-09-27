@@ -15,7 +15,7 @@ struct BookWriteView: View {
     @State private var viewType: ViewType
     @FocusState private var focusedField: Field?
     @Binding var isFullPresented: Bool
-
+    
     //책 상세화면에서 진입했을 경우
     init(book: Book?, isFullPresented: Binding<Bool>) {
         _viewModel = StateObject(wrappedValue: BookWriteViewModel(book: book))
@@ -183,11 +183,31 @@ extension BookWriteView {
             
             Text("독서한 기간을 알려주세요")
                 .font(.subheadline)
-            DatePicker("시작일", selection: $viewModel.output.startDate, displayedComponents: .date)
+            
+            switch status {
+            case .expected:
+                DatePicker(
+                    "독서예정일",
+                    selection: $viewModel.output.startDate,
+                    in: Date()...,
+                    displayedComponents: .date
+                )
                 .font(.subheadline)
                 .onTapGesture(count: 999999) { }
-            if status != .expected {
-                DatePicker(status.endDateTitle, selection: $viewModel.output.endDate, displayedComponents: .date)
+            case .current, .completed:
+                DatePicker(
+                    "시작일",
+                    selection: $viewModel.output.startDate,
+                    displayedComponents: .date
+                )
+                .font(.subheadline)
+                .onTapGesture(count: 999999) { }
+                DatePicker(
+                    status.endDateTitle,
+                    selection: $viewModel.output.endDate,
+                    in: viewModel.output.startDate...,
+                    displayedComponents: .date
+                )
                     .font(.subheadline)
                     .onTapGesture(count: 999999) { }
             }
@@ -198,7 +218,7 @@ extension BookWriteView {
     func summaryView() -> some View {
         VStack(alignment: .leading) {
             let status = ReadingStatus(rawValue: viewModel.output.selectedStatus)!
-
+            
             Text(status.summaryTitle)
                 .font(.subheadline)
             

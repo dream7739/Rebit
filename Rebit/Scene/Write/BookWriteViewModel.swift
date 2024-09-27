@@ -12,7 +12,7 @@ import RealmSwift
 typealias ReadingStatus = BookWriteViewModel.ReadingStatus
 
 final class BookWriteViewModel: BaseViewModel {
-  
+    
     struct Input {
         let viewOnAppear = PassthroughSubject<Void, Never>()
         let saveReview = PassthroughSubject<Void, Never>()
@@ -46,12 +46,12 @@ final class BookWriteViewModel: BaseViewModel {
     }
     
     /* 신규 저장
-    * 1) 책 정보가 존재 > 리뷰만 저장
-    * 2) 책 정보가 존재하지 않음 > 책 저장 > 리뷰 저장
-    *
-    * 리뷰 수정
-    * 1) Realm 오브젝트에 접근해서 수정
-    */
+     * 1) 책 정보가 존재 > 리뷰만 저장
+     * 2) 책 정보가 존재하지 않음 > 책 저장 > 리뷰 저장
+     *
+     * 리뷰 수정
+     * 1) Realm 오브젝트에 접근해서 수정
+     */
     func transform() {
         let saveBook = PassthroughSubject<Void, Never>()
         let saveReview = PassthroughSubject<Void, Never>()
@@ -154,7 +154,7 @@ final class BookWriteViewModel: BaseViewModel {
             }
             .store(in: &cancellables)
     }
-  
+    
 }
 
 extension BookWriteViewModel {
