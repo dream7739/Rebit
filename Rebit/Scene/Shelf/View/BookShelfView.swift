@@ -23,6 +23,8 @@ struct BookShelfView: View {
     )
     var bookList
     
+    @State private var placeholderText = "아직 책장에 책이 없어요\n검색을 통해 책을 추가해주세요"
+    
     var body: some View {
         GeometryReader { proxy in
             VStack(alignment: .leading, spacing: 10) {
@@ -43,15 +45,23 @@ struct BookShelfView: View {
                 .bold()
             
             asHorizontalPageContent(height: height * 0.9) {
-                ForEach(expectedReviewList, id: \.id) { item in
-                    NavigationLinkWrapper {
-                        if let book = item.book.first {
-                            BookReviewView(bookInfo: book)
-                        }
-                    } inner: {
-                        ExpectedReadingView(reviewInfo: item)
+                if expectedReviewList.isEmpty {
+                    Text("아직 읽을 예정인 책이 없어요")
+                        .foregroundStyle(.gray)
+                        .font(.callout)
+                        .frame(maxHeight: height * 0.9, alignment: .center)
+                } else {
+                    ForEach(expectedReviewList, id: \.id) { item in
+                        NavigationLinkWrapper {
+                            if let book = item.book.first {
+                                BookReviewView(bookInfo: book)
+                            }
+                        } inner: {
+                            ExpectedReadingView(reviewInfo: item)
 
+                        }
                     }
+
                 }
             }
         }
@@ -89,25 +99,30 @@ struct BookShelfView: View {
             let width = height / 1.5
             let size = CGSize(width: width, height: height)
             
-            LazyVGrid(columns: columns, spacing: 20, content: {
-            if bookList.count >= 6 {
-                ForEach(0..<6) { item in
-                    NavigationLinkWrapper {
-                        BookReviewView(bookInfo: bookList[item])
-                    } inner: {
-                        ShelfBookView(bookList: bookList[item], size: size)
-                    }
-                }
+            if bookList.isEmpty {
+                PlaceholderView(text: $placeholderText, type: .shelf)
+                    .frame(maxHeight: proxy.size.height, alignment: .center)
             } else {
-                ForEach(bookList, id: \.id) { item in
-                    NavigationLinkWrapper {
-                        BookReviewView(bookInfo: item)
-                    } inner: {
-                        ShelfBookView(bookList: item, size: size)
+                LazyVGrid(columns: columns, spacing: 20, content: {
+                    if bookList.count >= 6 {
+                        ForEach(0..<6) { item in
+                            NavigationLinkWrapper {
+                                BookReviewView(bookInfo: bookList[item])
+                            } inner: {
+                                ShelfBookView(bookList: bookList[item], size: size)
+                            }
+                        }
+                    } else {
+                        ForEach(bookList, id: \.id) { item in
+                            NavigationLinkWrapper {
+                                BookReviewView(bookInfo: item)
+                            } inner: {
+                                ShelfBookView(bookList: item, size: size)
+                            }
+                        }
                     }
-                }
+                })
             }
-        })
         }
     }
 }

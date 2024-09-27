@@ -6,41 +6,48 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct FavoriteBookView: View {
-    @StateObject private var viewModel = FavoriteViewModel()
+    @ObservedResults(BookReview.self, where: { $0.isLike } )
+    var favorite
+    
     @State private var currentIndex: Int = 0
+    @State private var placeholderText = "리뷰를 작성하고 좋아요한 책에 추가해보세요"
     
     var body: some View {
-        ZStack(alignment: .top) {
-            ForEach(Array(zip(viewModel.favorite.indices, viewModel.favorite)), id: \.0) {
-                (index: Int, item: BookReview) in
-                
-                NavigationLinkWrapper {
-                    if let book = item.book.first {
-                        BookReviewView(bookInfo: book)
-                    }
-                } inner: {
-                    FavoriteContentView(currentIndex: currentIndex, index: index, item: item)
-                        .gesture (
-                            DragGesture()
-                                .onEnded { value in
-                                    let threshold: CGFloat = 50
-                                    if value.translation.width > threshold {
-                                        withAnimation {
-                                            currentIndex = max(0, currentIndex - 1)
-                                        }
-                                    } else if value.translation.width < -threshold {
-                                        withAnimation {
-                                            currentIndex = min(viewModel.favorite.count - 1, currentIndex + 1)
+        if favorite.count == 0 {
+            PlaceholderView(text: $placeholderText, type: .shelf)
+        } else {
+            ZStack(alignment: .top) {
+                ForEach(Array(zip(favorite.indices, favorite)), id: \.0) {
+                    (index: Int, item: BookReview) in
+                    
+                    NavigationLinkWrapper {
+                        if let book = item.book.first {
+                            BookReviewView(bookInfo: book)
+                        }
+                    } inner: {
+                        FavoriteContentView(currentIndex: currentIndex, index: index, item: item)
+                            .gesture (
+                                DragGesture()
+                                    .onEnded { value in
+                                        let threshold: CGFloat = 50
+                                        if value.translation.width > threshold {
+                                            withAnimation {
+                                                currentIndex = max(0, currentIndex - 1)
+                                            }
+                                        } else if value.translation.width < -threshold {
+                                            withAnimation {
+                                                currentIndex = min(favorite.count - 1, currentIndex + 1)
+                                            }
                                         }
                                     }
-                                }
-                        )
+                            )
+                    }
                 }
             }
         }
-      
     }
     
 }

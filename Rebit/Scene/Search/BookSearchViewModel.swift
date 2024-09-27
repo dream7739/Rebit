@@ -20,6 +20,7 @@ final class BookSearchViewModel: BaseViewModel {
     }
     
     struct Output {
+        var isInitial = true
         var bookList: [Book] = []
     }
     
@@ -62,6 +63,7 @@ extension BookSearchViewModel {
                     print(error)
                 }
             } receiveValue: { [weak self] data in
+                self?.output.isInitial = false
                 self?.bookResponse = data
                 self?.output.bookList = data.items
             }

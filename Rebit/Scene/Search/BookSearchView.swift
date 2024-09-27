@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct BookSearchView: View {
-    
     @StateObject private var viewModel = BookSearchViewModel()
+    @State private var placeholderText = "책을 검색하고 리뷰를 작성해보세요"
+    @State private var noResultPlaceholderText = "검색결과가 존재하지 않습니다"
     
     var body: some View {
         VStack {
@@ -22,18 +23,30 @@ struct BookSearchView: View {
         }
     }
     
+   @ViewBuilder
     func verticalScrollView() -> some View {
-        ScrollView(.vertical) {
-            LazyVStack {
-                ForEach(Array(zip(viewModel.output.bookList.indices, viewModel.output.bookList)), id: \.0) { index, item in
-                    SearchRowView(book: item)
-                        .onAppear {
-                            if index == viewModel.output.bookList.count - 4 {
-                                if viewModel.isPaginationRequired {
-                                    viewModel.callRequestMore()
+        if viewModel.output.bookList.isEmpty {
+            VStack(alignment: .center) {
+                if viewModel.output.isInitial {
+                    PlaceholderView(text: $placeholderText, type: .search)
+                } else {
+                    PlaceholderView(text: $noResultPlaceholderText, type: .shelf)
+                }
+            }.frame(maxHeight: .infinity, alignment: .center)
+            
+        } else {
+            ScrollView(.vertical) {
+                LazyVStack {
+                    ForEach(Array(zip(viewModel.output.bookList.indices, viewModel.output.bookList)), id: \.0) { index, item in
+                        SearchRowView(book: item)
+                            .onAppear {
+                                if index == viewModel.output.bookList.count - 4 {
+                                    if viewModel.isPaginationRequired {
+                                        viewModel.callRequestMore()
+                                    }
                                 }
                             }
-                        }
+                    }
                 }
             }
         }
