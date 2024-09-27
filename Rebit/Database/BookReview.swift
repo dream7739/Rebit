@@ -81,7 +81,16 @@ final class BookReview: Object, ObjectKeyIdentifiable {
     }
     
     var ratingDescription: String {
-        return rating.formatted()
+        if status == 0 {
+            return "-"
+        } else {
+            return rating.formatted()
+        }
+    }
+    
+    var startDateDescription: String {
+        let start = DateFormatterManager.basicFormatter.string(from: startDate ?? Date())
+        return start
     }
     
     var readingDateDescription: String {

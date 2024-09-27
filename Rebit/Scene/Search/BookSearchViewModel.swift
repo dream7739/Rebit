@@ -21,6 +21,7 @@ final class BookSearchViewModel: BaseViewModel {
     
     struct Output {
         var isInitial = true
+        var scrollToTop = PassthroughSubject<Void, Never>()
         var bookList: [Book] = []
     }
     
@@ -66,6 +67,7 @@ extension BookSearchViewModel {
                 self?.output.isInitial = false
                 self?.bookResponse = data
                 self?.output.bookList = data.items
+                self?.output.scrollToTop.send(())
             }
             .store(in: &cancellables)
     }

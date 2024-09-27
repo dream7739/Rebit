@@ -11,6 +11,7 @@ import RealmSwift
 struct BookWriteView: View {
     @StateObject private var viewModel: BookWriteViewModel
     @State private var isShow: Bool = false
+    @State private var rating = 5.0
     @State private var viewType: ViewType
     @FocusState private var focusedField: Field?
     @Binding var isFullPresented: Bool
@@ -26,6 +27,7 @@ struct BookWriteView: View {
     init(bookReview: BookReview?, isFullPresented: Binding<Bool>) {
         _viewModel = StateObject(wrappedValue: BookWriteViewModel(bookReview: bookReview))
         self._isFullPresented = isFullPresented
+        self.rating = bookReview?.rating ?? 5.0
         self.viewType = .edit
     }
     
@@ -166,7 +168,7 @@ extension BookWriteView {
         VStack(alignment: .leading) {
             Text("평점을 매겨주세요")
                 .font(.subheadline)
-            CustomCosmosView(rating: $viewModel.output.rating)
+            CustomCosmosView(rating: $rating)
                 .onTapGesture(count: 999999) { }
             
         }
@@ -247,6 +249,10 @@ extension BookWriteView {
     
     func writeButton() -> some View {
         Button(action: {
+            //별점정보
+            viewModel.rating = rating
+            
+            //저장정보
             switch viewType {
             case .add:
                 viewModel.input.saveReview.send(())

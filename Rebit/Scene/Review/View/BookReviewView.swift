@@ -11,7 +11,7 @@ import RealmSwift
 struct BookReviewView: View {
     @StateObject private var viewModel: BookReviewViewModel
     @Environment(\.presentationMode) var presentationMode
-
+    
     init(bookInfo: BookInfo) {
         self._viewModel = StateObject(wrappedValue: BookReviewViewModel(bookInfo: bookInfo))
     }
@@ -120,43 +120,48 @@ struct BookReviewContentView: View {
                         .imageScale(.large)
                 }
             })
-            Menu {
-                Button("수정", action: {
-                    isFullPresented = true
-                })
-                
-                Button("삭제", action: {
-                    isShowingAlert = true
-                })
-                
-                NavigationLinkWrapper {
-                    let book = viewModel.output.bookInfo
-                    BookDetailView(
-                        book: Book(
-                            title: book.title,
-                            image: "",
-                            author: book.author,
-                            publisher: book.publisher,
-                            pubdate: book.pubdate,
-                            isbn: book.isbn,
-                            description: book.content),
-                            coverImage: viewModel.output.bookCoverImage
-                    )
-                } inner: {
-                    Button("상세정보", action: {})
-                }
-            } label: {
-                Image(.dotList)
-                    .frame(width: 30, height: 30)
-            }
+            optionMenu()
         }
         .padding(.top, 10)
         .padding(.trailing, 10)
     }
     
+    func optionMenu() -> some View {
+        Menu {
+            Button("수정", action: {
+                isFullPresented = true
+            })
+            
+            Button("삭제", action: {
+                isShowingAlert = true
+            })
+            
+            NavigationLinkWrapper {
+                let book = viewModel.output.bookInfo
+                BookDetailView(
+                    book: Book(
+                        title: book.title,
+                        image: "",
+                        author: book.author,
+                        publisher: book.publisher,
+                        pubdate: book.pubdate,
+                        isbn: book.isbn,
+                        description: book.content),
+                    coverImage: viewModel.output.bookCoverImage
+                )
+            } inner: {
+                Button("상세정보", action: {})
+            }
+        } label: {
+            Image(.dotList)
+                .frame(width: 30, height: 30)
+        }
+    }
+    
     func infoSectionView() -> some View {
         HStack {
-            infoBoxView("독서기간", reviewInfo.periodDescription)
+            let status = ReadingStatus(rawValue: reviewInfo.status)?.title ?? "정보 없음"
+            infoBoxView("독서상태", status)
             infoBoxView("평점", reviewInfo.ratingDescription)
             infoBoxView("리뷰수", viewModel.output.bookInfo.reviewCountDescription)
         }
@@ -172,18 +177,36 @@ struct BookReviewContentView: View {
                     Text(title)
                         .foregroundStyle(.gray)
                         .font(.caption)
-                    Text(content)
-                        .font(.callout.bold())
+                    
+                    if title == "평점" && content != "-" {
+                        HStack(spacing: 5) {
+                            Image(systemName: "star.fill")
+                                .resizable()
+                                .frame(width: 12, height: 12)
+                                .foregroundStyle(.orange)
+                            Text(content)
+                                .font(.callout.bold())
+                        }
+                    } else {
+                        Text(content)
+                            .font(.callout.bold())
+                    }
                 }
             }
     }
     
     func contentSectionView() -> some View {
         VStack(alignment: .leading, spacing: 6) {
-            contentView("한줄평", reviewInfo.title)
-            contentView("감상평", reviewInfo.content)
-            contentView("독서기간", reviewInfo.periodDescription)
-            contentView("저장일", reviewInfo.saveDateDescription)
+            if reviewInfo.status == 0 {
+                contentView("한줄평", reviewInfo.title)
+                contentView("독서예정일", reviewInfo.startDateDescription)
+                contentView("저장일", reviewInfo.saveDateDescription)
+            } else {
+                contentView("한줄평", reviewInfo.title)
+                contentView("감상평", reviewInfo.content)
+                contentView("독서기간", reviewInfo.periodDescription)
+                contentView("저장일", reviewInfo.saveDateDescription)
+            }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 10)

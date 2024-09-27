@@ -35,20 +35,26 @@ struct BookSearchView: View {
                 PlaceholderView(text: noResultPlaceholderText, type: .shelf)
             }
         } else {
-            ScrollView(.vertical) {
-                LazyVStack {
-                    ForEach(Array(zip(viewModel.output.bookList.indices, viewModel.output.bookList)), id: \.0) { index, item in
-                        SearchRowView(book: item)
-                            .onAppear {
-                                if index == viewModel.output.bookList.count - 4 {
-                                    if viewModel.isPaginationRequired {
-                                        viewModel.callRequestMore()
+            ScrollViewReader { reader in
+                ScrollView(.vertical) {
+                    LazyVStack {
+                        ForEach(Array(zip(viewModel.output.bookList.indices, viewModel.output.bookList)), id: \.0) { index, item in
+                            SearchRowView(book: item)
+                                .onAppear {
+                                    if index == viewModel.output.bookList.count - 4 {
+                                        if viewModel.isPaginationRequired {
+                                            viewModel.callRequestMore()
+                                        }
                                     }
                                 }
-                            }
+                        }
                     }
                 }
-            }.scrollDismissesKeyboard(.immediately)
+                .onReceive(viewModel.output.scrollToTop) { _ in
+                    reader.scrollTo(0, anchor: .top)
+                }
+            }
+            .scrollDismissesKeyboard(.immediately)
         }
     }
 }

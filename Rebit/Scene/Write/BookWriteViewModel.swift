@@ -23,7 +23,6 @@ final class BookWriteViewModel: BaseViewModel {
         var summaryText = ""
         var startDate = Date()
         var endDate = Date()
-        var rating = 5.0
         var reviewText = ""
         var selectedStatus = 0
         var dismissRequest = PassthroughSubject<Void, Never>()
@@ -35,6 +34,7 @@ final class BookWriteViewModel: BaseViewModel {
     
     var book: Book?
     var bookReview: BookReview?
+    var rating: Double = 0.0
     
     private let repository = RealmRepository()
     private let fileManager = ImageFileManager.shared
@@ -66,7 +66,6 @@ final class BookWriteViewModel: BaseViewModel {
                 self.output.summaryText = value.title
                 self.output.startDate = value.startDate ?? Date()
                 self.output.endDate = value.endDate ?? Date()
-                self.output.rating = value.rating
                 self.output.reviewText = value.content
                 self.output.selectedStatus = value.status
             }
@@ -117,7 +116,7 @@ final class BookWriteViewModel: BaseViewModel {
                 let review = BookReview(
                     title: self?.output.summaryText ?? "",
                     content: self?.output.reviewText ?? "" ,
-                    rating: self?.output.rating ?? 0,
+                    rating: self?.rating ?? 0,
                     status: self?.output.selectedStatus ?? 0,
                     startDate: self?.output.startDate,
                     endDate: self?.output.endDate
@@ -141,7 +140,7 @@ final class BookWriteViewModel: BaseViewModel {
                 let newReview = BookReview(
                     title: self.output.summaryText,
                     content: self.output.reviewText,
-                    rating: self.output.rating,
+                    rating: self.rating,
                     status: self.output.selectedStatus,
                     startDate: self.output.startDate,
                     endDate: self.output.endDate

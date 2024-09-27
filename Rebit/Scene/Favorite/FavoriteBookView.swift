@@ -9,7 +9,10 @@ import SwiftUI
 import RealmSwift
 
 struct FavoriteBookView: View {
-    @ObservedResults(BookReview.self, where: { $0.isLike }, sortDescriptor: SortDescriptor(keyPath: "saveDate", ascending: false))
+    @ObservedResults(
+        BookReview.self,
+        where: { $0.isLike },
+        sortDescriptor: SortDescriptor(keyPath: "saveDate", ascending: false))
     var favorite
     
     @State private var currentIndex: Int = 0

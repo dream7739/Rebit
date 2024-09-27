@@ -9,6 +9,7 @@ import SwiftUI
 import Cosmos
 
 struct CustomCosmosView: UIViewRepresentable {
+    
     @Binding var rating: Double
 
      func makeUIView(context: Context) -> CosmosView {
@@ -29,8 +30,21 @@ struct CustomCosmosView: UIViewRepresentable {
          uiView.settings.fillMode = .full
          uiView.didFinishTouchingCosmos = { rating in
              uiView.text = rating.formatted() + "점"
+             uiView.rating = rating
+             context.coordinator.rating = rating
          }
 
-
      }
+    
+    class Coordinator: NSObject {
+        @Binding var rating: Double
+        
+        init(rating: Binding<Double>) {
+            self._rating = rating
+        }
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        return Coordinator(rating: $rating)
+    }
 }
