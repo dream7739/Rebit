@@ -42,6 +42,7 @@ struct BookShelfView: View {
     func nowReadingSection(_ height: CGFloat) -> some View {
         VStack(alignment: .leading) {
             Text("책을 읽고 기록해보세요")
+                .font(.callout)
                 .bold()
             
             asHorizontalPageContent(height: height * 0.9) {
@@ -73,6 +74,7 @@ struct BookShelfView: View {
             HStack {
                 Text("나만의 책장")
                     .bold()
+                    .font(.callout)
                 Spacer()
                 NavigationLinkWrapper {
                     EntireShelfView()
@@ -147,15 +149,13 @@ struct ExpectedReadingView: View {
                             .lineLimit(1)
                             .font(.subheadline)
                         Text(bookInfo.author)
-                            .font(.caption)
-                            .foregroundStyle(.gray)
+                            .asTitleGrayForeground()
                         Text("\(reviewInfo.title)")
-                            .font(.caption)
-                            .foregroundStyle(.gray)
+                            .asTitleGrayForeground()
                             .lineLimit(2)
                         Spacer()
                         Text("기록하기")
-                            .font(.caption.bold())
+                            .font(.footnote.bold())
                             .foregroundStyle(.white)
                             .padding()
                             .background(

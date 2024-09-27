@@ -22,7 +22,7 @@ struct ShelfBookView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 5))
                 Text(bookList.title)
                     .lineLimit(1)
-                    .font(.caption)
+                    .font(.footnote)
                     .padding(.vertical, 8)
                     .padding(.horizontal, 2)
                     .frame(maxWidth: .infinity)

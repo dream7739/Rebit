@@ -93,7 +93,7 @@ extension MainTabView {
                 .frame(width: 20, height: 20)
             if isActive {
                 Text(title)
-                    .font(.system(size: 14))
+                    .font(.subheadline)
                     .foregroundColor(isActive ? .black : .gray)
             }
             Spacer()

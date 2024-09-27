@@ -101,12 +101,11 @@ struct DetailContentView: View {
     }
     
     func headerView() -> some View {
-        VStack {
+        VStack(spacing: 4) {
             Text(book.title)
                 .font(.callout.bold())
             Text(book.author)
-                .foregroundStyle(.gray)
-                .font(.subheadline.bold())
+                .asContentBlackForeground()
         }
         .frame(maxWidth: .infinity)
     }
@@ -114,12 +113,11 @@ struct DetailContentView: View {
     func storylineView() -> some View {
         VStack(alignment: .leading) {
             Text("줄거리")
-                .font(.footnote)
+                .asTitleGrayForeground()
                 .padding(.top, 5)
             HStack(alignment: .top) {
                 Text(book.description)
-                    .font(.footnote)
-                    .foregroundStyle(.gray)
+                    .asContentBlackForeground()
                     .lineLimit(isOpened ? .max : 5)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Button(action: {
@@ -135,46 +133,32 @@ struct DetailContentView: View {
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        
+        .padding(.bottom, 5)
     }
     
     func publishInfoView() -> some View {
-        VStack(alignment: .leading) {
-            Text("출판사")
-                .font(.footnote)
-                .padding(.top, 5)
-            Text(book.publisher)
-                .font(.footnote)
-                .foregroundStyle(.gray)
-            Text("출판일")
-                .font(.footnote)
-                .padding(.top, 5)
-            Text(book.dateDescription)
-                .font(.footnote)
-                .foregroundStyle(.gray)
-            Text("ISBN")
-                .font(.footnote)
-                .padding(.top, 5)
-            Text(book.isbn)
-                .font(.footnote)
-                .foregroundStyle(.gray)
+        VStack(alignment: .leading, spacing: 5) {
+            VStack(alignment: .leading, spacing: 2) {
+                Text("출판사")
+                    .asTitleGrayForeground()
+                Text(book.publisher)
+                    .asContentBlackForeground()
+            }
+            VStack(alignment: .leading, spacing: 2) {
+                Text("출판일")
+                    .asTitleGrayForeground()
+                Text(book.dateDescription)
+                    .asContentBlackForeground()
+            }
+            VStack(alignment: .leading, spacing: 2) {
+                Text("ISBN")
+                    .asTitleGrayForeground()
+                Text(book.isbn)
+                    .asContentBlackForeground()
+            }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         
     }
 }
 
-
-#Preview {
-    BookDetailView(book: bookDump)
-}
-
-var bookDump = Book(
-    title: "주술회전 26 (남쪽으로)",
-    image: "https://shopping-phinf.pstatic.net/main_4850944/48509446622.20240618091426.jpg",
-    author: "아쿠타미 게게",
-    publisher: "한국문화사",
-    pubdate: "20240202",
-    isbn: "123456789999",
-    description: "고죠 VS. 스쿠나!!!\n차원이 다른 “최강”의 전투, 그 결말은?!\n\n급이 다른 규모로 펼쳐지는 고죠 VS. 스쿠나의 최강 결전…! 영역의 동시 전개와 타서 끊어진 술식의 회복을 반복하던 전투는, 마허라가 소환되고 고죠의 영역 전개가 불가능해지면서 균형이 무너진 것처럼 보이는데--?!\n\n약식판권 : JUJUTSU KAISEN ⓒ2018 by Gege Akutami / SHUEISHA Inc."
-)

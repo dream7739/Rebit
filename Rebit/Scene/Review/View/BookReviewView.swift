@@ -97,7 +97,7 @@ struct BookReviewContentView: View {
             Text(viewModel.output.bookInfo.title)
                 .font(.callout.bold())
             Text(viewModel.output.bookInfo.author)
-                .font(.subheadline)
+                .asContentBlackForeground()
         }
         .frame(maxWidth: .infinity, alignment: .center)
         .overlay(alignment: .topTrailing) {
@@ -175,8 +175,7 @@ struct BookReviewContentView: View {
             .overlay(alignment: .center) {
                 VStack(alignment: .center, spacing: 4) {
                     Text(title)
-                        .foregroundStyle(.gray)
-                        .font(.caption)
+                        .asTitleGrayForeground()
                     
                     if title == "평점" && content != "-" {
                         HStack(spacing: 5) {

@@ -295,7 +295,7 @@ struct StatusCardView: View {
             selectedIndex = index
         }, label: {
             Text(ReadingStatus.allCases[index].title)
-                .font(.caption)
+                .font(.footnote)
                 .padding(.vertical, 8)
                 .padding(.horizontal, 13)
                 .background(selectedIndex == index ? .theme : .white)

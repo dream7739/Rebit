@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentBlackForeground: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .font(.caption)
+            .font(.system(size: 14))
             .foregroundStyle(.black)
     }
 }

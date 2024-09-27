@@ -138,8 +138,8 @@ final class BookWriteViewModel: BaseViewModel {
             }
             .map { oldReview in
                 let newReview = BookReview(
-                    title: self.output.summaryText,
-                    content: self.output.reviewText,
+                    title: self.output.summaryText.trimmingCharacters(in: .whitespacesAndNewlines),
+                    content: self.output.reviewText.trimmingCharacters(in: .whitespacesAndNewlines),
                     rating: self.rating,
                     status: self.output.selectedStatus,
                     startDate: self.output.startDate,
