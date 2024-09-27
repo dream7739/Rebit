@@ -15,24 +15,23 @@ struct EntireShelfView: View {
     private var placeholderText = "아직 서재에 책이 없어요\n책을 읽고 서재를 채워보세요"
     
     var body: some View {
-        GeometryReader { proxy in
-            VStack {
-                SearchBarView(text: $text)
-                    .padding(.horizontal, 15)
-                
-                if bookList.isEmpty {
-                    PlaceholderView(text: placeholderText, type: .shelf)
-                } else {
-                    ScrollView(.vertical) {
-                        verticalGridView(proxy.size)
-                    }
+        VStack {
+            SearchBarView(text: $text)
+                .padding(.horizontal, 15)
+            
+            if bookList.isEmpty {
+                PlaceholderView(text: placeholderText, type: .shelf)
+            } else {
+                ScrollView(.vertical) {
+                    verticalGridView()
                 }
+                .scrollDismissesKeyboard(.immediately)
             }
         }
         .navigationBarTitleDisplayMode(.inline)
     }
     
-    func verticalGridView(_ size: CGSize) -> some View {
+    func verticalGridView() -> some View {
         let columns = [
             GridItem(.flexible()),
             GridItem(.flexible()),
@@ -40,8 +39,9 @@ struct EntireShelfView: View {
         ]
         
         return LazyVGrid(columns: columns, spacing: 20, content: {
-            let height = (size.height / 4) - 20
-            let width = height / 1.5
+            let screenSize = UIScreen.main.bounds.size
+            let width = (screenSize.width - 70) / 3
+            let height = width * 1.5
             let size = CGSize(width: width, height: height)
             
             if text.isEmpty {
