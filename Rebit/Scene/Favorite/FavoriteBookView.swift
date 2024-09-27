@@ -9,15 +9,15 @@ import SwiftUI
 import RealmSwift
 
 struct FavoriteBookView: View {
-    @ObservedResults(BookReview.self, where: { $0.isLike } )
+    @ObservedResults(BookReview.self, where: { $0.isLike }, sortDescriptor: SortDescriptor(keyPath: "saveDate", ascending: false))
     var favorite
     
     @State private var currentIndex: Int = 0
-    @State private var placeholderText = "리뷰를 작성하고 좋아요한 책에 추가해보세요"
+    private var placeholderText = "리뷰를 작성하고 좋아요한 책에 추가해보세요"
     
     var body: some View {
         if favorite.count == 0 {
-            PlaceholderView(text: $placeholderText, type: .shelf)
+            PlaceholderView(text: placeholderText, type: .shelf)
         } else {
             ZStack(alignment: .top) {
                 ForEach(Array(zip(favorite.indices, favorite)), id: \.0) {

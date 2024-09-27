@@ -12,7 +12,7 @@ struct EntireShelfView: View {
     @ObservedResults(BookInfo.self, sortDescriptor: SortDescriptor(keyPath: "saveDate", ascending: false))
     var bookList
     @State private var text = ""
-    @State private var placeholderText = "아직 서재에 책이 없어요\n책을 읽고 서재를 채워보세요"
+    private var placeholderText = "아직 서재에 책이 없어요\n책을 읽고 서재를 채워보세요"
     
     var body: some View {
         GeometryReader { proxy in
@@ -21,11 +21,7 @@ struct EntireShelfView: View {
                     .padding(.horizontal, 15)
                 
                 if bookList.isEmpty {
-                    VStack(alignment: .center) {
-                        PlaceholderView(text: $placeholderText, type: .shelf)
-                    }
-                    .frame(maxHeight: .infinity)
-                        
+                    PlaceholderView(text: placeholderText, type: .shelf)
                 } else {
                     ScrollView(.vertical) {
                         verticalGridView(proxy.size)

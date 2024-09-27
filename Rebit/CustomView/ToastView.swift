@@ -31,7 +31,7 @@ struct ToastView: View {
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.bottom, 40)
                 .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         withAnimation {
                             isShow.toggle()
                             closure()

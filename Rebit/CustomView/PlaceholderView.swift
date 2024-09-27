@@ -13,7 +13,7 @@ struct PlaceholderView: View {
         case shelf
     }
     
-    @Binding var text: String
+    var text: String
     var type: ViewType
     
     var body: some View {
@@ -29,11 +29,11 @@ struct PlaceholderView: View {
                 .font(.callout)
                 .multilineTextAlignment(.center)
         }
-        .frame(maxWidth: .infinity, alignment: .center)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
       
     }
 }
 
 #Preview {
-    PlaceholderView(text: .constant("아직 등록한 책이 없어요"), type: .shelf)
+    PlaceholderView(text: "아직 등록한 책이 없어요", type: .shelf)
 }

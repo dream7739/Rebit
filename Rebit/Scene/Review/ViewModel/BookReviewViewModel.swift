@@ -71,9 +71,9 @@ final class BookReviewViewModel: BaseViewModel {
                 }
                 
                 //새롭게 책 정보를 패치
-                output.bookInfo = self.repository.fetchBook(bookId)
+                self.output.bookInfo = self.repository.fetchBook(bookId)
                 self.bookInfo = BookInfo()
-                output.isReviewChanged.send(())
+                self.output.isReviewChanged.send(())
             }
             .store(in: &cancellables)
         

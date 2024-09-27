@@ -48,7 +48,22 @@
 		88FC19242C96B11A004C844E /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 88FC19232C96B11A004C844E /* RealmSwift */; };
 		88FC19272C96B3C9004C844E /* BookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FC19262C96B3C9004C844E /* BookDetailView.swift */; };
 		88FF94382CA68C6800DE7B6E /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FF94372CA68C6800DE7B6E /* PlaceholderView.swift */; };
+		88FF94392CA6C62400DE7B6E /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 88FC19232C96B11A004C844E /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		88FF943A2CA6C62400DE7B6E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				88FF94392CA6C62400DE7B6E /* RealmSwift in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		881040B52C9C247700FCBD5A /* ImageFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileManager.swift; sourceTree = "<group>"; };
@@ -346,6 +361,7 @@
 				88F141E32C95454D002117CD /* Sources */,
 				88F141E42C95454D002117CD /* Frameworks */,
 				88F141E52C95454D002117CD /* Resources */,
+				88FF943A2CA6C62400DE7B6E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

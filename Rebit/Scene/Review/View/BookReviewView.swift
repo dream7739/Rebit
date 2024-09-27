@@ -10,7 +10,8 @@ import RealmSwift
 
 struct BookReviewView: View {
     @StateObject private var viewModel: BookReviewViewModel
-    
+    @Environment(\.presentationMode) var presentationMode
+
     init(bookInfo: BookInfo) {
         self._viewModel = StateObject(wrappedValue: BookReviewViewModel(bookInfo: bookInfo))
     }
@@ -38,6 +39,11 @@ struct BookReviewView: View {
         .onAppear {
             viewModel.input.viewOnAppear.send(())
         }
+        .onReceive(viewModel.output.isReviewChanged, perform: { _ in
+            if viewModel.output.bookInfo.reviewList.isEmpty {
+                presentationMode.wrappedValue.dismiss()
+            }
+        })
     }
 }
 
@@ -86,7 +92,7 @@ struct BookReviewContentView: View {
         VStack {
             Image(uiImage: viewModel.output.bookCoverImage)
                 .resizable()
-                .frame(width: 150, height: 230)
+                .frame(width: 120, height: 160)
                 .padding(.top, 10)
             Text(viewModel.output.bookInfo.title)
                 .font(.callout.bold())

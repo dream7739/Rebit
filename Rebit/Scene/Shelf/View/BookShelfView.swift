@@ -23,7 +23,7 @@ struct BookShelfView: View {
     )
     var bookList
     
-    @State private var placeholderText = "아직 책장에 책이 없어요\n검색을 통해 책을 추가해주세요"
+    private var placeholderText = "아직 책장에 책이 없어요\n검색을 통해 책을 추가해주세요"
     
     var body: some View {
         GeometryReader { proxy in
@@ -100,8 +100,7 @@ struct BookShelfView: View {
             let size = CGSize(width: width, height: height)
             
             if bookList.isEmpty {
-                PlaceholderView(text: $placeholderText, type: .shelf)
-                    .frame(maxHeight: proxy.size.height, alignment: .center)
+                PlaceholderView(text: placeholderText, type: .shelf)
             } else {
                 LazyVGrid(columns: columns, spacing: 20, content: {
                     if bookList.count >= 6 {
