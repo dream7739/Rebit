@@ -9,23 +9,30 @@ import SwiftUI
 import RealmSwift
 
 struct ShelfBookView: View {
-    @ObservedRealmObject var bookList: BookInfo
+    var bookList: BookInfo
+    var size: CGSize
     
     var body: some View {
-        VStack {
-            Image(uiImage: ImageFileManager.shared.loadImageToDocument(filename: "\(bookList.id)") ?? UIImage())
-                .resizable()
-                .clipShape(RoundedRectangle(cornerRadius: 5))
-            Text(bookList.title)
-                .lineLimit(1)
-                .font(.caption)
-                .background(RoundedRectangle(cornerRadius: 3)
-                    .fill(.thickMaterial)
-                    .frame(width: 110, height: 35)
-                    .shadow(color: .gray.opacity(0.3), radius: 10, x: 5, y: 5)
-                )
-                .offset(x: 0, y: -10)
+        GeometryReader { _ in
+            VStack {
+                Image(uiImage: ImageFileManager.shared.loadImageToDocument(filename: "\(bookList.id)") ?? UIImage())
+                    .resizable()
+                    .frame(width: size.width, height: size.height)
+                    .clipped()
+                    .clipShape(RoundedRectangle(cornerRadius: 5))
+                Text(bookList.title)
+                    .lineLimit(1)
+                    .font(.caption)
+                    .padding(.vertical, 8)
+                    .padding(.horizontal, 2)
+                    .frame(maxWidth: .infinity)
+                    .background(RoundedRectangle(cornerRadius: 3)
+                        .fill(.thickMaterial)
+                        .shadow(color: .gray.opacity(0.3), radius: 10, x: 5, y: 5)
+                    )
+                    .offset(x: 0, y: -30)
+            }
         }
-        .frame(width: 100, height: 150)
+        .frame(minWidth: size.width, minHeight: size.height)
     }
 }

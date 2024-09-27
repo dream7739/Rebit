@@ -138,19 +138,19 @@ final class BookWriteViewModel: BaseViewModel {
                 self?.bookReview
             }
             .map { oldReview in
-                let newReview = BookModifyModel(
+                let newReview = BookReview(
                     title: self.output.summaryText,
-                    startDate: self.output.startDate,
-                    endDate: self.output.endDate,
-                    rating: self.output.rating,
                     content: self.output.reviewText,
-                    status: self.output.selectedStatus
+                    rating: self.output.rating,
+                    status: self.output.selectedStatus,
+                    startDate: self.output.startDate,
+                    endDate: self.output.endDate
                 )
                 return (oldReview, newReview)
             }
-            .sink { [weak self] (oldReview: BookReview, newReview: BookModifyModel) in
+            .sink { [weak self] (oldReview: BookReview, newReview: BookReview) in
                 guard let self = self else { return }
-                repository.modifyBookReview(oldReview, newReview)
+                repository.updateBookReview(oldReview, newReview)
                 self.output.dismissRequest.send(())
             }
             .store(in: &cancellables)

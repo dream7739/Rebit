@@ -9,50 +9,72 @@ import SwiftUI
 import RealmSwift
 
 struct BookShelfView: View {
-    @ObservedObject private var viewModel = BookShelfViewModel()
+    
+    @ObservedResults(
+        BookReview.self,
+        where: ({ $0.status == 0 }),
+        sortDescriptor: SortDescriptor(keyPath: "saveDate", ascending: false)
+    )
+    var expectedReviewList
+    
+    @ObservedResults(
+        BookInfo.self,
+        sortDescriptor: SortDescriptor(keyPath: "saveDate", ascending: false)
+    )
+    var bookList
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            nowReadingSection()
-            mybookShelfSection()
-            Spacer()
+        GeometryReader { proxy in
+            VStack(alignment: .leading, spacing: 10) {
+                nowReadingSection(proxy.size.height * 0.3)
+                mybookShelfSection(proxy.size.height * 0.6)
+                Spacer()
+            }
+            .padding()
         }
-        .padding()
-        .onAppear(perform: {
+        .onAppear {
             print(Realm.Configuration.defaultConfiguration.fileURL)
-        })
+        }
     }
     
-    func nowReadingSection() -> some View {
+    func nowReadingSection(_ height: CGFloat) -> some View {
         VStack(alignment: .leading) {
             Text("책을 읽고 기록해보세요")
                 .bold()
             
-            asHorizontalPageContent(height: 150) {
-                ForEach(viewModel.currentBookList, id: \.id) { item in
-                    ExpectedReadingView(reviewInfo: item)
+            asHorizontalPageContent(height: height * 0.9) {
+                ForEach(expectedReviewList, id: \.id) { item in
+                    NavigationLinkWrapper {
+                        if let book = item.book.first {
+                            BookReviewView(bookInfo: book)
+                        }
+                    } inner: {
+                        ExpectedReadingView(reviewInfo: item)
+
+                    }
                 }
             }
         }
+        .frame(height: height)
     }
     
-    func mybookShelfSection() -> some View {
+    func mybookShelfSection(_ height: CGFloat) -> some View {
         VStack(alignment: .leading) {
             HStack {
                 Text("나만의 책장")
                     .bold()
                 Spacer()
-                NavigationLink(destination: {
+                NavigationLinkWrapper {
                     EntireShelfView()
-                }, label: {
+                } inner: {
                     Text("더보기")
                         .font(.footnote)
                         .foregroundStyle(.gray)
-                })
-                .buttonStyle(PlainButtonStyle())
+                }
             }
             shelfGridView()
         }
+        .frame(minHeight: height)
     }
     
     func shelfGridView() -> some View {
@@ -62,66 +84,77 @@ struct BookShelfView: View {
             GridItem(.flexible())
         ]
         
-        return LazyVGrid(columns: columns, spacing: 20, content: {
-            if viewModel.bookList.count >= 6 {
+        return GeometryReader { proxy in
+            let height = (proxy.size.height / 2) - 20
+            let width = height / 1.5
+            let size = CGSize(width: width, height: height)
+            
+            LazyVGrid(columns: columns, spacing: 20, content: {
+            if bookList.count >= 6 {
                 ForEach(0..<6) { item in
                     NavigationLinkWrapper {
-                        BookReviewView(bookInfo: viewModel.bookList[item])
+                        BookReviewView(bookInfo: bookList[item])
                     } inner: {
-                        ShelfBookView(bookList: viewModel.bookList[item])
+                        ShelfBookView(bookList: bookList[item], size: size)
                     }
                 }
             } else {
-                ForEach(viewModel.bookList, id: \.id) { item in
+                ForEach(bookList, id: \.id) { item in
                     NavigationLinkWrapper {
                         BookReviewView(bookInfo: item)
                     } inner: {
-                        ShelfBookView(bookList: item)
+                        ShelfBookView(bookList: item, size: size)
                     }
                 }
             }
         })
+        }
     }
 }
 
 struct ExpectedReadingView: View {
-    @ObservedRealmObject var reviewInfo: BookReview
+    var reviewInfo: BookReview
     
     var body: some View {
         if let bookInfo = reviewInfo.book.first {
-            HStack(alignment: .top) {
-                Image(uiImage: ImageFileManager.shared.loadImageToDocument(filename: "\(bookInfo.id)") ?? UIImage())
-                    .resizable()
-                    .frame(width: 100, height: 140)
-                    .clipShape(RoundedRectangle(cornerRadius: 5))
-                    .offset(x: -5, y: 0)
-                    .shadow(color: .gray.opacity(0.3), radius: 10, x: 3, y: 3)
-                VStack(alignment: .leading) {
-                    Text(bookInfo.title)
-                        .lineLimit(1)
-                        .font(.subheadline)
-                    Text(bookInfo.author)
-                        .font(.caption)
-                        .foregroundStyle(.gray)
-                    Text("\(reviewInfo.title)")
-                        .font(.caption)
-                        .foregroundStyle(.gray)
-                        .lineLimit(2)
+            GeometryReader { proxy in
+                let height = proxy.size.height - 20
+                let width = height / 1.4
+                
+                HStack(alignment: .top) {
+                    Image(uiImage: ImageFileManager.shared.loadImageToDocument(filename: "\(bookInfo.id)") ?? UIImage())
+                        .resizable()
+                        .frame(width: width, height: height)
+                        .clipShape(RoundedRectangle(cornerRadius: 5))
+                        .offset(x: -5, y: 0)
+                        .shadow(color: .gray.opacity(0.3), radius: 10, x: 3, y: 3)
+                    VStack(alignment: .leading) {
+                        Text(bookInfo.title)
+                            .lineLimit(1)
+                            .font(.subheadline)
+                        Text(bookInfo.author)
+                            .font(.caption)
+                            .foregroundStyle(.gray)
+                        Text("\(reviewInfo.title)")
+                            .font(.caption)
+                            .foregroundStyle(.gray)
+                            .lineLimit(2)
+                        Spacer()
+                        Text("기록하기")
+                            .font(.caption.bold())
+                            .foregroundStyle(.white)
+                            .padding()
+                            .background(
+                                Capsule()
+                                    .fill(.theme)
+                                    .frame(width: 70, height: 30)
+                            )
+                    }
                     Spacer()
-                    Button(action: {}, label: {
-                        Capsule()
-                            .fill(.theme)
-                            .frame(width: 70, height: 30)
-                            .overlay(alignment: .center) {
-                                Text("기록하기")
-                                    .font(.caption.bold())
-                                    .foregroundStyle(.white)
-                            }
-                    })
                 }
-                Spacer()
+                .padding(.vertical, 10)
+                .padding(.horizontal, 15)
             }
-            .padding()
         }
     }
     
