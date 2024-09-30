@@ -51,6 +51,7 @@ final class BookReview: Object, ObjectKeyIdentifiable {
     @Persisted var rating: Double
     @Persisted var status: Int
     @Persisted var isLike: Bool
+    @Persisted(indexed: true) var year: Int
     @Persisted var startDate: Date?
     @Persisted(indexed: true) var endDate: Date?
     @Persisted var repeatCount: Int
@@ -65,6 +66,7 @@ final class BookReview: Object, ObjectKeyIdentifiable {
         rating: Double,
         status: Int,
         isLike: Bool = false,
+        year: Int,
         startDate: Date?,
         endDate: Date?
     ) {
@@ -75,6 +77,7 @@ final class BookReview: Object, ObjectKeyIdentifiable {
         self.status = status
         self.isLike = isLike
         self.repeatCount = 1
+        self.year = year
         self.startDate = startDate
         self.endDate = endDate
         self.saveDate = Date()

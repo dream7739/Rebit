@@ -118,6 +118,7 @@ final class BookWriteViewModel: BaseViewModel {
                     content: self?.output.reviewText ?? "" ,
                     rating: self?.rating ?? 0,
                     status: self?.output.selectedStatus ?? 0,
+                    year: Calendar.current.component(.year, from: self?.output.endDate ?? Date()),
                     startDate: self?.output.startDate,
                     endDate: self?.output.endDate
                 )
@@ -142,6 +143,7 @@ final class BookWriteViewModel: BaseViewModel {
                     content: self.output.reviewText.trimmingCharacters(in: .whitespacesAndNewlines),
                     rating: self.rating,
                     status: self.output.selectedStatus,
+                    year: Calendar.current.component(.year, from: self.output.endDate),
                     startDate: self.output.startDate,
                     endDate: self.output.endDate
                 )

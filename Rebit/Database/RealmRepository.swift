@@ -72,6 +72,7 @@ final class RealmRepository {
         do {
             try realm.write {
                 review.title = newReview.title
+                review.year = newReview.year
                 review.startDate = newReview.startDate
                 review.endDate = newReview.endDate
                 review.rating = newReview.rating
