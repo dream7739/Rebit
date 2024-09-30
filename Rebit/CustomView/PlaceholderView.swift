@@ -11,6 +11,7 @@ struct PlaceholderView: View {
     enum ViewType {
         case search
         case shelf
+        case goal
     }
     
     var text: String
@@ -21,7 +22,7 @@ struct PlaceholderView: View {
             switch type {
             case .search:
                 Image(.search)
-            case .shelf:
+            case .shelf, .goal:
                 Image(.placeholder)
             }
             Text(text)

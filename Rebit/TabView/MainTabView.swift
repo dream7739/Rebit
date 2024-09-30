@@ -21,8 +21,8 @@ struct MainTabView: View {
                         .tag(1)
                     BookSearchView()
                         .tag(2)
-//                    BookChartView()
-//                        .tag(3)
+                    BookChartView()
+                        .tag(3)
                 }
                 .toolbar(.hidden, for: .tabBar)
                 
@@ -55,7 +55,7 @@ extension MainTabView {
         case favorite = 0
         case shelf = 1
         case search = 2
-//        case chart = 3
+        case chart = 3
         
         var title: String {
             switch self {
@@ -65,8 +65,8 @@ extension MainTabView {
                 return "Bookshelf"
             case .search:
                 return "Search"
-//            case .chart:
-//                return "Chart"
+            case .chart:
+                return "Chart"
             }
         }
         
@@ -78,8 +78,8 @@ extension MainTabView {
                 return "text.book.closed"
             case .search:
                 return "magnifyingglass"
-//            case .chart:
-//                return "chart.bar"
+            case .chart:
+                return "chart.bar"
             }
         }
     }

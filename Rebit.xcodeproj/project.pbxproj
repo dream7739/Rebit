@@ -11,6 +11,7 @@
 		881040BA2C9C513F00FCBD5A /* BookShelfImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881040B92C9C513F00FCBD5A /* BookShelfImageView.swift */; };
 		881040BC2C9C63EC00FCBD5A /* HorizontalPageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881040BB2C9C63EC00FCBD5A /* HorizontalPageWrapper.swift */; };
 		881040BE2C9C6D9400FCBD5A /* EntireShelfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881040BD2C9C6D9400FCBD5A /* EntireShelfView.swift */; };
+		8823744F2CAA801E00B2FDE1 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8823744E2CAA801E00B2FDE1 /* Date+.swift */; };
 		8834AD732CA40CE6002DEA90 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8834AD722CA40CE6002DEA90 /* ToastView.swift */; };
 		8851A7212C97F149002D2952 /* NavigationLazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8851A7202C97F149002D2952 /* NavigationLazyView.swift */; };
 		8863628F2C99407700B5A8E8 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8863628E2C99407700B5A8E8 /* SearchBarView.swift */; };
@@ -70,6 +71,7 @@
 		881040B92C9C513F00FCBD5A /* BookShelfImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShelfImageView.swift; sourceTree = "<group>"; };
 		881040BB2C9C63EC00FCBD5A /* HorizontalPageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalPageWrapper.swift; sourceTree = "<group>"; };
 		881040BD2C9C6D9400FCBD5A /* EntireShelfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntireShelfView.swift; sourceTree = "<group>"; };
+		8823744E2CAA801E00B2FDE1 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		8834AD722CA40CE6002DEA90 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		8851A7202C97F149002D2952 /* NavigationLazyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLazyView.swift; sourceTree = "<group>"; };
 		8863628E2C99407700B5A8E8 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				886362912C99409600B5A8E8 /* UIApplication+.swift */,
+				8823744E2CAA801E00B2FDE1 /* Date+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -458,6 +461,7 @@
 				88FF94382CA68C6800DE7B6E /* PlaceholderView.swift in Sources */,
 				8863628F2C99407700B5A8E8 /* SearchBarView.swift in Sources */,
 				88F1420C2C954817002117CD /* BaseViewModel.swift in Sources */,
+				8823744F2CAA801E00B2FDE1 /* Date+.swift in Sources */,
 				88F142182C956122002117CD /* BookChartView.swift in Sources */,
 				88D19D2B2C9B06FD00CE4FE6 /* RealmRepository.swift in Sources */,
 				881040B62C9C247700FCBD5A /* ImageFileManager.swift in Sources */,
