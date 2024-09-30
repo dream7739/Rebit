@@ -99,7 +99,7 @@ final class BookReview: Object, ObjectKeyIdentifiable {
     var readingDateDescription: String {
         let start = DateFormatterManager.basicFormatter.string(from: startDate ?? Date())
         let end = DateFormatterManager.basicFormatter.string(from: endDate ?? Date())
-        let description = start + " - " + end + "(\(periodDescription))"
+        let description = start + " - " + end + " (\(periodDescription))"
         return description
     }
     
@@ -110,13 +110,8 @@ final class BookReview: Object, ObjectKeyIdentifiable {
     
     var periodDescription: String {
         if let period = DateFormatterManager.dateCompare(startDate ?? Date(), endDate ?? Date()) {
-            if period == 0 {
-                return "하루"
-            } else if period > 0 {
-                return period.formatted() + "일"
-            } else {
-                return "-"
-            }
+            var realDate = period + 1
+            return realDate.formatted() + "일"
         } else {
             return "-"
         }
@@ -141,6 +136,6 @@ final class ReadingGoal: Object, ObjectKeyIdentifiable {
         self.month = month
         self.goal = goal
         self.saveDate = Date()
-
+        
     }
 }

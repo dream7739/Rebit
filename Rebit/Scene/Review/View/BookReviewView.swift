@@ -203,7 +203,7 @@ struct BookReviewContentView: View {
             } else {
                 contentView("한줄평", reviewInfo.title)
                 contentView("감상평", reviewInfo.content)
-                contentView("독서기간", reviewInfo.periodDescription)
+                contentView("독서기간", reviewInfo.readingDateDescription)
                 contentView("저장일", reviewInfo.saveDateDescription)
             }
         }
