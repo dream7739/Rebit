@@ -9,10 +9,14 @@ import SwiftUI
 import RealmSwift
 
 struct GoalSettingView: View {
+    @Environment(\.realm) var realm
+
     @ObservedResults(ReadingGoal.self, where: { $0.year == Date.currentYear() })
     var goalList
-    
+
     @State private var goal = ""
+    @Binding var isSheetPresent: Bool
+    
     var body: some View {
         VStack(alignment: .center) {
             Text("올해 몇 권의 책을 읽을까요?")
@@ -29,14 +33,11 @@ struct GoalSettingView: View {
             }
             Button(action: {
                 if goalList.isEmpty {
-                    guard let inputGoal = Int(goal) else { return }
-                    let goal = ReadingGoal(year: Date.currentYear(), month: 0, goal: inputGoal)
-                    $goalList.append(goal)
+                    appendGoal()
                 } else {
-                    guard let existGoal = goalList.first else { return }
-                    guard let inputGoal = Int(goal) else { return }
+                    modifyGoal()
                 }
-                
+                isSheetPresent.toggle()
             }, label: {
                 Text("등록하기")
                     .asThemeBasicButtonModifier()
@@ -51,7 +52,26 @@ struct GoalSettingView: View {
         }
         
     }
+    
+    func appendGoal() {
+        guard let inputGoal = Int(goal) else { return }
+        let goal = ReadingGoal(year: Date.currentYear(), month: 0, goal: inputGoal)
+        $goalList.append(goal)
+    }
+    
+    func modifyGoal() {
+        guard let existGoal = goalList.first else { return }
+        guard let inputGoal = Int(goal) else { return }
+        do {
+            try realm.write {
+                existGoal.thaw()?.goal = inputGoal
+            }
+        } catch {
+            print("error \(error)")
+        }
+    }
 }
+
 
 //#Preview {
 //    GoalSettingView()

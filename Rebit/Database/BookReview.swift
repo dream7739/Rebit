@@ -110,7 +110,7 @@ final class BookReview: Object, ObjectKeyIdentifiable {
     
     var periodDescription: String {
         if let period = DateFormatterManager.dateCompare(startDate ?? Date(), endDate ?? Date()) {
-            var realDate = period + 1
+            let realDate = period + 1
             return realDate.formatted() + "일"
         } else {
             return "-"

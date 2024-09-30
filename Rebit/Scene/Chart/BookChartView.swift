@@ -33,7 +33,7 @@ struct BookChartView: View {
             .padding(.horizontal, 15)
             .padding(.vertical, 15)
             .sheet(isPresented: $isSheetPresent, content: {
-                GoalSettingView()
+                GoalSettingView(isSheetPresent: $isSheetPresent)
                     .presentationDetents([.height(200)])
             })
         }
