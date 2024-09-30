@@ -10,21 +10,77 @@ import Charts
 import RealmSwift
 
 struct BookChartView: View {
-    @ObservedResults(BookReview.self)
+    @ObservedResults(BookReview.self, where: { $0.status == 2 })
     var bookList
     
+    @ObservedResults(ReadingGoal.self, where: { $0.year == Date.currentYear() })
+    var goalList
+    
+    @State private var goalAchievePercent: Double = 0.0
     @State private var monthList: [(month: String, reviewCnt: Int)] = []
     @State private var yearList: [(year: String, reviewCnt: Int)] = []
-    @State private var selectedYear = Calendar.current.component(.year, from: Date())
+    @State private var selectedYear = Date.currentYear()
     @State private var selectYearList: [Int] = []
+    @State private var isSheetPresent = false
     
     var body: some View {
         ScrollView {
             VStack(spacing: 10) {
+                goalHeaderView()
                 monthView()
                 yearView()
             }
+            .padding(.horizontal, 15)
+            .padding(.vertical, 15)
+            .sheet(isPresented: $isSheetPresent, content: {
+                GoalSettingView()
+                    .presentationDetents([.height(200)])
+            })
         }
+    }
+    
+    //목표 설정
+    func goalHeaderView() -> some View {
+        VStack {
+            if goalList.isEmpty {
+                VStack(alignment: .center) {
+                    Text("아직 등록한 목표가 없어요")
+                        .font(.callout)
+                    Button(action: {
+                        isSheetPresent.toggle()
+                    }) {
+                        Text("등록하기")
+                            .asGreenCapsuleBackground()
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .center)
+                .frame(height: 150)
+            } else {
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text("올해 목표 달성률")
+                            .font(.callout.bold())
+                        Spacer()
+                        Button(action: {
+                            isSheetPresent.toggle()
+                        }, label: {
+                            Text("목표수정")
+                                .font(.footnote)
+                                .foregroundStyle(.gray)
+                        })
+                    }
+                    CircularProgressView(progress: goalAchievePercent)
+                }
+                .onAppear {
+                    let achieveCnt = yearList.filter { $0.year == "\(Date.currentYear())년" }.first?.reviewCnt ?? 0
+                    guard let goalCnt = goalList.first?.goal, goalCnt != 0  else { return }
+                    let achievePercent = Double(achieveCnt) / Double(goalCnt)
+                    goalAchievePercent = achievePercent
+                }
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(height: 150)
     }
     
     //월별
@@ -76,8 +132,7 @@ struct BookChartView: View {
             }
         }
         .onAppear {
-            let year = Calendar.current.component(.year, from: Date())
-            configureMonthList(of: year)
+            configureMonthList(of: Date.currentYear())
             configureSelectYearList()
         }
     }
@@ -87,7 +142,6 @@ struct BookChartView: View {
             monthHeaderView()
             monthChartView()
         }
-        .padding(.horizontal, 15)
         .frame(maxWidth: .infinity)
         .frame(height: 250)
     }
@@ -129,7 +183,6 @@ struct BookChartView: View {
             yearHeaderView()
             yearChartView()
         }
-        .padding(.horizontal, 15)
         .frame(maxWidth: .infinity)
     }
 }

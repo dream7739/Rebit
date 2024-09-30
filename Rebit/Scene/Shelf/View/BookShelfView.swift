@@ -155,14 +155,7 @@ struct ExpectedReadingView: View {
                             .lineLimit(2)
                         Spacer()
                         Text("기록하기")
-                            .font(.footnote.bold())
-                            .foregroundStyle(.white)
-                            .padding()
-                            .background(
-                                Capsule()
-                                    .fill(.theme)
-                                    .frame(width: 70, height: 30)
-                            )
+                            .asGreenCapsuleBackground()
                     }
                     Spacer()
                 }

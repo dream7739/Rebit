@@ -12,6 +12,9 @@
 		881040BC2C9C63EC00FCBD5A /* HorizontalPageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881040BB2C9C63EC00FCBD5A /* HorizontalPageWrapper.swift */; };
 		881040BE2C9C6D9400FCBD5A /* EntireShelfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881040BD2C9C6D9400FCBD5A /* EntireShelfView.swift */; };
 		8823744F2CAA801E00B2FDE1 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8823744E2CAA801E00B2FDE1 /* Date+.swift */; };
+		882374512CAAD63D00B2FDE1 /* GreenCapsuleBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882374502CAAD63D00B2FDE1 /* GreenCapsuleBackground.swift */; };
+		882374532CAADB4C00B2FDE1 /* GoalSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882374522CAADB4C00B2FDE1 /* GoalSettingView.swift */; };
+		882374552CAAEDEB00B2FDE1 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882374542CAAEDEB00B2FDE1 /* CircularProgressView.swift */; };
 		8834AD732CA40CE6002DEA90 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8834AD722CA40CE6002DEA90 /* ToastView.swift */; };
 		8851A7212C97F149002D2952 /* NavigationLazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8851A7202C97F149002D2952 /* NavigationLazyView.swift */; };
 		8863628F2C99407700B5A8E8 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8863628E2C99407700B5A8E8 /* SearchBarView.swift */; };
@@ -72,6 +75,9 @@
 		881040BB2C9C63EC00FCBD5A /* HorizontalPageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalPageWrapper.swift; sourceTree = "<group>"; };
 		881040BD2C9C6D9400FCBD5A /* EntireShelfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntireShelfView.swift; sourceTree = "<group>"; };
 		8823744E2CAA801E00B2FDE1 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		882374502CAAD63D00B2FDE1 /* GreenCapsuleBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenCapsuleBackground.swift; sourceTree = "<group>"; };
+		882374522CAADB4C00B2FDE1 /* GoalSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSettingView.swift; sourceTree = "<group>"; };
+		882374542CAAEDEB00B2FDE1 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		8834AD722CA40CE6002DEA90 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		8851A7202C97F149002D2952 /* NavigationLazyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLazyView.swift; sourceTree = "<group>"; };
 		8863628E2C99407700B5A8E8 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
@@ -173,6 +179,7 @@
 				88D19D212C9ACFC200CE4FE6 /* GreenRoundBackground.swift */,
 				88E148242C9DB9AB00A3ECF6 /* TitleGrayForeground.swift */,
 				88E148262C9DBB5B00A3ECF6 /* ContentBlackForeground.swift */,
+				882374502CAAD63D00B2FDE1 /* GreenCapsuleBackground.swift */,
 			);
 			path = Modifier;
 			sourceTree = "<group>";
@@ -301,6 +308,7 @@
 				881040B92C9C513F00FCBD5A /* BookShelfImageView.swift */,
 				8834AD722CA40CE6002DEA90 /* ToastView.swift */,
 				88FF94372CA68C6800DE7B6E /* PlaceholderView.swift */,
+				882374542CAAEDEB00B2FDE1 /* CircularProgressView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -325,6 +333,7 @@
 			isa = PBXGroup;
 			children = (
 				88F142172C956122002117CD /* BookChartView.swift */,
+				882374522CAADB4C00B2FDE1 /* GoalSettingView.swift */,
 			);
 			path = Chart;
 			sourceTree = "<group>";
@@ -435,6 +444,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				881040BE2C9C6D9400FCBD5A /* EntireShelfView.swift in Sources */,
+				882374512CAAD63D00B2FDE1 /* GreenCapsuleBackground.swift in Sources */,
 				886362922C99409600B5A8E8 /* UIApplication+.swift in Sources */,
 				88D19D292C9ADA8400CE4FE6 /* DateFormatterManager.swift in Sources */,
 				88D19D242C9AD0C100CE4FE6 /* BookWriteViewModel.swift in Sources */,
@@ -449,6 +459,7 @@
 				88D19D262C9AD3C500CE4FE6 /* BookReview.swift in Sources */,
 				88F142152C9560D0002117CD /* FavoriteBookView.swift in Sources */,
 				88F141ED2C95454D002117CD /* ContentView.swift in Sources */,
+				882374552CAAEDEB00B2FDE1 /* CircularProgressView.swift in Sources */,
 				886362972C9993F600B5A8E8 /* CustomCosmosView.swift in Sources */,
 				88D19D222C9ACFC200CE4FE6 /* GreenRoundBackground.swift in Sources */,
 				88F142122C955F60002117CD /* MainTabView.swift in Sources */,
@@ -458,6 +469,7 @@
 				88FC19272C96B3C9004C844E /* BookDetailView.swift in Sources */,
 				88E1481F2C9D4C6B00A3ECF6 /* NavigationLinkWrapper.swift in Sources */,
 				88F141FD2C954765002117CD /* APIKey.swift in Sources */,
+				882374532CAADB4C00B2FDE1 /* GoalSettingView.swift in Sources */,
 				88FF94382CA68C6800DE7B6E /* PlaceholderView.swift in Sources */,
 				8863628F2C99407700B5A8E8 /* SearchBarView.swift in Sources */,
 				88F1420C2C954817002117CD /* BaseViewModel.swift in Sources */,

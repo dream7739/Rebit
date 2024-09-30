@@ -9,6 +9,10 @@ import Foundation
 
 extension Date {
     static func startOfMonth(for month: Int, of year: Int, using calendar: Calendar = .current) -> Date? {
-        DateComponents(calendar: calendar, year: year, month: month).date
+        return DateComponents(calendar: calendar, year: year, month: month).date
+    }
+    
+    static func currentYear() -> Int {
+        return Calendar.current.component(.year, from: Date())
     }
 }
