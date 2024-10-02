@@ -47,6 +47,11 @@ struct GoalSettingView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         .background(.white)
+        .onAppear {
+            if let goalCount = goalList.first?.goal {
+                goal = "\(goalCount)"
+            }
+        }
         .onTapGesture {
             UIApplication.shared.endEditing()
         }

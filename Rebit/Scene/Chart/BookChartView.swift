@@ -32,7 +32,9 @@ struct BookChartView: View {
             }
             .padding(.horizontal, 15)
             .padding(.vertical, 15)
-            .sheet(isPresented: $isSheetPresent, content: {
+            .sheet(isPresented: $isSheetPresent, onDismiss: {
+                goalAchievePercent = configureAchieve()
+            }, content: {
                 GoalSettingView(isSheetPresent: $isSheetPresent)
                     .presentationDetents([.height(200)])
             })
@@ -69,13 +71,19 @@ struct BookChartView: View {
                                 .foregroundStyle(.gray)
                         })
                     }
-                    CircularProgressView(progress: goalAchievePercent)
+                    HStack {
+                        CircularProgressView(progress: goalAchievePercent)
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("올해 목표 독서량: " + getGoalCnt().formatted() + "권")
+                                .asContentBlackForeground()
+                            Text("현재 독서량: " + getAchieveCnt().formatted() + "권")
+                                .asContentBlackForeground()
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                    }
                 }
                 .onAppear {
-                    let achieveCnt = yearList.filter { $0.year == "\(Date.currentYear())년" }.first?.reviewCnt ?? 0
-                    guard let goalCnt = goalList.first?.goal, goalCnt != 0  else { return }
-                    let achievePercent = Double(achieveCnt) / Double(goalCnt)
-                    goalAchievePercent = achievePercent
+                    goalAchievePercent = configureAchieve()
                 }
             }
         }
@@ -84,7 +92,7 @@ struct BookChartView: View {
     }
     
     //월별
-    func monthHeaderView() -> some View {
+    private func monthHeaderView() -> some View {
         return VStack(alignment: .leading, spacing: 2) {
             HStack {
                 Text("월별통계")
@@ -118,7 +126,7 @@ struct BookChartView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
     
-    func monthChartView() -> some View {
+    private func monthChartView() -> some View {
         Chart {
             ForEach(monthList, id: \.month) { item in
                 BarMark(
@@ -137,7 +145,7 @@ struct BookChartView: View {
         }
     }
     
-    func monthView() -> some View {
+    private func monthView() -> some View {
         VStack(alignment: .leading, spacing: 8) {
             monthHeaderView()
             monthChartView()
@@ -147,7 +155,7 @@ struct BookChartView: View {
     }
     
     //년도별
-    func yearHeaderView() -> some View {
+    private func yearHeaderView() -> some View {
         return VStack(alignment: .leading, spacing: 2) {
             HStack {
                 Text("년도별 통계")
@@ -159,7 +167,7 @@ struct BookChartView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
     
-    func yearChartView() -> some View {
+    private func yearChartView() -> some View {
         Chart {
             ForEach(yearList, id: \.year) { item in
                 BarMark(
@@ -178,7 +186,7 @@ struct BookChartView: View {
         }
     }
     
-    func yearView() -> some View {
+    private func yearView() -> some View {
         VStack(alignment: .leading, spacing: 8) {
             yearHeaderView()
             yearChartView()
@@ -188,6 +196,29 @@ struct BookChartView: View {
 }
 
 extension BookChartView {
+    //올해의 리뷰 권수
+    private func getAchieveCnt() -> Int {
+        let achieveCnt = yearList.filter { $0.year == "\(Date.currentYear())년" }.first?.reviewCnt ?? 0
+        return achieveCnt
+    }
+    
+    //올해의 목표 권수
+    private func getGoalCnt() -> Int {
+        guard let goalCnt = goalList.first?.goal, goalCnt != 0  else { return 0 }
+        return goalCnt
+    }
+    
+    //올해 목표달성률
+    private func configureAchieve() -> Double {
+        let achieveCnt = getAchieveCnt()
+        let goalCnt = getGoalCnt()
+        
+        guard goalCnt != 0 else { return 0 }
+        
+        let achievePercent = Double(achieveCnt) / Double(goalCnt)
+        return achievePercent
+    }
+    
     private func configureMonthList(of year: Int) {
         var result: [(String, Int)] = []
         for i in 1...12 {
