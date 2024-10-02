@@ -39,6 +39,7 @@ struct BookChartView: View {
                     .presentationDetents([.height(200)])
             })
         }
+        .padding(.bottom, 30)
     }
     
     //목표 설정

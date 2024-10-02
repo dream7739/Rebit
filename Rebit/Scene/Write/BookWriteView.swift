@@ -13,8 +13,9 @@ struct BookWriteView: View {
     @State private var isShow: Bool = false
     @State private var rating = 5.0
     @State private var viewType: ViewType
-    @FocusState private var focusedField: Field?
     @Binding var isFullPresented: Bool
+    @FocusState private var focusedField: Field?
+    @Environment(\.colorScheme) var color
     
     //책 상세화면에서 진입했을 경우
     init(book: Book?, isFullPresented: Binding<Bool>) {
@@ -140,7 +141,7 @@ extension BookWriteView {
                 isFullPresented = false
             }, label: {
                 Image(systemName: "xmark")
-                    .foregroundStyle(.black)
+                    .foregroundStyle(color == .light ? .black : .white)
             })
             .frame(alignment: .trailing)
         }
@@ -224,7 +225,7 @@ extension BookWriteView {
             
             TextField("이 책을 한줄로 정의해보세요", text: $viewModel.output.summaryText)
                 .font(.footnote)
-                .tint(.black)
+                .tint(.theme)
                 .padding(10)
                 .focused($focusedField, equals: .title)
                 .background(
@@ -246,7 +247,7 @@ extension BookWriteView {
                 .font(.footnote)
                 .textInputAutocapitalization(.none)
                 .autocorrectionDisabled()
-                .tint(.black)
+                .tint(.theme)
                 .padding(.vertical, 5)
                 .padding(.horizontal, 10)
                 .background(.gray.opacity(0.1))
@@ -288,6 +289,8 @@ extension BookWriteView {
 
 struct StatusCardView: View {
     @Binding var selectedIndex: Int
+    @Environment(\.colorScheme) var color
+
     var index: Int
     
     var body: some View {
@@ -298,8 +301,8 @@ struct StatusCardView: View {
                 .font(.footnote)
                 .padding(.vertical, 8)
                 .padding(.horizontal, 13)
-                .background(selectedIndex == index ? .theme : .white)
-                .foregroundStyle(selectedIndex == index ? .white : .black)
+                .background(selectedIndex == index ? .theme : color == .light ? .white : .black)
+                .foregroundStyle(selectedIndex == index ? .white : color == .light ? .black : .white)
                 .clipShape(Capsule())
                 .overlay(
                     Capsule()

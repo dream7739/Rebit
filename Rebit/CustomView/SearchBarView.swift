@@ -16,7 +16,6 @@ struct SearchBarView: View {
                 .foregroundStyle(.gray)
             TextField("검색할 책을 입력하세요", text: $text)
                 .autocorrectionDisabled(true)
-                .foregroundStyle(.black)
                 .tint(.theme)
             Image(systemName: "xmark.circle.fill")
                 .foregroundStyle(.gray)

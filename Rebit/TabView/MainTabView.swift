@@ -10,6 +10,7 @@ import SwiftUI
 
 struct MainTabView: View {
     @State private var selectedTab = 0
+    @Environment(\.colorScheme) var color
     
     var body: some View {
         NavigationStack {
@@ -38,8 +39,8 @@ struct MainTabView: View {
                 .frame(height: 70)
                 .background(
                     RoundedRectangle(cornerRadius: 35)
-                        .fill(.white)
-                        .shadow(color: .gray.opacity(0.2), radius: 2)
+                        .fill(color == .light ? .white : .black)
+                        .shadow(color: color == .light ? .gray.opacity(0.2) : .white.opacity(0.4), radius: 2)
                 )
                 .padding(.horizontal, 10)
                 .padding(.bottom, 20)

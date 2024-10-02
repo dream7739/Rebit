@@ -9,13 +9,12 @@ import SwiftUI
 import RealmSwift
 
 struct GoalSettingView: View {
-    @Environment(\.realm) var realm
-
     @ObservedResults(ReadingGoal.self, where: { $0.year == Date.currentYear() })
     var goalList
-
     @State private var goal = ""
     @Binding var isSheetPresent: Bool
+    @Environment(\.realm) var realm
+    @Environment(\.colorScheme) var color
     
     var body: some View {
         VStack(alignment: .center) {
@@ -46,7 +45,7 @@ struct GoalSettingView: View {
             .padding(.top, 10)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-        .background(.white)
+        .background(color == .light ? .white : .black)
         .onAppear {
             if let goalCount = goalList.first?.goal {
                 goal = "\(goalCount)"

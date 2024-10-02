@@ -61,6 +61,7 @@ struct BookSearchView: View {
 
 struct SearchRowView: View {
     var book: Book
+    @Environment(\.colorScheme) var color
     
     var body: some View {
         NavigationLinkWrapper {
@@ -90,7 +91,7 @@ struct SearchRowView: View {
             .frame(height: 160)
             .background(
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(.white)
+                    .fill(color == .light ? .white : .black)
             )
             .padding(.horizontal, 10)
             .padding(.vertical, 5)

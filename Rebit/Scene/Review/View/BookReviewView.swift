@@ -52,7 +52,8 @@ struct BookReviewContentView: View {
     @Binding var reviewInfo: BookReview
     @State var isFullPresented: Bool = false
     @State var isShowingAlert: Bool = false
-    
+    @Environment(\.colorScheme) var color
+
     var body: some View {
         VStack {
             headerView()
@@ -81,7 +82,7 @@ struct BookReviewContentView: View {
         .frame(maxWidth: .infinity)
         .background(
             UnevenRoundedRectangle(cornerRadii: RectangleCornerRadii(bottomTrailing: 30, topTrailing: 30))
-                .fill(.white)
+                .fill(color == .light ? .white : .black)
                 .shadow(color: .gray.opacity(0.3), radius: 5, x: 10, y: 5)
         )
         .padding(.trailing, 20)
@@ -112,11 +113,11 @@ struct BookReviewContentView: View {
             }, label: {
                 if reviewInfo.isLike {
                     Image(systemName: "heart.fill")
-                        .foregroundStyle(.red)
+                        .foregroundStyle(color == .light ? .red : .white)
                         .imageScale(.large)
                 } else {
                     Image(systemName: "heart")
-                        .foregroundStyle(.black)
+                        .foregroundStyle(color == .light ? .black : .white)
                         .imageScale(.large)
                 }
             })
@@ -171,7 +172,7 @@ struct BookReviewContentView: View {
     
     func infoBoxView(_ title: String, _ content: String) -> some View {
         Rectangle()
-            .fill(.white)
+            .fill(color == .light ? .white : .black)
             .overlay(alignment: .center) {
                 VStack(alignment: .center, spacing: 4) {
                     Text(title)

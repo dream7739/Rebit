@@ -77,6 +77,7 @@ struct BookDetailView: View {
 struct DetailContentView: View {
     var book: Book
     @State private var isOpened = false
+    @Environment(\.colorScheme) var color
     
     init(_ book: Book) {
         self.book = book
@@ -96,7 +97,7 @@ struct DetailContentView: View {
         .padding(.bottom, 20)
         .background(
             UnevenRoundedRectangle(cornerRadii: .init(topLeading: 30, topTrailing: 30))
-                .fill(.white)
+                .fill(color == .light ? .white : .black)
         )
     }
     

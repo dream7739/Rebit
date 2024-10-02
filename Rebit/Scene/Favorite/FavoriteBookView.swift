@@ -98,7 +98,6 @@ struct FavoriteContentView: View {
                     .opacity(currentIndex == index ? 1 : 0)
                 Text(book.author)
                     .font(.subheadline)
-                    .foregroundStyle(.black)
                     .opacity(currentIndex == index ? 1 : 0)
             }
             

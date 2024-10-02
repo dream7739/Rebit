@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ToastView: View {
     @Binding var isShow: Bool
+    @Environment(\.colorScheme) var color
     let message: String
     let closure: () -> Void
     
@@ -21,12 +22,13 @@ struct ToastView: View {
     var body: some View {
         if isShow {
             Text(message)
+                .font(.callout)
                 .padding(.horizontal, 12)
                 .padding(.vertical, 8)
-                .foregroundStyle(.white)
+                .foregroundStyle(color == .light ? .white : .black)
                 .background(
                     Capsule()
-                        .fill(.black.opacity(0.6))
+                        .fill(color == .light ? .black.opacity(0.6) : .white.opacity(0.6))
                 )
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.bottom, 40)
