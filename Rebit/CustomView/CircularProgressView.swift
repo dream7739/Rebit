@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CircularProgressView: View {
-    var progress: Double
+    @Binding var progress: Double
     
     var body: some View {
         let progressText = String(format: "%.0f%%", progress * 100)
@@ -34,5 +34,5 @@ struct CircularProgressView: View {
 }
 
 #Preview {
-    CircularProgressView(progress: 0.7)
+    CircularProgressView(progress: .constant(0.7))
 }
