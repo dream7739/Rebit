@@ -39,6 +39,7 @@ struct BookChartView: View {
                     .presentationDetents([.height(200)])
             })
         }
+        .padding(.bottom, 30)
     }
     
     //목표 설정
@@ -72,7 +73,7 @@ struct BookChartView: View {
                         })
                     }
                     HStack {
-                        CircularProgressView(progress: goalAchievePercent)
+                        CircularProgressView(progress: $goalAchievePercent)
                         VStack(alignment: .leading, spacing: 4) {
                             Text("올해 목표 독서량: " + getGoalCnt().formatted() + "권")
                                 .asContentBlackForeground()
