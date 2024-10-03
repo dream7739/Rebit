@@ -92,6 +92,7 @@
 		88E148202C9D557C00A3ECF6 /* BookReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookReviewView.swift; sourceTree = "<group>"; };
 		88E148242C9DB9AB00A3ECF6 /* TitleGrayForeground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleGrayForeground.swift; sourceTree = "<group>"; };
 		88E148262C9DBB5B00A3ECF6 /* ContentBlackForeground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlackForeground.swift; sourceTree = "<group>"; };
+		88EDDD522CAE905C00F0210E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		88F02CBA2C9EEFC3003FD34A /* BookReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookReviewViewModel.swift; sourceTree = "<group>"; };
 		88F141E72C95454D002117CD /* Rebit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rebit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88F141EA2C95454D002117CD /* RebitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RebitApp.swift; sourceTree = "<group>"; };
@@ -222,6 +223,7 @@
 		88F141E92C95454D002117CD /* Rebit */ = {
 			isa = PBXGroup;
 			children = (
+				88EDDD522CAE905C00F0210E /* Info.plist */,
 				88D19D272C9ADA7D00CE4FE6 /* Utill */,
 				88D19D202C9ACFA300CE4FE6 /* Modifier */,
 				886362902C99408F00B5A8E8 /* Extension */,
@@ -619,10 +621,10 @@
 				DEVELOPMENT_TEAM = 6ZWU3ZJ8BG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Rebit/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "리빗";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -654,10 +656,10 @@
 				DEVELOPMENT_TEAM = 6ZWU3ZJ8BG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Rebit/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "리빗";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
