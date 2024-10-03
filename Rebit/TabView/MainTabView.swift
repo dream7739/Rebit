@@ -61,13 +61,13 @@ extension MainTabView {
         var title: String {
             switch self {
             case .favorite:
-                return "Favorite"
+                return "favorite".localized
             case .shelf:
-                return "Bookshelf"
+                return "bookshelf".localized
             case .search:
-                return "Search"
+                return "search".localized
             case .chart:
-                return "Chart"
+                return "chart".localized
             }
         }
         

@@ -23,7 +23,7 @@ struct BookShelfView: View {
     )
     var bookList
     
-    private var placeholderText = "아직 책장에 책이 없어요\n검색을 통해 책을 추가해주세요"
+    private var placeholderText = "shelf-my-empty".localized
     
     var body: some View {
         GeometryReader { proxy in
@@ -41,13 +41,13 @@ struct BookShelfView: View {
     
     func nowReadingSection(_ height: CGFloat) -> some View {
         VStack(alignment: .leading) {
-            Text("책을 읽고 기록해보세요")
+            Text("shelf-announce".localized)
                 .font(.callout)
                 .bold()
             
             asHorizontalPageContent(height: height * 0.9) {
                 if expectedReviewList.isEmpty {
-                    Text("아직 읽을 예정인 책이 없어요")
+                    Text("shelf-announce-empty".localized)
                         .foregroundStyle(.gray)
                         .font(.callout)
                         .frame(maxHeight: height * 0.9, alignment: .center)
@@ -72,14 +72,14 @@ struct BookShelfView: View {
     func mybookShelfSection(_ height: CGFloat) -> some View {
         VStack(alignment: .leading) {
             HStack {
-                Text("나만의 책장")
+                Text("shelf-my".localized)
                     .bold()
                     .font(.callout)
                 Spacer()
                 NavigationLinkWrapper {
                     EntireShelfView()
                 } inner: {
-                    Text("더보기")
+                    Text("shelf-detail".localized)
                         .font(.footnote)
                         .foregroundStyle(.gray)
                 }
@@ -154,7 +154,7 @@ struct ExpectedReadingView: View {
                             .asTitleGrayForeground()
                             .lineLimit(2)
                         Spacer()
-                        Text("기록하기")
+                        Text("shelf-write-review".localized)
                             .asGreenCapsuleBackground()
                     }
                     Spacer()

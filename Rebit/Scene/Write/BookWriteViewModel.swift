@@ -168,11 +168,11 @@ extension BookWriteViewModel {
         var title: String {
             switch self {
             case .expected:
-                return "독서예정"
+                return "reading-expected".localized
             case .current:
-                return "독서중"
+                return "reading-current".localized
             case .completed:
-                return "독서완료"
+                return "reading-completed".localized
             }
         }
         

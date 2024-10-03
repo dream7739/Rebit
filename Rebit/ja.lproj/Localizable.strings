@@ -1,0 +1,84 @@
+/* 
+  Localizable.strings
+  Rebit
+
+  Created by 홍정민 on 10/3/24.
+  
+*/
+
+//탭
+"favorite" = "お気に入り";
+"bookshelf" = "書斎";
+"search" = "検索";
+"chart" = "チャート";
+
+//검색바
+"search-placeholder" = "本を検索してみましょう";
+
+//즐겨찾기 - 플레이스홀더
+"favorite-empty" = "記録を作成し、お気に入りに追加してみてください";
+
+//서재화면 타이틀
+"shelf-announce" = "本を読んで記録してみてください";
+
+//서재화면 상단 - 플레이스홀더
+"shelf-announce-empty" = "まだ読む予定の本がありません";
+
+//서재상단 - 기록하기 버튼
+"shelf-write-review" = "記録する";
+
+//서재화면 하단 타이틀
+"shelf-my" = "私だけの本棚";
+
+"shelf-detail" = "もっと見る";
+
+//서재 하단 - 플레이스홀더
+"shelf-my-empty" = "まだ書斎に本がありません。\n検索で本を追加してください";
+
+//서재 - 전체보기
+"shelf-entire-empty" = "まだ書斎に本がありません。\n本を読んで書斎を埋めてみてください";
+
+//리뷰 - 상단 메뉴 버튼 - 수정
+"menu-edit" = "修整";
+
+//리뷰 - 상단 메뉴 버튼 - 삭제
+"menu-delete" = "削除";
+
+//리뷰 - 상단 메뉴 버튼 - 책 정보
+"menu-detail" = "本の情報";
+
+//리뷰 - 카드뷰 - 독서상태
+"review-status-title" = "독서상태";
+
+//리뷰 - 카드뷰 - 독서상태
+"review-status-title" = "読書状態";
+
+//독서상태 - 독서예정
+"reading-expected" = "読書予定";
+
+//독서상태 - 독서중
+"reading-current" = "読書中";
+
+//독서상태 - 독서완료
+"reading-completed" = "読書完了";
+
+//리뷰 - 카드뷰 - 평점
+"review-rating" = "評点";
+
+//리뷰 - 카드뷰 - 리뷰수
+"review-count" = "記録個数";
+
+//리뷰 - 한줄평
+"review-comment" = "一行評";
+
+//리뷰 - 감상평
+"review-content" = "感想評";
+
+//리뷰 - 독서기간
+"review-date" = "読書期間";
+
+//리뷰 - 독서예정일
+"review-expected-date" = "読書予定日";
+
+//리뷰 - 저장일
+"review-save-date" = "保存日";

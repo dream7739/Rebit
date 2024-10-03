@@ -1,0 +1,82 @@
+/* 
+  Localizable.strings
+  Rebit
+
+  Created by 홍정민 on 10/3/24.
+  
+*/
+
+//탭
+"favorite" = "즐겨찾기";
+"bookshelf" = "서재";
+"search" = "검색";
+"chart" = "통계";
+
+//검색바
+"search-placeholder" = "책을 검색해보세요";
+
+//즐겨찾기 - 플레이스홀더
+"favorite-empty" = "리뷰를 작성하고 좋아요한 책에 추가해보세요";
+
+//서재화면 상단 타이틀
+"shelf-announce" = "책을 읽고 기록해보세요";
+
+//서재화면 상단 - 플레이스홀더
+"shelf-announce-empty" = "아직 읽을 예정인 책이 없어요";
+
+//서재상단 - 기록하기 버튼
+"shelf-write-review" = "기록하기";
+
+//서재화면 하단 타이틀
+"shelf-my" = "나만의 책장";
+
+//서재화면 하단 더보기
+"shelf-detail" = "더보기";
+
+//서재 하단 - 플레이스홀더
+"shelf-my-empty" = "아직 서재에 책이 없어요\n검색을 통해 책을 추가해주세요";
+
+//서재 - 전체보기
+"shelf-entire-empty" = "아직 서재에 책이 없어요\n책을 읽고 서재를 채워보세요";
+
+//리뷰 - 상단 메뉴 버튼 - 수정
+"menu-edit" = "수정";
+
+//리뷰 - 상단 메뉴 버튼 - 삭제
+"menu-delete" = "삭제";
+
+//리뷰 - 상단 메뉴 버튼 - 책 정보
+"menu-detail" = "책 정보";
+
+//리뷰 - 카드뷰 - 독서상태
+"review-status-title" = "독서상태";
+
+//독서상태 - 독서예정
+"reading-expected" = "독서예정";
+
+//독서상태 - 독서중
+"reading-current" = "독서중";
+
+//독서상태 - 독서완료
+"reading-completed" = "독서완료";
+
+//리뷰 - 카드뷰 - 평점
+"review-rating" = "평점";
+
+//리뷰 - 카드뷰 - 리뷰수
+"review-count" = "리뷰수";
+
+//리뷰 - 한줄평
+"review-comment" = "한줄평";
+
+//리뷰 - 감상평
+"review-content" = "감상평";
+
+//리뷰 - 독서기간
+"review-date" = "독서기간";
+
+//리뷰 - 독서예정일
+"review-expected-date" = "독서예정일";
+
+//리뷰 - 저장일
+"review-save-date" = "저장일";

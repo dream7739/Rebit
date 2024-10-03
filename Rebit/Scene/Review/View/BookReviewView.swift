@@ -129,11 +129,11 @@ struct BookReviewContentView: View {
     
     func optionMenu() -> some View {
         Menu {
-            Button("수정", action: {
+            Button("menu-edit".localized, action: {
                 isFullPresented = true
             })
             
-            Button("삭제", action: {
+            Button("menu-delete".localized, action: {
                 isShowingAlert = true
             })
             
@@ -151,7 +151,7 @@ struct BookReviewContentView: View {
                     coverImage: viewModel.output.bookCoverImage
                 )
             } inner: {
-                Button("상세정보", action: {})
+                Button("menu-detail".localized, action: {})
             }
         } label: {
             Image(.dotList)
@@ -162,12 +162,12 @@ struct BookReviewContentView: View {
     func infoSectionView() -> some View {
         HStack {
             let status = ReadingStatus(rawValue: reviewInfo.status)?.title ?? "정보 없음"
-            infoBoxView("독서상태", status)
-            infoBoxView("평점", reviewInfo.ratingDescription)
-            infoBoxView("리뷰수", viewModel.output.bookInfo.reviewCountDescription)
+            infoBoxView("review-status-title".localized, status)
+            infoBoxView("review-rating".localized, reviewInfo.ratingDescription)
+            infoBoxView("review-count".localized, viewModel.output.bookInfo.reviewCountDescription)
         }
         .frame(maxWidth: .infinity)
-        .frame(height: 50)
+        .frame(height: 65)
     }
     
     func infoBoxView(_ title: String, _ content: String) -> some View {
@@ -178,7 +178,7 @@ struct BookReviewContentView: View {
                     Text(title)
                         .asTitleGrayForeground()
                     
-                    if title == "평점" && content != "-" {
+                    if title == "review-rating".localized && content != "-" {
                         HStack(spacing: 5) {
                             Image(systemName: "star.fill")
                                 .resizable()
@@ -198,14 +198,14 @@ struct BookReviewContentView: View {
     func contentSectionView() -> some View {
         VStack(alignment: .leading, spacing: 6) {
             if reviewInfo.status == 0 {
-                contentView("한줄평", reviewInfo.title)
-                contentView("독서예정일", reviewInfo.startDateDescription)
-                contentView("저장일", reviewInfo.saveDateDescription)
+                contentView("review-comment".localized, reviewInfo.title)
+                contentView("review-expected-date".localized, reviewInfo.startDateDescription)
+                contentView("review-save-date".localized, reviewInfo.saveDateDescription)
             } else {
-                contentView("한줄평", reviewInfo.title)
-                contentView("감상평", reviewInfo.content)
-                contentView("독서기간", reviewInfo.readingDateDescription)
-                contentView("저장일", reviewInfo.saveDateDescription)
+                contentView("review-comment".localized, reviewInfo.title)
+                contentView("review-content".localized, reviewInfo.content)
+                contentView("review-date".localized, reviewInfo.readingDateDescription)
+                contentView("review-save-date".localized, reviewInfo.saveDateDescription)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)

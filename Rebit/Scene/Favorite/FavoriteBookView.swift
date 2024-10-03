@@ -16,7 +16,7 @@ struct FavoriteBookView: View {
     var favorite
     
     @State private var currentIndex: Int = 0
-    private var placeholderText = "리뷰를 작성하고 좋아요한 책에 추가해보세요"
+    private var placeholderText = "favorite-empty".localized
     
     var body: some View {
         if favorite.count == 0 {

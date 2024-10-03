@@ -12,7 +12,7 @@ struct EntireShelfView: View {
     @ObservedResults(BookInfo.self, sortDescriptor: SortDescriptor(keyPath: "saveDate", ascending: false))
     var bookList
     @State private var text = ""
-    private var placeholderText = "아직 서재에 책이 없어요\n책을 읽고 서재를 채워보세요"
+    private var placeholderText = "shelf-entire-empty".localized
     
     var body: some View {
         VStack {

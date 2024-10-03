@@ -14,7 +14,7 @@ struct SearchBarView: View {
         HStack {
             Image(systemName: "magnifyingglass")
                 .foregroundStyle(.gray)
-            TextField("검색할 책을 입력하세요", text: $text)
+            TextField("search-placeholder".localized, text: $text)
                 .autocorrectionDisabled(true)
                 .tint(.theme)
             Image(systemName: "xmark.circle.fill")

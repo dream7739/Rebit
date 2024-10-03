@@ -30,6 +30,8 @@
 		88E148212C9D557C00A3ECF6 /* BookReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E148202C9D557C00A3ECF6 /* BookReviewView.swift */; };
 		88E148252C9DB9AB00A3ECF6 /* TitleGrayForeground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E148242C9DB9AB00A3ECF6 /* TitleGrayForeground.swift */; };
 		88E148272C9DBB5B00A3ECF6 /* ContentBlackForeground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E148262C9DBB5B00A3ECF6 /* ContentBlackForeground.swift */; };
+		88EDDD582CAE927A00F0210E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 88EDDD562CAE927A00F0210E /* Localizable.strings */; };
+		88EDDD5C2CAEA99D00F0210E /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EDDD5B2CAEA99D00F0210E /* String+.swift */; };
 		88F02CBB2C9EEFC3003FD34A /* BookReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F02CBA2C9EEFC3003FD34A /* BookReviewViewModel.swift */; };
 		88F141EB2C95454D002117CD /* RebitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F141EA2C95454D002117CD /* RebitApp.swift */; };
 		88F141ED2C95454D002117CD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F141EC2C95454D002117CD /* ContentView.swift */; };
@@ -93,6 +95,10 @@
 		88E148242C9DB9AB00A3ECF6 /* TitleGrayForeground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleGrayForeground.swift; sourceTree = "<group>"; };
 		88E148262C9DBB5B00A3ECF6 /* ContentBlackForeground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlackForeground.swift; sourceTree = "<group>"; };
 		88EDDD522CAE905C00F0210E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		88EDDD572CAE927A00F0210E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		88EDDD592CAE92CA00F0210E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		88EDDD5A2CAE930000F0210E /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		88EDDD5B2CAEA99D00F0210E /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		88F02CBA2C9EEFC3003FD34A /* BookReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookReviewViewModel.swift; sourceTree = "<group>"; };
 		88F141E72C95454D002117CD /* Rebit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rebit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88F141EA2C95454D002117CD /* RebitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RebitApp.swift; sourceTree = "<group>"; };
@@ -145,6 +151,7 @@
 			children = (
 				886362912C99409600B5A8E8 /* UIApplication+.swift */,
 				8823744E2CAA801E00B2FDE1 /* Date+.swift */,
+				88EDDD5B2CAEA99D00F0210E /* String+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -239,6 +246,7 @@
 				88F141EE2C95454E002117CD /* Assets.xcassets */,
 				88F141F02C95454E002117CD /* Preview Content */,
 				88F141FC2C954765002117CD /* APIKey.swift */,
+				88EDDD562CAE927A00F0210E /* Localizable.strings */,
 			);
 			path = Rebit;
 			sourceTree = "<group>";
@@ -412,6 +420,8 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
+				ko,
 			);
 			mainGroup = 88F141DE2C95454D002117CD;
 			packageReferences = (
@@ -433,6 +443,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88F141F22C95454E002117CD /* Preview Assets.xcassets in Resources */,
+				88EDDD582CAE927A00F0210E /* Localizable.strings in Resources */,
 				88F141F92C9545E1002117CD /* .gitignore in Resources */,
 				88F141EF2C95454E002117CD /* Assets.xcassets in Resources */,
 			);
@@ -449,6 +460,7 @@
 				882374512CAAD63D00B2FDE1 /* GreenCapsuleBackground.swift in Sources */,
 				886362922C99409600B5A8E8 /* UIApplication+.swift in Sources */,
 				88D19D292C9ADA8400CE4FE6 /* DateFormatterManager.swift in Sources */,
+				88EDDD5C2CAEA99D00F0210E /* String+.swift in Sources */,
 				88D19D242C9AD0C100CE4FE6 /* BookWriteViewModel.swift in Sources */,
 				88F1421B2C956239002117CD /* BookShelfView.swift in Sources */,
 				88F142062C9547C2002117CD /* BookSearchView.swift in Sources */,
@@ -490,12 +502,26 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXVariantGroup section */
+		88EDDD562CAE927A00F0210E /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				88EDDD572CAE927A00F0210E /* en */,
+				88EDDD592CAE92CA00F0210E /* ja */,
+				88EDDD5A2CAE930000F0210E /* ko */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		88F141F32C95454E002117CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -559,6 +585,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
