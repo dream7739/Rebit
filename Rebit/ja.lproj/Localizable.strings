@@ -30,6 +30,7 @@
 //서재화면 하단 타이틀
 "shelf-my" = "私だけの本棚";
 
+//서재화면 하단 더보기
 "shelf-detail" = "もっと見る";
 
 //서재 하단 - 플레이스홀더
@@ -46,9 +47,6 @@
 
 //리뷰 - 상단 메뉴 버튼 - 책 정보
 "menu-detail" = "本の情報";
-
-//리뷰 - 카드뷰 - 독서상태
-"review-status-title" = "독서상태";
 
 //리뷰 - 카드뷰 - 독서상태
 "review-status-title" = "読書状態";
@@ -85,6 +83,15 @@
 
 //리뷰 - 기간(일)
 "review-period" = "日";
+
+//리뷰 - 삭제 - 타이틀
+"review-delete-title" = "本当に削除しますか?";
+
+//리뷰 - 삭제 - 확인
+"review-delete-ok" = "確認";
+
+//리뷰 - 삭제 - 취소
+"review-delete-cancel" = "キャンセル";
 
 //책 상세 - 줄거리
 "book-info-summary" = "あらすじ";
@@ -139,3 +146,51 @@
 
 //기록 - 토스트 - 수정
 "write-toast-update" = "修正完了";
+
+//검색 - empty
+"search-empty" = "本を検索してレビューを作成してみてください";
+
+//검색 - 결과 - empty
+"search-result-empty" = "検索結果が存在しません";
+
+//차트 - 목표 설정 - empty
+"chart-no-goal" = "まだ目標を設定していません";
+
+//차트 - 등록하기
+"chart-goal-register" = "目標設定";
+
+//차트 - 올해 목표 달성률
+"chart-year-goal" = "今年の目標達成率";
+
+//차트 - 목표수정
+"chart-goal-modify" = "目標修正";
+
+//차트 - 올해 목표 독서량
+"chart-year-goal-count" = "今年の目標読書量";
+
+//차트 - 권수
+"chart-year-goal-count-subfix" = "巻";
+
+//차트 - 현재 독서량
+"chart-current-goal-count" = "現在の読書量";
+
+//차트 - 월별통계
+"chart-montly-graph" = "月別統計";
+
+//차트 - 월별통계 - 총계
+"chart-montly-total" = "全";
+
+//차트 - 월별통계 - 총계
+"chart-montly-total-subfix" = "冊読みました";
+
+//차트 - 연도별 통계
+"chart-yearly-graph" = "年度別統計";
+
+//차트 - "월"
+"chart-graph-month" = "月";
+
+//차트 - "년"
+"chart-graph-year" = "年";
+
+//목표설정 - 타이틀
+"goal-title" = "今年何冊の本を読みますか？";

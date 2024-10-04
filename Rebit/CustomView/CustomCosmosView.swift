@@ -29,7 +29,7 @@ struct CustomCosmosView: UIViewRepresentable {
          uiView.settings.emptyImage = UIImage(named: "rating")
          uiView.settings.fillMode = .full
          uiView.didFinishTouchingCosmos = { rating in
-             uiView.text = rating.formatted() + "점"
+             uiView.text = rating.formatted()
              uiView.rating = rating
              context.coordinator.rating = rating
          }

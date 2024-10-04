@@ -72,12 +72,12 @@ struct BookReviewContentView: View {
                 isFullPresented: $isFullPresented
             )
         }
-        .alert("정말 삭제하시겠습니까?", isPresented: $isShowingAlert) {
-            Button("확인", role: .none) {
+        .alert("review-delete-title".localized, isPresented: $isShowingAlert) {
+            Button("review-delete-ok".localized, role: .none) {
                 viewModel.input.deleteButtonClicked.send(reviewInfo)
             }
             
-            Button("취소", role: .cancel) { }
+            Button("review-delete-cancel".localized, role: .cancel) { }
         }
         .frame(maxWidth: .infinity)
         .background(

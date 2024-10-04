@@ -9,8 +9,8 @@ import SwiftUI
 
 struct BookSearchView: View {
     @StateObject private var viewModel = BookSearchViewModel()
-    private var placeholderText = "책을 검색하고 리뷰를 작성해보세요"
-    private var noResultPlaceholderText = "검색결과가 존재하지 않습니다"
+    private var placeholderText = "search-empty".localized
+    private var noResultPlaceholderText = "search-result-empty".localized
     
     var body: some View {
         VStack {
@@ -102,7 +102,7 @@ struct SearchRowView: View {
 
 struct WriteButtonView: View {
     var body: some View {
-        Text("기록하기")
+        Text("shelf-write-review".localized)
             .font(.callout.bold())
             .frame(width: 90, height: 35)
             .background(.theme)

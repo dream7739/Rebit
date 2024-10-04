@@ -18,7 +18,7 @@ struct GoalSettingView: View {
     
     var body: some View {
         VStack(alignment: .center) {
-            Text("올해 몇 권의 책을 읽을까요?")
+            Text("goal-title".localized)
             HStack {
                 TextField("\(goalList.first?.goal ?? 0)" , text: $goal)
                     .frame(width: 40)
@@ -28,7 +28,7 @@ struct GoalSettingView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                     .multilineTextAlignment(.trailing)
                     .keyboardType(.numberPad)
-                Text("권")
+                Text("chart-year-goal-count-subfix".localized)
             }
             Button(action: {
                 if goalList.isEmpty {
@@ -38,7 +38,7 @@ struct GoalSettingView: View {
                 }
                 isSheetPresent.toggle()
             }, label: {
-                Text("등록하기")
+                Text("chart-goal-register".localized)
                     .asThemeBasicButtonModifier()
                     .padding(.horizontal, 10)
             })

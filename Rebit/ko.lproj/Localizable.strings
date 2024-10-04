@@ -84,6 +84,15 @@
 //리뷰 - 기간(일)
 "review-period" = "일";
 
+//리뷰 - 삭제 - 타이틀
+"review-delete-title" = "정말 삭제하시겠습니까?";
+
+//리뷰 - 삭제 - 확인
+"review-delete-ok" = "확인";
+
+//리뷰 - 삭제 - 취소
+"review-delete-cancel" = "취소";
+
 //책 상세 - 줄거리
 "book-info-summary" = "줄거리";
 
@@ -138,3 +147,50 @@
 //기록 - 토스트 - 수정
 "write-toast-update" = "수정되었습니다";
 
+//검색 - empty
+"search-empty" = "책을 검색하고 리뷰를 작성해보세요";
+
+//검색 - 결과 - empty
+"search-result-empty" = "검색결과가 존재하지 않습니다";
+
+//차트 - 목표 설정 - empty
+"chart-no-goal" = "아직 등록한 목표가 없어요";
+
+//차트 - 등록하기
+"chart-goal-register" = "등록하기";
+
+//차트 - 올해 목표 달성률
+"chart-year-goal" = "올해 목표 달성률";
+
+//차트 - 목표수정
+"chart-goal-modify" = "목표 수정";
+
+//차트 - 올해 목표 독서량
+"chart-year-goal-count" = "올해 목표 독서량";
+
+//차트 - 권수
+"chart-year-goal-count-subfix" = "권";
+
+//차트 - 현재 독서량
+"chart-current-goal-count" = "현재 독서량";
+
+//차트 - 월별통계
+"chart-montly-graph" = "월별통계";
+
+//차트 - 월별통계 - 총계
+"chart-montly-total" = "총";
+
+//차트 - 월별통계 - 총계
+"chart-montly-total-subfix" = "권을 읽었어요";
+
+//차트 - 연도별 통계
+"chart-yearly-graph" = "연도별 통계";
+
+//차트 - "월"
+"chart-graph-month" = "월";
+
+//차트 - "년"
+"chart-graph-year" = "년";
+
+//목표설정 - 타이틀
+"goal-title" = "올해 몇 권의 책을 읽을까요?";

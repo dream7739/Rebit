@@ -47,12 +47,12 @@ struct BookChartView: View {
         VStack {
             if goalList.isEmpty {
                 VStack(alignment: .center) {
-                    Text("아직 등록한 목표가 없어요")
+                    Text("chart-no-goal".localized)
                         .font(.callout)
                     Button(action: {
                         isSheetPresent.toggle()
                     }) {
-                        Text("등록하기")
+                        Text("chart-goal-register".localized)
                             .asGreenCapsuleBackground()
                     }
                 }
@@ -61,13 +61,13 @@ struct BookChartView: View {
             } else {
                 VStack(alignment: .leading) {
                     HStack {
-                        Text("올해 목표 달성률")
+                        Text("chart-year-goal".localized)
                             .font(.callout.bold())
                         Spacer()
                         Button(action: {
                             isSheetPresent.toggle()
                         }, label: {
-                            Text("목표수정")
+                            Text("chart-goal-modify".localized)
                                 .font(.footnote)
                                 .foregroundStyle(.gray)
                         })
@@ -75,9 +75,9 @@ struct BookChartView: View {
                     HStack {
                         CircularProgressView(progress: $goalAchievePercent)
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("올해 목표 독서량: " + getGoalCnt().formatted() + "권")
+                            Text("chart-year-goal-count".localized + ": " + getGoalCnt().formatted() + "chart-year-goal-count-subfix".localized)
                                 .asContentBlackForeground()
-                            Text("현재 독서량: " + getAchieveCnt().formatted() + "권")
+                            Text("chart-current-goal-count".localized + ": " + getAchieveCnt().formatted() + "chart-year-goal-count-subfix".localized)
                                 .asContentBlackForeground()
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
@@ -96,7 +96,7 @@ struct BookChartView: View {
     private func monthHeaderView() -> some View {
         return VStack(alignment: .leading, spacing: 2) {
             HStack {
-                Text("월별통계")
+                Text("chart-montly-graph".localized)
                     .font(.callout.bold())
                 Spacer()
                 Menu {
@@ -121,7 +121,7 @@ struct BookChartView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                 }
             }
-            Text("총 \(monthList.map { $0.reviewCnt }.reduce(0) { $0 + $1 })권을 읽었어요")
+            Text("chart-montly-total".localized + " \(monthList.map { $0.reviewCnt }.reduce(0) { $0 + $1 })" + "chart-montly-total-subfix".localized)
                 .asTitleGrayForeground()
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -159,10 +159,10 @@ struct BookChartView: View {
     private func yearHeaderView() -> some View {
         return VStack(alignment: .leading, spacing: 2) {
             HStack {
-                Text("년도별 통계")
+                Text("chart-yearly-graph".localized)
                     .font(.callout.bold())
             }
-            Text("총 \(yearList.map { $0.reviewCnt }.reduce(0) { $0 + $1 })권을 읽었어요")
+            Text("chart-montly-total".localized + " \(yearList.map { $0.reviewCnt }.reduce(0) { $0 + $1 })" + "chart-montly-total-subfix".localized)
                 .asTitleGrayForeground()
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -226,7 +226,7 @@ extension BookChartView {
             let month = Date.startOfMonth(for: i, of: year)
             let nextMonth = Date.startOfMonth(for: i+1, of: year)
             let list = bookList.where { $0.endDate >= month && $0.endDate < nextMonth }
-            result.append(("\(i)월", list.count))
+            result.append(("\(i)" + "chart-graph-month".localized, list.count))
         }
         monthList = result
     }
@@ -249,7 +249,7 @@ extension BookChartView {
         
         for item in list {
             let reviewList = bookList.where { $0.year == item.year }
-            result.append(("\(item.year)년", reviewList.count))
+            result.append(("\(item.year)" + "chart-graph-year".localized, reviewList.count))
         }
         
         yearList = result
