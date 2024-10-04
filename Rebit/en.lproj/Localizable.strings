@@ -80,3 +80,60 @@
 
 //리뷰 - 저장일
 "review-save-date" = "save date";
+
+//리뷰 - 기간(일)
+"review-period" = "days";
+
+//책 상세 - 줄거리
+"book-info-summary" = "plot";
+
+//책 상세 - 출판사
+"book-info-publisher" = "publisher";
+
+//책 상세 - 출판일
+"book-info-pubdate" = "publication date";
+
+//기록 - 타이틀
+"write-title" = "How about this book?";
+
+//기록 - 독서 상태
+"write-status" = "Tell me your reading status";
+
+//기록 - 평점
+"write-rating" = "Rate it";
+
+//기록 - 기간
+"write-period" = "Tell me how long you read";
+
+//기록 - 시작일
+"write-start-date" = "start date";
+
+//기록 - 목표종료일
+"write-goal-end-date" = "goal end date";
+
+//기록 - 종료일
+"write-end-date" = "end date";
+
+//기록 - 기대평
+"write-expected-title" = "Write down your expectations for this book";
+
+//기록 - 한줄평
+"write-summary-title" = "Write down your own one-line review";
+
+//기록 - 한줄평 - empty
+"write-summary-empty" = "Define this book in one line";
+
+//기록 - 감상평 - empty
+"write-review-empty" = "Write down your impressions after reading the book";
+
+//기록 - 감상평
+"write-review-title" = "Write down the overall review";
+
+//기록 - 작성하기
+"write-save" = "SAVE";
+
+//기록 - 토스트 - 저장
+"write-toast-save" = "Save complete";
+
+//기록 - 토스트 - 수정
+"write-toast-update" = "Modified complete";

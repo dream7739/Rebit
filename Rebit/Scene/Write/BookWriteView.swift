@@ -123,9 +123,9 @@ extension BookWriteView {
         var toastMessage: String {
             switch self {
             case .add:
-                return "저장되었습니다"
+                return "write-toast-save".localized
             case .edit:
-                return "수정되었습니다"
+                return "write-toast-update".localized
             }
         }
     }
@@ -134,7 +134,7 @@ extension BookWriteView {
 extension BookWriteView {
     func titleView() -> some View {
         HStack {
-            Text("이 책은 어떤 책인가요?")
+            Text("write-title".localized)
                 .font(.system(size: 20).bold())
             Spacer()
             Button(action: {
@@ -150,7 +150,7 @@ extension BookWriteView {
     
     func readingStatusView() -> some View {
         VStack(alignment: .leading) {
-            Text("독서 상태를 알려주세요")
+            Text("write-status".localized)
                 .font(.subheadline)
             HStack {
                 ForEach(ReadingStatus.allCases, id: \.self) { item in
@@ -167,7 +167,7 @@ extension BookWriteView {
     
     func ratingView() -> some View {
         VStack(alignment: .leading) {
-            Text("평점을 매겨주세요")
+            Text("write-rating".localized)
                 .font(.subheadline)
             CustomCosmosView(rating: $rating)
                 .onTapGesture(count: 999999) { }
@@ -182,13 +182,13 @@ extension BookWriteView {
         VStack(alignment: .leading) {
             let status = ReadingStatus(rawValue: viewModel.output.selectedStatus)!
             
-            Text("독서한 기간을 알려주세요")
+            Text("write-period".localized)
                 .font(.subheadline)
             
             switch status {
             case .expected:
                 DatePicker(
-                    "독서예정일",
+                    "review-expected-date".localized,
                     selection: $viewModel.output.startDate,
                     in: Date()...,
                     displayedComponents: .date
@@ -197,7 +197,7 @@ extension BookWriteView {
                 .onTapGesture(count: 999999) { }
             case .current, .completed:
                 DatePicker(
-                    "시작일",
+                    "write-start-date".localized,
                     selection: $viewModel.output.startDate,
                     displayedComponents: .date
                 )
@@ -223,7 +223,7 @@ extension BookWriteView {
             Text(status.summaryTitle)
                 .font(.subheadline)
             
-            TextField("이 책을 한줄로 정의해보세요", text: $viewModel.output.summaryText)
+            TextField("write-summary-empty".localized, text: $viewModel.output.summaryText)
                 .font(.footnote)
                 .tint(.theme)
                 .padding(10)
@@ -240,7 +240,7 @@ extension BookWriteView {
     
     func reviewView() -> some View {
         VStack(alignment: .leading) {
-            Text("전체적인 감상평을 남겨보세요")
+            Text("write-review-title".localized)
                 .font(.subheadline)
             
             TextEditor(text: $viewModel.output.reviewText)
@@ -256,7 +256,7 @@ extension BookWriteView {
                 .frame(height: 200)
                 .focused($focusedField, equals: .content)
                 .overlay(alignment: .topLeading) {
-                    Text("책을 읽은 후의 감상을 적어보세요")
+                    Text("write-review-empty".localized)
                         .font(.footnote)
                         .foregroundStyle(.gray.opacity(0.6))
                         .padding(.vertical, 15)
@@ -281,7 +281,7 @@ extension BookWriteView {
                 viewModel.input.modifyReview.send(())
             }
         }, label: {
-            Text("작성하기")
+            Text("write-save".localized)
                 .asThemeBasicButtonModifier()
         })
     }

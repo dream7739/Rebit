@@ -18,7 +18,7 @@ struct CustomCosmosView: UIViewRepresentable {
 
      func updateUIView(_ uiView: CosmosView, context: Context) {
          uiView.rating = rating
-         uiView.text = rating.formatted() + "점"
+         uiView.text = rating.formatted()
          // Autoresize Cosmos view according to it intrinsic size
          uiView.setContentHuggingPriority(.defaultHigh, for: .vertical)
          uiView.setContentHuggingPriority(.defaultHigh, for: .horizontal)

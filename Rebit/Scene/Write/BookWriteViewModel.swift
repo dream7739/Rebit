@@ -181,18 +181,18 @@ extension BookWriteViewModel {
             case .expected:
                 return ""
             case .current:
-                return "목표종료일"
+                return "write-goal-end-date".localized
             case .completed:
-                return "종료일"
+                return "write-end-date".localized
             }
         }
         
         var summaryTitle: String {
             switch self {
             case .expected:
-                return "이 책에 대한 기대평을 입력해보세요"
+                return "write-expected-title".localized
             case .current, .completed:
-                return "나만의 한줄평을 입력해보세요"
+                return "write-summary-title".localized
             }
         }
     }

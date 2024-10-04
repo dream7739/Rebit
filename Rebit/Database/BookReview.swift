@@ -39,7 +39,7 @@ final class BookInfo: Object, ObjectKeyIdentifiable {
     }
     
     var reviewCountDescription: String {
-        return reviewList.count.formatted() + "개"
+        return reviewList.count.formatted()
     }
     
 }
@@ -111,7 +111,7 @@ final class BookReview: Object, ObjectKeyIdentifiable {
     var periodDescription: String {
         if let period = DateFormatterManager.dateCompare(startDate ?? Date(), endDate ?? Date()) {
             let realDate = period + 1
-            return realDate.formatted() + "일"
+            return realDate.formatted() + "review-period".localized
         } else {
             return "-"
         }

@@ -113,7 +113,7 @@ struct DetailContentView: View {
     
     func storylineView() -> some View {
         VStack(alignment: .leading) {
-            Text("줄거리")
+            Text("book-info-summary".localized)
                 .asTitleGrayForeground()
                 .padding(.top, 5)
             HStack(alignment: .top) {
@@ -140,13 +140,13 @@ struct DetailContentView: View {
     func publishInfoView() -> some View {
         VStack(alignment: .leading, spacing: 5) {
             VStack(alignment: .leading, spacing: 2) {
-                Text("출판사")
+                Text("book-info-publisher".localized)
                     .asTitleGrayForeground()
                 Text(book.publisher)
                     .asContentBlackForeground()
             }
             VStack(alignment: .leading, spacing: 2) {
-                Text("출판일")
+                Text("book-info-pubdate".localized)
                     .asTitleGrayForeground()
                 Text(book.dateDescription)
                     .asContentBlackForeground()
