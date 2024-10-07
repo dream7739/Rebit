@@ -21,6 +21,7 @@
 		886362922C99409600B5A8E8 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886362912C99409600B5A8E8 /* UIApplication+.swift */; };
 		886362952C9992DE00B5A8E8 /* Cosmos in Frameworks */ = {isa = PBXBuildFile; productRef = 886362942C9992DE00B5A8E8 /* Cosmos */; };
 		886362972C9993F600B5A8E8 /* CustomCosmosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886362962C9993F600B5A8E8 /* CustomCosmosView.swift */; };
+		88B20AA02CB40E0100825016 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 88B20A9F2CB40E0100825016 /* GoogleService-Info.plist */; };
 		88D19D222C9ACFC200CE4FE6 /* GreenRoundBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D19D212C9ACFC200CE4FE6 /* GreenRoundBackground.swift */; };
 		88D19D242C9AD0C100CE4FE6 /* BookWriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D19D232C9AD0C100CE4FE6 /* BookWriteViewModel.swift */; };
 		88D19D262C9AD3C500CE4FE6 /* BookReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D19D252C9AD3C500CE4FE6 /* BookReview.swift */; };
@@ -85,6 +86,9 @@
 		8863628E2C99407700B5A8E8 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		886362912C99409600B5A8E8 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
 		886362962C9993F600B5A8E8 /* CustomCosmosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCosmosView.swift; sourceTree = "<group>"; };
+		88B20A9F2CB40E0100825016 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		88B20AA12CB40E2F00825016 /* RebitDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RebitDebug.entitlements; sourceTree = "<group>"; };
+		88B20AA22CB40E3B00825016 /* Rebit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rebit.entitlements; sourceTree = "<group>"; };
 		88D19D212C9ACFC200CE4FE6 /* GreenRoundBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenRoundBackground.swift; sourceTree = "<group>"; };
 		88D19D232C9AD0C100CE4FE6 /* BookWriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookWriteViewModel.swift; sourceTree = "<group>"; };
 		88D19D252C9AD3C500CE4FE6 /* BookReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookReview.swift; sourceTree = "<group>"; };
@@ -230,6 +234,9 @@
 		88F141E92C95454D002117CD /* Rebit */ = {
 			isa = PBXGroup;
 			children = (
+				88B20AA22CB40E3B00825016 /* Rebit.entitlements */,
+				88B20AA12CB40E2F00825016 /* RebitDebug.entitlements */,
+				88B20A9F2CB40E0100825016 /* GoogleService-Info.plist */,
 				88EDDD522CAE905C00F0210E /* Info.plist */,
 				88D19D272C9ADA7D00CE4FE6 /* Utill */,
 				88D19D202C9ACFA300CE4FE6 /* Modifier */,
@@ -444,6 +451,7 @@
 			files = (
 				88F141F22C95454E002117CD /* Preview Assets.xcassets in Resources */,
 				88EDDD582CAE927A00F0210E /* Localizable.strings in Resources */,
+				88B20AA02CB40E0100825016 /* GoogleService-Info.plist in Resources */,
 				88F141F92C9545E1002117CD /* .gitignore in Resources */,
 				88F141EF2C95454E002117CD /* Assets.xcassets in Resources */,
 			);
@@ -642,6 +650,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Rebit/RebitDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Rebit/Preview Content\"";
@@ -677,6 +686,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Rebit/Rebit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Rebit/Preview Content\"";
