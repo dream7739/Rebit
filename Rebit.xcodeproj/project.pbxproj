@@ -21,6 +21,7 @@
 		886362922C99409600B5A8E8 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886362912C99409600B5A8E8 /* UIApplication+.swift */; };
 		886362952C9992DE00B5A8E8 /* Cosmos in Frameworks */ = {isa = PBXBuildFile; productRef = 886362942C9992DE00B5A8E8 /* Cosmos */; };
 		886362972C9993F600B5A8E8 /* CustomCosmosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886362962C9993F600B5A8E8 /* CustomCosmosView.swift */; };
+		887A867B2CBEB59600849C82 /* RealmProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887A867A2CBEB59600849C82 /* RealmProtocol.swift */; };
 		88B20AA02CB40E0100825016 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 88B20A9F2CB40E0100825016 /* GoogleService-Info.plist */; };
 		88B20AA52CB40F1D00825016 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 88B20AA42CB40F1D00825016 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		88B20AA72CB40F1D00825016 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 88B20AA62CB40F1D00825016 /* FirebaseCrashlytics */; };
@@ -89,6 +90,7 @@
 		8863628E2C99407700B5A8E8 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		886362912C99409600B5A8E8 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
 		886362962C9993F600B5A8E8 /* CustomCosmosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCosmosView.swift; sourceTree = "<group>"; };
+		887A867A2CBEB59600849C82 /* RealmProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmProtocol.swift; sourceTree = "<group>"; };
 		88B20A9F2CB40E0100825016 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		88B20AA12CB40E2F00825016 /* RebitDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RebitDebug.entitlements; sourceTree = "<group>"; };
 		88B20AA22CB40E3B00825016 /* Rebit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rebit.entitlements; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 			children = (
 				88D19D252C9AD3C500CE4FE6 /* BookReview.swift */,
 				88D19D2A2C9B06FD00CE4FE6 /* RealmRepository.swift */,
+				887A867A2CBEB59600849C82 /* RealmProtocol.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -487,6 +490,7 @@
 				881040BA2C9C513F00FCBD5A /* BookShelfImageView.swift in Sources */,
 				88F142092C9547F6002117CD /* BookSearchViewModel.swift in Sources */,
 				88F1420F2C9548B4002117CD /* CoverImageView.swift in Sources */,
+				887A867B2CBEB59600849C82 /* RealmProtocol.swift in Sources */,
 				88F141FF2C954789002117CD /* NetworkManager.swift in Sources */,
 				88D19D262C9AD3C500CE4FE6 /* BookReview.swift in Sources */,
 				88F142152C9560D0002117CD /* FavoriteBookView.swift in Sources */,

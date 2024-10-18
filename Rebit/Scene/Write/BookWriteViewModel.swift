@@ -101,7 +101,7 @@ final class BookWriteViewModel: BaseViewModel {
                 )
             }
             .sink { [weak self] value in
-                self?.repository.addBookInfo(value)
+                self?.repository.add(object: value)
             }
             .store(in: &cancellables)
         

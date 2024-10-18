@@ -8,15 +8,15 @@
 import Foundation
 import RealmSwift
 
-final class RealmRepository {
+final class RealmRepository: RealmProtocol {
+    typealias RealmDataSource = BookInfo
+  
+    var realm = try! Realm()
     
-    private let realm = try! Realm()
-    
-    // 책
-    func addBookInfo(_ book: BookInfo) {
+    func add(object: BookInfo) {
         do{
             try realm.write {
-                realm.add(book)
+                realm.add(object)
             }
         }catch{
             print("add book failed")
@@ -33,7 +33,7 @@ final class RealmRepository {
         }
     }
     
-    func fetchAllBooks() -> Results<BookInfo> {
+    func fetchAll() -> Results<BookInfo> {
         let list = realm.objects(BookInfo.self)
         return list
     }
@@ -112,7 +112,7 @@ final class RealmRepository {
 
 extension RealmRepository {
     func isBookExist(title: String, isbn: String) -> Bool {
-        let bookList = fetchAllBooks()
+        let bookList = fetchAll()
         
         let existCount = bookList.where {
             $0.title.equals(title) && $0.isbn.equals(isbn)
@@ -122,7 +122,7 @@ extension RealmRepository {
     }
     
     func getBookObject(title: String, isbn: String) -> BookInfo? {
-        let bookList = fetchAllBooks()
+        let bookList = fetchAll()
 
         let bookInfo = bookList.where {
             $0.title.equals(title) && $0.isbn.equals(isbn)
