@@ -27,9 +27,11 @@ final class BookSearchViewModel: BaseViewModel {
     
     var cancellables = Set<AnyCancellable>()
     var input = Input()
+    let networkManager: NetworkType
     @Published var output = Output()
     
-    init() {
+    init(networkManager: NetworkType) {
+        self.networkManager = networkManager
         transform()
     }
     
@@ -61,7 +63,7 @@ extension BookSearchViewModel {
     func callRequest() {
         Task {
             do {
-                let result = try await APIManager.shared.callRequest(request: self.bookRequest)
+                let result = try await networkManager.callRequest(request: self.bookRequest)
                 self.output.isInitial = false
                 self.bookResponse = result
                 self.output.bookList = result.items
@@ -77,7 +79,7 @@ extension BookSearchViewModel {
         bookRequest.start += 1
         Task {
             do {
-                let result = try await APIManager.shared.callRequest(request: bookRequest)
+                let result = try await networkManager.callRequest(request: bookRequest)
                 bookResponse = result
                 output.bookList.append(contentsOf: result.items)
             } catch {

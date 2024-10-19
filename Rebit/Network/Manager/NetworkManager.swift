@@ -7,13 +7,11 @@
 
 import Foundation
 
-protocol NetworkManager {
-    associatedtype Request
-    associatedtype Response
-    func callRequest(request: Request) async throws -> Response
+protocol NetworkType {
+    func callRequest(request: BookRequest) async throws -> BookResponse
 }
 
-final class APIManager: NetworkManager {
+final class APIManager: NetworkType {
     static let shared = APIManager()
     private init() { }
     

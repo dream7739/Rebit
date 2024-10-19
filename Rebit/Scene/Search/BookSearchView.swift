@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BookSearchView: View {
-    @StateObject private var viewModel = BookSearchViewModel()
+    @StateObject private var viewModel = BookSearchViewModel(networkManager: APIManager.shared)
     private var placeholderText = "search-empty".localized
     private var noResultPlaceholderText = "search-result-empty".localized
     
