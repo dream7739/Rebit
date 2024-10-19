@@ -33,63 +33,57 @@ final class BookSearchViewModel: BaseViewModel {
         transform()
     }
     
+    //일반 함수 -> async 함수 호출 불가
+    //Task 인스턴스를 통해 비동기 작업 수행 가능
+    //async 함수 호출 시 일반적으로 await 키워드를 삽입
     func transform() {
         input.callSearch
+            .map { [weak self] in
+                guard let self = self else { return }
+                let text = self.searchText.trimmingCharacters(in: .whitespaces).lowercased()
+                if text.isEmpty || text == bookRequest.query { return }
+                bookRequest.start = 1
+                bookRequest.query = text
+            }
             .sink { [weak self] _ in
-                self?.callRequest()
+                guard let self = self else { return }
+                Task {
+                    await self.callRequest()
+                }
             }
             .store(in: &cancellables)
         
     }
- 
-    
 }
 
 extension BookSearchViewModel {
+    @MainActor
     func callRequest() {
-        
-        let text = searchText.trimmingCharacters(in: .whitespaces).lowercased()
-        if text.isEmpty || text == bookRequest.query { return }
-        
-        bookRequest.start = 1
-        bookRequest.query = text
-        
-        APIManager.fetchBooks(request: bookRequest)
-            .receive(on: DispatchQueue.main)
-            .sink { result in
-                switch result {
-                case .finished:
-                    break
-                case .failure(let error):
-                    print(error)
-                }
-            } receiveValue: { [weak self] data in
-                self?.output.isInitial = false
-                self?.bookResponse = data
-                self?.output.bookList = data.items
-                self?.output.scrollToTop.send(())
+        Task {
+            do {
+                let result = try await APIManager.shared.callRequest(request: self.bookRequest)
+                self.output.isInitial = false
+                self.bookResponse = result
+                self.output.bookList = result.items
+                self.output.scrollToTop.send(())
+            } catch {
+                print(error)
             }
-            .store(in: &cancellables)
+        }
     }
     
+    @MainActor
     func callRequestMore() {
-        
         bookRequest.start += 1
-        
-        APIManager.fetchBooks(request: bookRequest)
-            .receive(on: DispatchQueue.main)
-            .sink { result in
-                switch result {
-                case .finished:
-                    break
-                case .failure(let error):
-                    print(error)
-                }
-            } receiveValue: { [weak self] data in
-                self?.bookResponse = data
-                self?.output.bookList.append(contentsOf: data.items)
+        Task {
+            do {
+                let result = try await APIManager.shared.callRequest(request: bookRequest)
+                bookResponse = result
+                output.bookList.append(contentsOf: result.items)
+            } catch {
+                print(error)
             }
-            .store(in: &cancellables)
+        }
     }
     
     var isPaginationRequired: Bool {

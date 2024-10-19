@@ -11,6 +11,7 @@
 		881040BA2C9C513F00FCBD5A /* BookShelfImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881040B92C9C513F00FCBD5A /* BookShelfImageView.swift */; };
 		881040BC2C9C63EC00FCBD5A /* HorizontalPageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881040BB2C9C63EC00FCBD5A /* HorizontalPageWrapper.swift */; };
 		881040BE2C9C6D9400FCBD5A /* EntireShelfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881040BD2C9C6D9400FCBD5A /* EntireShelfView.swift */; };
+		881187AA2CC3890C00BA257A /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881187A92CC3890C00BA257A /* APIError.swift */; };
 		8823744F2CAA801E00B2FDE1 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8823744E2CAA801E00B2FDE1 /* Date+.swift */; };
 		882374512CAAD63D00B2FDE1 /* GreenCapsuleBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882374502CAAD63D00B2FDE1 /* GreenCapsuleBackground.swift */; };
 		882374532CAADB4C00B2FDE1 /* GoalSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882374522CAADB4C00B2FDE1 /* GoalSettingView.swift */; };
@@ -81,6 +82,7 @@
 		881040B92C9C513F00FCBD5A /* BookShelfImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShelfImageView.swift; sourceTree = "<group>"; };
 		881040BB2C9C63EC00FCBD5A /* HorizontalPageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalPageWrapper.swift; sourceTree = "<group>"; };
 		881040BD2C9C6D9400FCBD5A /* EntireShelfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntireShelfView.swift; sourceTree = "<group>"; };
+		881187A92CC3890C00BA257A /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		8823744E2CAA801E00B2FDE1 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		882374502CAAD63D00B2FDE1 /* GreenCapsuleBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenCapsuleBackground.swift; sourceTree = "<group>"; };
 		882374522CAADB4C00B2FDE1 /* GoalSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSettingView.swift; sourceTree = "<group>"; };
@@ -148,6 +150,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		881187A62CC388BB00BA257A /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				88F141FE2C954789002117CD /* NetworkManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		881187A72CC388C000BA257A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				88F142002C95479B002117CD /* BookRequest.swift */,
+				88F142022C9547A3002117CD /* BookResponse.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		881187A82CC388FE00BA257A /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				881187A92CC3890C00BA257A /* APIError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
 		8851A71F2C97F13B002D2952 /* Wrapper */ = {
 			isa = PBXGroup;
 			children = (
@@ -277,9 +304,9 @@
 		88F141FA2C954679002117CD /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				88F141FE2C954789002117CD /* NetworkManager.swift */,
-				88F142002C95479B002117CD /* BookRequest.swift */,
-				88F142022C9547A3002117CD /* BookResponse.swift */,
+				881187A82CC388FE00BA257A /* Error */,
+				881187A72CC388C000BA257A /* Model */,
+				881187A62CC388BB00BA257A /* Manager */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -506,6 +533,7 @@
 				88E1481F2C9D4C6B00A3ECF6 /* NavigationLinkWrapper.swift in Sources */,
 				88F141FD2C954765002117CD /* APIKey.swift in Sources */,
 				882374532CAADB4C00B2FDE1 /* GoalSettingView.swift in Sources */,
+				881187AA2CC3890C00BA257A /* APIError.swift in Sources */,
 				88FF94382CA68C6800DE7B6E /* PlaceholderView.swift in Sources */,
 				8863628F2C99407700B5A8E8 /* SearchBarView.swift in Sources */,
 				88F1420C2C954817002117CD /* BaseViewModel.swift in Sources */,
