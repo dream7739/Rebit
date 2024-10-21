@@ -22,6 +22,8 @@
 		886362922C99409600B5A8E8 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886362912C99409600B5A8E8 /* UIApplication+.swift */; };
 		886362952C9992DE00B5A8E8 /* Cosmos in Frameworks */ = {isa = PBXBuildFile; productRef = 886362942C9992DE00B5A8E8 /* Cosmos */; };
 		886362972C9993F600B5A8E8 /* CustomCosmosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886362962C9993F600B5A8E8 /* CustomCosmosView.swift */; };
+		8879B44E2CC672820002BF99 /* RebitNetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8879B44D2CC672820002BF99 /* RebitNetworkTests.swift */; };
+		8879B4552CC673B40002BF99 /* MockAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8879B4542CC673B40002BF99 /* MockAPIManager.swift */; };
 		887A867B2CBEB59600849C82 /* RealmProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887A867A2CBEB59600849C82 /* RealmProtocol.swift */; };
 		88B20AA02CB40E0100825016 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 88B20A9F2CB40E0100825016 /* GoogleService-Info.plist */; };
 		88B20AA52CB40F1D00825016 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 88B20AA42CB40F1D00825016 /* FirebaseAnalyticsWithoutAdIdSupport */; };
@@ -63,6 +65,16 @@
 		88FF94392CA6C62400DE7B6E /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 88FC19232C96B11A004C844E /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		8879B44F2CC672820002BF99 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 88F141DF2C95454D002117CD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 88F141E62C95454D002117CD;
+			remoteInfo = Rebit;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		88FF943A2CA6C62400DE7B6E /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -92,6 +104,9 @@
 		8863628E2C99407700B5A8E8 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		886362912C99409600B5A8E8 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
 		886362962C9993F600B5A8E8 /* CustomCosmosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCosmosView.swift; sourceTree = "<group>"; };
+		8879B44B2CC672820002BF99 /* RebitNetworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RebitNetworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8879B44D2CC672820002BF99 /* RebitNetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RebitNetworkTests.swift; sourceTree = "<group>"; };
+		8879B4542CC673B40002BF99 /* MockAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIManager.swift; sourceTree = "<group>"; };
 		887A867A2CBEB59600849C82 /* RealmProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmProtocol.swift; sourceTree = "<group>"; };
 		88B20A9F2CB40E0100825016 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		88B20AA12CB40E2F00825016 /* RebitDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RebitDebug.entitlements; sourceTree = "<group>"; };
@@ -135,6 +150,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8879B4482CC672820002BF99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		88F141E42C95454D002117CD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -154,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				88F141FE2C954789002117CD /* NetworkManager.swift */,
+				8879B4542CC673B40002BF99 /* MockAPIManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -193,6 +216,14 @@
 				88EDDD5B2CAEA99D00F0210E /* String+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		8879B44C2CC672820002BF99 /* RebitNetworkTests */ = {
+			isa = PBXGroup;
+			children = (
+				8879B44D2CC672820002BF99 /* RebitNetworkTests.swift */,
+			);
+			path = RebitNetworkTests;
 			sourceTree = "<group>";
 		};
 		88BF25C22C9FF3C600440FE1 /* Review */ = {
@@ -254,6 +285,7 @@
 			children = (
 				88F141F82C9545E1002117CD /* .gitignore */,
 				88F141E92C95454D002117CD /* Rebit */,
+				8879B44C2CC672820002BF99 /* RebitNetworkTests */,
 				88F141E82C95454D002117CD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -262,6 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				88F141E72C95454D002117CD /* Rebit.app */,
+				8879B44B2CC672820002BF99 /* RebitNetworkTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -419,6 +452,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		8879B44A2CC672820002BF99 /* RebitNetworkTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8879B4532CC672820002BF99 /* Build configuration list for PBXNativeTarget "RebitNetworkTests" */;
+			buildPhases = (
+				8879B4472CC672820002BF99 /* Sources */,
+				8879B4482CC672820002BF99 /* Frameworks */,
+				8879B4492CC672820002BF99 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8879B4502CC672820002BF99 /* PBXTargetDependency */,
+			);
+			name = RebitNetworkTests;
+			productName = RebitNetworkTests;
+			productReference = 8879B44B2CC672820002BF99 /* RebitNetworkTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		88F141E62C95454D002117CD /* Rebit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 88F141F52C95454E002117CD /* Build configuration list for PBXNativeTarget "Rebit" */;
@@ -454,6 +505,10 @@
 				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1540;
 				TargetAttributes = {
+					8879B44A2CC672820002BF99 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 88F141E62C95454D002117CD;
+					};
 					88F141E62C95454D002117CD = {
 						CreatedOnToolsVersion = 15.4;
 					};
@@ -480,11 +535,19 @@
 			projectRoot = "";
 			targets = (
 				88F141E62C95454D002117CD /* Rebit */,
+				8879B44A2CC672820002BF99 /* RebitNetworkTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8879B4492CC672820002BF99 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		88F141E52C95454D002117CD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -500,12 +563,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8879B4472CC672820002BF99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8879B44E2CC672820002BF99 /* RebitNetworkTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		88F141E32C95454D002117CD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				881040BE2C9C6D9400FCBD5A /* EntireShelfView.swift in Sources */,
 				882374512CAAD63D00B2FDE1 /* GreenCapsuleBackground.swift in Sources */,
+				8879B4552CC673B40002BF99 /* MockAPIManager.swift in Sources */,
 				886362922C99409600B5A8E8 /* UIApplication+.swift in Sources */,
 				88D19D292C9ADA8400CE4FE6 /* DateFormatterManager.swift in Sources */,
 				88EDDD5C2CAEA99D00F0210E /* String+.swift in Sources */,
@@ -552,6 +624,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		8879B4502CC672820002BF99 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 88F141E62C95454D002117CD /* Rebit */;
+			targetProxy = 8879B44F2CC672820002BF99 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		88EDDD562CAE927A00F0210E /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
@@ -566,6 +646,40 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		8879B4512CC672820002BF99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jm.SeSACPushTest.RebitNetworkTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rebit.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Rebit";
+			};
+			name = Debug;
+		};
+		8879B4522CC672820002BF99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jm.SeSACPushTest.RebitNetworkTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rebit.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Rebit";
+			};
+			name = Release;
+		};
 		88F141F32C95454E002117CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -762,6 +876,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8879B4532CC672820002BF99 /* Build configuration list for PBXNativeTarget "RebitNetworkTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8879B4512CC672820002BF99 /* Debug */,
+				8879B4522CC672820002BF99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		88F141E22C95454D002117CD /* Build configuration list for PBXProject "Rebit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
