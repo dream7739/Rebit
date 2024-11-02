@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-protocol SearchIntentProtocol {
+protocol SearchIntentProtocol: AnyObject {
     func viewOnAppear()
     func searchButtonClicked(query: String)
     func paginationRequired()
@@ -65,6 +65,7 @@ final class SearchIntent: SearchIntentProtocol {
                 do {
                     let bookResponse = try await callRequest(request: model.bookRequest)
                     model.bookResponse.items.append(contentsOf: bookResponse.items)
+                    
                     await MainActor.run {
                         model.updateContent()
                     }

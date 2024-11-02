@@ -16,7 +16,7 @@ struct MainTabView: View {
         NavigationStack {
             ZStack(alignment: .bottom){
                 TabView(selection: $selectedTab) {
-                    FavoriteBookView()
+                    FavoriteBookView.build()
                         .tag(0)
                     BookShelfView()
                         .tag(1)
