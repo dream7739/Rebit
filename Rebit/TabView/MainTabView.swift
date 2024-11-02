@@ -20,7 +20,7 @@ struct MainTabView: View {
                         .tag(0)
                     BookShelfView()
                         .tag(1)
-                    BookSearchView()
+                    BookSearchView.build()
                         .tag(2)
                     BookChartView()
                         .tag(3)

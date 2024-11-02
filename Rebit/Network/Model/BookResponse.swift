@@ -11,7 +11,7 @@ struct BookResponse: Decodable, Hashable {
     let total: Int
     let start: Int
     let display: Int
-    let items: [Book]
+    var items: [Book]
 }
         
 struct Book: Decodable, Hashable {
