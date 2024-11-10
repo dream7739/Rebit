@@ -1,59 +1,11 @@
 //
-//  FavoriteBookView.swift
+//  FavoriteContentView.swift
 //  Rebit
 //
-//  Created by 홍정민 on 9/14/24.
+//  Created by 홍정민 on 11/3/24.
 //
 
 import SwiftUI
-import RealmSwift
-
-struct FavoriteBookView: View {
-    @ObservedResults(
-        BookReview.self,
-        where: { $0.isLike },
-        sortDescriptor: SortDescriptor(keyPath: "saveDate", ascending: false))
-    var favorite
-    
-    @State private var currentIndex: Int = 0
-    private var placeholderText = "favorite-empty".localized
-    
-    var body: some View {
-        if favorite.count == 0 {
-            PlaceholderView(text: placeholderText, type: .shelf)
-        } else {
-            ZStack(alignment: .top) {
-                ForEach(Array(zip(favorite.indices, favorite)), id: \.0) {
-                    (index: Int, item: BookReview) in
-                    
-                    NavigationLinkWrapper {
-                        if let book = item.book.first {
-                            BookReviewView(bookInfo: book)
-                        }
-                    } inner: {
-                        FavoriteContentView(currentIndex: currentIndex, index: index, item: item)
-                            .gesture (
-                                DragGesture()
-                                    .onEnded { value in
-                                        let threshold: CGFloat = 50
-                                        if value.translation.width > threshold {
-                                            withAnimation {
-                                                currentIndex = max(0, currentIndex - 1)
-                                            }
-                                        } else if value.translation.width < -threshold {
-                                            withAnimation {
-                                                currentIndex = min(favorite.count - 1, currentIndex + 1)
-                                            }
-                                        }
-                                    }
-                            )
-                    }
-                }
-            }
-        }
-    }
-    
-}
 
 struct FavoriteContentView: View {
     var currentIndex: Int
@@ -126,8 +78,4 @@ struct FavoriteContentView: View {
         }
         .frame(maxWidth: .infinity, alignment: .center)
     }
-}
-
-#Preview {
-    FavoriteBookView()
 }

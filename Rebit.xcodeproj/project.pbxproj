@@ -51,13 +51,21 @@
 		88F142012C95479B002117CD /* BookRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F142002C95479B002117CD /* BookRequest.swift */; };
 		88F142032C9547A3002117CD /* BookResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F142022C9547A3002117CD /* BookResponse.swift */; };
 		88F142062C9547C2002117CD /* BookSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F142052C9547C2002117CD /* BookSearchView.swift */; };
-		88F142092C9547F6002117CD /* BookSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F142082C9547F6002117CD /* BookSearchViewModel.swift */; };
 		88F1420C2C954817002117CD /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F1420B2C954817002117CD /* BaseViewModel.swift */; };
 		88F1420F2C9548B4002117CD /* CoverImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F1420E2C9548B4002117CD /* CoverImageView.swift */; };
 		88F142122C955F60002117CD /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F142112C955F60002117CD /* MainTabView.swift */; };
 		88F142152C9560D0002117CD /* FavoriteBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F142142C9560D0002117CD /* FavoriteBookView.swift */; };
 		88F142182C956122002117CD /* BookChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F142172C956122002117CD /* BookChartView.swift */; };
 		88F1421B2C956239002117CD /* BookShelfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F1421A2C956239002117CD /* BookShelfView.swift */; };
+		88FA056C2CD64AB70084A3B0 /* WriteButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FA056B2CD64AB70084A3B0 /* WriteButtonView.swift */; };
+		88FA05712CD664D80084A3B0 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FA05702CD664D80084A3B0 /* SearchModel.swift */; };
+		88FA05732CD664F90084A3B0 /* SearchIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FA05722CD664F90084A3B0 /* SearchIntent.swift */; };
+		88FA05762CD665660084A3B0 /* MVIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FA05752CD665660084A3B0 /* MVIContainer.swift */; };
+		88FA05782CD668480084A3B0 /* BookSearchRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FA05772CD668480084A3B0 /* BookSearchRowView.swift */; };
+		88FA057D2CD66BD70084A3B0 /* FavoriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FA057C2CD66BD70084A3B0 /* FavoriteModel.swift */; };
+		88FA057F2CD66BDC0084A3B0 /* FavoriteIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FA057E2CD66BDC0084A3B0 /* FavoriteIntent.swift */; };
+		88FA05812CD66DF30084A3B0 /* ReviewRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FA05802CD66DF30084A3B0 /* ReviewRepository.swift */; };
+		88FA05852CD6790F0084A3B0 /* FavoriteContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FA05842CD6790F0084A3B0 /* FavoriteContentView.swift */; };
 		88FC19212C96B004004C844E /* BookWriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FC19202C96B004004C844E /* BookWriteView.swift */; };
 		88FC19242C96B11A004C844E /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 88FC19232C96B11A004C844E /* RealmSwift */; };
 		88FC19272C96B3C9004C844E /* BookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FC19262C96B3C9004C844E /* BookDetailView.swift */; };
@@ -137,13 +145,21 @@
 		88F142002C95479B002117CD /* BookRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRequest.swift; sourceTree = "<group>"; };
 		88F142022C9547A3002117CD /* BookResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookResponse.swift; sourceTree = "<group>"; };
 		88F142052C9547C2002117CD /* BookSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearchView.swift; sourceTree = "<group>"; };
-		88F142082C9547F6002117CD /* BookSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearchViewModel.swift; sourceTree = "<group>"; };
 		88F1420B2C954817002117CD /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		88F1420E2C9548B4002117CD /* CoverImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverImageView.swift; sourceTree = "<group>"; };
 		88F142112C955F60002117CD /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		88F142142C9560D0002117CD /* FavoriteBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBookView.swift; sourceTree = "<group>"; };
 		88F142172C956122002117CD /* BookChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookChartView.swift; sourceTree = "<group>"; };
 		88F1421A2C956239002117CD /* BookShelfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShelfView.swift; sourceTree = "<group>"; };
+		88FA056B2CD64AB70084A3B0 /* WriteButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteButtonView.swift; sourceTree = "<group>"; };
+		88FA05702CD664D80084A3B0 /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
+		88FA05722CD664F90084A3B0 /* SearchIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchIntent.swift; sourceTree = "<group>"; };
+		88FA05752CD665660084A3B0 /* MVIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVIContainer.swift; sourceTree = "<group>"; };
+		88FA05772CD668480084A3B0 /* BookSearchRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearchRowView.swift; sourceTree = "<group>"; };
+		88FA057C2CD66BD70084A3B0 /* FavoriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteModel.swift; sourceTree = "<group>"; };
+		88FA057E2CD66BDC0084A3B0 /* FavoriteIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteIntent.swift; sourceTree = "<group>"; };
+		88FA05802CD66DF30084A3B0 /* ReviewRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRepository.swift; sourceTree = "<group>"; };
+		88FA05842CD6790F0084A3B0 /* FavoriteContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteContentView.swift; sourceTree = "<group>"; };
 		88FC19202C96B004004C844E /* BookWriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookWriteView.swift; sourceTree = "<group>"; };
 		88FC19262C96B3C9004C844E /* BookDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailView.swift; sourceTree = "<group>"; };
 		88FF94372CA68C6800DE7B6E /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
@@ -315,6 +331,7 @@
 				88F142042C9547B9002117CD /* Scene */,
 				88F1420A2C954804002117CD /* Base */,
 				88F141FB2C954680002117CD /* Database */,
+				88FA05742CD6654E0084A3B0 /* Container */,
 				88F141FA2C954679002117CD /* Network */,
 				88F141EA2C95454D002117CD /* RebitApp.swift */,
 				88F141EC2C95454D002117CD /* ContentView.swift */,
@@ -350,6 +367,7 @@
 				88D19D252C9AD3C500CE4FE6 /* BookReview.swift */,
 				88D19D2A2C9B06FD00CE4FE6 /* RealmRepository.swift */,
 				887A867A2CBEB59600849C82 /* RealmProtocol.swift */,
+				88FA05802CD66DF30084A3B0 /* ReviewRepository.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -371,8 +389,9 @@
 		88F142072C9547DB002117CD /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				88F142052C9547C2002117CD /* BookSearchView.swift */,
-				88F142082C9547F6002117CD /* BookSearchViewModel.swift */,
+				88FA056F2CD664C30084A3B0 /* View */,
+				88FA056E2CD664B90084A3B0 /* Model */,
+				88FA056D2CD664B30084A3B0 /* Intent */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -395,6 +414,7 @@
 				8834AD722CA40CE6002DEA90 /* ToastView.swift */,
 				88FF94372CA68C6800DE7B6E /* PlaceholderView.swift */,
 				882374542CAAEDEB00B2FDE1 /* CircularProgressView.swift */,
+				88FA056B2CD64AB70084A3B0 /* WriteButtonView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -410,7 +430,9 @@
 		88F142132C9560C6002117CD /* Favorite */ = {
 			isa = PBXGroup;
 			children = (
-				88F142142C9560D0002117CD /* FavoriteBookView.swift */,
+				88FA057B2CD66B6D0084A3B0 /* Intent */,
+				88FA057A2CD66B670084A3B0 /* Model */,
+				88FA05792CD66B630084A3B0 /* View */,
 			);
 			path = Favorite;
 			sourceTree = "<group>";
@@ -430,6 +452,64 @@
 				88F02CB92C9EEF98003FD34A /* View */,
 			);
 			path = Shelf;
+			sourceTree = "<group>";
+		};
+		88FA056D2CD664B30084A3B0 /* Intent */ = {
+			isa = PBXGroup;
+			children = (
+				88FA05722CD664F90084A3B0 /* SearchIntent.swift */,
+			);
+			path = Intent;
+			sourceTree = "<group>";
+		};
+		88FA056E2CD664B90084A3B0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				88FA05702CD664D80084A3B0 /* SearchModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		88FA056F2CD664C30084A3B0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				88F142052C9547C2002117CD /* BookSearchView.swift */,
+				88FA05772CD668480084A3B0 /* BookSearchRowView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		88FA05742CD6654E0084A3B0 /* Container */ = {
+			isa = PBXGroup;
+			children = (
+				88FA05752CD665660084A3B0 /* MVIContainer.swift */,
+			);
+			path = Container;
+			sourceTree = "<group>";
+		};
+		88FA05792CD66B630084A3B0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				88F142142C9560D0002117CD /* FavoriteBookView.swift */,
+				88FA05842CD6790F0084A3B0 /* FavoriteContentView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		88FA057A2CD66B670084A3B0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				88FA057C2CD66BD70084A3B0 /* FavoriteModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		88FA057B2CD66B6D0084A3B0 /* Intent */ = {
+			isa = PBXGroup;
+			children = (
+				88FA057E2CD66BDC0084A3B0 /* FavoriteIntent.swift */,
+			);
+			path = Intent;
 			sourceTree = "<group>";
 		};
 		88FC191F2C96AFC8004C844E /* Write */ = {
@@ -576,10 +656,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				881040BE2C9C6D9400FCBD5A /* EntireShelfView.swift in Sources */,
+				88FA05732CD664F90084A3B0 /* SearchIntent.swift in Sources */,
 				882374512CAAD63D00B2FDE1 /* GreenCapsuleBackground.swift in Sources */,
 				8879B4552CC673B40002BF99 /* MockAPIManager.swift in Sources */,
 				886362922C99409600B5A8E8 /* UIApplication+.swift in Sources */,
 				88D19D292C9ADA8400CE4FE6 /* DateFormatterManager.swift in Sources */,
+				88FA05852CD6790F0084A3B0 /* FavoriteContentView.swift in Sources */,
 				88EDDD5C2CAEA99D00F0210E /* String+.swift in Sources */,
 				88D19D242C9AD0C100CE4FE6 /* BookWriteViewModel.swift in Sources */,
 				88F1421B2C956239002117CD /* BookShelfView.swift in Sources */,
@@ -587,7 +669,6 @@
 				8851A7212C97F149002D2952 /* NavigationLazyView.swift in Sources */,
 				88E148212C9D557C00A3ECF6 /* BookReviewView.swift in Sources */,
 				881040BA2C9C513F00FCBD5A /* BookShelfImageView.swift in Sources */,
-				88F142092C9547F6002117CD /* BookSearchViewModel.swift in Sources */,
 				88F1420F2C9548B4002117CD /* CoverImageView.swift in Sources */,
 				887A867B2CBEB59600849C82 /* RealmProtocol.swift in Sources */,
 				88F141FF2C954789002117CD /* NetworkManager.swift in Sources */,
@@ -596,6 +677,7 @@
 				88F141ED2C95454D002117CD /* ContentView.swift in Sources */,
 				882374552CAAEDEB00B2FDE1 /* CircularProgressView.swift in Sources */,
 				886362972C9993F600B5A8E8 /* CustomCosmosView.swift in Sources */,
+				88FA057F2CD66BDC0084A3B0 /* FavoriteIntent.swift in Sources */,
 				88D19D222C9ACFC200CE4FE6 /* GreenRoundBackground.swift in Sources */,
 				88F142122C955F60002117CD /* MainTabView.swift in Sources */,
 				881040BC2C9C63EC00FCBD5A /* HorizontalPageWrapper.swift in Sources */,
@@ -610,14 +692,20 @@
 				8863628F2C99407700B5A8E8 /* SearchBarView.swift in Sources */,
 				88F1420C2C954817002117CD /* BaseViewModel.swift in Sources */,
 				8823744F2CAA801E00B2FDE1 /* Date+.swift in Sources */,
+				88FA05712CD664D80084A3B0 /* SearchModel.swift in Sources */,
 				88F142182C956122002117CD /* BookChartView.swift in Sources */,
 				88D19D2B2C9B06FD00CE4FE6 /* RealmRepository.swift in Sources */,
+				88FA057D2CD66BD70084A3B0 /* FavoriteModel.swift in Sources */,
 				881040B62C9C247700FCBD5A /* ImageFileManager.swift in Sources */,
 				88F02CBB2C9EEFC3003FD34A /* BookReviewViewModel.swift in Sources */,
+				88FA056C2CD64AB70084A3B0 /* WriteButtonView.swift in Sources */,
 				88F142012C95479B002117CD /* BookRequest.swift in Sources */,
 				88F141EB2C95454D002117CD /* RebitApp.swift in Sources */,
+				88FA05762CD665660084A3B0 /* MVIContainer.swift in Sources */,
 				88FC19212C96B004004C844E /* BookWriteView.swift in Sources */,
 				88E148252C9DB9AB00A3ECF6 /* TitleGrayForeground.swift in Sources */,
+				88FA05782CD668480084A3B0 /* BookSearchRowView.swift in Sources */,
+				88FA05812CD66DF30084A3B0 /* ReviewRepository.swift in Sources */,
 				88F142032C9547A3002117CD /* BookResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
