@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct BookSearchView: View {
-    @StateObject var container: MVIContainer<SearchIntent, SearchModel>
-    private var state: SearchModel { container.model }
-    private var intent: SearchIntent { container.intent }
+    @StateObject var container: MVIContainer<SearchIntentProtocol, SearchModelStateProtocol>
+    private var state: SearchModelStateProtocol { container.model }
+    private var intent: SearchIntentProtocol { container.intent }
     
     var body: some View {
         VStack {
@@ -74,8 +74,8 @@ extension BookSearchView {
             networkManager: APIManager.shared
         )
         let container = MVIContainer(
-            intent: intent,
-            model: model,
+            intent: intent as SearchIntentProtocol,
+            model: model as SearchModelStateProtocol,
             modelChangePublisher: model.objectWillChange
         )
         let view = BookSearchView(container: container)

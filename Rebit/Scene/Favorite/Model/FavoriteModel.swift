@@ -12,15 +12,22 @@ enum FavoriteContentState {
     case noResult
 }
 
+protocol FavoriteModelStateProtocol {
+    var contentState: FavoriteContentState { get }
+    var placeholder: String { get }
+}
+
 protocol FavoriteModelActionProtocol: AnyObject {
     func displayNoResult()
     func updateContent(favorite: [BookReview])
 }
 
-final class FavoriteModel: ObservableObject, FavoriteModelActionProtocol {
+final class FavoriteModel: ObservableObject, FavoriteModelStateProtocol {
     @Published var contentState: FavoriteContentState = .noResult
     var placeholder = "favorite-empty".localized
-    
+}
+
+extension FavoriteModel: FavoriteModelActionProtocol {
     func displayNoResult() {
         contentState = .noResult
     }

@@ -9,10 +9,10 @@ import SwiftUI
 import RealmSwift
 
 struct FavoriteBookView: View {
-    @StateObject var container: MVIContainer<FavoriteIntent, FavoriteModel>
+    @StateObject var container: MVIContainer<FavoriteIntentProtocol, FavoriteModelStateProtocol>
     @State private var currentIndex: Int = 0
-    private var state: FavoriteModel { container.model }
-    private var intent: FavoriteIntent { container.intent }
+    private var state: FavoriteModelStateProtocol { container.model }
+    private var intent: FavoriteIntentProtocol { container.intent }
     
     
     var body: some View {
@@ -69,8 +69,8 @@ extension FavoriteBookView {
             repository: ReviewRepository()
         )
         let container = MVIContainer(
-            intent: intent,
-            model: model,
+            intent: intent as FavoriteIntentProtocol,
+            model: model as FavoriteModelStateProtocol,
             modelChangePublisher: model.objectWillChange
         )
         let view = FavoriteBookView(container: container)

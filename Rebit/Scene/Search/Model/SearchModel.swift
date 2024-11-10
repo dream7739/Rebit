@@ -14,6 +14,17 @@ enum SearchContentState {
     case noResult
 }
 
+protocol SearchModelStateProtocol: AnyObject {
+    var contentState: SearchContentState { get }
+    var searchText: String { get set }
+    var bookRequest: BookRequest { get }
+    var page: Int { get }
+    var bookResponse: BookResponse { get }
+    var placeholder: String { get }
+    var noResults: String { get }
+    var scrollToTop: PassthroughSubject<Void, Never> { get }
+}
+
 protocol SearchModelActionProtocol: AnyObject {
     func displayInitial()
     func updateContent()
@@ -21,7 +32,7 @@ protocol SearchModelActionProtocol: AnyObject {
 }
 
 // State
-final class SearchModel: ObservableObject {
+final class SearchModel: ObservableObject, SearchModelStateProtocol {
     @Published var contentState: SearchContentState = .initial
     @Published var searchText = ""
     
@@ -40,7 +51,7 @@ final class SearchModel: ObservableObject {
     var noResults = "search-result-empty".localized
     
     // Scroll
-    let scrollToTop = PassthroughSubject<Void, Never>()
+    var scrollToTop = PassthroughSubject<Void, Never>()
 }
 
 // Action
