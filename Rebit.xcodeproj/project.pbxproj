@@ -25,6 +25,8 @@
 		8879B44E2CC672820002BF99 /* RebitNetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8879B44D2CC672820002BF99 /* RebitNetworkTests.swift */; };
 		8879B4552CC673B40002BF99 /* MockAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8879B4542CC673B40002BF99 /* MockAPIManager.swift */; };
 		887A867B2CBEB59600849C82 /* RealmProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887A867A2CBEB59600849C82 /* RealmProtocol.swift */; };
+		88B173FE2D1D78DA00AF8D56 /* ReviewIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B173FD2D1D78DA00AF8D56 /* ReviewIntent.swift */; };
+		88B174002D1D78E400AF8D56 /* ReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B173FF2D1D78E400AF8D56 /* ReviewModel.swift */; };
 		88B20AA02CB40E0100825016 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 88B20A9F2CB40E0100825016 /* GoogleService-Info.plist */; };
 		88B20AA52CB40F1D00825016 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 88B20AA42CB40F1D00825016 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		88B20AA72CB40F1D00825016 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 88B20AA62CB40F1D00825016 /* FirebaseCrashlytics */; };
@@ -116,6 +118,8 @@
 		8879B44D2CC672820002BF99 /* RebitNetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RebitNetworkTests.swift; sourceTree = "<group>"; };
 		8879B4542CC673B40002BF99 /* MockAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIManager.swift; sourceTree = "<group>"; };
 		887A867A2CBEB59600849C82 /* RealmProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmProtocol.swift; sourceTree = "<group>"; };
+		88B173FD2D1D78DA00AF8D56 /* ReviewIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewIntent.swift; sourceTree = "<group>"; };
+		88B173FF2D1D78E400AF8D56 /* ReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModel.swift; sourceTree = "<group>"; };
 		88B20A9F2CB40E0100825016 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		88B20AA12CB40E2F00825016 /* RebitDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RebitDebug.entitlements; sourceTree = "<group>"; };
 		88B20AA22CB40E3B00825016 /* Rebit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rebit.entitlements; sourceTree = "<group>"; };
@@ -242,9 +246,27 @@
 			path = RebitNetworkTests;
 			sourceTree = "<group>";
 		};
+		88B173FB2D1D78AE00AF8D56 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				88B173FF2D1D78E400AF8D56 /* ReviewModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		88B173FC2D1D78B200AF8D56 /* Intent */ = {
+			isa = PBXGroup;
+			children = (
+				88B173FD2D1D78DA00AF8D56 /* ReviewIntent.swift */,
+			);
+			path = Intent;
+			sourceTree = "<group>";
+		};
 		88BF25C22C9FF3C600440FE1 /* Review */ = {
 			isa = PBXGroup;
 			children = (
+				88B173FC2D1D78B200AF8D56 /* Intent */,
+				88B173FB2D1D78AE00AF8D56 /* Model */,
 				88BF25C62C9FF90600440FE1 /* ViewModel */,
 				88BF25C52C9FF90200440FE1 /* View */,
 			);
@@ -670,7 +692,9 @@
 				88E148212C9D557C00A3ECF6 /* BookReviewView.swift in Sources */,
 				881040BA2C9C513F00FCBD5A /* BookShelfImageView.swift in Sources */,
 				88F1420F2C9548B4002117CD /* CoverImageView.swift in Sources */,
+				88B173FE2D1D78DA00AF8D56 /* ReviewIntent.swift in Sources */,
 				887A867B2CBEB59600849C82 /* RealmProtocol.swift in Sources */,
+				88B174002D1D78E400AF8D56 /* ReviewModel.swift in Sources */,
 				88F141FF2C954789002117CD /* NetworkManager.swift in Sources */,
 				88D19D262C9AD3C500CE4FE6 /* BookReview.swift in Sources */,
 				88F142152C9560D0002117CD /* FavoriteBookView.swift in Sources */,

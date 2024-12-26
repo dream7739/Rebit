@@ -55,7 +55,7 @@ struct BookShelfView: View {
                     ForEach(expectedReviewList, id: \.id) { item in
                         NavigationLinkWrapper {
                             if let book = item.book.first {
-                                BookReviewView(bookInfo: book)
+                                BookReviewView.build(book: book)
                             }
                         } inner: {
                             ExpectedReadingView(reviewInfo: item)
@@ -108,7 +108,7 @@ struct BookShelfView: View {
                     if bookList.count >= 6 {
                         ForEach(0..<6) { item in
                             NavigationLinkWrapper {
-                                BookReviewView(bookInfo: bookList[item])
+                                BookReviewView.build(book: bookList[item])
                             } inner: {
                                 ShelfBookView(bookList: bookList[item], size: size)
                             }
@@ -116,7 +116,7 @@ struct BookShelfView: View {
                     } else {
                         ForEach(bookList, id: \.id) { item in
                             NavigationLinkWrapper {
-                                BookReviewView(bookInfo: item)
+                                BookReviewView.build(book: item)
                             } inner: {
                                 ShelfBookView(bookList: item, size: size)
                             }

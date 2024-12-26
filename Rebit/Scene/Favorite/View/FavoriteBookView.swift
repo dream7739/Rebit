@@ -37,7 +37,7 @@ extension FavoriteBookView {
             
             NavigationLinkWrapper {
                 if let book = item.book.first {
-                    BookReviewView(bookInfo: book)
+                    BookReviewView.build(book: book)
                 }
             } inner: {
                 FavoriteContentView(currentIndex: currentIndex, index: index, item: item)

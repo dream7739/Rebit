@@ -9,13 +9,11 @@ import SwiftUI
 import RealmSwift
 
 struct BookReviewView: View {
-    @StateObject private var viewModel: BookReviewViewModel
+    @StateObject var container: MVIContainer<ReviewIntentProtocol, ReviewModelStateProtocol>
+    private var state: ReviewModelStateProtocol { container.model }
+    private var intent: ReviewIntentProtocol { container.intent }
     @Environment(\.presentationMode) var presentationMode
-    
-    init(bookInfo: BookInfo) {
-        self._viewModel = StateObject(wrappedValue: BookReviewViewModel(bookInfo: bookInfo))
-    }
-    
+ 
     var body: some View {
         ZStack {
             Rectangle()
@@ -26,30 +24,30 @@ struct BookReviewView: View {
             
             GeometryReader { proxy in
                 asHorizontalPageContent(height: proxy.size.height) {
-                    ForEach($viewModel.output.bookInfo.reviewList, id: \.id) { $review in
-                        BookReviewContentView(
-                            viewModel: viewModel,
-                            reviewInfo: $review
-                        )
+                    ForEach(state.review, id: \.self) { review in
+                        BookReviewContentView(container: container, review: review)
                     }
                 }
             }
         }
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            viewModel.input.viewOnAppear.send(())
+            intent.viewOnAppear()
         }
-        .onReceive(viewModel.output.isReviewChanged, perform: { _ in
-            if viewModel.output.bookInfo.reviewList.isEmpty {
-                presentationMode.wrappedValue.dismiss()
-            }
-        })
+//        .onReceive(viewModel.output.isReviewChanged, perform: { _ in
+//            if viewModel.output.bookInfo.reviewList.isEmpty {
+//                presentationMode.wrappedValue.dismiss()
+//            }
+//        })
     }
 }
 
 struct BookReviewContentView: View {
-    @ObservedObject var viewModel: BookReviewViewModel
-    @Binding var reviewInfo: BookReview
+    @ObservedObject var container: MVIContainer<ReviewIntentProtocol, ReviewModelStateProtocol>
+    private var state: ReviewModelStateProtocol { container.model }
+    private var intent: ReviewIntentProtocol { container.intent }
+    var review: BookReviewPresentModel
+    
     @State var isFullPresented: Bool = false
     @State var isShowingAlert: Bool = false
     @Environment(\.colorScheme) var color
@@ -65,16 +63,16 @@ struct BookReviewContentView: View {
         }
         .fullScreenCover(isPresented: $isFullPresented,
                          onDismiss: {
-            viewModel.input.updateOccured.send(reviewInfo)
+//            viewModel.input.updateOccured.send(reviewInfo)
         }) {
-            BookWriteView(
-                bookReview: reviewInfo,
-                isFullPresented: $isFullPresented
-            )
+//            BookWriteView(
+//                bookReview: reviewInfo,
+//                isFullPresented: $isFullPresented
+//            )
         }
         .alert("review-delete-title".localized, isPresented: $isShowingAlert) {
             Button("review-delete-ok".localized, role: .none) {
-                viewModel.input.deleteButtonClicked.send(reviewInfo)
+//                viewModel.input.deleteButtonClicked.send(reviewInfo)
             }
             
             Button("review-delete-cancel".localized, role: .cancel) { }
@@ -91,13 +89,13 @@ struct BookReviewContentView: View {
     
     func headerView() -> some View {
         VStack {
-            Image(uiImage: viewModel.output.bookCoverImage)
+            Image(uiImage: review.coverImage)
                 .resizable()
                 .frame(width: 120, height: 160)
                 .padding(.top, 10)
-            Text(viewModel.output.bookInfo.title)
+            Text(review.bookTitle)
                 .font(.callout.bold())
-            Text(viewModel.output.bookInfo.author)
+            Text(review.author)
                 .asContentBlackForeground()
         }
         .frame(maxWidth: .infinity, alignment: .center)
@@ -109,9 +107,9 @@ struct BookReviewContentView: View {
     func optionMenuView() -> some View {
         HStack(alignment: .center, spacing: 4) {
             Button(action: {
-                viewModel.input.isLikeClicked.send(reviewInfo)
+//                viewModel.input.isLikeClicked.send(reviewInfo)
             }, label: {
-                if reviewInfo.isLike {
+                if review.isLike {
                     Image(systemName: "heart.fill")
                         .foregroundStyle(color == .light ? .red : .white)
                         .imageScale(.large)
@@ -137,22 +135,22 @@ struct BookReviewContentView: View {
                 isShowingAlert = true
             })
             
-            NavigationLinkWrapper {
-                let book = viewModel.output.bookInfo
-                BookDetailView(
-                    book: Book(
-                        title: book.title,
-                        image: "",
-                        author: book.author,
-                        publisher: book.publisher,
-                        pubdate: book.pubdate,
-                        isbn: book.isbn,
-                        description: book.content),
-                    coverImage: viewModel.output.bookCoverImage
-                )
-            } inner: {
-                Button("menu-detail".localized, action: {})
-            }
+//            NavigationLinkWrapper {
+//                let book = viewModel.output.bookInfo
+//                BookDetailView(
+//                    book: Book(
+//                        title: book.title,
+//                        image: "",
+//                        author: book.author,
+//                        publisher: book.publisher,
+//                        pubdate: book.pubdate,
+//                        isbn: book.isbn,
+//                        description: book.content),
+//                    coverImage: viewModel.output.bookCoverImage
+//                )
+//            } inner: {
+//                Button("menu-detail".localized, action: {})
+//            }
         } label: {
             Image(.dotList)
                 .frame(width: 30, height: 30)
@@ -161,10 +159,9 @@ struct BookReviewContentView: View {
     
     func infoSectionView() -> some View {
         HStack {
-            let status = ReadingStatus(rawValue: reviewInfo.status)?.title ?? "정보 없음"
-            infoBoxView("review-status-title".localized, status)
-            infoBoxView("review-rating".localized, reviewInfo.ratingDescription)
-            infoBoxView("review-count".localized, viewModel.output.bookInfo.reviewCountDescription)
+            infoBoxView("review-status-title".localized, review.status.title)
+            infoBoxView("review-rating".localized, review.rating)
+            infoBoxView("review-count".localized, review.reviewCount)
         }
         .frame(maxWidth: .infinity)
         .frame(height: 65)
@@ -197,15 +194,15 @@ struct BookReviewContentView: View {
     
     func contentSectionView() -> some View {
         VStack(alignment: .leading, spacing: 6) {
-            if reviewInfo.status == 0 {
-                contentView("review-comment".localized, reviewInfo.title)
-                contentView("review-expected-date".localized, reviewInfo.startDateDescription)
-                contentView("review-save-date".localized, reviewInfo.saveDateDescription)
+            if review.status == .expected {
+                contentView("review-comment".localized, review.title)
+                contentView("review-expected-date".localized, review.expectedDate)
+                contentView("review-save-date".localized, review.saveDate)
             } else {
-                contentView("review-comment".localized, reviewInfo.title)
-                contentView("review-content".localized, reviewInfo.content)
-                contentView("review-date".localized, reviewInfo.readingDateDescription)
-                contentView("review-save-date".localized, reviewInfo.saveDateDescription)
+                contentView("review-comment".localized, review.title)
+                contentView("review-content".localized, review.content)
+                contentView("review-date".localized, review.readingDate)
+                contentView("review-save-date".localized, review.saveDate)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -225,4 +222,19 @@ struct BookReviewContentView: View {
 }
 
 
-
+extension BookReviewView {
+    static func build(book: BookInfo) -> some View {
+        let model = ReviewModel(book: book)
+        let intent = ReviewIntent(
+            model: model,
+            repository: RealmRepository()
+        )
+        let container = MVIContainer(
+            intent: intent as ReviewIntentProtocol,
+            model: model as ReviewModelStateProtocol,
+            modelChangePublisher: model.objectWillChange
+        )
+        let view = BookReviewView(container: container)
+        return view
+    }
+}
