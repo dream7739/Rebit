@@ -51,9 +51,6 @@ struct GoalSettingView: View {
                 goal = "\(goalCount)"
             }
         }
-        .onTapGesture {
-            UIApplication.shared.endEditing()
-        }
         
     }
     

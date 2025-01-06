@@ -1,45 +1,13 @@
 //
-//  RebitApp.swift
+//  AppDelegate.swift
 //  Rebit
 //
-//  Created by 홍정민 on 9/14/24.
+//  Created by 홍정민 on 1/6/25.
 //
 
 import SwiftUI
-import RealmSwift
 import FirebaseCore
 import FirebaseMessaging
-
-@main
-struct RebitApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    
-    init() {
-        setNavigationBarAppearance()
-    }
-    
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-    }
-}
-
-extension RebitApp {
-    private func setNavigationBarAppearance() {
-        let backButtonAppearance = UIBarButtonItemAppearance()
-        let appearance = UINavigationBarAppearance()
-        
-        backButtonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.clear]
-        appearance.configureWithOpaqueBackground()
-        appearance.backButtonAppearance = backButtonAppearance
-        
-        UINavigationBar.appearance().standardAppearance = appearance
-        
-        UIBarButtonItem.appearance().tintColor = .navigation
-    }
-}
-
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,

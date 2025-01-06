@@ -19,9 +19,10 @@
 		8834AD732CA40CE6002DEA90 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8834AD722CA40CE6002DEA90 /* ToastView.swift */; };
 		8851A7212C97F149002D2952 /* NavigationLazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8851A7202C97F149002D2952 /* NavigationLazyView.swift */; };
 		8863628F2C99407700B5A8E8 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8863628E2C99407700B5A8E8 /* SearchBarView.swift */; };
-		886362922C99409600B5A8E8 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886362912C99409600B5A8E8 /* UIApplication+.swift */; };
 		886362952C9992DE00B5A8E8 /* Cosmos in Frameworks */ = {isa = PBXBuildFile; productRef = 886362942C9992DE00B5A8E8 /* Cosmos */; };
 		886362972C9993F600B5A8E8 /* CustomCosmosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886362962C9993F600B5A8E8 /* CustomCosmosView.swift */; };
+		8867A9142D2C07EC00BC8C5E /* MainTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8867A9132D2C07EC00BC8C5E /* MainTabItem.swift */; };
+		8867A9172D2C1F8200BC8C5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8867A9162D2C1F8200BC8C5E /* AppDelegate.swift */; };
 		8879B44E2CC672820002BF99 /* RebitNetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8879B44D2CC672820002BF99 /* RebitNetworkTests.swift */; };
 		8879B4552CC673B40002BF99 /* MockAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8879B4542CC673B40002BF99 /* MockAPIManager.swift */; };
 		887A867B2CBEB59600849C82 /* RealmProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887A867A2CBEB59600849C82 /* RealmProtocol.swift */; };
@@ -112,8 +113,9 @@
 		8834AD722CA40CE6002DEA90 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		8851A7202C97F149002D2952 /* NavigationLazyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLazyView.swift; sourceTree = "<group>"; };
 		8863628E2C99407700B5A8E8 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
-		886362912C99409600B5A8E8 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
 		886362962C9993F600B5A8E8 /* CustomCosmosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCosmosView.swift; sourceTree = "<group>"; };
+		8867A9132D2C07EC00BC8C5E /* MainTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabItem.swift; sourceTree = "<group>"; };
+		8867A9162D2C1F8200BC8C5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8879B44B2CC672820002BF99 /* RebitNetworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RebitNetworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8879B44D2CC672820002BF99 /* RebitNetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RebitNetworkTests.swift; sourceTree = "<group>"; };
 		8879B4542CC673B40002BF99 /* MockAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIManager.swift; sourceTree = "<group>"; };
@@ -231,11 +233,19 @@
 		886362902C99408F00B5A8E8 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				886362912C99409600B5A8E8 /* UIApplication+.swift */,
 				8823744E2CAA801E00B2FDE1 /* Date+.swift */,
 				88EDDD5B2CAEA99D00F0210E /* String+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		8867A9152D2C1F7500BC8C5E /* App */ = {
+			isa = PBXGroup;
+			children = (
+				88F141EA2C95454D002117CD /* RebitApp.swift */,
+				8867A9162D2C1F8200BC8C5E /* AppDelegate.swift */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 		8879B44C2CC672820002BF99 /* RebitNetworkTests */ = {
@@ -296,6 +306,7 @@
 				88E148242C9DB9AB00A3ECF6 /* TitleGrayForeground.swift */,
 				88E148262C9DBB5B00A3ECF6 /* ContentBlackForeground.swift */,
 				882374502CAAD63D00B2FDE1 /* GreenCapsuleBackground.swift */,
+				8867A9132D2C07EC00BC8C5E /* MainTabItem.swift */,
 			);
 			path = Modifier;
 			sourceTree = "<group>";
@@ -340,6 +351,7 @@
 		88F141E92C95454D002117CD /* Rebit */ = {
 			isa = PBXGroup;
 			children = (
+				8867A9152D2C1F7500BC8C5E /* App */,
 				88B20AA22CB40E3B00825016 /* Rebit.entitlements */,
 				88B20AA12CB40E2F00825016 /* RebitDebug.entitlements */,
 				88B20A9F2CB40E0100825016 /* GoogleService-Info.plist */,
@@ -355,7 +367,6 @@
 				88F141FB2C954680002117CD /* Database */,
 				88FA05742CD6654E0084A3B0 /* Container */,
 				88F141FA2C954679002117CD /* Network */,
-				88F141EA2C95454D002117CD /* RebitApp.swift */,
 				88F141EC2C95454D002117CD /* ContentView.swift */,
 				88F141EE2C95454E002117CD /* Assets.xcassets */,
 				88F141F02C95454E002117CD /* Preview Content */,
@@ -681,7 +692,6 @@
 				88FA05732CD664F90084A3B0 /* SearchIntent.swift in Sources */,
 				882374512CAAD63D00B2FDE1 /* GreenCapsuleBackground.swift in Sources */,
 				8879B4552CC673B40002BF99 /* MockAPIManager.swift in Sources */,
-				886362922C99409600B5A8E8 /* UIApplication+.swift in Sources */,
 				88D19D292C9ADA8400CE4FE6 /* DateFormatterManager.swift in Sources */,
 				88FA05852CD6790F0084A3B0 /* FavoriteContentView.swift in Sources */,
 				88EDDD5C2CAEA99D00F0210E /* String+.swift in Sources */,
@@ -702,6 +712,7 @@
 				882374552CAAEDEB00B2FDE1 /* CircularProgressView.swift in Sources */,
 				886362972C9993F600B5A8E8 /* CustomCosmosView.swift in Sources */,
 				88FA057F2CD66BDC0084A3B0 /* FavoriteIntent.swift in Sources */,
+				8867A9142D2C07EC00BC8C5E /* MainTabItem.swift in Sources */,
 				88D19D222C9ACFC200CE4FE6 /* GreenRoundBackground.swift in Sources */,
 				88F142122C955F60002117CD /* MainTabView.swift in Sources */,
 				881040BC2C9C63EC00FCBD5A /* HorizontalPageWrapper.swift in Sources */,
@@ -710,6 +721,7 @@
 				88FC19272C96B3C9004C844E /* BookDetailView.swift in Sources */,
 				88E1481F2C9D4C6B00A3ECF6 /* NavigationLinkWrapper.swift in Sources */,
 				88F141FD2C954765002117CD /* APIKey.swift in Sources */,
+				8867A9172D2C1F8200BC8C5E /* AppDelegate.swift in Sources */,
 				882374532CAADB4C00B2FDE1 /* GoalSettingView.swift in Sources */,
 				881187AA2CC3890C00BA257A /* APIError.swift in Sources */,
 				88FF94382CA68C6800DE7B6E /* PlaceholderView.swift in Sources */,

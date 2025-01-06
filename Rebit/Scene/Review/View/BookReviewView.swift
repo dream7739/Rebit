@@ -40,13 +40,14 @@ struct BookReviewView: View {
 //            }
 //        })
     }
+    
 }
 
 struct BookReviewContentView: View {
     @ObservedObject var container: MVIContainer<ReviewIntentProtocol, ReviewModelStateProtocol>
     private var state: ReviewModelStateProtocol { container.model }
     private var intent: ReviewIntentProtocol { container.intent }
-    var review: BookReviewPresentModel
+    let review: BookReviewPresentModel
     
     @State var isFullPresented: Bool = false
     @State var isShowingAlert: Bool = false
@@ -54,11 +55,11 @@ struct BookReviewContentView: View {
 
     var body: some View {
         VStack {
-            headerView()
+            bookInfoView()
             Divider()
-            infoSectionView()
+            reviewStatusView()
             Divider()
-            contentSectionView()
+            reviewContentView()
             Spacer()
         }
         .fullScreenCover(isPresented: $isFullPresented,
@@ -87,7 +88,7 @@ struct BookReviewContentView: View {
         .padding(.vertical)
     }
     
-    func headerView() -> some View {
+    func bookInfoView() -> some View {
         VStack {
             Image(uiImage: review.coverImage)
                 .resizable()
@@ -157,7 +158,7 @@ struct BookReviewContentView: View {
         }
     }
     
-    func infoSectionView() -> some View {
+    func reviewStatusView() -> some View {
         HStack {
             infoBoxView("review-status-title".localized, review.status.title)
             infoBoxView("review-rating".localized, review.rating)
@@ -192,7 +193,7 @@ struct BookReviewContentView: View {
             }
     }
     
-    func contentSectionView() -> some View {
+    func reviewContentView() -> some View {
         VStack(alignment: .leading, spacing: 6) {
             if review.status == .expected {
                 contentView("review-comment".localized, review.title)

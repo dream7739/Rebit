@@ -13,19 +13,18 @@ struct BookSearchView: View {
     private var intent: SearchIntentProtocol { container.intent }
     
     var body: some View {
-        VStack {
-            SearchBarView(text: container.binding(for: \.searchText))
-                .padding(10)
-                .onSubmit {
-                    intent.searchButtonClicked(query: state.searchText)
-                }
-            searchContentView()
+        NavigationStack {
+            VStack {
+                SearchBarView(text: container.binding(for: \.searchText))
+                    .padding(10)
+                    .onSubmit {
+                        intent.searchButtonClicked(query: state.searchText)
+                    }
+                searchContentView()
+            }
         }
         .onAppear {
             intent.viewOnAppear()
-        }
-        .onTapGesture {
-            UIApplication.shared.endEditing()
         }
     }
 

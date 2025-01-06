@@ -58,9 +58,6 @@ struct BookWriteView: View {
         .onReceive(viewModel.output.dismissRequest) { _ in
             isShow = true
         }
-        .onTapGesture {
-            UIApplication.shared.endEditing()
-        }
         .onSubmit {
             switch focusedField {
             case .title:
