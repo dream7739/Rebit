@@ -31,7 +31,6 @@ struct MainTabView: View {
                 .asMainTabItem(.chart)
                 .tag(3)
         }
-        .tint(.theme)
     }
 }
 
