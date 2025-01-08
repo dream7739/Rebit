@@ -26,13 +26,16 @@ struct BookShelfView: View {
     private var placeholderText = "shelf-my-empty".localized
     
     var body: some View {
-        GeometryReader { proxy in
-            VStack(alignment: .leading, spacing: 10) {
-                nowReadingSection(proxy.size.height * 0.3)
-                mybookShelfSection(proxy.size.height * 0.6)
-                Spacer()
+        NavigationStack {
+            GeometryReader { proxy in
+                VStack(alignment: .leading, spacing: 10) {
+                    nowReadingSection(proxy.size.height * 0.3)
+                    mybookShelfSection(proxy.size.height * 0.6)
+                    Spacer()
+                }
+                .padding()
+                .asMainToolbar()
             }
-            .padding()
         }
         .onAppear {
             print(Realm.Configuration.defaultConfiguration.fileURL)

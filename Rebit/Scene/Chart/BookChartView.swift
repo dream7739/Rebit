@@ -24,22 +24,25 @@ struct BookChartView: View {
     @State private var isSheetPresent = false
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: 10) {
-                goalHeaderView()
-                monthView()
-                yearView()
+        NavigationStack {
+            ScrollView {
+                VStack(spacing: 10) {
+                    goalHeaderView()
+                    monthView()
+                    yearView()
+                }
+                .padding(.horizontal, 15)
+                .padding(.vertical, 15)
+                .sheet(isPresented: $isSheetPresent, onDismiss: {
+                    goalAchievePercent = configureAchieve()
+                }, content: {
+                    GoalSettingView(isSheetPresent: $isSheetPresent)
+                        .presentationDetents([.height(200)])
+                })
             }
-            .padding(.horizontal, 15)
-            .padding(.vertical, 15)
-            .sheet(isPresented: $isSheetPresent, onDismiss: {
-                goalAchievePercent = configureAchieve()
-            }, content: {
-                GoalSettingView(isSheetPresent: $isSheetPresent)
-                    .presentationDetents([.height(200)])
-            })
+            .padding(.bottom, 30)
+            .asMainToolbar()
         }
-        .padding(.bottom, 30)
     }
     
     //목표 설정

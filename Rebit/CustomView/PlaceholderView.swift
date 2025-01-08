@@ -19,12 +19,6 @@ struct PlaceholderView: View {
     
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
-            switch type {
-            case .search:
-                Image(.search)
-            case .shelf, .goal:
-                Image(.placeholder)
-            }
             Text(text)
                 .foregroundStyle(.gray)
                 .font(.callout)

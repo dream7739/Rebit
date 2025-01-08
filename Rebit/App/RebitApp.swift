@@ -27,11 +27,9 @@ extension RebitApp {
     private func setNavigationBarAppearance() {
         let backButtonAppearance = UIBarButtonItemAppearance()
         let appearance = UINavigationBarAppearance()
-        
         backButtonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.clear]
         appearance.configureWithOpaqueBackground()
         appearance.backButtonAppearance = backButtonAppearance
-        
         UINavigationBar.appearance().standardAppearance = appearance
         UIBarButtonItem.appearance().tintColor = .navigation
     }

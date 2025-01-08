@@ -32,6 +32,11 @@
 		88B20AA52CB40F1D00825016 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 88B20AA42CB40F1D00825016 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		88B20AA72CB40F1D00825016 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 88B20AA62CB40F1D00825016 /* FirebaseCrashlytics */; };
 		88B20AA92CB40F1D00825016 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 88B20AA82CB40F1D00825016 /* FirebaseMessaging */; };
+		88C462392D2E7440008954D7 /* 나눔손글씨 배은혜체.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88C462382D2E7440008954D7 /* 나눔손글씨 배은혜체.ttf */; };
+		88C4623B2D2E76AE008954D7 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C4623A2D2E76AE008954D7 /* Font.swift */; };
+		88C4623D2D2E960D008954D7 /* MainToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C4623C2D2E960D008954D7 /* MainToolbar.swift */; };
+		88C462402D2E9A95008954D7 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C4623F2D2E9A95008954D7 /* Tab.swift */; };
+		88C462422D2E9C1E008954D7 /* Literal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C462412D2E9C1E008954D7 /* Literal.swift */; };
 		88D19D222C9ACFC200CE4FE6 /* GreenRoundBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D19D212C9ACFC200CE4FE6 /* GreenRoundBackground.swift */; };
 		88D19D242C9AD0C100CE4FE6 /* BookWriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D19D232C9AD0C100CE4FE6 /* BookWriteViewModel.swift */; };
 		88D19D262C9AD3C500CE4FE6 /* BookReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D19D252C9AD3C500CE4FE6 /* BookReview.swift */; };
@@ -125,6 +130,11 @@
 		88B20A9F2CB40E0100825016 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		88B20AA12CB40E2F00825016 /* RebitDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RebitDebug.entitlements; sourceTree = "<group>"; };
 		88B20AA22CB40E3B00825016 /* Rebit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rebit.entitlements; sourceTree = "<group>"; };
+		88C462382D2E7440008954D7 /* 나눔손글씨 배은혜체.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "나눔손글씨 배은혜체.ttf"; sourceTree = "<group>"; };
+		88C4623A2D2E76AE008954D7 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		88C4623C2D2E960D008954D7 /* MainToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainToolbar.swift; sourceTree = "<group>"; };
+		88C4623F2D2E9A95008954D7 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		88C462412D2E9C1E008954D7 /* Literal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Literal.swift; sourceTree = "<group>"; };
 		88D19D212C9ACFC200CE4FE6 /* GreenRoundBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenRoundBackground.swift; sourceTree = "<group>"; };
 		88D19D232C9AD0C100CE4FE6 /* BookWriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookWriteViewModel.swift; sourceTree = "<group>"; };
 		88D19D252C9AD3C500CE4FE6 /* BookReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookReview.swift; sourceTree = "<group>"; };
@@ -299,6 +309,24 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		88C462372D2E742C008954D7 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				88C462382D2E7440008954D7 /* 나눔손글씨 배은혜체.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		88C4623E2D2E99E8008954D7 /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				88C4623A2D2E76AE008954D7 /* Font.swift */,
+				88C4623F2D2E9A95008954D7 /* Tab.swift */,
+				88C462412D2E9C1E008954D7 /* Literal.swift */,
+			);
+			path = Constant;
+			sourceTree = "<group>";
+		};
 		88D19D202C9ACFA300CE4FE6 /* Modifier */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,6 +335,7 @@
 				88E148262C9DBB5B00A3ECF6 /* ContentBlackForeground.swift */,
 				882374502CAAD63D00B2FDE1 /* GreenCapsuleBackground.swift */,
 				8867A9132D2C07EC00BC8C5E /* MainTabItem.swift */,
+				88C4623C2D2E960D008954D7 /* MainToolbar.swift */,
 			);
 			path = Modifier;
 			sourceTree = "<group>";
@@ -351,16 +380,17 @@
 		88F141E92C95454D002117CD /* Rebit */ = {
 			isa = PBXGroup;
 			children = (
-				8867A9152D2C1F7500BC8C5E /* App */,
 				88B20AA22CB40E3B00825016 /* Rebit.entitlements */,
 				88B20AA12CB40E2F00825016 /* RebitDebug.entitlements */,
 				88B20A9F2CB40E0100825016 /* GoogleService-Info.plist */,
 				88EDDD522CAE905C00F0210E /* Info.plist */,
+				8867A9152D2C1F7500BC8C5E /* App */,
+				88C4623E2D2E99E8008954D7 /* Constant */,
+				88C462372D2E742C008954D7 /* Font */,
 				88D19D272C9ADA7D00CE4FE6 /* Utill */,
 				88D19D202C9ACFA300CE4FE6 /* Modifier */,
 				886362902C99408F00B5A8E8 /* Extension */,
 				8851A71F2C97F13B002D2952 /* Wrapper */,
-				88F142102C955F46002117CD /* TabView */,
 				88F1420D2C95487F002117CD /* CustomView */,
 				88F142042C9547B9002117CD /* Scene */,
 				88F1420A2C954804002117CD /* Base */,
@@ -440,6 +470,7 @@
 		88F1420D2C95487F002117CD /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				88F142112C955F60002117CD /* MainTabView.swift */,
 				88F1420E2C9548B4002117CD /* CoverImageView.swift */,
 				8863628E2C99407700B5A8E8 /* SearchBarView.swift */,
 				886362962C9993F600B5A8E8 /* CustomCosmosView.swift */,
@@ -450,14 +481,6 @@
 				88FA056B2CD64AB70084A3B0 /* WriteButtonView.swift */,
 			);
 			path = CustomView;
-			sourceTree = "<group>";
-		};
-		88F142102C955F46002117CD /* TabView */ = {
-			isa = PBXGroup;
-			children = (
-				88F142112C955F60002117CD /* MainTabView.swift */,
-			);
-			path = TabView;
 			sourceTree = "<group>";
 		};
 		88F142132C9560C6002117CD /* Favorite */ = {
@@ -666,6 +689,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88F141F22C95454E002117CD /* Preview Assets.xcassets in Resources */,
+				88C462392D2E7440008954D7 /* 나눔손글씨 배은혜체.ttf in Resources */,
 				88EDDD582CAE927A00F0210E /* Localizable.strings in Resources */,
 				88B20AA02CB40E0100825016 /* GoogleService-Info.plist in Resources */,
 				88F141F92C9545E1002117CD /* .gitignore in Resources */,
@@ -708,11 +732,13 @@
 				88F141FF2C954789002117CD /* NetworkManager.swift in Sources */,
 				88D19D262C9AD3C500CE4FE6 /* BookReview.swift in Sources */,
 				88F142152C9560D0002117CD /* FavoriteBookView.swift in Sources */,
+				88C462402D2E9A95008954D7 /* Tab.swift in Sources */,
 				88F141ED2C95454D002117CD /* ContentView.swift in Sources */,
 				882374552CAAEDEB00B2FDE1 /* CircularProgressView.swift in Sources */,
 				886362972C9993F600B5A8E8 /* CustomCosmosView.swift in Sources */,
 				88FA057F2CD66BDC0084A3B0 /* FavoriteIntent.swift in Sources */,
 				8867A9142D2C07EC00BC8C5E /* MainTabItem.swift in Sources */,
+				88C4623B2D2E76AE008954D7 /* Font.swift in Sources */,
 				88D19D222C9ACFC200CE4FE6 /* GreenRoundBackground.swift in Sources */,
 				88F142122C955F60002117CD /* MainTabView.swift in Sources */,
 				881040BC2C9C63EC00FCBD5A /* HorizontalPageWrapper.swift in Sources */,
@@ -737,9 +763,11 @@
 				88FA056C2CD64AB70084A3B0 /* WriteButtonView.swift in Sources */,
 				88F142012C95479B002117CD /* BookRequest.swift in Sources */,
 				88F141EB2C95454D002117CD /* RebitApp.swift in Sources */,
+				88C4623D2D2E960D008954D7 /* MainToolbar.swift in Sources */,
 				88FA05762CD665660084A3B0 /* MVIContainer.swift in Sources */,
 				88FC19212C96B004004C844E /* BookWriteView.swift in Sources */,
 				88E148252C9DB9AB00A3ECF6 /* TitleGrayForeground.swift in Sources */,
+				88C462422D2E9C1E008954D7 /* Literal.swift in Sources */,
 				88FA05782CD668480084A3B0 /* BookSearchRowView.swift in Sources */,
 				88FA05812CD66DF30084A3B0 /* ReviewRepository.swift in Sources */,
 				88F142032C9547A3002117CD /* BookResponse.swift in Sources */,

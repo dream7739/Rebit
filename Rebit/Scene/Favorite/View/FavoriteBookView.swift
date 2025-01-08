@@ -16,13 +16,16 @@ struct FavoriteBookView: View {
     
     
     var body: some View {
-        ZStack(alignment: .top) {
-            switch state.contentState {
-            case .content(let favorite):
-                favoriteCardView(favorite)
-            case .noResult:
-                PlaceholderView(text: state.placeholder, type: .shelf)
+        NavigationStack {
+            ZStack(alignment: .top) {
+                switch state.contentState {
+                case .content(let favorite):
+                    favoriteCardView(favorite)
+                case .noResult:
+                    PlaceholderView(text: state.placeholder, type: .shelf)
+                }
             }
+            .asMainToolbar()
         }
         .onAppear {
             intent.viewOnAppear()

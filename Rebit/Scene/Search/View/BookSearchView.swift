@@ -22,6 +22,7 @@ struct BookSearchView: View {
                     }
                 searchContentView()
             }
+            .asMainToolbar()
         }
         .onAppear {
             intent.viewOnAppear()
