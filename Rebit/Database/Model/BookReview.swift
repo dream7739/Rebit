@@ -1,48 +1,12 @@
 //
-//  Book.swift
+//  BookReview.swift
 //  Rebit
 //
-//  Created by 홍정민 on 9/18/24.
+//  Created by 홍정민 on 1/10/25.
 //
 
 import Foundation
 import RealmSwift
-
-final class BookInfo: Object, ObjectKeyIdentifiable {
-    @Persisted(primaryKey: true) var id: ObjectId
-    @Persisted(indexed: true) var title: String
-    @Persisted var content: String
-    @Persisted var author: String
-    @Persisted var isbn: String
-    @Persisted var pubdate: String
-    @Persisted var publisher: String
-    @Persisted var saveDate: Date
-    @Persisted var reviewList = List<BookReview>()
-    
-    convenience init(
-        title: String,
-        content: String,
-        author: String,
-        isbn: String,
-        pubdate: String,
-        publisher: String,
-        saveDate: Date = Date(),
-        reviewList: List<BookReview> = List<BookReview>()
-    ) {
-        self.init()
-        self.title = title
-        self.content = content
-        self.author = author
-        self.isbn = isbn
-        self.pubdate = pubdate
-        self.publisher = publisher
-    }
-    
-    var reviewCountDescription: String {
-        return reviewList.count.formatted()
-    }
-    
-}
 
 final class BookReview: Object, ObjectKeyIdentifiable {
     @Persisted(primaryKey: true) var id: ObjectId
@@ -117,25 +81,4 @@ final class BookReview: Object, ObjectKeyIdentifiable {
         }
     }
     
-}
-
-final class ReadingGoal: Object, ObjectKeyIdentifiable {
-    @Persisted(primaryKey: true) var id: ObjectId
-    @Persisted(indexed: true) var year: Int
-    @Persisted var month: Int
-    @Persisted var goal: Int
-    @Persisted var saveDate: Date
-    
-    convenience init(
-        year: Int,
-        month: Int,
-        goal: Int
-    ) {
-        self.init()
-        self.year = year
-        self.month = month
-        self.goal = goal
-        self.saveDate = Date()
-        
-    }
 }
