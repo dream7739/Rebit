@@ -37,7 +37,7 @@ struct BookDetailView: View {
         .toolbar(.hidden, for: .tabBar)
         .ignoresSafeArea()
         .fullScreenCover(isPresented: $isFullPresented, content: {
-            NavigationLazyView(BookWriteView(book: book, isFullPresented: $isFullPresented))
+//            NavigationLazyView(BookWriteView(book: book, isFullPresented: $isFullPresented))
         })
     }
     

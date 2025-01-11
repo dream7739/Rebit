@@ -47,7 +47,7 @@ struct EntireShelfView: View {
             if text.isEmpty {
                 ForEach(bookList, id: \.id) { item in
                     NavigationLinkWrapper {
-                        BookReviewView.build(book: item)
+//                        BookReviewView.build(book: item)
                     } inner: {
                         ShelfBookView(bookList: item, size: size)
                     }
@@ -55,7 +55,7 @@ struct EntireShelfView: View {
             } else {
                 ForEach(bookList.where { $0.title.contains(text, options: .caseInsensitive) }, id: \.id) { item in
                     NavigationLinkWrapper {
-                        BookReviewView.build(book: item)
+//                        BookReviewView.build(book: item)
                     } inner: {
                         ShelfBookView(bookList: item, size: size)
                     }

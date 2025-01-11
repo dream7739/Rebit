@@ -31,16 +31,14 @@ struct FavoriteBookView: View {
             intent.viewOnAppear()
         }
     }
-}
-
-extension FavoriteBookView {
+    
     func favoriteCardView(_ favorite: [BookReview]) -> some View {
         ForEach(Array(zip(favorite.indices, favorite)), id: \.0) {
             (index: Int, item: BookReview) in
             
             NavigationLinkWrapper {
                 if let book = item.book.first {
-                    BookReviewView.build(book: book)
+//                    BookReviewView.build(book: book)
                 }
             } inner: {
                 FavoriteContentView(currentIndex: currentIndex, index: index, item: item)
@@ -64,12 +62,13 @@ extension FavoriteBookView {
     }
 }
 
+
 extension FavoriteBookView {
     static func build() -> some View {
         let model = FavoriteModel()
         let intent = FavoriteIntent(
             model: model,
-            repository: ReviewRepository()
+            repository: DefaultReviewRepository()
         )
         let container = MVIContainer(
             intent: intent as FavoriteIntentProtocol,

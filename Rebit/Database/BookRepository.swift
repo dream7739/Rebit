@@ -8,22 +8,36 @@
 import Foundation
 import RealmSwift
 
-final class RealmRepository: RealmProtocol {
-    typealias RealmDataSource = BookInfo
-  
-    var realm = try! Realm()
+protocol BookRepository: AnyObject {
+    func addBook(_ book: BookInfo)
+    func addReview( _ book: BookInfo, _ review: BookReview)
+    func fetchAll() -> Results<BookInfo>
+    func deleteBook(_ id: ObjectId)
+}
+
+
+final class DefaultBookRepository: BookRepository {
+    var realm: Realm
     
-    func add(object: BookInfo) {
-        do{
+    init() {
+        do {
+            realm = try Realm()
+        } catch {
+            print("realm initialize failed")
+        }
+    }
+    
+    func addBook(_ book: BookInfo) {
+        do {
             try realm.write {
-                realm.add(object)
+                realm.add(book)
             }
-        }catch{
+        } catch {
             print("add book failed")
         }
     }
     
-    func addBookReview( _ book: BookInfo, _ review: BookReview) {
+    func addReview( _ book: BookInfo, _ review: BookReview) {
         do {
             try realm.write {
                 book.reviewList.append(review)
@@ -38,29 +52,19 @@ final class RealmRepository: RealmProtocol {
         return list
     }
     
-    func fetchBook(_ id: ObjectId) -> BookInfo {
-        let book = realm.object(ofType: BookInfo.self, forPrimaryKey: id) ?? BookInfo()
-        return book
-    }
-    
     func deleteBook(_ id: ObjectId) {
-        let book = fetchBook(id)
+        guard let book = realm.object(ofType: BookInfo.self, forPrimaryKey: id) else { return }
         
         do {
             try realm.write {
                 realm.delete(book)
             }
         } catch {
-            print("delete book Failed")
+            print("delete book failed")
         }
     }
     
     //리뷰
-    func fetchAllReview() -> Results<BookReview> {
-        let list = realm.objects(BookReview.self)
-        return list
-    }
-    
     func fetchReview(_ id: ObjectId) -> BookReview {
         let review = realm.object(ofType: BookReview.self, forPrimaryKey: id) ?? BookReview()
         return review

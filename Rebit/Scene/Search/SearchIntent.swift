@@ -10,14 +10,21 @@ import Combine
 
 protocol SearchIntentProtocol: AnyObject {
     func viewOnAppear()
-    func searchButtonClicked(query: String)
-    func paginationRequired()
+    func searchBook(query: String)
+    func searchPagination()
 }
 
 final class SearchIntent: SearchIntentProtocol {
     private var model: SearchModel
     private var networkManager: NetworkType
-    
+    private var bookRequest = BookRequest(query: "")
+    private var bookResponse = BookResponse(
+        total: 0,
+        start: 0,
+        display: 0,
+        items: []
+    )
+
     init(
         model: SearchModel,
         networkManager: NetworkType
@@ -27,28 +34,26 @@ final class SearchIntent: SearchIntentProtocol {
     }
     
     func viewOnAppear() {
-        if model.bookResponse.items.isEmpty {
+        if bookResponse.items.isEmpty {
             model.displayInitial()
         }
     }
     
-    func searchButtonClicked(query: String) {
+    func searchBook(query: String) {
         let text = query.trimmingCharacters(in: .whitespaces).lowercased()
-        model.bookRequest.query = text
-        model.page = 1
+        bookRequest.query = text
         
         Task {
             do {
-                let bookResponse = try await callRequest(request: model.bookRequest)
-                let bookList = bookResponse.items
+                bookResponse = try await networkManager.callRequest(request: bookRequest)
+                let books = bookResponse.items
 
                 await MainActor.run {
-                    if bookList.isEmpty {
+                    if books.isEmpty {
                         model.displayNoResult()
                         return
                     } else {
-                        model.bookResponse = bookResponse
-                        model.updateContent()
+                        model.updateContent(books: books)
                         model.scrollToTop.send(())
                     }
                 }
@@ -58,16 +63,16 @@ final class SearchIntent: SearchIntentProtocol {
         }
     }
     
-    func paginationRequired() {
-        if isPaginationRequired() {
-            model.bookRequest.start += 1
+    func searchPagination() {
+        if isPaginationRequired {
+            bookRequest.start += 1
             Task {
                 do {
-                    let bookResponse = try await callRequest(request: model.bookRequest)
-                    model.bookResponse.items.append(contentsOf: bookResponse.items)
+                    let response = try await networkManager.callRequest(request: bookRequest)
+                    bookResponse.items.append(contentsOf: response.items)
                     
                     await MainActor.run {
-                        model.updateContent()
+                        model.updateContent(books: bookResponse.items)
                     }
                 } catch {
                     print(error)
@@ -76,22 +81,9 @@ final class SearchIntent: SearchIntentProtocol {
         }
     }
     
-
-}
-
-extension SearchIntent {
-    func callRequest(request: BookRequest) async throws -> BookResponse {
-        do {
-            let result = try await networkManager.callRequest(request: request)
-            return result
-        } catch {
-            throw error
-        }
-    }
-    
-    func isPaginationRequired() -> Bool {
-        let pageCnt = 30
-        let afterPageCnt = model.bookResponse.items.count + pageCnt
-        return model.bookResponse.total >= afterPageCnt ? true : false
+    private var isPaginationRequired: Bool {
+        let pageCount = 30
+        let afterCount = bookResponse.items.count + pageCount
+        return bookResponse.total >= afterCount ? true : false
     }
 }

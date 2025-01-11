@@ -22,7 +22,7 @@ final class FavoriteIntent: FavoriteIntentProtocol {
     }
     
     func viewOnAppear() {
-        let favoriteList = repository.fetchFavoriteList()
+        let favoriteList = repository.fetchFavoriteReviewList()
         if favoriteList.isEmpty {
             model.displayNoResult()
         } else {
