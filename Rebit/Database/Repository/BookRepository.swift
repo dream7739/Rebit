@@ -10,9 +10,14 @@ import RealmSwift
 
 protocol BookRepository: AnyObject {
     func addBook(_ book: BookInfo)
-    func addReview( _ book: BookInfo, _ review: BookReview)
     func fetchAll() -> Results<BookInfo>
     func deleteBook(_ id: ObjectId)
+    
+    // 책 존재 유무
+    func isExistBook(title: String, isbn: String) -> Bool
+    
+    // 책 단건 조회
+    func getBookObject(title: String, isbn: String) -> BookInfo?
 }
 
 final class DefaultBookRepository: BookRepository {
@@ -29,16 +34,6 @@ final class DefaultBookRepository: BookRepository {
             }
         } catch {
             print("add book failed")
-        }
-    }
-    
-    func addReview( _ book: BookInfo, _ review: BookReview) {
-        do {
-            try realm.write {
-                book.reviewList.append(review)
-            }
-        } catch {
-            print("add book review failed")
         }
     }
     
@@ -62,9 +57,7 @@ final class DefaultBookRepository: BookRepository {
 
 extension DefaultBookRepository {
     func isExistBook(title: String, isbn: String) -> Bool {
-        let bookList = fetchAll()
-        
-        let existCount = bookList.where {
+        let existCount = realm.objects(BookInfo.self).where {
             $0.title.equals(title) && $0.isbn.equals(isbn)
         }.count
         

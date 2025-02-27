@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MainTabView.swift
-// 태그를 통해 selectedTab에 선택한 탭 인덱스 넘김
+// 태그를 통해 selectedTab에 선택한 탭 인덱스를 넘겨준다
 struct MainTabView: View {
     @State private var selectedTab = 0
     @Environment(\.colorScheme) var color

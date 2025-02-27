@@ -38,6 +38,7 @@ final class BookInfo: Object, ObjectKeyIdentifiable {
         self.publisher = publisher
     }
     
+    // 리뷰 개수
     var reviewCountDescription: String {
         return reviewList.count.formatted()
     }

@@ -12,7 +12,7 @@ enum FavoriteContentState {
     case noResult
 }
 
-protocol FavoriteModelStateProtocol {
+protocol FavoriteModelStateProtocol: AnyObject {
     var contentState: FavoriteContentState { get }
     var placeholder: String { get }
 }

@@ -8,11 +8,20 @@
 import Foundation
 import RealmSwift
 
+// ReviewRepository
 protocol ReviewRepository: AnyObject {
+    // fetch
     func fetchReview(_ id: ObjectId) -> BookReview
     func fetchFavoriteReviewList() -> [BookReview]
-    func updateBookReview(_ oldReview: BookReview, _ newReview: BookReview)
+    
+    // create
+    func createReview( _ book: BookInfo, _ review: BookReview)
+    
+    // update
+    func updateReview(_ oldReview: BookReview, _ newReview: BookReview)
     func updateLike(_ id: ObjectId)
+    
+    // delete
     func deleteReview(_ id: ObjectId)
 }
 
@@ -23,6 +32,7 @@ final class DefaultReviewRepository: ReviewRepository {
         realm = try! Realm()
     }
     
+    // fetch
     func fetchReview(_ id: ObjectId) -> BookReview {
         let review = realm.object(ofType: BookReview.self, forPrimaryKey: id) ?? BookReview()
         return review
@@ -35,8 +45,20 @@ final class DefaultReviewRepository: ReviewRepository {
             .map { $0 }
         return list
     }
-
-    func updateBookReview(_ oldReview: BookReview, _ newReview: BookReview) {
+    
+    // create
+    func createReview( _ book: BookInfo, _ review: BookReview) {
+        do {
+            try realm.write {
+                book.reviewList.append(review)
+            }
+        } catch {
+            print("add book review failed")
+        }
+    }
+    
+    // update
+    func updateReview(_ oldReview: BookReview, _ newReview: BookReview) {
         guard let review = realm.object(ofType: BookReview.self, forPrimaryKey: oldReview.id) else { return }
         
         do {

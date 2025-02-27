@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		88018EDD2D328BCB009AEA18 /* ReviewIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88018EDC2D328BCB009AEA18 /* ReviewIntent.swift */; };
 		881040B62C9C247700FCBD5A /* ImageFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881040B52C9C247700FCBD5A /* ImageFileManager.swift */; };
 		881040BA2C9C513F00FCBD5A /* BookShelfImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881040B92C9C513F00FCBD5A /* BookShelfImageView.swift */; };
 		881040BC2C9C63EC00FCBD5A /* HorizontalPageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881040BB2C9C63EC00FCBD5A /* HorizontalPageWrapper.swift */; };
@@ -30,6 +31,10 @@
 		886B29D12D31274A00392C8E /* RealmError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886B29D02D31274A00392C8E /* RealmError.swift */; };
 		8879B44E2CC672820002BF99 /* RebitNetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8879B44D2CC672820002BF99 /* RebitNetworkTests.swift */; };
 		8879B4552CC673B40002BF99 /* MockAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8879B4542CC673B40002BF99 /* MockAPIManager.swift */; };
+		88AD6BF82D6F0B38003F93B1 /* ExpectedReadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AD6BF72D6F0B38003F93B1 /* ExpectedReadingView.swift */; };
+		88AD6BFA2D6F0BBA003F93B1 /* BookWriteIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AD6BF92D6F0BBA003F93B1 /* BookWriteIntent.swift */; };
+		88AD6BFC2D6F0BC9003F93B1 /* BookWriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AD6BFB2D6F0BC9003F93B1 /* BookWriteModel.swift */; };
+		88AD6BFE2D6F3D9D003F93B1 /* WriteViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AD6BFD2D6F3D9D003F93B1 /* WriteViewType.swift */; };
 		88B174002D1D78E400AF8D56 /* ReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B173FF2D1D78E400AF8D56 /* ReviewModel.swift */; };
 		88B20AA02CB40E0100825016 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 88B20A9F2CB40E0100825016 /* GoogleService-Info.plist */; };
 		88B20AA52CB40F1D00825016 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 88B20AA42CB40F1D00825016 /* FirebaseAnalyticsWithoutAdIdSupport */; };
@@ -104,6 +109,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		88018EDC2D328BCB009AEA18 /* ReviewIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewIntent.swift; sourceTree = "<group>"; };
 		881040B52C9C247700FCBD5A /* ImageFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileManager.swift; sourceTree = "<group>"; };
 		881040B92C9C513F00FCBD5A /* BookShelfImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShelfImageView.swift; sourceTree = "<group>"; };
 		881040BB2C9C63EC00FCBD5A /* HorizontalPageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalPageWrapper.swift; sourceTree = "<group>"; };
@@ -127,6 +133,10 @@
 		8879B44B2CC672820002BF99 /* RebitNetworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RebitNetworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8879B44D2CC672820002BF99 /* RebitNetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RebitNetworkTests.swift; sourceTree = "<group>"; };
 		8879B4542CC673B40002BF99 /* MockAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIManager.swift; sourceTree = "<group>"; };
+		88AD6BF72D6F0B38003F93B1 /* ExpectedReadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpectedReadingView.swift; sourceTree = "<group>"; };
+		88AD6BF92D6F0BBA003F93B1 /* BookWriteIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookWriteIntent.swift; sourceTree = "<group>"; };
+		88AD6BFB2D6F0BC9003F93B1 /* BookWriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookWriteModel.swift; sourceTree = "<group>"; };
+		88AD6BFD2D6F3D9D003F93B1 /* WriteViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewType.swift; sourceTree = "<group>"; };
 		88B173FF2D1D78E400AF8D56 /* ReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModel.swift; sourceTree = "<group>"; };
 		88B20A9F2CB40E0100825016 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		88B20AA12CB40E2F00825016 /* RebitDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RebitDebug.entitlements; sourceTree = "<group>"; };
@@ -294,6 +304,7 @@
 			children = (
 				88B173FF2D1D78E400AF8D56 /* ReviewModel.swift */,
 				88E148202C9D557C00A3ECF6 /* BookReviewView.swift */,
+				88018EDC2D328BCB009AEA18 /* ReviewIntent.swift */,
 			);
 			path = Review;
 			sourceTree = "<group>";
@@ -478,6 +489,7 @@
 			children = (
 				88F1421A2C956239002117CD /* BookShelfView.swift */,
 				881040BD2C9C6D9400FCBD5A /* EntireShelfView.swift */,
+				88AD6BF72D6F0B38003F93B1 /* ExpectedReadingView.swift */,
 			);
 			path = Shelf;
 			sourceTree = "<group>";
@@ -495,6 +507,9 @@
 			children = (
 				88FC19202C96B004004C844E /* BookWriteView.swift */,
 				88D19D232C9AD0C100CE4FE6 /* BookWriteViewModel.swift */,
+				88AD6BF92D6F0BBA003F93B1 /* BookWriteIntent.swift */,
+				88AD6BFB2D6F0BC9003F93B1 /* BookWriteModel.swift */,
+				88AD6BFD2D6F3D9D003F93B1 /* WriteViewType.swift */,
 			);
 			path = Write;
 			sourceTree = "<group>";
@@ -646,22 +661,27 @@
 				88F142062C9547C2002117CD /* BookSearchView.swift in Sources */,
 				8851A7212C97F149002D2952 /* NavigationLazyView.swift in Sources */,
 				88E148212C9D557C00A3ECF6 /* BookReviewView.swift in Sources */,
+				88AD6BFA2D6F0BBA003F93B1 /* BookWriteIntent.swift in Sources */,
 				881040BA2C9C513F00FCBD5A /* BookShelfImageView.swift in Sources */,
 				88F1420F2C9548B4002117CD /* CoverImageView.swift in Sources */,
 				88B174002D1D78E400AF8D56 /* ReviewModel.swift in Sources */,
 				88F141FF2C954789002117CD /* NetworkManager.swift in Sources */,
 				88F142152C9560D0002117CD /* FavoriteBookView.swift in Sources */,
+				88018EDD2D328BCB009AEA18 /* ReviewIntent.swift in Sources */,
 				88C462402D2E9A95008954D7 /* Tab.swift in Sources */,
 				886B29C72D311B1B00392C8E /* BookReview.swift in Sources */,
 				88F141ED2C95454D002117CD /* ContentView.swift in Sources */,
 				882374552CAAEDEB00B2FDE1 /* CircularProgressView.swift in Sources */,
 				886362972C9993F600B5A8E8 /* CustomCosmosView.swift in Sources */,
 				88FA057F2CD66BDC0084A3B0 /* FavoriteIntent.swift in Sources */,
+				88AD6BFC2D6F0BC9003F93B1 /* BookWriteModel.swift in Sources */,
 				8867A9142D2C07EC00BC8C5E /* MainTabItem.swift in Sources */,
 				88C4623B2D2E76AE008954D7 /* Font.swift in Sources */,
+				88AD6BF82D6F0B38003F93B1 /* ExpectedReadingView.swift in Sources */,
 				88D19D222C9ACFC200CE4FE6 /* GreenRoundBackground.swift in Sources */,
 				88F142122C955F60002117CD /* MainTabView.swift in Sources */,
 				881040BC2C9C63EC00FCBD5A /* HorizontalPageWrapper.swift in Sources */,
+				88AD6BFE2D6F3D9D003F93B1 /* WriteViewType.swift in Sources */,
 				8834AD732CA40CE6002DEA90 /* ToastView.swift in Sources */,
 				88E148272C9DBB5B00A3ECF6 /* ContentBlackForeground.swift in Sources */,
 				88FC19272C96B3C9004C844E /* BookDetailView.swift in Sources */,
@@ -725,6 +745,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jm.SeSACPushTest.RebitNetworkTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -742,6 +763,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jm.SeSACPushTest.RebitNetworkTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

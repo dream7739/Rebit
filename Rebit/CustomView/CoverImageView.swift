@@ -27,7 +27,3 @@ struct CoverImageView: View {
         }
     }
 }
-
-#Preview {
-    CoverImageView(url: "https://search.shopping.naver.com/book/catalog/50259596640")
-}

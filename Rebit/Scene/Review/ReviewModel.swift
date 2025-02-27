@@ -7,35 +7,43 @@
 
 import SwiftUI
 
-//struct BookReviewPresentModel: Hashable {
-//    let coverImage: UIImage
-//    let bookTitle: String
-//    let author: String
-//    let status: ReadingStatus
-//    let rating: String
-//    let reviewCount: String
-//    let title: String
-//    let content: String
-//    let isLike: Bool
-//    let readingDate: String
-//    let expectedDate: String
-//    let saveDate: String
-//}
-//
-//protocol ReviewModelStateProtocol: AnyObject {
-//    var review: [BookReviewPresentModel] { get }
-//    var isLike: Bool { get }
-//}
-//
-//final class ReviewModel: ObservableObject, ReviewModelStateProtocol {
-//    @Published var review: [BookReviewPresentModel] = []
-//    var isLike: Bool = false
-//    let book: BookInfo
-//    
-//    init(book: BookInfo) {
-//        self.book = book
-//    }
-//}
-//
-//
-//
+enum ReviewContentState {
+    case initial(reviewList: [BookReview])
+}
+
+protocol ReviewModelStateProtocol: AnyObject {
+    var book: BookInfo { get }
+    var reviewList: [BookReview] { get }
+    var bookCover: UIImage { get }
+    var contentState: ReviewContentState { get }
+}
+
+protocol ReviewModelActionProtocol: AnyObject {
+    func displayInitial()
+    func displayNoReview()
+}
+
+final class ReviewModel: ObservableObject, ReviewModelStateProtocol {
+    var book: BookInfo
+    var reviewList: [BookReview] = []
+    var bookCover = UIImage()
+    @Published var contentState: ReviewContentState
+    @Environment(\.presentationMode) var presentationMode
+
+    init(book: BookInfo) {
+        self.book = book
+        contentState = .initial(reviewList: reviewList)
+    }
+}
+
+extension ReviewModel: ReviewModelActionProtocol {
+    func displayInitial() {
+        self.bookCover = ImageFileManager.shared.loadImageToDocument(filename: "\(book.id)") ?? UIImage()
+        self.reviewList = book.reviewList.map { $0 }
+        self.contentState = .initial(reviewList: reviewList)
+    }
+    
+    func displayNoReview() {
+        presentationMode.wrappedValue.dismiss()
+    }
+}

@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 protocol FavoriteIntentProtocol: AnyObject {
     func viewOnAppear()
 }

@@ -9,8 +9,7 @@ import Foundation
 import Combine
 import RealmSwift
 
-//typealias ReadingStatus = BookWriteViewModel.ReadingStatus
-//
+
 //final class BookWriteViewModel: BaseViewModel {
 //    
 //    struct Input {
@@ -157,43 +156,4 @@ import RealmSwift
 //            .store(in: &cancellables)
 //    }
 //    
-//}
-//
-//extension BookWriteViewModel {
-//    enum ReadingStatus: Int, CaseIterable {
-//        case expected = 0
-//        case current
-//        case completed
-//        
-//        var title: String {
-//            switch self {
-//            case .expected:
-//                return "reading-expected".localized
-//            case .current:
-//                return "reading-current".localized
-//            case .completed:
-//                return "reading-completed".localized
-//            }
-//        }
-//        
-//        var endDateTitle: String {
-//            switch self {
-//            case .expected:
-//                return ""
-//            case .current:
-//                return "write-goal-end-date".localized
-//            case .completed:
-//                return "write-end-date".localized
-//            }
-//        }
-//        
-//        var summaryTitle: String {
-//            switch self {
-//            case .expected:
-//                return "write-expected-title".localized
-//            case .current, .completed:
-//                return "write-summary-title".localized
-//            }
-//        }
-//    }
 //}

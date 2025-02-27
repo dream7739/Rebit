@@ -47,6 +47,7 @@ final class BookReview: Object, ObjectKeyIdentifiable {
         self.saveDate = Date()
     }
     
+    // 평점
     var ratingDescription: String {
         if status == 0 {
             return "-"
@@ -55,11 +56,13 @@ final class BookReview: Object, ObjectKeyIdentifiable {
         }
     }
     
+    // 독서 시작일
     var startDateDescription: String {
         let start = DateFormatterManager.basicFormatter.string(from: startDate ?? Date())
         return start
     }
     
+    // 독서 기간 24.12.12 - 24.12.15 (N일)
     var readingDateDescription: String {
         let start = DateFormatterManager.basicFormatter.string(from: startDate ?? Date())
         let end = DateFormatterManager.basicFormatter.string(from: endDate ?? Date())
@@ -67,11 +70,13 @@ final class BookReview: Object, ObjectKeyIdentifiable {
         return description
     }
     
+    // 리뷰 저장일
     var saveDateDescription: String {
         let date = DateFormatterManager.basicFormatter.string(from: saveDate)
         return date
     }
     
+    // 독서 기간 (N일)
     var periodDescription: String {
         if let period = DateFormatterManager.dateCompare(startDate ?? Date(), endDate ?? Date()) {
             let realDate = period + 1

@@ -44,7 +44,6 @@ extension SearchModel: SearchModelActionProtocol {
     }
     
     func updateContent(books: [Book]) {
-        print(#function)
         contentState = .content(books: books)
     }
     
