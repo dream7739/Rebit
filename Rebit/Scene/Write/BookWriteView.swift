@@ -52,11 +52,8 @@ struct BookWriteView: View {
             isShow = true
         }
         .onSubmit {
-            switch focusedField {
-            case .title:
+            if focusedField == .content {
                 focusedField = .content
-            default:
-                print("default")
             }
         }
     }
@@ -240,7 +237,6 @@ extension BookWriteView {
     
     func writeButton() -> some View {
         Button(action: {
-            //별점정보
             state.rating = rating
             intent.saveReviewClicked()
         }, label: {
@@ -278,7 +274,7 @@ struct StatusCardView: View {
 
 extension BookWriteView {
     static func build(
-        viewType: WriteViewType,
+        viewType: BookWriteViewType,
         book: Book? = nil,
         review: BookReview? = nil,
         isFullPresented: Binding<Bool>

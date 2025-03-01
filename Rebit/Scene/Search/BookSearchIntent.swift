@@ -8,14 +8,14 @@
 import Foundation
 import Combine
 
-protocol SearchIntentProtocol: AnyObject {
+protocol BookSearchIntentProtocol: AnyObject {
     func viewOnAppear()
     func searchBook(query: String)
     func searchPagination()
 }
 
-final class SearchIntent: SearchIntentProtocol {
-    private var model: SearchModel
+final class BookSearchIntent: BookSearchIntentProtocol {
+    private var model: BookSearchModel
     private var networkManager: NetworkType
     private var bookRequest = BookRequest(query: "")
     private var bookResponse = BookResponse(
@@ -26,7 +26,7 @@ final class SearchIntent: SearchIntentProtocol {
     )
 
     init(
-        model: SearchModel,
+        model: BookSearchModel,
         networkManager: NetworkType
     ) {
         self.model = model

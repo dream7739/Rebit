@@ -11,7 +11,7 @@ import Combine
 protocol BookWriteModelStateProtocol: AnyObject {
     var book: Book? { get }
     var review: BookReview? { get }
-    var viewType: WriteViewType { get }
+    var viewType: BookWriteViewType { get }
     var summaryText: String { get set }
     var startDate: Date { get set }
     var endDate: Date { get set }
@@ -30,7 +30,7 @@ final class BookWriteModel: ObservableObject, BookWriteModelStateProtocol {
     // 생성 시 넘겨받아 사용할 값
     var book: Book?
     var review: BookReview?
-    var viewType: WriteViewType
+    var viewType: BookWriteViewType
     
     // 사용자 입력값
     @Published var summaryText: String = ""
@@ -42,7 +42,7 @@ final class BookWriteModel: ObservableObject, BookWriteModelStateProtocol {
     var dismissRequest = PassthroughSubject<Void, Never>()
     
     init(
-        viewType: WriteViewType,
+        viewType: BookWriteViewType,
         book: Book? = nil,
         review: BookReview? = nil
     ) {

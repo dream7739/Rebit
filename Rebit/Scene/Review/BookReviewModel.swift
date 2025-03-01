@@ -1,0 +1,60 @@
+//
+//  BookReviewModel.swift
+//  Rebit
+//
+//  Created by 홍정민 on 12/26/24.
+//
+
+import SwiftUI
+import Combine
+
+enum BookReviewContentState {
+    case initial(reviewList: [BookReview])
+    case updated(reviewList: [BookReview])
+    case empty
+}
+
+protocol BookReviewModelStateProtocol: AnyObject {
+    var book: BookInfo { get }
+    var reviewList: [BookReview] { get }
+    var bookCover: UIImage { get }
+    var contentState: BookReviewContentState { get }
+    var dismissTrigger: PassthroughSubject<Void, Never> { get }
+}
+
+protocol BookReviewModelActionProtocol: AnyObject {
+    func displayInitial(bookCover: UIImage, reviewList: [BookReview])
+    func dismissReview()
+    func updateBookReview(book: BookInfo, reviewList: [BookReview])
+}
+
+final class BookReviewModel: ObservableObject, BookReviewModelStateProtocol {
+    var book: BookInfo
+    var reviewList: [BookReview] = []
+    var bookCover = UIImage()
+    @Published var contentState: BookReviewContentState
+    var dismissTrigger = PassthroughSubject<Void, Never>()
+
+    init(book: BookInfo) {
+        self.book = book
+        contentState = .initial(reviewList: reviewList)
+    }
+}
+
+extension BookReviewModel: BookReviewModelActionProtocol {
+    func displayInitial(bookCover: UIImage, reviewList: [BookReview]) {
+        self.bookCover = bookCover
+        self.reviewList = reviewList
+        self.contentState = .initial(reviewList: reviewList)
+    }
+    
+    func dismissReview() {
+        dismissTrigger.send(())
+    }
+    
+    func updateBookReview(book: BookInfo, reviewList: [BookReview]) {
+        self.book = book
+        self.reviewList = reviewList
+        self.contentState = .updated(reviewList: reviewList)
+    }
+}

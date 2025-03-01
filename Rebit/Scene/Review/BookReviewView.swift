@@ -6,23 +6,27 @@
 //
 
 import SwiftUI
-import RealmSwift
 
 struct BookReviewView: View {
-    @StateObject var container: MVIContainer<ReviewIntentProtocol, ReviewModelStateProtocol>
-    private var state: ReviewModelStateProtocol { container.model }
-    private var intent: ReviewIntentProtocol { container.intent }
-    
+    @StateObject var container: MVIContainer<BookReviewIntentProtocol, BookReviewModelStateProtocol>
+    private var state: BookReviewModelStateProtocol { container.model }
+    private var intent: BookReviewIntentProtocol { container.intent }
+    @Environment(\.presentationMode) var presentationMode
+
     var body: some View {
         ZStack {
             reviewBackgroundView()
             reviewContentView()
         }
+        .toolbarRole(.editor)
+        .toolbarBackground(.clear, for: .navigationBar)
         .toolbar(.hidden, for: .tabBar)
-        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             intent.viewOnAppear()
         }
+        .onReceive(state.dismissTrigger) { _ in
+            presentationMode.wrappedValue.dismiss()
+        }        
     }
     
     func reviewBackgroundView() -> some View {
@@ -45,9 +49,9 @@ struct BookReviewView: View {
 }
 
 struct BookReviewContentView: View {
-    @ObservedObject var container: MVIContainer<ReviewIntentProtocol, ReviewModelStateProtocol>
-    private var state: ReviewModelStateProtocol { container.model }
-    private var intent: ReviewIntentProtocol { container.intent }
+    @ObservedObject var container: MVIContainer<BookReviewIntentProtocol, BookReviewModelStateProtocol>
+    private var state: BookReviewModelStateProtocol { container.model }
+    private var intent: BookReviewIntentProtocol { container.intent }
     let review: BookReview
     
     @State var isFullPresented: Bool = false
@@ -65,7 +69,7 @@ struct BookReviewContentView: View {
         }
         .fullScreenCover(isPresented: $isFullPresented,
                          onDismiss: {
-            //            viewModel.input.updateOccured.send(reviewInfo)
+            intent.updateTrigger(review)
         }) {
             BookWriteView.build(
                 viewType: .edit,
@@ -75,8 +79,7 @@ struct BookReviewContentView: View {
         }
         .alert("review-delete-title".localized, isPresented: $isShowingAlert) {
             Button("review-delete-ok".localized, role: .none) {
-                intent.deleteReview(review)
-                //                viewModel.input.deleteButtonClicked.send(reviewInfo)
+                intent.deleteReviewClicked(review)
             }
             Button("review-delete-cancel".localized, role: .cancel) { }
         }
@@ -113,7 +116,7 @@ struct BookReviewContentView: View {
     func optionMenuView() -> some View {
         HStack(alignment: .center, spacing: 4) {
             Button(action: {
-                //                viewModel.input.isLikeClicked.send(reviewInfo)
+                intent.isLikeClicked(review)
             }, label: {
                 if review.isLike {
                     Image(systemName: "heart.fill")
@@ -232,15 +235,16 @@ struct BookReviewContentView: View {
 
 extension BookReviewView {
     static func build(book: BookInfo) -> some View {
-        let model = ReviewModel(book: book)
-        let intent = ReviewIntent(
+        let model = BookReviewModel(book: book)
+        let intent = BookReviewIntent(
             model: model,
             bookRepository: DefaultBookRepository(),
-            reviewRepository: DefaultReviewRepository()
+            reviewRepository: DefaultReviewRepository(),
+            fileManager: ImageFileManager.shared
         )
         let container = MVIContainer(
-            intent: intent as ReviewIntentProtocol,
-            model: model as ReviewModelStateProtocol,
+            intent: intent as BookReviewIntentProtocol,
+            model: model as BookReviewModelStateProtocol,
             modelChangePublisher: model.objectWillChange
         )
         let view = BookReviewView(container: container)

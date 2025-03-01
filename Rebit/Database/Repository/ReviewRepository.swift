@@ -77,7 +77,7 @@ final class DefaultReviewRepository: ReviewRepository {
     }
     
     func updateLike(_ id: ObjectId) {
-        let review = fetchReview(id)
+        guard let review = realm.object(ofType: BookReview.self, forPrimaryKey: id) else { return }
         
         do {
             try realm.write {

@@ -69,8 +69,9 @@ extension BookWriteIntent {
         } else {
             saveBookData(book)
             saveReviewData(book)
-            model.dismissRequestTrigger()
         }
+        
+        model.dismissRequestTrigger()
     }
     
     // 기존 리뷰 갱신

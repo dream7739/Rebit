@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct BookSearchView: View {
-    @StateObject var container: MVIContainer<SearchIntentProtocol, SearchModelStateProtocol>
-    private var state: SearchModelStateProtocol { container.model }
-    private var intent: SearchIntentProtocol { container.intent }
+    @StateObject var container: MVIContainer<BookSearchIntentProtocol, BookSearchModelStateProtocol>
+    private var state: BookSearchModelStateProtocol { container.model }
+    private var intent: BookSearchIntentProtocol { container.intent }
     
     var body: some View {
         NavigationStack {
@@ -106,14 +106,14 @@ struct SearchRowView: View {
 
 extension BookSearchView {
     static func build() -> some View {
-        let model = SearchModel()
-        let intent = SearchIntent(
+        let model = BookSearchModel()
+        let intent = BookSearchIntent(
             model: model,
             networkManager: APIManager.shared
         )
         let container = MVIContainer(
-            intent: intent as SearchIntentProtocol,
-            model: model as SearchModelStateProtocol,
+            intent: intent as BookSearchIntentProtocol,
+            model: model as BookSearchModelStateProtocol,
             modelChangePublisher: model.objectWillChange
         )
         let view = BookSearchView(container: container)

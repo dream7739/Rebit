@@ -1,5 +1,5 @@
 //
-//  WriteViewType.swift
+//  BookWriteViewType.swift
 //  Rebit
 //
 //  Created by 홍정민 on 2/26/25.
@@ -7,9 +7,9 @@
 
 import Foundation
 
-// WriteViewType
+// BookWriteViewType
 // 신규 생성 or 수정
-enum WriteViewType {
+enum BookWriteViewType {
     case add
     case edit
     

@@ -8,14 +8,14 @@
 import Foundation
 import Combine
 
-enum SearchContentState {
+enum BookSearchContentState {
     case initial
     case content(books: [Book])
     case noResult
 }
 
-protocol SearchModelStateProtocol: AnyObject {
-    var contentState: SearchContentState { get }
+protocol BookSearchModelStateProtocol: AnyObject {
+    var contentState: BookSearchContentState { get }
     var searchText: String { get set }
     var bookList: [Book] { get }
     var placeholder: String { get }
@@ -23,14 +23,14 @@ protocol SearchModelStateProtocol: AnyObject {
     var scrollToTop: PassthroughSubject<Void, Never> { get }
 }
 
-protocol SearchModelActionProtocol: AnyObject {
+protocol BookSearchModelActionProtocol: AnyObject {
     func displayInitial()
     func updateContent(books: [Book])
     func displayNoResult()
 }
 
-final class SearchModel: ObservableObject, SearchModelStateProtocol {
-    @Published var contentState: SearchContentState = .initial
+final class BookSearchModel: ObservableObject, BookSearchModelStateProtocol {
+    @Published var contentState: BookSearchContentState = .initial
     @Published var searchText = ""
     var bookList: [Book] = []
     var placeholder = "search-empty".localized
@@ -38,7 +38,7 @@ final class SearchModel: ObservableObject, SearchModelStateProtocol {
     var scrollToTop = PassthroughSubject<Void, Never>()
 }
 
-extension SearchModel: SearchModelActionProtocol {
+extension BookSearchModel: BookSearchModelActionProtocol {
     func displayInitial() {
         contentState = .initial
     }
