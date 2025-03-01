@@ -40,15 +40,20 @@ final class BookReviewIntent: BookReviewIntentProtocol {
     }
     
     func deleteReviewClicked(_ review: BookReview) {
+        typealias BookReviewData = (book: BookInfo, reviewList: [BookReview])
+        
+        // 리뷰 삭제
         reviewRepository.deleteReview(review.id)
         
-        guard let bookReviewData = fetchUpdatedBookReviewData() else { return }
-        model.updateBookReview(book: bookReviewData.0, reviewList: bookReviewData.1)
+        // 책, 리뷰정보 재조회
+        guard let bookReviewData: BookReviewData = fetchUpdatedBookReviewData() else { return }
         
-        if model.book.reviewList.isEmpty {
-            fileManager.removeImageFromDocument(filename: "\(bookReviewData.0.id)")
+        if bookReviewData.reviewList.isEmpty {
+            fileManager.removeImageFromDocument(filename: "\(bookReviewData.book.id)")
             bookRepository.deleteBook(bookReviewData.0.id)
             model.dismissReview()
+        } else {
+            model.updateBookReview(book: bookReviewData.book, reviewList: bookReviewData.reviewList)
         }
     }
     

@@ -160,7 +160,6 @@ extension BookWriteView {
                     displayedComponents: .date
                 )
                 .font(.subheadline)
-                .onTapGesture(count: 999999) { }
             case .current, .completed:
                 DatePicker(
                     "write-start-date".localized,

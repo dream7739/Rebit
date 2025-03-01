@@ -19,7 +19,7 @@ struct MainTabView: View {
                 .asMainTabItem(.favorite)
                 .tag(0)
             
-            BookShelfView()
+            BookShelfView.build()
                 .asMainTabItem(.bookshelf)
                 .tag(1)
             

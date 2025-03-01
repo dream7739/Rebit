@@ -9,21 +9,9 @@ import SwiftUI
 import RealmSwift
 
 struct BookShelfView: View {
-    
-    @ObservedResults(
-        BookReview.self,
-        where: ({ $0.status == 0 }),
-        sortDescriptor: SortDescriptor(keyPath: "saveDate", ascending: false)
-    )
-    var expectedReviewList
-    
-    @ObservedResults(
-        BookInfo.self,
-        sortDescriptor: SortDescriptor(keyPath: "saveDate", ascending: false)
-    )
-    var bookList
-    
-    private var placeholderText = "shelf-my-empty".localized
+    @StateObject private var container: MVIContainer<BookShelfIntentProtocol, BookShelfModelStateProtocol>
+    private var state: BookShelfModelStateProtocol { container.model }
+    private var intent: BookShelfIntentProtocol { container.intent }
     
     var body: some View {
         NavigationStack {
@@ -38,6 +26,7 @@ struct BookShelfView: View {
             }
         }
         .onAppear {
+            intent.viewOnAppear()
             print(Realm.Configuration.defaultConfiguration.fileURL)
         }
     }
@@ -49,23 +38,24 @@ struct BookShelfView: View {
                 .bold()
             
             asHorizontalPageContent(height: height * 0.9) {
-                if expectedReviewList.isEmpty {
-                    Text("shelf-announce-empty".localized)
-                        .foregroundStyle(.gray)
-                        .font(.callout)
-                        .frame(maxHeight: height * 0.9, alignment: .center)
-                } else {
-                    ForEach(expectedReviewList, id: \.id) { item in
+                switch state.contentState.expectedStatus {
+                case .normal:
+                    ForEach(state.expectedReviewList, id: \.id) { item in
                         NavigationLinkWrapper {
                             if let book = item.book.first {
                                 BookReviewView.build(book: book)
                             }
                         } inner: {
                             ExpectedReadingView(reviewInfo: item)
-
+                            
                         }
                     }
-
+                    
+                case .empty:
+                    Text("shelf-announce-empty".localized)
+                        .foregroundStyle(.gray)
+                        .font(.callout)
+                        .frame(maxHeight: height * 0.9, alignment: .center)
                 }
             }
         }
@@ -104,29 +94,50 @@ struct BookShelfView: View {
             let width = height / 1.5
             let size = CGSize(width: width, height: height)
             
-            if bookList.isEmpty {
-                PlaceholderView(text: placeholderText, type: .shelf)
-            } else {
+            switch state.contentState.bookStatus {
+            case .normal:
                 LazyVGrid(columns: columns, spacing: 20, content: {
-                    if bookList.count >= 6 {
-                        ForEach(0..<6) { item in
-                            NavigationLinkWrapper {
-                                BookReviewView.build(book: bookList[item])
-                            } inner: {
-                                ShelfBookView(bookList: bookList[item], size: size)
-                            }
-                        }
-                    } else {
-                        ForEach(bookList, id: \.id) { item in
-                            NavigationLinkWrapper {
-                                BookReviewView.build(book: item)
-                            } inner: {
-                                ShelfBookView(bookList: item, size: size)
-                            }
+                    ForEach(state.bookList, id: \.id) { item in
+                        NavigationLinkWrapper {
+                            BookReviewView.build(book: item)
+                        } inner: {
+                            ShelfBookView(bookList: item, size: size)
                         }
                     }
                 })
+            case .excess:
+                LazyVGrid(columns: columns, spacing: 20, content: {
+                    ForEach(0..<6) { item in
+                        NavigationLinkWrapper {
+                            BookReviewView.build(book: state.bookList[item])
+                        } inner: {
+                            ShelfBookView(bookList: state.bookList[item], size: size)
+                        }
+                    }
+                })
+            case .empty:
+                PlaceholderView(text: state.placeholderText, type: .shelf)
             }
         }
+    }
+}
+
+extension BookShelfView {
+    static func build() -> some View {
+        let model = BookShelfModel()
+        let intent = BookShelfIntent(
+            model: model,
+            bookRepository: DefaultBookRepository(),
+            reviewRepository: DefaultReviewRepository()
+        )
+        let container = MVIContainer(
+            intent: intent as BookShelfIntentProtocol,
+            model: model as BookShelfModelStateProtocol,
+            modelChangePublisher: model.objectWillChange
+        )
+        let view = BookShelfView(
+            container: container
+        )
+        return view
     }
 }

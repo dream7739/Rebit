@@ -26,7 +26,7 @@ struct BookReviewView: View {
         }
         .onReceive(state.dismissTrigger) { _ in
             presentationMode.wrappedValue.dismiss()
-        }        
+        }
     }
     
     func reviewBackgroundView() -> some View {

@@ -11,7 +11,6 @@ import Combine
 enum BookReviewContentState {
     case initial(reviewList: [BookReview])
     case updated(reviewList: [BookReview])
-    case empty
 }
 
 protocol BookReviewModelStateProtocol: AnyObject {
@@ -55,6 +54,7 @@ extension BookReviewModel: BookReviewModelActionProtocol {
     func updateBookReview(book: BookInfo, reviewList: [BookReview]) {
         self.book = book
         self.reviewList = reviewList
-        self.contentState = .updated(reviewList: reviewList)
+        contentState = .updated(reviewList: reviewList)
     }
+    
 }

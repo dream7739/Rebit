@@ -13,6 +13,7 @@ protocol ReviewRepository: AnyObject {
     // fetch
     func fetchReview(_ id: ObjectId) -> BookReview
     func fetchFavoriteReviewList() -> [BookReview]
+    func fetchExpectedReviewList() -> [BookReview]
     
     // create
     func createReview( _ book: BookInfo, _ review: BookReview)
@@ -41,6 +42,14 @@ final class DefaultReviewRepository: ReviewRepository {
     func fetchFavoriteReviewList() -> [BookReview] {
         let list = realm.objects(BookReview.self)
             .filter { $0.isLike }
+            .sorted { $0.saveDate > $1.saveDate }
+            .map { $0 }
+        return list
+    }
+    
+    func fetchExpectedReviewList() -> [BookReview] {
+        let list = realm.objects(BookReview.self)
+            .filter { $0.status == 0 }
             .sorted { $0.saveDate > $1.saveDate }
             .map { $0 }
         return list
@@ -89,7 +98,7 @@ final class DefaultReviewRepository: ReviewRepository {
     }
     
     func deleteReview(_ id: ObjectId) {
-        let review = fetchReview(id)
+        guard let review = realm.object(ofType: BookReview.self, forPrimaryKey: id) else { return }
         
         do {
             try realm.write {
