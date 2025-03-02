@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct BookResponse: Decodable, Hashable {
+struct BookResponseDTO: Decodable, Hashable {
     let total: Int
     let start: Int
     let display: Int
-    var items: [Book]
+    var items: [BookContentDTO]
 }
         
-struct Book: Decodable, Hashable {
+struct BookContentDTO: Decodable, Hashable {
     let title: String
     let image: String
     let author: String

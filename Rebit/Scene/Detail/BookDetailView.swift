@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BookDetailView: View {
     @State private var isFullPresented = false
-    var book: Book
+    var book: BookContentDTO
     var coverImage: UIImage?
     
     var body: some View {
@@ -34,8 +34,10 @@ struct BookDetailView: View {
                 }
             }
         }
-        .toolbar(.hidden, for: .tabBar)
         .ignoresSafeArea()
+        .toolbarRole(.editor)
+        .toolbarBackground(.theme, for: .navigationBar)
+        .toolbar(.hidden, for: .tabBar)
         .fullScreenCover(isPresented: $isFullPresented, content: {
             NavigationLazyView(
                 BookWriteView.build(
@@ -81,11 +83,11 @@ struct BookDetailView: View {
 }
 
 struct DetailContentView: View {
-    var book: Book
+    var book: BookContentDTO
     @State private var isOpened = false
     @Environment(\.colorScheme) var color
     
-    init(_ book: Book) {
+    init(_ book: BookContentDTO) {
         self.book = book
     }
     

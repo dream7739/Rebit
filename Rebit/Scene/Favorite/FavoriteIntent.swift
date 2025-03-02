@@ -21,11 +21,15 @@ final class FavoriteIntent: FavoriteIntentProtocol {
     }
     
     func viewOnAppear() {
-        let favoriteList = repository.fetchFavoriteReviewList()
-        if favoriteList.isEmpty {
+        let reviewDTOList = repository.fetchFavoriteReviewList()
+        let bookDTOList = reviewDTOList.map { $0.book.first ?? BookDTO() }
+        
+        if reviewDTOList.isEmpty {
             model.displayNoResult()
         } else {
-            model.updateContent(favorite: favoriteList)
+            let reviewList = reviewDTOList.map { $0.toBookReview() }
+            let bookList = bookDTOList.map { $0.toBook() }
+            model.updateContent(reviewList: reviewList, bookList: bookList)
         }
     }
     

@@ -11,6 +11,7 @@ import RealmSwift
 struct FavoriteBookView: View {
     @StateObject var container: MVIContainer<FavoriteIntentProtocol, FavoriteModelStateProtocol>
     @State private var currentIndex: Int = 0
+    @State private var isActive: Bool = false
     private var state: FavoriteModelStateProtocol { container.model }
     private var intent: FavoriteIntentProtocol { container.intent }
     
@@ -18,8 +19,8 @@ struct FavoriteBookView: View {
         NavigationStack {
             ZStack(alignment: .top) {
                 switch state.contentState {
-                case .content(let favorite):
-                    favoriteCardView(favorite)
+                case .content(let reviewList, let bookList):
+                    favoriteCardView(reviewList, bookList)
                 case .noResult:
                     PlaceholderView(text: state.placeholder, type: .shelf)
                 }
@@ -29,33 +30,39 @@ struct FavoriteBookView: View {
         .onAppear {
             intent.viewOnAppear()
         }
+        .onChange(of: isActive) { newValue in
+            intent.viewOnAppear()
+        }
     }
     
-    func favoriteCardView(_ favorite: [BookReview]) -> some View {
-        ForEach(Array(zip(favorite.indices, favorite)), id: \.0) {
-            (index: Int, item: BookReview) in
+    func favoriteCardView(_ reviewList: [BookReview], _ bookList: [Book]) -> some View {
+        ForEach(Array(zip(reviewList.indices, reviewList)), id: \.0) {
+            (index: Int, review: BookReview) in
             
             NavigationLinkWrapper {
-                if let book = item.book.first {
-//                    BookReviewView.build(book: book)
-                }
+                BookReviewView.build(book: bookList[index], isActive: $isActive)
             } inner: {
-                FavoriteContentView(currentIndex: currentIndex, index: index, item: item)
-                    .gesture (
-                        DragGesture()
-                            .onEnded { value in
-                                let threshold: CGFloat = 50
-                                if value.translation.width > threshold {
-                                    withAnimation {
-                                        currentIndex = max(0, currentIndex - 1)
-                                    }
-                                } else if value.translation.width < -threshold {
-                                    withAnimation {
-                                        currentIndex = min(favorite.count - 1, currentIndex + 1)
-                                    }
+                FavoriteContentView(
+                    currentIndex: currentIndex,
+                    index: index,
+                    book: bookList[index],
+                    review: review
+                )
+                .gesture (
+                    DragGesture()
+                        .onEnded { value in
+                            let threshold: CGFloat = 50
+                            if value.translation.width > threshold {
+                                withAnimation {
+                                    currentIndex = max(0, currentIndex - 1)
+                                }
+                            } else if value.translation.width < -threshold {
+                                withAnimation {
+                                    currentIndex = min(reviewList.count - 1, currentIndex + 1)
                                 }
                             }
-                    )
+                        }
+                )
             }
         }
     }
@@ -64,7 +71,8 @@ struct FavoriteBookView: View {
 struct FavoriteContentView: View {
     var currentIndex: Int
     var index: Int
-    var item: BookReview
+    var book: Book
+    var review: BookReview
     
     @GestureState var dragOffset: CGFloat = 0
     var widthRatio = 2.3
@@ -89,30 +97,28 @@ struct FavoriteContentView: View {
     
     func headerView(_ width: CGFloat, _ height: CGFloat) -> some View {
         VStack(alignment: .center, spacing: 6) {
-            if let book = item.book.first {
-                Image(uiImage: ImageFileManager.shared.loadImageToDocument(filename: "\(book.id)") ?? UIImage())
-                    .resizable()
-                    .frame(width: width , height: height * 0.6)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .opacity(currentIndex == index ? 1.0 : 0.6)
-                    .scaleEffect(currentIndex == index ? 1.0 : 0.7)
-                    .padding(.bottom, 10)
-                Text(book.title)
-                    .font(.callout.bold())
-                    .lineLimit(2)
-                    .multilineTextAlignment(.center)
-                    .opacity(currentIndex == index ? 1 : 0)
-                Text(book.author)
-                    .font(.subheadline)
-                    .opacity(currentIndex == index ? 1 : 0)
-            }
+            Image(uiImage: ImageFileManager.shared.loadImageToDocument(filename: "\(book.id)") ?? UIImage())
+                .resizable()
+                .frame(width: width , height: height * 0.6)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .opacity(currentIndex == index ? 1.0 : 0.6)
+                .scaleEffect(currentIndex == index ? 1.0 : 0.7)
+                .padding(.bottom, 10)
+            Text(book.title)
+                .font(.callout.bold())
+                .lineLimit(2)
+                .multilineTextAlignment(.center)
+                .opacity(currentIndex == index ? 1 : 0)
+            Text(book.author)
+                .font(.subheadline)
+                .opacity(currentIndex == index ? 1 : 0)
             
             HStack(alignment: .center, spacing: 2) {
                 Image(systemName: "star.fill")
                     .resizable()
                     .frame(width: 13, height: 12)
                     .foregroundStyle(.orange)
-                Text(item.ratingDescription)
+                Text(review.ratingDescription)
                     .font(.caption)
                     .foregroundStyle(.orange)
             }
@@ -124,7 +130,7 @@ struct FavoriteContentView: View {
     
     func descriptionView() -> some View {
         VStack(alignment: .center) {
-            Text(item.content)
+            Text(review.content)
                 .multilineTextAlignment(.leading)
                 .lineLimit(4)
                 .asTitleGrayForeground()

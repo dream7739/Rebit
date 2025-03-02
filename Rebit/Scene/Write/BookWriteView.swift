@@ -274,7 +274,7 @@ struct StatusCardView: View {
 extension BookWriteView {
     static func build(
         viewType: BookWriteViewType,
-        book: Book? = nil,
+        book: BookContentDTO? = nil,
         review: BookReview? = nil,
         isFullPresented: Binding<Bool>
     ) -> some View {

@@ -9,7 +9,7 @@ import SwiftUI
 import RealmSwift
 
 struct EntireShelfView: View {
-    @ObservedResults(BookInfo.self, sortDescriptor: SortDescriptor(keyPath: "saveDate", ascending: false))
+    @ObservedResults(BookDTO.self, sortDescriptor: SortDescriptor(keyPath: "saveDate", ascending: false))
     var bookList
     @State private var text = ""
     private var placeholderText = "shelf-entire-empty".localized
@@ -49,7 +49,7 @@ struct EntireShelfView: View {
                     NavigationLinkWrapper {
 //                        BookReviewView.build(book: item)
                     } inner: {
-                        ShelfBookView(bookList: item, size: size)
+//                        ShelfBookView(bookList: item, size: size)
                     }
                 }
             } else {
@@ -57,7 +57,7 @@ struct EntireShelfView: View {
                     NavigationLinkWrapper {
 //                        BookReviewView.build(book: item)
                     } inner: {
-                        ShelfBookView(bookList: item, size: size)
+//                        ShelfBookView(bookList: item, size: size)
                     }
                     
                 }
@@ -67,9 +67,4 @@ struct EntireShelfView: View {
         .padding(.vertical, 10)
     }
     
-}
-
-
-#Preview {
-    EntireShelfView()
 }

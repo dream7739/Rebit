@@ -41,7 +41,7 @@ struct BookSearchView: View {
         }
     }
     
-    func searchListView(bookList: [Book]) -> some View {
+    func searchListView(bookList: [BookContentDTO]) -> some View {
         ScrollViewReader { reader in
             ScrollView(.vertical) {
                 LazyVStack {
@@ -64,7 +64,7 @@ struct BookSearchView: View {
 }
 
 struct SearchRowView: View {
-    var book: Book
+    var book: BookContentDTO
     @Environment(\.colorScheme) var color
     
     var body: some View {

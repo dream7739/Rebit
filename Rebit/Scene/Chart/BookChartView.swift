@@ -10,7 +10,7 @@ import Charts
 import RealmSwift
 
 struct BookChartView: View {
-    @ObservedResults(BookReview.self, where: { $0.status == 2 })
+    @ObservedResults(BookReviewDTO.self, where: { $0.status == 2 })
     var bookList
     
     @ObservedResults(ReadingGoal.self, where: { $0.year == Date.currentYear() })

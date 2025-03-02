@@ -10,14 +10,14 @@ import Combine
 
 enum BookSearchContentState {
     case initial
-    case content(books: [Book])
+    case content(books: [BookContentDTO])
     case noResult
 }
 
 protocol BookSearchModelStateProtocol: AnyObject {
     var contentState: BookSearchContentState { get }
     var searchText: String { get set }
-    var bookList: [Book] { get }
+    var bookList: [BookContentDTO] { get }
     var placeholder: String { get }
     var noResults: String { get }
     var scrollToTop: PassthroughSubject<Void, Never> { get }
@@ -25,14 +25,14 @@ protocol BookSearchModelStateProtocol: AnyObject {
 
 protocol BookSearchModelActionProtocol: AnyObject {
     func displayInitial()
-    func updateContent(books: [Book])
+    func updateContent(books: [BookContentDTO])
     func displayNoResult()
 }
 
 final class BookSearchModel: ObservableObject, BookSearchModelStateProtocol {
     @Published var contentState: BookSearchContentState = .initial
     @Published var searchText = ""
-    var bookList: [Book] = []
+    var bookList: [BookContentDTO] = []
     var placeholder = "search-empty".localized
     var noResults = "search-result-empty".localized
     var scrollToTop = PassthroughSubject<Void, Never>()
@@ -43,7 +43,7 @@ extension BookSearchModel: BookSearchModelActionProtocol {
         contentState = .initial
     }
     
-    func updateContent(books: [Book]) {
+    func updateContent(books: [BookContentDTO]) {
         contentState = .content(books: books)
     }
     

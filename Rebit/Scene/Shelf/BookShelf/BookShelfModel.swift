@@ -28,15 +28,21 @@ struct BookShelfContentState {
     }
 }
 
+struct BookReviewContent: Hashable, Identifiable {
+    let id = UUID()
+    let book: Book
+    let bookReview: BookReview
+}
+
 protocol BookShelfModelStateProtocol: AnyObject {
     var contentState: BookShelfContentState { get }
-    var expectedReviewList: [BookReview] { get }
-    var bookList: [BookInfo] { get }
+    var expectedReviewList: [BookReviewContent] { get }
+    var bookList: [Book] { get }
     var placeholderText: String { get }
 }
 
 protocol BookShelfModelActionProtocol: AnyObject {
-    func displayInitial(expectedReviewList: [BookReview], bookList: [BookInfo])
+    func displayInitial(expectedReviewList: [BookReviewContent], bookList: [Book])
     func setContentState()
 }
 
@@ -44,13 +50,13 @@ final class BookShelfModel: ObservableObject, BookShelfModelStateProtocol {
     private let bookDisplayLimit = 6
 
     @Published var contentState = BookShelfContentState()
-    var expectedReviewList: [BookReview] = []
-    var bookList: [BookInfo] = []
-    var placeholderText = "shelf-my-empty".localized    
+    var expectedReviewList: [BookReviewContent] = []
+    var bookList: [Book] = []
+    var placeholderText = "shelf-my-empty".localized
 }
 
 extension BookShelfModel: BookShelfModelActionProtocol {
-    func displayInitial(expectedReviewList: [BookReview], bookList: [BookInfo]) {
+    func displayInitial(expectedReviewList: [BookReviewContent], bookList: [Book]) {
         self.expectedReviewList = expectedReviewList
         self.bookList = bookList
     }

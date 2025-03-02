@@ -11,6 +11,7 @@ struct BookReviewView: View {
     @StateObject var container: MVIContainer<BookReviewIntentProtocol, BookReviewModelStateProtocol>
     private var state: BookReviewModelStateProtocol { container.model }
     private var intent: BookReviewIntentProtocol { container.intent }
+    @Binding var isActive: Bool
     @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
@@ -26,6 +27,9 @@ struct BookReviewView: View {
         }
         .onReceive(state.dismissTrigger) { _ in
             presentationMode.wrappedValue.dismiss()
+        }
+        .onDisappear {
+            isActive.toggle()
         }
     }
     
@@ -69,7 +73,7 @@ struct BookReviewContentView: View {
         }
         .fullScreenCover(isPresented: $isFullPresented,
                          onDismiss: {
-            intent.updateTrigger(review)
+            intent.updateReviewStatus(review)
         }) {
             BookWriteView.build(
                 viewType: .edit,
@@ -147,7 +151,7 @@ struct BookReviewContentView: View {
             NavigationLinkWrapper {
                 let book = state.book
                 BookDetailView(
-                    book: Book(
+                    book: BookContentDTO(
                         title: book.title,
                         image: "",
                         author: book.author,
@@ -173,7 +177,7 @@ struct BookReviewContentView: View {
                 Literal.ReadingStatus(rawValue: review.status)?.title ?? ""
             )
             infoBoxView("review-rating".localized, review.ratingDescription)
-            infoBoxView("review-count".localized, state.book.reviewCountDescription)
+            infoBoxView("review-count".localized, state.reviewList.count.formatted())
         }
         .frame(maxWidth: .infinity)
         .frame(height: 65)
@@ -234,7 +238,7 @@ struct BookReviewContentView: View {
 }
 
 extension BookReviewView {
-    static func build(book: BookInfo) -> some View {
+    static func build(book: Book, isActive: Binding<Bool>) -> some View {
         let model = BookReviewModel(book: book)
         let intent = BookReviewIntent(
             model: model,
@@ -247,7 +251,10 @@ extension BookReviewView {
             model: model as BookReviewModelStateProtocol,
             modelChangePublisher: model.objectWillChange
         )
-        let view = BookReviewView(container: container)
+        let view = BookReviewView(
+            container: container,
+            isActive: isActive
+        )
         return view
     }
 }

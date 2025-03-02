@@ -17,8 +17,8 @@ protocol BookSearchIntentProtocol: AnyObject {
 final class BookSearchIntent: BookSearchIntentProtocol {
     private var model: BookSearchModel
     private var networkManager: NetworkType
-    private var bookRequest = BookRequest(query: "")
-    private var bookResponse = BookResponse(
+    private var bookRequest = BookRequestDTO(query: "")
+    private var bookResponse = BookResponseDTO(
         total: 0,
         start: 0,
         display: 0,

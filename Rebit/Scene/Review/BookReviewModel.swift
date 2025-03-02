@@ -14,7 +14,7 @@ enum BookReviewContentState {
 }
 
 protocol BookReviewModelStateProtocol: AnyObject {
-    var book: BookInfo { get }
+    var book: Book { get }
     var reviewList: [BookReview] { get }
     var bookCover: UIImage { get }
     var contentState: BookReviewContentState { get }
@@ -24,17 +24,17 @@ protocol BookReviewModelStateProtocol: AnyObject {
 protocol BookReviewModelActionProtocol: AnyObject {
     func displayInitial(bookCover: UIImage, reviewList: [BookReview])
     func dismissReview()
-    func updateBookReview(book: BookInfo, reviewList: [BookReview])
+    func updateBookReview(book: Book, reviewList: [BookReview])
 }
 
 final class BookReviewModel: ObservableObject, BookReviewModelStateProtocol {
-    var book: BookInfo
+    var book: Book
     var reviewList: [BookReview] = []
     var bookCover = UIImage()
     @Published var contentState: BookReviewContentState
     var dismissTrigger = PassthroughSubject<Void, Never>()
 
-    init(book: BookInfo) {
+    init(book: Book) {
         self.book = book
         contentState = .initial(reviewList: reviewList)
     }
@@ -47,11 +47,12 @@ extension BookReviewModel: BookReviewModelActionProtocol {
         self.contentState = .initial(reviewList: reviewList)
     }
     
+    // 리뷰 삭제 시 트리거 발생시키도록 구현
     func dismissReview() {
         dismissTrigger.send(())
     }
     
-    func updateBookReview(book: BookInfo, reviewList: [BookReview]) {
+    func updateBookReview(book: Book, reviewList: [BookReview]) {
         self.book = book
         self.reviewList = reviewList
         contentState = .updated(reviewList: reviewList)

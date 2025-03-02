@@ -11,12 +11,12 @@ final class MockAPIManager: NetworkType {
     static let shared = MockAPIManager()
     private init() { }
     
-    func callRequest(request: BookRequest) async throws -> BookResponse {
-        return BookResponse(
+    func callRequest(request: BookRequestDTO) async throws -> BookResponseDTO {
+        return BookResponseDTO(
             total: 10,
             start: 1,
             display: 30,
-            items: [Book(
+            items: [BookContentDTO(
                 title: "제목",
                 image: "이미지",
                 author: "작가",

@@ -74,22 +74,11 @@ extension BookWriteIntent {
         model.dismissRequestTrigger()
     }
     
-    // 기존 리뷰 갱신
-    // 기존 리뷰를 사용자가 작성한 값으로 데이터베이스 갱신
-    
-    // 리뷰 갱신 완료 후
-    // 모델에 dismiss 트리거 전달
-    func updateReview() {
-        guard let oldReview = model.review else { return }
-        let newReview = createNewReviewData()
-        reviewRepository.updateReview(oldReview, newReview)
-        model.dismissRequestTrigger()
-    }
-    
+  
     // 데이터베이스 책 저장
     // 책 커버 이미지 저장
-    func saveBookData(_ book: Book) {
-        let bookInfo = BookInfo(
+    func saveBookData(_ book: BookContentDTO) {
+        let bookInfo = BookDTO(
             title: book.title,
             content: book.description,
             author: book.author,
@@ -106,13 +95,13 @@ extension BookWriteIntent {
     // 데이터베이스 리뷰 저장
     // 1. 가지고 있는 책 정보를 통해 데이터베이스에 저장된 책을 가져온다.
     // 2. 데이터베이스에 리뷰를 저장한다.
-    func saveReviewData(_ book: Book) {
+    func saveReviewData(_ book: BookContentDTO) {
         guard let bookInfo = bookRepository.getBookObject(
             title: book.title,
             isbn: book.isbn
         ) else { return }
         
-        let bookReview = BookReview(
+        let bookReview = BookReviewDTO(
             title: model.summaryText,
             content: model.reviewText,
             rating: model.rating,
@@ -125,9 +114,21 @@ extension BookWriteIntent {
         reviewRepository.createReview(bookInfo, bookReview)
     }
     
+    // 기존 리뷰 갱신
+    // 기존 리뷰를 사용자가 작성한 값으로 데이터베이스 갱신
+    // 리뷰 갱신 완료 후
+    // 모델에 dismiss 트리거 전달
+    func updateReview() {
+        guard let oldReviewID = model.review?.id else { return }
+        let newReview = createNewReviewData()
+        reviewRepository.updateReview(oldReviewID, newReview)
+        model.dismissRequestTrigger()
+    }
+    
+    
     // 사용자 작성값으로 리뷰를 구성
-    func createNewReviewData() -> BookReview {
-        let newReview = BookReview(
+    func createNewReviewData() -> BookReviewDTO {
+        let newReview = BookReviewDTO(
             title: model.summaryText.trimmingCharacters(in: .whitespacesAndNewlines),
             content: model.reviewText.trimmingCharacters(in: .whitespacesAndNewlines),
             rating: model.rating,

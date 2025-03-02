@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-final class BookInfo: Object, ObjectKeyIdentifiable {
+final class BookDTO: Object, ObjectKeyIdentifiable {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted(indexed: true) var title: String
     @Persisted var content: String
@@ -17,7 +17,7 @@ final class BookInfo: Object, ObjectKeyIdentifiable {
     @Persisted var pubdate: String
     @Persisted var publisher: String
     @Persisted var saveDate: Date
-    @Persisted var reviewList = List<BookReview>()
+    @Persisted var reviewList = List<BookReviewDTO>()
     
     convenience init(
         title: String,
@@ -27,7 +27,7 @@ final class BookInfo: Object, ObjectKeyIdentifiable {
         pubdate: String,
         publisher: String,
         saveDate: Date = Date(),
-        reviewList: List<BookReview> = List<BookReview>()
+        reviewList: List<BookReviewDTO> = List<BookReviewDTO>()
     ) {
         self.init()
         self.title = title
@@ -43,4 +43,19 @@ final class BookInfo: Object, ObjectKeyIdentifiable {
         return reviewList.count.formatted()
     }
     
+}
+
+extension BookDTO {
+    func toBook() -> Book {
+        return Book(
+            id: self.id,
+            title: self.title,
+            content: self.content,
+            author: self.author,
+            isbn: self.isbn,
+            publisher: self.publisher,
+            pubdate: self.pubdate,
+            saveDate: self.saveDate
+        )
+    }
 }

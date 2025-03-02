@@ -21,7 +21,7 @@ final class RebitNetworkTests: XCTestCase {
     }
     
     func testAPIManager_ValidISBN_ReturnSuccess() async throws {
-        let result = try await sut.callRequest(request: BookRequest(query: "TEST"))
+        let result = try await sut.callRequest(request: BookRequestDTO(query: "TEST"))
         XCTAssertGreaterThanOrEqual(result.items.first!.isbn.count, 10)
         XCTAssertLessThanOrEqual(result.items.first!.isbn.count, 13)
     }

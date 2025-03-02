@@ -9,15 +9,15 @@ import Foundation
 import RealmSwift
 
 protocol BookRepository: AnyObject {
-    func addBook(_ book: BookInfo)
-    func fetchAll() -> Results<BookInfo>
+    func addBook(_ book: BookDTO)
+    func fetchAll() -> Results<BookDTO>
     func deleteBook(_ id: ObjectId)
     
     // 책 존재 유무
     func isExistBook(title: String, isbn: String) -> Bool
     
     // 책 단건 조회
-    func getBookObject(title: String, isbn: String) -> BookInfo?
+    func getBookObject(title: String, isbn: String) -> BookDTO?
 }
 
 final class DefaultBookRepository: BookRepository {
@@ -27,7 +27,7 @@ final class DefaultBookRepository: BookRepository {
         realm = try! Realm()
     }
     
-    func addBook(_ book: BookInfo) {
+    func addBook(_ book: BookDTO) {
         do {
             try realm.write {
                 realm.add(book)
@@ -37,13 +37,13 @@ final class DefaultBookRepository: BookRepository {
         }
     }
     
-    func fetchAll() -> Results<BookInfo> {
-        let list = realm.objects(BookInfo.self)
+    func fetchAll() -> Results<BookDTO> {
+        let list = realm.objects(BookDTO.self)
         return list
     }
     
     func deleteBook(_ id: ObjectId) {
-        guard let book = realm.object(ofType: BookInfo.self, forPrimaryKey: id) else { return }
+        guard let book = realm.object(ofType: BookDTO.self, forPrimaryKey: id) else { return }
         
         do {
             try realm.write {
@@ -57,14 +57,14 @@ final class DefaultBookRepository: BookRepository {
 
 extension DefaultBookRepository {
     func isExistBook(title: String, isbn: String) -> Bool {
-        let existCount = realm.objects(BookInfo.self).where {
+        let existCount = realm.objects(BookDTO.self).where {
             $0.title.equals(title) && $0.isbn.equals(isbn)
         }.count
         
         return existCount >= 1
     }
     
-    func getBookObject(title: String, isbn: String) -> BookInfo? {
+    func getBookObject(title: String, isbn: String) -> BookDTO? {
         let bookList = fetchAll()
 
         let bookInfo = bookList.where {
@@ -75,7 +75,7 @@ extension DefaultBookRepository {
     }
     
     func validateBook(_ id: ObjectId) -> Bool {
-        guard let book = realm.object(ofType: BookInfo.self, forPrimaryKey: id) else { return false }
+        guard let book = realm.object(ofType: BookDTO.self, forPrimaryKey: id) else { return false }
         let reviewCount = book.reviewList.count
         return reviewCount > 0 ? true : false
     }

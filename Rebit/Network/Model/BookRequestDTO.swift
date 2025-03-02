@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BookRequest {
+struct BookRequestDTO {
     var query: String
     var start = 1
     let display = 30

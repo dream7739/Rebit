@@ -12,7 +12,8 @@ struct BookShelfView: View {
     @StateObject private var container: MVIContainer<BookShelfIntentProtocol, BookShelfModelStateProtocol>
     private var state: BookShelfModelStateProtocol { container.model }
     private var intent: BookShelfIntentProtocol { container.intent }
-    
+    @State private var isActive: Bool = false
+
     var body: some View {
         NavigationStack {
             GeometryReader { proxy in
@@ -29,6 +30,9 @@ struct BookShelfView: View {
             intent.viewOnAppear()
             print(Realm.Configuration.defaultConfiguration.fileURL)
         }
+        .onChange(of: isActive) { newValue in
+            intent.viewOnAppear()
+        }
     }
     
     func nowReadingSection(_ height: CGFloat) -> some View {
@@ -42,12 +46,9 @@ struct BookShelfView: View {
                 case .normal:
                     ForEach(state.expectedReviewList, id: \.id) { item in
                         NavigationLinkWrapper {
-                            if let book = item.book.first {
-                                BookReviewView.build(book: book)
-                            }
+                            BookReviewView.build(book: item.book, isActive: $isActive)
                         } inner: {
-                            ExpectedReadingView(reviewInfo: item)
-                            
+                            ExpectedReadingView(bookReviewContent: item)
                         }
                     }
                     
@@ -99,7 +100,7 @@ struct BookShelfView: View {
                 LazyVGrid(columns: columns, spacing: 20, content: {
                     ForEach(state.bookList, id: \.id) { item in
                         NavigationLinkWrapper {
-                            BookReviewView.build(book: item)
+                            BookReviewView.build(book: item, isActive: $isActive)
                         } inner: {
                             ShelfBookView(bookList: item, size: size)
                         }
@@ -109,7 +110,7 @@ struct BookShelfView: View {
                 LazyVGrid(columns: columns, spacing: 20, content: {
                     ForEach(0..<6) { item in
                         NavigationLinkWrapper {
-                            BookReviewView.build(book: state.bookList[item])
+                            BookReviewView.build(book: state.bookList[item], isActive: $isActive)
                         } inner: {
                             ShelfBookView(bookList: state.bookList[item], size: size)
                         }

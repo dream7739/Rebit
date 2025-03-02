@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol BookWriteModelStateProtocol: AnyObject {
-    var book: Book? { get }
+    var book: BookContentDTO? { get }
     var review: BookReview? { get }
     var viewType: BookWriteViewType { get }
     var summaryText: String { get set }
@@ -28,7 +28,7 @@ protocol BookWriteModelActionProtocol: AnyObject {
 
 final class BookWriteModel: ObservableObject, BookWriteModelStateProtocol {
     // 생성 시 넘겨받아 사용할 값
-    var book: Book?
+    var book: BookContentDTO?
     var review: BookReview?
     var viewType: BookWriteViewType
     
@@ -43,7 +43,7 @@ final class BookWriteModel: ObservableObject, BookWriteModelStateProtocol {
     
     init(
         viewType: BookWriteViewType,
-        book: Book? = nil,
+        book: BookContentDTO? = nil,
         review: BookReview? = nil
     ) {
         self.viewType = viewType

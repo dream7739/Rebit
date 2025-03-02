@@ -9,7 +9,7 @@ import SwiftUI
 import RealmSwift
 
 struct ShelfBookView: View {
-    var bookList: BookInfo
+    var bookList: Book
     var size: CGSize
     
     var body: some View {

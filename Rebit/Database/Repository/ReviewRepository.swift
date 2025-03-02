@@ -11,15 +11,15 @@ import RealmSwift
 // ReviewRepository
 protocol ReviewRepository: AnyObject {
     // fetch
-    func fetchReview(_ id: ObjectId) -> BookReview
-    func fetchFavoriteReviewList() -> [BookReview]
-    func fetchExpectedReviewList() -> [BookReview]
+    func fetchReview(_ id: ObjectId) -> BookReviewDTO
+    func fetchFavoriteReviewList() -> [BookReviewDTO]
+    func fetchExpectedReviewList() -> [BookReviewDTO]
     
     // create
-    func createReview( _ book: BookInfo, _ review: BookReview)
+    func createReview( _ book: BookDTO, _ review: BookReviewDTO)
     
     // update
-    func updateReview(_ oldReview: BookReview, _ newReview: BookReview)
+    func updateReview(_ id: ObjectId, _ newReview: BookReviewDTO)
     func updateLike(_ id: ObjectId)
     
     // delete
@@ -34,21 +34,21 @@ final class DefaultReviewRepository: ReviewRepository {
     }
     
     // fetch
-    func fetchReview(_ id: ObjectId) -> BookReview {
-        let review = realm.object(ofType: BookReview.self, forPrimaryKey: id) ?? BookReview()
+    func fetchReview(_ id: ObjectId) -> BookReviewDTO {
+        let review = realm.object(ofType: BookReviewDTO.self, forPrimaryKey: id) ?? BookReviewDTO()
         return review
     }
     
-    func fetchFavoriteReviewList() -> [BookReview] {
-        let list = realm.objects(BookReview.self)
+    func fetchFavoriteReviewList() -> [BookReviewDTO] {
+        let list = realm.objects(BookReviewDTO.self)
             .filter { $0.isLike }
             .sorted { $0.saveDate > $1.saveDate }
             .map { $0 }
         return list
     }
     
-    func fetchExpectedReviewList() -> [BookReview] {
-        let list = realm.objects(BookReview.self)
+    func fetchExpectedReviewList() -> [BookReviewDTO] {
+        let list = realm.objects(BookReviewDTO.self)
             .filter { $0.status == 0 }
             .sorted { $0.saveDate > $1.saveDate }
             .map { $0 }
@@ -56,7 +56,7 @@ final class DefaultReviewRepository: ReviewRepository {
     }
     
     // create
-    func createReview( _ book: BookInfo, _ review: BookReview) {
+    func createReview( _ book: BookDTO, _ review: BookReviewDTO) {
         do {
             try realm.write {
                 book.reviewList.append(review)
@@ -67,9 +67,8 @@ final class DefaultReviewRepository: ReviewRepository {
     }
     
     // update
-    func updateReview(_ oldReview: BookReview, _ newReview: BookReview) {
-        guard let review = realm.object(ofType: BookReview.self, forPrimaryKey: oldReview.id) else { return }
-        
+    func updateReview(_ id: ObjectId, _ newReview: BookReviewDTO) {
+        guard let review = realm.object(ofType: BookReviewDTO.self, forPrimaryKey: id) else { return }
         do {
             try realm.write {
                 review.title = newReview.title
@@ -86,7 +85,7 @@ final class DefaultReviewRepository: ReviewRepository {
     }
     
     func updateLike(_ id: ObjectId) {
-        guard let review = realm.object(ofType: BookReview.self, forPrimaryKey: id) else { return }
+        guard let review = realm.object(ofType: BookReviewDTO.self, forPrimaryKey: id) else { return }
         
         do {
             try realm.write {
@@ -98,7 +97,7 @@ final class DefaultReviewRepository: ReviewRepository {
     }
     
     func deleteReview(_ id: ObjectId) {
-        guard let review = realm.object(ofType: BookReview.self, forPrimaryKey: id) else { return }
+        guard let review = realm.object(ofType: BookReviewDTO.self, forPrimaryKey: id) else { return }
         
         do {
             try realm.write {

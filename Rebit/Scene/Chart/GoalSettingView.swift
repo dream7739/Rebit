@@ -72,8 +72,3 @@ struct GoalSettingView: View {
         }
     }
 }
-
-
-//#Preview {
-//    GoalSettingView()
-//}

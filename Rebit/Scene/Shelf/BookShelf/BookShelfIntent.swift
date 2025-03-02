@@ -25,11 +25,26 @@ final class BookShelfIntent: BookShelfIntentProtocol {
     }
     
     func viewOnAppear() {
-        let expectedReviewList = reviewRepository.fetchExpectedReviewList()
-        let bookList: [BookInfo] = bookRepository.fetchAll().map { $0 }
+        let expectedReviewList = fetchExpectedReviewList()
+        let bookList = fetchBookList()
         model.displayInitial(expectedReviewList: expectedReviewList, bookList: bookList)
         model.setContentState()
     }
     
+    func fetchExpectedReviewList() -> [BookReviewContent] {
+        let expectedReviewDTOList = reviewRepository.fetchExpectedReviewList()
+        let expectedReviewList = expectedReviewDTOList.map {
+            BookReviewContent(
+                book: $0.book.first!.toBook(),
+                bookReview: $0.toBookReview()
+            )
+        }
+        return expectedReviewList
+    }
     
+    func fetchBookList() -> [Book] {
+        let bookDTOList = bookRepository.fetchAll()
+        let bookList: [Book] = bookDTOList.map { $0.toBook() }
+        return bookList
+    }
 }

@@ -8,14 +8,14 @@
 import Foundation
 
 protocol NetworkType {
-    func callRequest(request: BookRequest) async throws -> BookResponse
+    func callRequest(request: BookRequestDTO) async throws -> BookResponseDTO
 }
 
 final class APIManager: NetworkType {
     static let shared = APIManager()
     private init() { }
     
-    func callRequest(request: BookRequest) async throws -> BookResponse {
+    func callRequest(request: BookRequestDTO) async throws -> BookResponseDTO {
         //URLComponent
         var component = URLComponents(string: APIURL.naver)!
         
@@ -54,7 +54,7 @@ final class APIManager: NetworkType {
             throw APIError.invalidStatus
         }
         
-        guard let decodedData = try? JSONDecoder().decode(BookResponse.self, from: data) else {
+        guard let decodedData = try? JSONDecoder().decode(BookResponseDTO.self, from: data) else {
             throw APIError.failDecoding
         }
         
