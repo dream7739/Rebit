@@ -76,7 +76,7 @@ struct SearchRowView: View {
                     .frame(width: 90, height: 130)
                     .clipShape(RoundedRectangle(cornerRadius: 5))
                 
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 2) {
                     Text(book.title)
                         .font(.callout.bold())
                         .lineLimit(2)
@@ -84,21 +84,23 @@ struct SearchRowView: View {
                         .font(.footnote)
                         .lineLimit(2)
                         .foregroundStyle(.gray)
-                    Spacer()
+                    Text(book.description)
+                        .font(.caption)
+                        .lineLimit(3)
+                        .foregroundStyle(.gray)
+                        .padding(.vertical, 3)
                     HStack {
                         Spacer()
                         WriteButtonView()
                     }
+                    .padding(.top, 2)
                 }
             }
             .padding()
-            .frame(height: 160)
             .background(
-                RoundedRectangle(cornerRadius: 10)
+                Rectangle()
                     .fill(color == .light ? .white : .black)
             )
-            .padding(.horizontal, 10)
-            .padding(.vertical, 5)
         }
     }
 }

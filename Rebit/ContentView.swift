@@ -12,7 +12,3 @@ struct ContentView: View {
        MainTabView()
     }
 }
-
-#Preview {
-    ContentView()
-}

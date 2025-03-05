@@ -28,7 +28,6 @@ struct BookShelfView: View {
         }
         .onAppear {
             intent.viewOnAppear()
-            print(Realm.Configuration.defaultConfiguration.fileURL)
         }
         .onChange(of: isActive) { newValue in
             intent.viewOnAppear()

@@ -10,8 +10,8 @@ import SwiftUI
 struct WriteButtonView: View {
     var body: some View {
         Text("shelf-write-review".localized)
-            .font(.callout.bold())
-            .frame(width: 90, height: 35)
+            .font(.footnote.bold())
+            .frame(width: 70, height: 28)
             .background(.theme)
             .foregroundStyle(.white)
             .clipShape(
