@@ -34,7 +34,12 @@ final class EntireShelfIntent: EntireShelfIntentProtocol {
             model.displaySearchResult(bookList: bookList)
         } else {
             let bookList: [Book] = fetchBookList(keyword: keyword)
-            model.displaySearchResult(bookList: bookList)
+            
+            if bookList.isEmpty {
+                model.displayEmpty()
+            } else {
+                model.displaySearchResult(bookList: bookList)
+            }
         }
     }
     
