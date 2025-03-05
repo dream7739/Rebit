@@ -21,6 +21,7 @@ struct MainToolbar: ViewModifier {
                     }
                 }
             }
+            .toolbarBackground(.toolbarBackground, for: .navigationBar)
     }
 }
 

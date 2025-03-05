@@ -19,8 +19,6 @@ struct BookReviewView: View {
             reviewBackgroundView()
             reviewContentView()
         }
-        .toolbarRole(.editor)
-        .toolbarBackground(.clear, for: .navigationBar)
         .toolbar(.hidden, for: .tabBar)
         .onAppear {
             intent.viewOnAppear()

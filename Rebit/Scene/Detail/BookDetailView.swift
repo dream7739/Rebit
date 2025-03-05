@@ -35,8 +35,6 @@ struct BookDetailView: View {
             }
         }
         .ignoresSafeArea()
-        .toolbarRole(.editor)
-        .toolbarBackground(.theme, for: .navigationBar)
         .toolbar(.hidden, for: .tabBar)
         .fullScreenCover(isPresented: $isFullPresented, content: {
             NavigationLazyView(

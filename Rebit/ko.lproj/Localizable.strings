@@ -100,7 +100,7 @@
 "book-info-publisher" = "출판사";
 
 //책 상세 - 출판일
-"book-info-pubdate" = "출판사";
+"book-info-pubdate" = "출판일";
 
 //기록 - 타이틀
 "write-title" = "이 책은 어떤 책인가요?";
