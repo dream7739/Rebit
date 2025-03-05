@@ -9,8 +9,14 @@ import Foundation
 import RealmSwift
 
 protocol BookRepository: AnyObject {
+    // 책 추가
     func addBook(_ book: BookDTO)
+    
+    // 책 조회
     func fetchAll() -> Results<BookDTO>
+    func fetch(keyword: String) -> Results<BookDTO>
+    
+    // 책 삭제
     func deleteBook(_ id: ObjectId)
     
     // 책 존재 유무
@@ -39,6 +45,14 @@ final class DefaultBookRepository: BookRepository {
     
     func fetchAll() -> Results<BookDTO> {
         let list = realm.objects(BookDTO.self)
+        return list
+    }
+    
+    func fetch(keyword: String) -> Results<BookDTO> {
+        let list = realm.objects(BookDTO.self).where {
+            $0.title.contains(keyword, options: .caseInsensitive)
+            || $0.content.contains(keyword, options: .caseInsensitive)
+        }
         return list
     }
     

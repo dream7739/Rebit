@@ -9,29 +9,40 @@ import SwiftUI
 import RealmSwift
 
 struct EntireShelfView: View {
-    @ObservedResults(BookDTO.self, sortDescriptor: SortDescriptor(keyPath: "saveDate", ascending: false))
-    var bookList
-    @State private var text = ""
-    private var placeholderText = "shelf-entire-empty".localized
+    @StateObject private var container: MVIContainer<EntireShelfIntentProtocol, EntireShelfModelStateProtocol>
+    private var intent: EntireShelfIntentProtocol { container.intent }
+    private var state: EntireShelfModelStateProtocol { container.model }
+    
+    @State private var isActive = false
     
     var body: some View {
         VStack {
-            SearchBarView(text: $text)
+            SearchBarView(text: container.binding(for: \.searchText))
                 .padding(.horizontal, 15)
             
-            if bookList.isEmpty {
-                PlaceholderView(text: placeholderText, type: .shelf)
-            } else {
+            switch state.contentState {
+            case .initial(let bookList), .result(let bookList):
                 ScrollView(.vertical) {
-                    verticalGridView()
+                    verticalGridView(bookList: bookList)
                 }
                 .scrollDismissesKeyboard(.immediately)
+            case .empty(let placeholder):
+                PlaceholderView(text: placeholder, type: .shelf)
             }
+        }
+        .onAppear {
+            intent.viewOnAppear()
+        }
+        .onChange(of: state.searchText) { newValue in
+            intent.searchTextOnChanged(searchText: newValue)
+        }
+        .onChange(of: isActive) { newValue in
+            intent.viewOnAppear()
         }
         .navigationBarTitleDisplayMode(.inline)
     }
     
-    func verticalGridView() -> some View {
+    func verticalGridView(bookList: [Book]) -> some View {
         let columns = [
             GridItem(.flexible()),
             GridItem(.flexible()),
@@ -44,27 +55,32 @@ struct EntireShelfView: View {
             let height = width * 1.5
             let size = CGSize(width: width, height: height)
             
-            if text.isEmpty {
-                ForEach(bookList, id: \.id) { item in
-                    NavigationLinkWrapper {
-//                        BookReviewView.build(book: item)
-                    } inner: {
-//                        ShelfBookView(bookList: item, size: size)
-                    }
-                }
-            } else {
-                ForEach(bookList.where { $0.title.contains(text, options: .caseInsensitive) }, id: \.id) { item in
-                    NavigationLinkWrapper {
-//                        BookReviewView.build(book: item)
-                    } inner: {
-//                        ShelfBookView(bookList: item, size: size)
-                    }
-                    
+            ForEach(bookList, id: \.id) { item in
+                NavigationLinkWrapper {
+                    BookReviewView.build(book: item, isActive: $isActive)
+                } inner: {
+                    ShelfBookView(bookList: item, size: size)
                 }
             }
         })
         .padding(.horizontal, 15)
         .padding(.vertical, 10)
     }
-    
+}
+
+extension EntireShelfView {
+    static func build() -> some View {
+        let model = EntireShelfModel()
+        let intent = EntireShelfIntent(
+            model: model,
+            bookRepository: DefaultBookRepository()
+        )
+        let container = MVIContainer(
+            intent: intent as EntireShelfIntentProtocol,
+            model: model as EntireShelfModelStateProtocol,
+            modelChangePublisher: model.objectWillChange
+        )
+        let view = EntireShelfView(container: container)
+        return view
+    }
 }

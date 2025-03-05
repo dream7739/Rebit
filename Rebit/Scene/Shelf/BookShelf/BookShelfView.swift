@@ -71,7 +71,7 @@ struct BookShelfView: View {
                     .font(.callout)
                 Spacer()
                 NavigationLinkWrapper {
-                    EntireShelfView()
+                    EntireShelfView.build()
                 } inner: {
                     Text("shelf-detail".localized)
                         .font(.footnote)

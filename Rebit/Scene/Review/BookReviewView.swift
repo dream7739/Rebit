@@ -193,10 +193,10 @@ struct BookReviewContentView: View {
                     
                     if title == "review-rating".localized && content != "-" {
                         HStack(spacing: 5) {
-                            Image(systemName: "star.fill")
+                            Image(.ratingFill)
                                 .resizable()
                                 .frame(width: 12, height: 12)
-                                .foregroundStyle(.orange)
+                                .foregroundStyle(.theme)
                             Text(content)
                                 .font(.callout.bold())
                         }

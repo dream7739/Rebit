@@ -113,14 +113,14 @@ struct FavoriteContentView: View {
                 .font(.subheadline)
                 .opacity(currentIndex == index ? 1 : 0)
             
-            HStack(alignment: .center, spacing: 2) {
-                Image(systemName: "star.fill")
+            HStack(alignment: .center, spacing: 4) {
+                Image(.ratingFill)
                     .resizable()
                     .frame(width: 13, height: 12)
                     .foregroundStyle(.orange)
                 Text(review.ratingDescription)
                     .font(.caption)
-                    .foregroundStyle(.orange)
+                    .foregroundStyle(.theme)
             }
             .opacity(currentIndex == index ? 1 : 0)
             .frame(maxWidth: .infinity, alignment: .center)
