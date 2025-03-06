@@ -1,0 +1,101 @@
+# This workflow will build a Swift project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-swift
+
+name: App Store
+
+on:
+  push:
+    branches: [ "release/**" ]
+    tags: ["v*.*.*"]
+jobs:
+  build:
+    name: CI/CD By Using Fastlane
+    runs-on: macos-latest
+
+    steps:
+    - name: Select Xcode version
+      run: sudo xcode-select -s /Applications/Xcode_16.2.app
+        
+    # Git Repository Checkout
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    # Buiild 수행 Xcode 버전 설정
+    - name: Select Xcode Version
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+          xcode-version: latest-stable
+
+    # APIKey 생성  
+    - name: Create APIKey.swift file
+      run: |
+         mkdir -p ./Rebit
+         echo 'import Foundation' > ./Rebit/APIKey.swift
+         echo 'enum APIURL { static let naver = "https://openapi.naver.com/v1/search/book.json" }' >> ./Rebit/APIKey.swift
+         echo 'enum APIKey {' >> ./Rebit/APIKey.swift
+         echo '    static let clientID = "${{ secrets.NAVER_CLIENT_ID }}"' >> ./Rebit/APIKey.swift
+         echo '    static let clientSecret = "${{ secrets.NAVER_CLIENT_SECRET }}"' >> ./Rebit/APIKey.swift
+         echo '}' >> ./Rebit/APIKey.swift
+
+    # GoogleService-info.plist 생성  
+    - name: GoogleService-info.plist file
+      run: |
+        mkdir -p ./Rebit
+        echo '<?xml version="1.0" encoding="UTF-8"?>' >> ./Rebit/GoogleService-info.plist
+        echo '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">' >> ./Rebit/GoogleService-info.plist
+        echo '<plist version="1.0">' >> ./Rebit/GoogleService-info.plist
+        echo '<dict>' >> ./Rebit/GoogleService-info.plist
+        echo '    <key>API_KEY</key>' >> ./Rebit/GoogleService-info.plist
+        echo '    <string>"${{ secrets.GOOGLE_SERVICE_API_KEY }}"</string>' >> ./Rebit/GoogleService-info.plist 
+        echo '    <key>GCM_SENDER_ID</key>' >> ./Rebit/GoogleService-info.plist 
+        echo '    <string>"${{ secrets.GCM_SENDER_ID }}"</string>' >> ./Rebit/GoogleService-info.plist 
+        echo '    <key>PLIST_VERSION</key>' >> ./Rebit/GoogleService-info.plist 
+        echo '    <string>1</string>' >> ./Rebit/GoogleService-info.plist 
+        echo '    <key>BUNDLE_ID</key>' >> ./Rebit/GoogleService-info.plist 
+        echo '    <string>"${{ secrets.GOOGLE_SERVICE_BUNDLE_ID }}"</string>' >> ./Rebit/GoogleService-info.plist 
+        echo '    <key>PROJECT_ID</key>' >> ./Rebit/GoogleService-info.plist 
+        echo '    <string>"${{ secrets.GOOGLE_SERVICE_PROJECT_ID }}"</string>' >> ./Rebit/GoogleService-info.plist 
+        echo '    <key>STORAGE_BUCKET</key>' >> ./Rebit/GoogleService-info.plist 
+        echo '    <string>"${{ secrets.GOOGLE_SERVICE_STORAGE_BUCKET }}"</string>' >> ./Rebit/GoogleService-info.plist 
+        echo '    <key>IS_ADS_ENABLED</key>' >> ./Rebit/GoogleService-info.plist 
+        echo '    <false></false>' >> ./Rebit/GoogleService-info.plist 
+        echo '    <key>IS_ANALYTICS_ENABLED</key>' >> ./Rebit/GoogleService-info.plist 
+        echo '    <false></false>' >> ./Rebit/GoogleService-info.plist 
+        echo '    <key>IS_APPINVITE_ENABLED</key>' >> ./Rebit/GoogleService-info.plist 
+        echo '    <true></true>' >> ./Rebit/GoogleService-info.plist 
+        echo '    <key>IS_GCM_ENABLED</key>' >> ./Rebit/GoogleService-info.plist 
+        echo '    <true></true>' >> ./Rebit/GoogleService-info.plist 
+        echo '    <key>IS_SIGNIN_ENABLED</key>' >> ./Rebit/GoogleService-info.plist 
+        echo '    <true></true>' >> ./Rebit/GoogleService-info.plist 
+        echo '    <key>GOOGLE_APP_ID</key>' >> ./Rebit/GoogleService-info.plist 
+        echo '    <string>"{{ $secrets.GOOGLE_APP_ID }}"</string>' >> ./Rebit/GoogleService-info.plist 
+        echo '</dict>' >> ./Rebit/GoogleService-info.plist
+        echo '</plist>' >> ./Rebit/GoogleService-info.plist
+
+    # Install fastlane
+    - name: Install fastlane
+      run: brew install fastlane
+    - name: Fastlane Version Check
+      run: fastlane --version
+
+    # Install SSH
+    - name: Install SSH key
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.SSH_KEY }}
+        known_hosts: ${{ secrets.KNOWN_HOSTS }}
+
+    # Run Fastlane
+    - name: Run Fastlane
+      run: fastlane beta
+      env:
+        MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+        FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
+        FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+        APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+        APP_STORE_CONNECT_API_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_ISSUER_ID }}
+        APP_STORE_CONNECT_API_KEY_CONTENT: ${{ secrets.APP_STORE_CONNECT_API_KEY_CONTENT }}
+        KEYCHAIN_NAME: ${{ secrets.KEYCHAIN_NAME }}
+        KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+        SLACK_URL: ${{ secrets.SLACK_URL }}
+

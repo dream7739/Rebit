@@ -14,7 +14,7 @@ struct FavoriteBookView: View {
     @State private var isActive: Bool = false
     private var state: FavoriteModelStateProtocol { container.model }
     private var intent: FavoriteIntentProtocol { container.intent }
-    
+      
     var body: some View {
         NavigationStack {
             ZStack(alignment: .top) {
