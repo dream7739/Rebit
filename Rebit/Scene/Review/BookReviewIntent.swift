@@ -36,11 +36,14 @@ final class BookReviewIntent: BookReviewIntentProtocol {
     }
     
     func viewOnAppear() {
-        let bookCover = fileManager.loadImageToDocument(filename: "\(model.book.id)") ?? UIImage()
-        
-        guard let bookReviewData: BookReviewData = fetchBookReviewData() else { return }
-        let reviewList = bookReviewData.reviewList.map { $0.toBookReview() }
-        model.displayInitial(bookCover: bookCover, reviewList: reviewList)
+        do {
+            let bookCover = try fileManager.loadImageToDocument(filename: "\(model.book.id)")
+            guard let bookReviewData: BookReviewData = fetchBookReviewData() else { return }
+            let reviewList = bookReviewData.reviewList.map { $0.toBookReview() }
+            model.displayInitial(bookCover: bookCover, reviewList: reviewList)
+        } catch {
+            print(error)
+        }
     }
     
     func fetchBookReviewData() -> (BookDTO, [BookReviewDTO])? {
@@ -56,9 +59,13 @@ final class BookReviewIntent: BookReviewIntentProtocol {
         guard let bookReviewData: BookReviewData = fetchBookReviewData() else { return }
         
         if bookReviewData.reviewList.isEmpty {
-            fileManager.removeImageFromDocument(filename: "\(bookReviewData.book.id)")
-            bookRepository.deleteBook(bookReviewData.book.id)
-            model.dismissReview()
+            do {
+                try fileManager.removeImageFromDocument(filename: "\(bookReviewData.book.id)")
+                bookRepository.deleteBook(bookReviewData.book.id)
+                model.dismissReview()
+            } catch {
+                print(error)
+            }
         } else {
             let book = bookReviewData.book.toBook()
             let reviewList = bookReviewData.reviewList.map { $0.toBookReview() }

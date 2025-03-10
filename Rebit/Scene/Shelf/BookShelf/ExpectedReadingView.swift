@@ -11,6 +11,7 @@ struct ExpectedReadingView: View {
     var bookReviewContent: BookReviewContent
     private var book: Book { bookReviewContent.book }
     private var review: BookReview { bookReviewContent.bookReview }
+    @State var coverImage = UIImage()
     
     var body: some View {
         GeometryReader { proxy in
@@ -18,7 +19,7 @@ struct ExpectedReadingView: View {
             let width = height / 1.4
             
             HStack(alignment: .top) {
-                Image(uiImage: ImageFileManager.shared.loadImageToDocument(filename: "\(book.id)") ?? UIImage())
+                Image(uiImage: coverImage)
                     .resizable()
                     .frame(width: width, height: height)
                     .clipShape(RoundedRectangle(cornerRadius: 5))
@@ -37,6 +38,13 @@ struct ExpectedReadingView: View {
                         .asGreenCapsuleBackground()
                 }
                 Spacer()
+            }
+            .task {
+                do {
+                    coverImage = try ImageFileManager.shared.loadImageToDocument(filename: "\(book.id)")
+                } catch {
+                    print(error)
+                }
             }
             .padding(.vertical, 10)
             .padding(.trailing, 15)

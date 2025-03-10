@@ -96,8 +96,10 @@ struct FavoriteContentView: View {
     }
     
     func headerView(_ width: CGFloat, _ height: CGFloat) -> some View {
-        VStack(alignment: .center, spacing: 6) {
-            Image(uiImage: ImageFileManager.shared.loadImageToDocument(filename: "\(book.id)") ?? UIImage())
+        let coverImage = try? ImageFileManager.shared.loadImageToDocument(filename: "\(book.id)")
+        
+        return VStack(alignment: .center, spacing: 6) {
+            Image(uiImage: coverImage ?? UIImage())
                 .resizable()
                 .frame(width: width , height: height * 0.6)
                 .clipShape(RoundedRectangle(cornerRadius: 10))

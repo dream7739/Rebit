@@ -11,11 +11,12 @@ import RealmSwift
 struct ShelfBookView: View {
     var bookList: Book
     var size: CGSize
+    @State var coverImage = UIImage()
     
     var body: some View {
         GeometryReader { _ in
             VStack {
-                Image(uiImage: ImageFileManager.shared.loadImageToDocument(filename: "\(bookList.id)") ?? UIImage())
+                Image(uiImage: coverImage)
                     .resizable()
                     .frame(width: size.width, height: size.height)
                     .clipped()
@@ -33,6 +34,14 @@ struct ShelfBookView: View {
                     .offset(x: 0, y: -30)
             }
         }
+        .task {
+            do {
+                coverImage = try ImageFileManager.shared.loadImageToDocument(filename: "\(bookList.id)")
+            } catch {
+                print(error)
+            }
+        }
         .frame(minWidth: size.width, minHeight: size.height)
+        
     }
 }

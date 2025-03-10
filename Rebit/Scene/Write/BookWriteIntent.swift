@@ -15,7 +15,8 @@ protocol BookWriteIntentProtocol: AnyObject {
     func saveReviewClicked()
 }
 
-final class BookWriteIntent: BookWriteIntentProtocol {
+@MainActor
+final class BookWriteIntent: @preconcurrency BookWriteIntentProtocol {
     let model: BookWriteModel
     let bookRepository: BookRepository
     let reviewRepository: ReviewRepository
@@ -74,7 +75,7 @@ extension BookWriteIntent {
         model.dismissRequestTrigger()
     }
     
-  
+    
     // 데이터베이스 책 저장
     // 책 커버 이미지 저장
     func saveBookData(_ book: BookContentDTO) {
@@ -87,8 +88,15 @@ extension BookWriteIntent {
             publisher: book.publisher
         )
         
-        bookRepository.addBook(bookInfo)
-        fileManager.saveImageToDocument(path: book.image, filename: "\(bookInfo.id)")
+        self.bookRepository.addBook(bookInfo)
+        
+        Task {
+            do {
+                try await fileManager.saveImageToDocument(path: book.image, filename: "\(bookInfo.id)")
+            } catch {
+                print(error)
+            }
+        }
     }
     
     
