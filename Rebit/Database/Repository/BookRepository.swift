@@ -9,21 +9,20 @@ import Foundation
 import RealmSwift
 
 protocol BookRepository: AnyObject {
-    // 책 추가
-    func addBook(_ book: BookDTO)
+    // create
+    func createBook(_ book: BookDTO)
     
-    // 책 조회
+    // fetch
     func fetchAll() -> Results<BookDTO>
     func fetch(keyword: String) -> Results<BookDTO>
+    func fetch(title: String, isbn: String) -> BookDTO?
     
-    // 책 삭제
+    // delete
     func deleteBook(_ id: ObjectId)
     
-    // 책 존재 유무
+    // exist
     func isExistBook(title: String, isbn: String) -> Bool
     
-    // 책 단건 조회
-    func getBookObject(title: String, isbn: String) -> BookDTO?
 }
 
 final class DefaultBookRepository: BookRepository {
@@ -33,7 +32,7 @@ final class DefaultBookRepository: BookRepository {
         realm = try! Realm()
     }
     
-    func addBook(_ book: BookDTO) {
+    func createBook(_ book: BookDTO) {
         do {
             try realm.write {
                 realm.add(book)
@@ -56,6 +55,16 @@ final class DefaultBookRepository: BookRepository {
         return list
     }
     
+    func fetch(title: String, isbn: String) -> BookDTO? {
+        let bookList = fetchAll()
+
+        let bookInfo = bookList.where {
+            $0.title.equals(title) && $0.isbn.equals(isbn)
+        }.first
+        
+        return bookInfo
+    }
+    
     func deleteBook(_ id: ObjectId) {
         guard let book = realm.object(ofType: BookDTO.self, forPrimaryKey: id) else { return }
         
@@ -76,16 +85,6 @@ extension DefaultBookRepository {
         }.count
         
         return existCount >= 1
-    }
-    
-    func getBookObject(title: String, isbn: String) -> BookDTO? {
-        let bookList = fetchAll()
-
-        let bookInfo = bookList.where {
-            $0.title.equals(title) && $0.isbn.equals(isbn)
-        }.first
-        
-        return bookInfo
     }
     
     func validateBook(_ id: ObjectId) -> Bool {

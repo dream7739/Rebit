@@ -88,7 +88,7 @@ extension BookWriteIntent {
             publisher: book.publisher
         )
         
-        self.bookRepository.addBook(bookInfo)
+        self.bookRepository.createBook(bookInfo)
         
         Task {
             do {
@@ -104,7 +104,7 @@ extension BookWriteIntent {
     // 1. 가지고 있는 책 정보를 통해 데이터베이스에 저장된 책을 가져온다.
     // 2. 데이터베이스에 리뷰를 저장한다.
     func saveReviewData(_ book: BookContentDTO) {
-        guard let bookInfo = bookRepository.getBookObject(
+        guard let bookInfo = bookRepository.fetch(
             title: book.title,
             isbn: book.isbn
         ) else { return }

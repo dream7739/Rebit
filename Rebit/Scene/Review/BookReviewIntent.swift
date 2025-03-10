@@ -47,7 +47,7 @@ final class BookReviewIntent: BookReviewIntentProtocol {
     }
     
     func fetchBookReviewData() -> (BookDTO, [BookReviewDTO])? {
-        guard let book = bookRepository.getBookObject(title: model.book.title, isbn: model.book.isbn) else { return nil }
+        guard let book = bookRepository.fetch(title: model.book.title, isbn: model.book.isbn) else { return nil }
         let reviewList: [BookReviewDTO] = book.reviewList.map { $0 }
         return (book, reviewList)
     }
