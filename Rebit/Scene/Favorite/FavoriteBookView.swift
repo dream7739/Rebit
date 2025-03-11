@@ -19,8 +19,8 @@ struct FavoriteBookView: View {
         NavigationStack {
             ZStack(alignment: .top) {
                 switch state.contentState {
-                case .content(let reviewList, let bookList):
-                    favoriteCardView(reviewList, bookList)
+                case .content(let reviewList), .updated(let reviewList):
+                    favoriteCardView(reviewList)
                 case .noResult:
                     PlaceholderView(text: state.placeholder, type: .shelf)
                 }
@@ -31,21 +31,18 @@ struct FavoriteBookView: View {
             intent.viewOnAppear()
         }
         .onChange(of: isActive) { newValue in
-            intent.viewOnAppear()
+            intent.onChangeStatus()
         }
     }
     
-    func favoriteCardView(_ reviewList: [BookReview], _ bookList: [Book]) -> some View {
-        ForEach(Array(zip(reviewList.indices, reviewList)), id: \.0) {
-            (index: Int, review: BookReview) in
-            
+    func favoriteCardView(_ reviewList: [BookReviewContent]) -> some View {
+        ForEach(Array(zip(reviewList.indices, reviewList)), id: \.1.id) { (index: Int, review: BookReviewContent) in
             NavigationLinkWrapper {
-                BookReviewView.build(book: bookList[index], isActive: $isActive)
+                BookReviewView.build(book: review.book, isActive: $isActive)
             } inner: {
                 FavoriteContentView(
                     currentIndex: currentIndex,
                     index: index,
-                    book: bookList[index],
                     review: review
                 )
                 .gesture (
@@ -71,8 +68,8 @@ struct FavoriteBookView: View {
 struct FavoriteContentView: View {
     var currentIndex: Int
     var index: Int
-    var book: Book
-    var review: BookReview
+    var review: BookReviewContent
+    @State var coverImage: UIImage?
     
     @GestureState var dragOffset: CGFloat = 0
     var widthRatio = 2.3
@@ -92,12 +89,13 @@ struct FavoriteContentView: View {
             .frame(maxWidth: .infinity, alignment: .center)
             .offset(x: CGFloat(index - currentIndex) * width + dragOffset, y: 40)
         }
+        .onAppear {
+            coverImage = try? ImageFileManager.shared.loadImageToDocument(filename: "\(review.book.id)")
+        }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
     func headerView(_ width: CGFloat, _ height: CGFloat) -> some View {
-        let coverImage = try? ImageFileManager.shared.loadImageToDocument(filename: "\(book.id)")
-        
         return VStack(alignment: .center, spacing: 6) {
             Image(uiImage: coverImage ?? UIImage())
                 .resizable()
@@ -106,12 +104,12 @@ struct FavoriteContentView: View {
                 .opacity(currentIndex == index ? 1.0 : 0.6)
                 .scaleEffect(currentIndex == index ? 1.0 : 0.7)
                 .padding(.bottom, 10)
-            Text(book.title)
+            Text(review.book.title)
                 .font(.callout.bold())
                 .lineLimit(2)
                 .multilineTextAlignment(.center)
                 .opacity(currentIndex == index ? 1 : 0)
-            Text(book.author)
+            Text(review.book.author)
                 .font(.subheadline)
                 .opacity(currentIndex == index ? 1 : 0)
             
@@ -120,7 +118,7 @@ struct FavoriteContentView: View {
                     .resizable()
                     .frame(width: 13, height: 12)
                     .foregroundStyle(.orange)
-                Text(review.ratingDescription)
+                Text(review.bookReview.ratingDescription)
                     .font(.caption)
                     .foregroundStyle(.theme)
             }
@@ -132,7 +130,7 @@ struct FavoriteContentView: View {
     
     func descriptionView() -> some View {
         VStack(alignment: .center) {
-            Text(review.content)
+            Text(review.bookReview.content)
                 .multilineTextAlignment(.leading)
                 .lineLimit(4)
                 .asTitleGrayForeground()

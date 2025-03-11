@@ -9,6 +9,7 @@ import Foundation
 
 protocol FavoriteIntentProtocol: AnyObject {
     func viewOnAppear()
+    func onChangeStatus()
 }
 
 final class FavoriteIntent: FavoriteIntentProtocol {
@@ -22,15 +23,34 @@ final class FavoriteIntent: FavoriteIntentProtocol {
     
     func viewOnAppear() {
         let reviewDTOList = repository.fetchFavoriteReviewList()
-        let bookDTOList = reviewDTOList.map { $0.book.first ?? BookDTO() }
         
         if reviewDTOList.isEmpty {
             model.displayNoResult()
         } else {
-            let reviewList = reviewDTOList.map { $0.toBookReview() }
-            let bookList = bookDTOList.map { $0.toBook() }
-            model.updateContent(reviewList: reviewList, bookList: bookList)
+            let reviewList = reviewDTOList.map {
+                BookReviewContent(
+                    book: $0.book.first!.toBook(),
+                    bookReview: $0.toBookReview()
+                )
+            }
+            model.displayInitial(reviewList: reviewList)
         }
     }
     
+    func onChangeStatus() {
+        let reviewDTOList = repository.fetchFavoriteReviewList()
+        
+        if reviewDTOList.isEmpty {
+            model.displayNoResult()
+        } else {
+            let reviewList = reviewDTOList.map {
+                BookReviewContent(
+                    book: $0.book.first!.toBook(),
+                    bookReview: $0.toBookReview()
+                )
+            }
+            model.displayUpdated(reviewList: reviewList)
+
+        }
+    }
 }

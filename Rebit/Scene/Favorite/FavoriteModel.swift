@@ -8,7 +8,8 @@
 import Foundation
 
 enum FavoriteContentState {
-    case content(reviewList: [BookReview], bookList: [Book])
+    case content(reviewList: [BookReviewContent])
+    case updated(reviewList: [BookReviewContent])
     case noResult
 }
 
@@ -19,7 +20,8 @@ protocol FavoriteModelStateProtocol: AnyObject {
 
 protocol FavoriteModelActionProtocol: AnyObject {
     func displayNoResult()
-    func updateContent(reviewList: [BookReview], bookList: [Book])
+    func displayInitial(reviewList: [BookReviewContent])
+    func displayUpdated(reviewList: [BookReviewContent])
 }
 
 final class FavoriteModel: ObservableObject, FavoriteModelStateProtocol {
@@ -32,10 +34,11 @@ extension FavoriteModel: FavoriteModelActionProtocol {
         contentState = .noResult
     }
     
-    func updateContent(reviewList: [BookReview], bookList: [Book]) {
-        contentState = .content(
-            reviewList: reviewList,
-            bookList: bookList
-        )
+    func displayInitial(reviewList: [BookReviewContent]) {
+        contentState = .content(reviewList: reviewList)
+    }
+    
+    func displayUpdated(reviewList: [BookReviewContent]) {
+        contentState = .updated(reviewList: reviewList)
     }
 }

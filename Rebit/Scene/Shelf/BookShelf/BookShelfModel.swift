@@ -28,12 +28,6 @@ struct BookShelfContentState {
     }
 }
 
-struct BookReviewContent: Hashable, Identifiable {
-    let id = UUID()
-    let book: Book
-    let bookReview: BookReview
-}
-
 protocol BookShelfModelStateProtocol: AnyObject {
     var contentState: BookShelfContentState { get }
     var expectedReviewList: [BookReviewContent] { get }
