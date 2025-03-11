@@ -33,11 +33,11 @@ struct BookSearchView: View {
     func searchContentView() -> some View {
         switch state.contentState {
         case .initial:
-            PlaceholderView(text: state.placeholder, type: .search)
+            PlaceholderView(text: state.placeholder)
         case .content(let books):
             searchListView(bookList: books)
         case .noResult:
-            PlaceholderView(text: state.noResults, type: .shelf)
+            PlaceholderView(text: state.noResults)
         }
     }
     

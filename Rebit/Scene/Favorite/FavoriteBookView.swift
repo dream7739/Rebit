@@ -22,7 +22,7 @@ struct FavoriteBookView: View {
                 case .content(let reviewList), .updated(let reviewList):
                     favoriteCardView(reviewList)
                 case .noResult:
-                    PlaceholderView(text: state.placeholder, type: .shelf)
+                    PlaceholderView(text: state.placeholder)
                 }
             }
             .asMainToolbar()

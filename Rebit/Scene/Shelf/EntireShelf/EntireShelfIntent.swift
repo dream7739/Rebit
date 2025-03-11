@@ -23,7 +23,12 @@ final class EntireShelfIntent: EntireShelfIntentProtocol {
     
     func viewOnAppear() {
         let bookList: [Book] = fetchBookList()
-        model.displayInitial(bookList: bookList)
+        
+        if bookList.isEmpty {
+            model.displayEmptyView(type: .empty)
+        } else {
+            model.displayInitial(bookList: bookList)
+        }
     }
     
     func searchTextOnChanged(searchText: String) {
@@ -36,7 +41,7 @@ final class EntireShelfIntent: EntireShelfIntentProtocol {
             let bookList: [Book] = fetchBookList(keyword: keyword)
             
             if bookList.isEmpty {
-                model.displayEmpty()
+                model.displayEmptyView(type: .noResult)
             } else {
                 model.displaySearchResult(bookList: bookList)
             }

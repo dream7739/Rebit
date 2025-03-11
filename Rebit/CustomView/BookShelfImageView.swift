@@ -9,7 +9,7 @@ import SwiftUI
 import RealmSwift
 
 struct ShelfBookView: View {
-    var bookList: Book
+    var book: Book
     var size: CGSize
     @State var coverImage = UIImage()
     
@@ -21,7 +21,7 @@ struct ShelfBookView: View {
                     .frame(width: size.width, height: size.height)
                     .clipped()
                     .clipShape(RoundedRectangle(cornerRadius: 5))
-                Text(bookList.title)
+                Text(book.title)
                     .lineLimit(1)
                     .font(.footnote)
                     .padding(.vertical, 8)
@@ -34,9 +34,9 @@ struct ShelfBookView: View {
                     .offset(x: 0, y: -30)
             }
         }
-        .task {
+        .onAppear {
             do {
-                coverImage = try ImageFileManager.shared.loadImageToDocument(filename: "\(bookList.id)")
+                coverImage = try ImageFileManager.shared.loadImageToDocument(filename: "\(book.id)")
             } catch {
                 print(error)
             }

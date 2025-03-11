@@ -27,7 +27,10 @@ final class BookShelfIntent: BookShelfIntentProtocol {
     func viewOnAppear() {
         let expectedReviewList = fetchExpectedReviewList()
         let bookList = fetchBookList()
-        model.displayInitial(expectedReviewList: expectedReviewList, bookList: bookList)
+        model.displayInitial(
+            expectedReviewList: expectedReviewList,
+            bookList: bookList
+        )
         model.setContentState()
     }
     

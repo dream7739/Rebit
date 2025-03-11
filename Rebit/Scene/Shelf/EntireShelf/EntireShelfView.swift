@@ -27,7 +27,7 @@ struct EntireShelfView: View {
                 }
                 .scrollDismissesKeyboard(.immediately)
             case .empty(let placeholder):
-                PlaceholderView(text: placeholder, type: .shelf)
+                PlaceholderView(text: placeholder)
             }
         }
         .onAppear {
@@ -59,7 +59,7 @@ struct EntireShelfView: View {
                 NavigationLinkWrapper {
                     BookReviewView.build(book: item, isActive: $isActive)
                 } inner: {
-                    ShelfBookView(bookList: item, size: size)
+                    ShelfBookView(book: item, size: size)
                 }
             }
         })

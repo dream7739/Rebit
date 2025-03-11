@@ -101,7 +101,7 @@ struct BookShelfView: View {
                         NavigationLinkWrapper {
                             BookReviewView.build(book: item, isActive: $isActive)
                         } inner: {
-                            ShelfBookView(bookList: item, size: size)
+                            ShelfBookView(book: item, size: size)
                         }
                     }
                 })
@@ -111,12 +111,12 @@ struct BookShelfView: View {
                         NavigationLinkWrapper {
                             BookReviewView.build(book: state.bookList[item], isActive: $isActive)
                         } inner: {
-                            ShelfBookView(bookList: state.bookList[item], size: size)
+                            ShelfBookView(book: state.bookList[item], size: size)
                         }
                     }
                 })
             case .empty:
-                PlaceholderView(text: state.placeholderText, type: .shelf)
+                PlaceholderView(text: state.placeholderText)
             }
         }
     }
