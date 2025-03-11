@@ -43,7 +43,7 @@ final class DefaultBookRepository: BookRepository {
     }
     
     func fetchAll() -> Results<BookDTO> {
-        let list = realm.objects(BookDTO.self)
+        let list = realm.objects(BookDTO.self).sorted(by: \.saveDate, ascending: false)
         return list
     }
     
