@@ -50,7 +50,6 @@ final class FavoriteIntent: FavoriteIntentProtocol {
                 )
             }
             model.displayUpdated(reviewList: reviewList)
-
         }
     }
 }

@@ -35,10 +35,12 @@ extension FavoriteModel: FavoriteModelActionProtocol {
     }
     
     func displayInitial(reviewList: [BookReviewContent]) {
+        print(#function)
         contentState = .content(reviewList: reviewList)
     }
     
     func displayUpdated(reviewList: [BookReviewContent]) {
+        print(#function)
         contentState = .updated(reviewList: reviewList)
     }
 }

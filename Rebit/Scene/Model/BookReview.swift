@@ -34,14 +34,12 @@ extension BookReview {
             endDate: self.endDate
         )
     }
-    
+}
+
+extension BookReview {
     // 평점
     var ratingDescription: String {
-        if status == 0 {
-            return "-"
-        } else {
-            return rating.formatted()
-        }
+        return status == 0 ? "" : rating.formatted()
     }
     
     // 독서 시작일

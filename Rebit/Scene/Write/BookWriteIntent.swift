@@ -15,8 +15,7 @@ protocol BookWriteIntentProtocol: AnyObject {
     func saveReviewClicked()
 }
 
-@MainActor
-final class BookWriteIntent: @preconcurrency BookWriteIntentProtocol {
+final class BookWriteIntent: BookWriteIntentProtocol {
     let model: BookWriteModel
     let bookRepository: BookRepository
     let reviewRepository: ReviewRepository
@@ -78,8 +77,9 @@ extension BookWriteIntent {
     
     // 데이터베이스 책 저장
     // 책 커버 이미지 저장
+    
     func saveBookData(_ book: BookContentDTO) {
-        let bookInfo = BookDTO(
+        let bookDTO = BookDTO(
             title: book.title,
             content: book.description,
             author: book.author,
@@ -88,17 +88,18 @@ extension BookWriteIntent {
             publisher: book.publisher
         )
         
-        self.bookRepository.createBook(bookInfo)
+        // 데이터베이스 책 저장
+        bookRepository.createBook(bookDTO)
         
-        Task {
+        Task { @MainActor in
             do {
-                try await fileManager.saveImageToDocument(path: book.image, filename: "\(bookInfo.id)")
+                try await fileManager.saveImageToDocument(path: book.image, filename: "\(bookDTO.id)")
             } catch {
                 print(error)
             }
         }
+        
     }
-    
     
     // 데이터베이스 리뷰 저장
     // 1. 가지고 있는 책 정보를 통해 데이터베이스에 저장된 책을 가져온다.
