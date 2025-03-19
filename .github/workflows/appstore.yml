@@ -41,34 +41,34 @@ jobs:
     - name: GoogleService-info.plist file
       run: |
         mkdir -p ./Rebit
-        echo '<?xml version="1.0" encoding="UTF-8"?>' >> ./Rebit/GoogleService-info.plist
+        echo '<?xml version="1.0" encoding="UTF-8"?>' > ./Rebit/GoogleService-info.plist
         echo '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">' >> ./Rebit/GoogleService-info.plist
         echo '<plist version="1.0">' >> ./Rebit/GoogleService-info.plist
         echo '<dict>' >> ./Rebit/GoogleService-info.plist
         echo '    <key>API_KEY</key>' >> ./Rebit/GoogleService-info.plist
-        echo '    <string>"${{ secrets.GOOGLE_SERVICE_API_KEY }}"</string>' >> ./Rebit/GoogleService-info.plist 
-        echo '    <key>GCM_SENDER_ID</key>' >> ./Rebit/GoogleService-info.plist 
-        echo '    <string>"${{ secrets.GCM_SENDER_ID }}"</string>' >> ./Rebit/GoogleService-info.plist 
-        echo '    <key>PLIST_VERSION</key>' >> ./Rebit/GoogleService-info.plist 
-        echo '    <string>1</string>' >> ./Rebit/GoogleService-info.plist 
-        echo '    <key>BUNDLE_ID</key>' >> ./Rebit/GoogleService-info.plist 
-        echo '    <string>"${{ secrets.GOOGLE_SERVICE_BUNDLE_ID }}"</string>' >> ./Rebit/GoogleService-info.plist 
-        echo '    <key>PROJECT_ID</key>' >> ./Rebit/GoogleService-info.plist 
-        echo '    <string>"${{ secrets.GOOGLE_SERVICE_PROJECT_ID }}"</string>' >> ./Rebit/GoogleService-info.plist 
-        echo '    <key>STORAGE_BUCKET</key>' >> ./Rebit/GoogleService-info.plist 
-        echo '    <string>"${{ secrets.GOOGLE_SERVICE_STORAGE_BUCKET }}"</string>' >> ./Rebit/GoogleService-info.plist 
-        echo '    <key>IS_ADS_ENABLED</key>' >> ./Rebit/GoogleService-info.plist 
-        echo '    <false></false>' >> ./Rebit/GoogleService-info.plist 
-        echo '    <key>IS_ANALYTICS_ENABLED</key>' >> ./Rebit/GoogleService-info.plist 
-        echo '    <false></false>' >> ./Rebit/GoogleService-info.plist 
-        echo '    <key>IS_APPINVITE_ENABLED</key>' >> ./Rebit/GoogleService-info.plist 
-        echo '    <true></true>' >> ./Rebit/GoogleService-info.plist 
-        echo '    <key>IS_GCM_ENABLED</key>' >> ./Rebit/GoogleService-info.plist 
-        echo '    <true></true>' >> ./Rebit/GoogleService-info.plist 
-        echo '    <key>IS_SIGNIN_ENABLED</key>' >> ./Rebit/GoogleService-info.plist 
-        echo '    <true></true>' >> ./Rebit/GoogleService-info.plist 
-        echo '    <key>GOOGLE_APP_ID</key>' >> ./Rebit/GoogleService-info.plist 
-        echo '    <string>"${{ secrets.GOOGLE_APP_ID }}"</string>' >> ./Rebit/GoogleService-info.plist 
+        echo '    <string>${{ secrets.GOOGLE_SERVICE_API_KEY }}</string>' >> ./Rebit/GoogleService-info.plist
+        echo '    <key>GCM_SENDER_ID</key>' >> ./Rebit/GoogleService-info.plist
+        echo '    <string>${{ secrets.GCM_SENDER_ID }}</string>' >> ./Rebit/GoogleService-info.plist
+        echo '    <key>PLIST_VERSION</key>' >> ./Rebit/GoogleService-info.plist
+        echo '    <string>1</string>' >> ./Rebit/GoogleService-info.plist
+        echo '    <key>BUNDLE_ID</key>' >> ./Rebit/GoogleService-info.plist
+        echo '    <string>${{ secrets.GOOGLE_SERVICE_BUNDLE_ID }}</string>' >> ./Rebit/GoogleService-info.plist
+        echo '    <key>PROJECT_ID</key>' >> ./Rebit/GoogleService-info.plist
+        echo '    <string>${{ secrets.GOOGLE_SERVICE_PROJECT_ID }}</string>' >> ./Rebit/GoogleService-info.plist
+        echo '    <key>STORAGE_BUCKET</key>' >> ./Rebit/GoogleService-info.plist
+        echo '    <string>${{ secrets.GOOGLE_SERVICE_STORAGE_BUCKET }}</string>' >> ./Rebit/GoogleService-info.plist
+        echo '    <key>IS_ADS_ENABLED</key>' >> ./Rebit/GoogleService-info.plist
+        echo '    <false/>' >> ./Rebit/GoogleService-info.plist
+        echo '    <key>IS_ANALYTICS_ENABLED</key>' >> ./Rebit/GoogleService-info.plist
+        echo '    <false/>' >> ./Rebit/GoogleService-info.plist
+        echo '    <key>IS_APPINVITE_ENABLED</key>' >> ./Rebit/GoogleService-info.plist
+        echo '    <true/>' >> ./Rebit/GoogleService-info.plist
+        echo '    <key>IS_GCM_ENABLED</key>' >> ./Rebit/GoogleService-info.plist
+        echo '    <true/>' >> ./Rebit/GoogleService-info.plist
+        echo '    <key>IS_SIGNIN_ENABLED</key>' >> ./Rebit/GoogleService-info.plist
+        echo '    <true/>' >> ./Rebit/GoogleService-info.plist
+        echo '    <key>GOOGLE_APP_ID</key>' >> ./Rebit/GoogleService-info.plist
+        echo '    <string>${{ secrets.GOOGLE_APP_ID }}</string>' >> ./Rebit/GoogleService-info.plist
         echo '</dict>' >> ./Rebit/GoogleService-info.plist
         echo '</plist>' >> ./Rebit/GoogleService-info.plist
 
