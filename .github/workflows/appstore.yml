@@ -68,7 +68,7 @@ jobs:
         echo '    <key>IS_SIGNIN_ENABLED</key>' >> ./Rebit/GoogleService-info.plist 
         echo '    <true></true>' >> ./Rebit/GoogleService-info.plist 
         echo '    <key>GOOGLE_APP_ID</key>' >> ./Rebit/GoogleService-info.plist 
-        echo '    <string>"{{ $secrets.GOOGLE_APP_ID }}"</string>' >> ./Rebit/GoogleService-info.plist 
+        echo '    <string>"${{ secrets.GOOGLE_APP_ID }}"</string>' >> ./Rebit/GoogleService-info.plist 
         echo '</dict>' >> ./Rebit/GoogleService-info.plist
         echo '</plist>' >> ./Rebit/GoogleService-info.plist
 
