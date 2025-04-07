@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,6 +18,18 @@
 		882374532CAADB4C00B2FDE1 /* GoalSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882374522CAADB4C00B2FDE1 /* GoalSettingView.swift */; };
 		882374552CAAEDEB00B2FDE1 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882374542CAAEDEB00B2FDE1 /* CircularProgressView.swift */; };
 		8834AD732CA40CE6002DEA90 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8834AD722CA40CE6002DEA90 /* ToastView.swift */; };
+		883575322DA4001200CCD9EF /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 883575312DA4001200CCD9EF /* WidgetKit.framework */; };
+		883575342DA4001200CCD9EF /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 883575332DA4001200CCD9EF /* SwiftUI.framework */; };
+		883575412DA4001300CCD9EF /* RebitWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8835752F2DA4001200CCD9EF /* RebitWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		883575482DA4045500CCD9EF /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 883575472DA4045500CCD9EF /* RealmSwift */; };
+		883575492DA4045500CCD9EF /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 883575472DA4045500CCD9EF /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		8835754D2DA404D400CCD9EF /* BookReviewDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886B29C62D311B1B00392C8E /* BookReviewDTO.swift */; };
+		8835754E2DA405A400CCD9EF /* DateFormatterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D19D282C9ADA8400CE4FE6 /* DateFormatterManager.swift */; };
+		8835754F2DA405C000CCD9EF /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EDDD5B2CAEA99D00F0210E /* String+.swift */; };
+		883575502DA405C800CCD9EF /* BookDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886B29C32D311B0300392C8E /* BookDTO.swift */; };
+		883575512DA405E200CCD9EF /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888C633A2D74420C005F18D2 /* Book.swift */; };
+		883575522DA405E600CCD9EF /* BookReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888C633C2D744211005F18D2 /* BookReview.swift */; };
+		883575762DA4270000CCD9EF /* ImageFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881040B52C9C247700FCBD5A /* ImageFileManager.swift */; };
 		8851A7212C97F149002D2952 /* NavigationLazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8851A7202C97F149002D2952 /* NavigationLazyView.swift */; };
 		8863628F2C99407700B5A8E8 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8863628E2C99407700B5A8E8 /* SearchBarView.swift */; };
 		886362952C9992DE00B5A8E8 /* Cosmos in Frameworks */ = {isa = PBXBuildFile; productRef = 886362942C9992DE00B5A8E8 /* Cosmos */; };
@@ -89,6 +101,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		8835753F2DA4001300CCD9EF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 88F141DF2C95454D002117CD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8835752E2DA4001200CCD9EF;
+			remoteInfo = RebitWidgetExtension;
+		};
 		8879B44F2CC672820002BF99 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 88F141DF2C95454D002117CD /* Project object */;
@@ -99,6 +118,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		883575422DA4001300CCD9EF /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				883575412DA4001300CCD9EF /* RebitWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8835754A2DA4045500CCD9EF /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				883575492DA4045500CCD9EF /* RealmSwift in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		88FF943A2CA6C62400DE7B6E /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -124,6 +165,11 @@
 		882374522CAADB4C00B2FDE1 /* GoalSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSettingView.swift; sourceTree = "<group>"; };
 		882374542CAAEDEB00B2FDE1 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		8834AD722CA40CE6002DEA90 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
+		8835752F2DA4001200CCD9EF /* RebitWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RebitWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		883575312DA4001200CCD9EF /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		883575332DA4001200CCD9EF /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		883575532DA406FD00CCD9EF /* RebitWidgetExtensionRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RebitWidgetExtensionRelease.entitlements; sourceTree = "<group>"; };
+		8835756C2DA41A9500CCD9EF /* RebitWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RebitWidgetExtension.entitlements; sourceTree = "<group>"; };
 		8851A7202C97F149002D2952 /* NavigationLazyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLazyView.swift; sourceTree = "<group>"; };
 		8863628E2C99407700B5A8E8 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		886362962C9993F600B5A8E8 /* CustomCosmosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCosmosView.swift; sourceTree = "<group>"; };
@@ -195,7 +241,31 @@
 		88FF94372CA68C6800DE7B6E /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		883575452DA4001300CCD9EF /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 8835752E2DA4001200CCD9EF /* RebitWidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		883575352DA4001200CCD9EF /* RebitWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (883575452DA4001300CCD9EF /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = RebitWidget; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
+		8835752C2DA4001200CCD9EF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				883575482DA4045500CCD9EF /* RealmSwift in Frameworks */,
+				883575342DA4001200CCD9EF /* SwiftUI.framework in Frameworks */,
+				883575322DA4001200CCD9EF /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8879B4482CC672820002BF99 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -242,6 +312,15 @@
 				881187A92CC3890C00BA257A /* APIError.swift */,
 			);
 			path = Error;
+			sourceTree = "<group>";
+		};
+		883575302DA4001200CCD9EF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				883575312DA4001200CCD9EF /* WidgetKit.framework */,
+				883575332DA4001200CCD9EF /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		8851A71F2C97F13B002D2952 /* Wrapper */ = {
@@ -383,9 +462,13 @@
 		88F141DE2C95454D002117CD = {
 			isa = PBXGroup;
 			children = (
+				8835756C2DA41A9500CCD9EF /* RebitWidgetExtension.entitlements */,
+				883575532DA406FD00CCD9EF /* RebitWidgetExtensionRelease.entitlements */,
 				88F141F82C9545E1002117CD /* .gitignore */,
 				88F141E92C95454D002117CD /* Rebit */,
 				8879B44C2CC672820002BF99 /* RebitNetworkTests */,
+				883575352DA4001200CCD9EF /* RebitWidget */,
+				883575302DA4001200CCD9EF /* Frameworks */,
 				88F141E82C95454D002117CD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -395,6 +478,7 @@
 			children = (
 				88F141E72C95454D002117CD /* Rebit.app */,
 				8879B44B2CC672820002BF99 /* RebitNetworkTests.xctest */,
+				8835752F2DA4001200CCD9EF /* RebitWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -553,6 +637,30 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		8835752E2DA4001200CCD9EF /* RebitWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 883575462DA4001300CCD9EF /* Build configuration list for PBXNativeTarget "RebitWidgetExtension" */;
+			buildPhases = (
+				8835752B2DA4001200CCD9EF /* Sources */,
+				8835752C2DA4001200CCD9EF /* Frameworks */,
+				8835752D2DA4001200CCD9EF /* Resources */,
+				8835754A2DA4045500CCD9EF /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				883575352DA4001200CCD9EF /* RebitWidget */,
+			);
+			name = RebitWidgetExtension;
+			packageProductDependencies = (
+				883575472DA4045500CCD9EF /* RealmSwift */,
+			);
+			productName = RebitWidgetExtension;
+			productReference = 8835752F2DA4001200CCD9EF /* RebitWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		8879B44A2CC672820002BF99 /* RebitNetworkTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8879B4532CC672820002BF99 /* Build configuration list for PBXNativeTarget "RebitNetworkTests" */;
@@ -579,10 +687,12 @@
 				88F141E42C95454D002117CD /* Frameworks */,
 				88F141E52C95454D002117CD /* Resources */,
 				88FF943A2CA6C62400DE7B6E /* Embed Frameworks */,
+				883575422DA4001300CCD9EF /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				883575402DA4001300CCD9EF /* PBXTargetDependency */,
 			);
 			name = Rebit;
 			packageProductDependencies = (
@@ -603,9 +713,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1540;
+				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1540;
 				TargetAttributes = {
+					8835752E2DA4001200CCD9EF = {
+						CreatedOnToolsVersion = 16.2;
+					};
 					8879B44A2CC672820002BF99 = {
 						CreatedOnToolsVersion = 15.4;
 						TestTargetID = 88F141E62C95454D002117CD;
@@ -637,11 +750,19 @@
 			targets = (
 				88F141E62C95454D002117CD /* Rebit */,
 				8879B44A2CC672820002BF99 /* RebitNetworkTests */,
+				8835752E2DA4001200CCD9EF /* RebitWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8835752D2DA4001200CCD9EF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8879B4492CC672820002BF99 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -665,6 +786,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8835752B2DA4001200CCD9EF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				883575522DA405E600CCD9EF /* BookReview.swift in Sources */,
+				8835754D2DA404D400CCD9EF /* BookReviewDTO.swift in Sources */,
+				883575502DA405C800CCD9EF /* BookDTO.swift in Sources */,
+				883575512DA405E200CCD9EF /* Book.swift in Sources */,
+				883575762DA4270000CCD9EF /* ImageFileManager.swift in Sources */,
+				8835754E2DA405A400CCD9EF /* DateFormatterManager.swift in Sources */,
+				8835754F2DA405C000CCD9EF /* String+.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8879B4472CC672820002BF99 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -749,6 +884,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		883575402DA4001300CCD9EF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8835752E2DA4001200CCD9EF /* RebitWidgetExtension */;
+			targetProxy = 8835753F2DA4001300CCD9EF /* PBXContainerItemProxy */;
+		};
 		8879B4502CC672820002BF99 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 88F141E62C95454D002117CD /* Rebit */;
@@ -770,6 +910,66 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		883575432DA4001300CCD9EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = RebitWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6ZWU3ZJ8BG;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RebitWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = RebitWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jm.Rebit.RebitWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		883575442DA4001300CCD9EF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = RebitWidgetExtensionRelease.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6ZWU3ZJ8BG;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RebitWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = RebitWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jm.Rebit.RebitWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		8879B4512CC672820002BF99 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -969,12 +1169,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Rebit/Rebit.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Rebit/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 6ZWU3ZJ8BG;
+				DEVELOPMENT_TEAM = 6ZWU3ZJ8BG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Rebit/Info.plist;
@@ -992,7 +1191,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.jm.Rebit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore com.jm.Rebit";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -1006,6 +1204,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		883575462DA4001300CCD9EF /* Build configuration list for PBXNativeTarget "RebitWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				883575432DA4001300CCD9EF /* Debug */,
+				883575442DA4001300CCD9EF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8879B4532CC672820002BF99 /* Build configuration list for PBXNativeTarget "RebitNetworkTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1063,6 +1270,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		883575472DA4045500CCD9EF /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 88FC19222C96B11A004C844E /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
 		886362942C9992DE00B5A8E8 /* Cosmos */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 886362932C9992DE00B5A8E8 /* XCRemoteSwiftPackageReference "Cosmos" */;

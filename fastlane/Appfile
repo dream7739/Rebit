@@ -3,8 +3,6 @@ apple_id("dream7739@naver.com") # Your Apple Developer Portal username
 
 itc_team_id("127311514") # App Store Connect Team ID
 team_id("6ZWU3ZJ8BG") # Developer Portal Team ID
-itc_team_id("127311514") # App Store Connect Team ID
-team_id("6ZWU3ZJ8BG") # Developer Portal Team ID
 
 # For more information about the Appfile, see:
 #     https://docs.fastlane.tools/advanced/#appfile

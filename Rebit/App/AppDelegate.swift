@@ -8,6 +8,7 @@
 import SwiftUI
 import FirebaseCore
 import FirebaseMessaging
+import RealmSwift
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
@@ -28,8 +29,29 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         //메시지 대리자 설정. 등록 토큰을 수신
         Messaging.messaging().delegate = self
         
+        
+        // Realm 파일 이관(Shared Container)
+        let defaultRealm = Realm.Configuration.defaultConfiguration.fileURL!
+        let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.jm.rebit")
+        let realmURL = container?.appendingPathComponent("default.realm")
+        var config: Realm.Configuration!
+        
+        if FileManager.default.fileExists(atPath: defaultRealm.path) {
+            do {
+                _ = try FileManager.default.replaceItemAt(realmURL!, withItemAt: defaultRealm)
+               config = Realm.Configuration(fileURL: realmURL, schemaVersion: 1)
+            } catch {
+               print("Error info: \(error)")
+            }
+        } else {
+             config = Realm.Configuration(fileURL: realmURL, schemaVersion: 1)
+        }
+
+        Realm.Configuration.defaultConfiguration = config
+        
         return true
     }
+  
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
