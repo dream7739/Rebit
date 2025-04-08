@@ -83,8 +83,8 @@ struct RebitWidget: Widget {
             }
         }
         .configurationDisplayName("리빗")
-        .description("리빗에 기록한 독서기록을 확인해요🐰")
-        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge]) // 지원 크기
+        .description("리빗에 기록한 독서기록을 확인해보세요")
+        .supportedFamilies([.systemSmall, .systemMedium]) // 지원 크기
     }
 }
 
