@@ -21,15 +21,7 @@
 		883575322DA4001200CCD9EF /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 883575312DA4001200CCD9EF /* WidgetKit.framework */; };
 		883575342DA4001200CCD9EF /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 883575332DA4001200CCD9EF /* SwiftUI.framework */; };
 		883575412DA4001300CCD9EF /* RebitWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8835752F2DA4001200CCD9EF /* RebitWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		883575482DA4045500CCD9EF /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 883575472DA4045500CCD9EF /* RealmSwift */; };
-		883575492DA4045500CCD9EF /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 883575472DA4045500CCD9EF /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8835754D2DA404D400CCD9EF /* BookReviewDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886B29C62D311B1B00392C8E /* BookReviewDTO.swift */; };
-		8835754E2DA405A400CCD9EF /* DateFormatterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D19D282C9ADA8400CE4FE6 /* DateFormatterManager.swift */; };
 		8835754F2DA405C000CCD9EF /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EDDD5B2CAEA99D00F0210E /* String+.swift */; };
-		883575502DA405C800CCD9EF /* BookDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886B29C32D311B0300392C8E /* BookDTO.swift */; };
-		883575512DA405E200CCD9EF /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888C633A2D74420C005F18D2 /* Book.swift */; };
-		883575522DA405E600CCD9EF /* BookReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888C633C2D744211005F18D2 /* BookReview.swift */; };
-		883575762DA4270000CCD9EF /* ImageFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881040B52C9C247700FCBD5A /* ImageFileManager.swift */; };
 		8851A7212C97F149002D2952 /* NavigationLazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8851A7202C97F149002D2952 /* NavigationLazyView.swift */; };
 		8863628F2C99407700B5A8E8 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8863628E2C99407700B5A8E8 /* SearchBarView.swift */; };
 		886362952C9992DE00B5A8E8 /* Cosmos in Frameworks */ = {isa = PBXBuildFile; productRef = 886362942C9992DE00B5A8E8 /* Cosmos */; };
@@ -135,7 +127,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				883575492DA4045500CCD9EF /* RealmSwift in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -260,7 +251,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				883575482DA4045500CCD9EF /* RealmSwift in Frameworks */,
 				883575342DA4001200CCD9EF /* SwiftUI.framework in Frameworks */,
 				883575322DA4001200CCD9EF /* WidgetKit.framework in Frameworks */,
 			);
@@ -655,7 +645,6 @@
 			);
 			name = RebitWidgetExtension;
 			packageProductDependencies = (
-				883575472DA4045500CCD9EF /* RealmSwift */,
 			);
 			productName = RebitWidgetExtension;
 			productReference = 8835752F2DA4001200CCD9EF /* RebitWidgetExtension.appex */;
@@ -790,12 +779,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				883575522DA405E600CCD9EF /* BookReview.swift in Sources */,
-				8835754D2DA404D400CCD9EF /* BookReviewDTO.swift in Sources */,
-				883575502DA405C800CCD9EF /* BookDTO.swift in Sources */,
-				883575512DA405E200CCD9EF /* Book.swift in Sources */,
-				883575762DA4270000CCD9EF /* ImageFileManager.swift in Sources */,
-				8835754E2DA405A400CCD9EF /* DateFormatterManager.swift in Sources */,
 				8835754F2DA405C000CCD9EF /* String+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1159,7 +1142,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.3;
+				MARKETING_VERSION = 1.3.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jm.Rebit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1200,7 +1183,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.3;
+				MARKETING_VERSION = 1.3.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jm.Rebit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1284,11 +1267,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		883575472DA4045500CCD9EF /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 88FC19222C96B11A004C844E /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
-		};
 		886362942C9992DE00B5A8E8 /* Cosmos */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 886362932C9992DE00B5A8E8 /* XCRemoteSwiftPackageReference "Cosmos" */;

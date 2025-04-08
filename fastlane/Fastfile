@@ -69,7 +69,7 @@ platform :ios do
 
     # 빌드 넘버 자동증가 
     increment_build_number(
-      build_number: latest_testflight_build_number + 1,
+      build_number: latest_testflight_build_number(app_identifier: "com.jm.Rebit") + 1,
       xcodeproj: "Rebit.xcodeproj"
     )
     
@@ -82,6 +82,7 @@ platform :ios do
     slack(message: "리빗 iOS 배포 진행중 ⭐️")
 
     # 테스트 플라이트 업로드
-    upload_to_testflight
+    upload_to_testflight(app_identifier: "com.jm.Rebit")
+
   end
 end

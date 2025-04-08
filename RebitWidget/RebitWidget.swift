@@ -43,17 +43,21 @@ struct SimpleEntry: TimelineEntry {
 // 위젯 랜더링 시 보여질 View
 struct RebitWidgetEntryView : View {
     var entry: Provider.Entry
-    let favoriteReview = RealmManager.shared.getLatestFavoriteReview()
-    
+  
     var body: some View {
+        let userDefaults = UserDefaults(suiteName: "group.jm.rebit")
+        let bookTitle = userDefaults?.string(forKey: "bookTitle")
+        let reviewContent = userDefaults?.string(forKey: "reviewContent") ?? ""
+        let bookAuthor = userDefaults?.string(forKey: "bookAuthor") ?? ""
+              
         VStack(alignment: .leading, spacing: 8) {
-            if let favoriteReview {
+            if let bookTitle {
                 Text("오늘의 한줄🐰")
                     .font(.callout)
                     .bold()
-                Text(favoriteReview.title)
+                Text(reviewContent)
                     .font(.callout)
-                Text("from. \(favoriteReview.book.first!.title)")
+                Text("from. \(bookAuthor)")
                     .font(.caption)
                     .frame(maxWidth: .infinity, alignment: .trailing)
             } else {

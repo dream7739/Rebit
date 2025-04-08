@@ -29,29 +29,27 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         //메시지 대리자 설정. 등록 토큰을 수신
         Messaging.messaging().delegate = self
         
-        
-        // Realm 파일 이관(Shared Container)
-        let defaultRealm = Realm.Configuration.defaultConfiguration.fileURL!
-        let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.jm.rebit")
-        let realmURL = container?.appendingPathComponent("default.realm")
-        var config: Realm.Configuration!
-        
-        if FileManager.default.fileExists(atPath: defaultRealm.path) {
-            do {
-                _ = try FileManager.default.replaceItemAt(realmURL!, withItemAt: defaultRealm)
-               config = Realm.Configuration(fileURL: realmURL, schemaVersion: 1)
-            } catch {
-               print("Error info: \(error)")
-            }
-        } else {
-             config = Realm.Configuration(fileURL: realmURL, schemaVersion: 1)
-        }
-
-        Realm.Configuration.defaultConfiguration = config
-        
+        saveLatestFavoriteReviewToUserDefaults()
         return true
     }
   
+    // Widget에서 사용할 데이터 저장
+    func saveLatestFavoriteReviewToUserDefaults() {
+        // Realm에서 좋아하는 책 리뷰 가져오기
+        let reviewRepository = DefaultReviewRepository()
+        if let favoriteReview = reviewRepository.fetchFavoriteReviewList().first {
+            let userDefaults = UserDefaults(suiteName: "group.jm.rebit")
+            userDefaults?.set(favoriteReview.book.first!.title, forKey: "bookTitle")
+            userDefaults?.set(favoriteReview.book.first!.author, forKey: "bookAuthor")
+            userDefaults?.set(favoriteReview.title, forKey: "reviewContent")
+        } else {
+            // 좋아하는 리뷰가 없는 경우
+            let userDefaults = UserDefaults(suiteName: "group.jm.rebit")
+            userDefaults?.removeObject(forKey: "bookTitle")
+            userDefaults?.removeObject(forKey: "bookAuthor")
+            userDefaults?.removeObject(forKey: "reviewContent")
+        }
+    }
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
